@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 9 Session 2 — Step-by-Step Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+    HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <nav class="top-bar">
+      <span class="site-logo">Week 9 · Session 2</span>
+      <span class="week-label">WordPress Dashboard & Content</span>
+    </nav>
+    <hgroup class="hero-text">
+      <h1>Step-by-Step Lab Guide</h1>
+      <p>Follow every step in order — tick each box as you finish it!</p>
+    </hgroup>
+
+    <!-- Overall progress bar across all phases -->
+    <div class="overall-progress-wrap">
+      <div class="overall-progress-label">
+        Overall Progress: <span id="overall-done">0</span> / <span id="overall-total">0</span> steps
+      </div>
+      <div class="overall-track">
+        <div class="overall-fill" id="overall-fill"></div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+    QUICK NAVIGATION
+  ============================================================ -->
+  <nav class="phase-nav" aria-label="Jump to phase">
+    <a href="#phase-0" class="phase-nav-link">Before You Start</a>
+    <a href="#phase-1" class="phase-nav-link">Phase 1 · Dashboard</a>
+    <a href="#phase-2" class="phase-nav-link">Phase 2 · Pages</a>
+    <a href="#phase-3" class="phase-nav-link">Phase 3 · Posts & Taxonomy</a>
+    <a href="#audit" class="phase-nav-link">Final Checklist</a>
+  </nav>
+
+
+  <!-- ============================================================
+    MAIN CONTENT
+  ============================================================ -->
+  <main class="page-content">
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 0 · BEFORE YOU START
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-0">
+      <header class="phase-header phase-gray">
+        <span class="phase-badge">Before You Start</span>
+        <h2>Make Sure Everything is Running</h2>
+      </header>
+
+      <div class="phase-body">
+        <p class="phase-intro">
+          WordPress needs XAMPP to be running before you can log in.
+          These two checks take 30 seconds and prevent 90% of problems.
+        </p>
+
+        <ol class="step-list" data-phase="phase0">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open the XAMPP Control Panel</div>
+              <div class="step-desc">
+                Find XAMPP in your Start Menu (Windows) or Applications folder (Mac) and open it.
+              </div>
+              <div class="step-visual visual-dark">
+                <div class="mock-xampp">
+                  <div class="mock-xampp-row">
+                    <span class="mock-label">Apache</span>
+                    <span class="mock-status mock-green">Running  ●</span>
+                    <span class="mock-btn-row">
+                      <span class="mock-btn mock-btn-red">Stop</span>
+                      <span class="mock-btn mock-btn-gray">Admin</span>
+                    </span>
+                  </div>
+                  <div class="mock-xampp-row">
+                    <span class="mock-label">MySQL</span>
+                    <span class="mock-status mock-green">Running  ●</span>
+                    <span class="mock-btn-row">
+                      <span class="mock-btn mock-btn-red">Stop</span>
+                      <span class="mock-btn mock-btn-gray">Admin</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="step-note note-green">
+                ✅ Both Apache and MySQL must show green text before continuing.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open your browser and go to the WordPress login page</div>
+              <div class="step-desc">
+                Type this URL exactly into your browser address bar:
+              </div>
+              <div class="url-display">http://localhost/mywebsite/wp-admin</div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                You should see the WordPress login screen. Enter:
+              </div>
+              <div class="creds-row">
+                <span class="cred-item"><strong>Username:</strong> <code>admin</code></span>
+                <span class="cred-item"><strong>Password:</strong> <code>12345</code></span>
+              </div>
+              <div class="step-note note-red">
+                ⚠️ If you see a white blank page or connection error — XAMPP is not running. Go back to Step 1.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1 · DASHBOARD TOUR & CLEAN-UP (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1">
+      <header class="phase-header phase-blue">
+        <span class="phase-badge">Phase 1</span>
+        <h2>Dashboard Tour &amp; Spring Cleaning</h2>
+        <span class="phase-time">⏱ 30 min</span>
+      </header>
+
+      <div class="phase-body">
+        <p class="phase-intro">
+          Once logged in, you land on the WordPress <strong>Dashboard</strong>.
+          The black bar at the top means you are logged in as admin.
+          Let's explore the interface, then delete the dummy placeholder content.
+        </p>
+
+        <!-- CONCEPT BOX: Left Menu Explained -->
+        <div class="concept-box concept-blue">
+          <div class="concept-title">📋 The Left-Hand Menu — What Each Section Does</div>
+          <div class="menu-map">
+            <div class="menu-item"><span class="menu-dot" style="background:#2e75b6"></span><strong>Dashboard</strong> — Site overview, updates, quick stats</div>
+            <div class="menu-item"><span class="menu-dot" style="background:#1f7a8c"></span><strong>Posts</strong> — All blog articles. Add New, Categories, Tags</div>
+            <div class="menu-item"><span class="menu-dot" style="background:#6b2fa0"></span><strong>Pages</strong> — Static pages like Home, About, Contact</div>
+            <div class="menu-item"><span class="menu-dot" style="background:#f0a500"></span><strong>Media</strong> — All uploaded images and files</div>
+            <div class="menu-item"><span class="menu-dot" style="background:#d04a00"></span><strong>Appearance</strong> — Themes, Menus, Widgets</div>
+            <div class="menu-item"><span class="menu-dot" style="background:#4caf50"></span><strong>Plugins</strong> — Add extra features to the site</div>
+            <div class="menu-item"><span class="menu-dot" style="background:#c00000"></span><strong>Settings</strong> — Reading, Permalinks, General info</div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase1">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Visit your site to see it from the front</div>
+              <div class="step-desc">
+                In the top-left corner of the black admin bar, hover over the house icon (your site name).
+                A dropdown appears — click <strong>"Visit Site"</strong>.
+              </div>
+              <div class="step-visual visual-dark">
+                <div class="mock-adminbar">
+                  <span class="mock-wp-logo">W</span>
+                  <span class="mock-site-name">My Class Site ▾
+                    <span class="mock-dropdown">
+                      <span class="mock-dd-item">Dashboard</span>
+                      <span class="mock-dd-item mock-dd-active">Visit Site</span>
+                    </span>
+                  </span>
+                  <span class="mock-adminbar-note">← hover here</span>
+                </div>
+              </div>
+              <div class="step-note note-blue">
+                💡 The black bar is ONLY visible to you (the admin). Regular visitors never see it.
+                Click the site name again to return to the Dashboard.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Delete the "Hello World!" post</div>
+              <div class="step-desc">
+                WordPress creates a dummy post called "Hello world!" by default. Delete it:
+              </div>
+              <ol class="sub-steps">
+                <li>In the left menu, click <strong>Posts</strong></li>
+                <li>Hover your mouse over <strong>"Hello world!"</strong> — a row of links appears below it</li>
+                <li>Click <strong>Trash</strong></li>
+              </ol>
+              <div class="step-note note-green">✅ The post list should now be empty.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Delete the "Sample Page"</div>
+              <div class="step-desc">WordPress also creates a dummy page. Remove it:</div>
+              <ol class="sub-steps">
+                <li>Click <strong>Pages</strong> in the left menu</li>
+                <li>Hover over <strong>"Sample Page"</strong> → click <strong>Trash</strong></li>
+              </ol>
+              <div class="step-note note-green">✅ Pages list should now be empty.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Delete sample comments</div>
+              <div class="step-desc">Clear the default comment too:</div>
+              <ol class="sub-steps">
+                <li>Click <strong>Comments</strong> in the left menu (the speech-bubble icon)</li>
+                <li>Check the box next to any comment to select all</li>
+                <li>In the "Bulk actions" dropdown → choose <strong>Move to Trash</strong> → click Apply</li>
+              </ol>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2 · BUILDING STATIC PAGES (45 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2">
+      <header class="phase-header phase-teal">
+        <span class="phase-badge">Phase 2</span>
+        <h2>Building Static Pages</h2>
+        <span class="phase-time">⏱ 45 min</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- CONCEPT: Pages vs Posts -->
+        <div class="concept-box concept-split">
+          <div class="concept-half concept-half-teal">
+            <div class="concept-title">📄 PAGES — Static Content</div>
+            <ul class="concept-list">
+              <li>No publish date — timeless</li>
+              <li>Not in the blog feed</li>
+              <li>Always in the navigation menu</li>
+              <li><strong>Examples:</strong> Home · About Us · Contact</li>
+            </ul>
+          </div>
+          <div class="concept-half concept-half-purple">
+            <div class="concept-title">📰 POSTS — Dynamic Content</div>
+            <ul class="concept-list">
+              <li>Have a date — newest first</li>
+              <li>Appear in the blog feed</li>
+              <li>Organised by Categories &amp; Tags</li>
+              <li><strong>Examples:</strong> News · Blog · Articles</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="concept-box concept-gold">
+          <strong>📖 Rule of thumb:</strong> If content does NOT change often → use a <strong>Page</strong>.
+          If content is regularly updated → use a <strong>Post</strong>.
+        </div>
+
+        <ol class="step-list" data-phase="phase2">
+
+          <!-- CREATE HOME PAGE -->
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Create the Home page</div>
+              <div class="step-desc">
+                Go to <strong>Pages → Add New</strong>.
+                The Gutenberg block editor opens. Close the welcome dialog if it appears.
+              </div>
+              <ol class="sub-steps">
+                <li>Click where it says <em>"Add title"</em> at the top → type: <code>Home</code></li>
+                <li>Click below the title → an empty paragraph block appears</li>
+                <li>Type a welcome message, for example:<br>
+                  <em>"Welcome to My Class Site. This is a tech news blog about the latest in hardware and software."</em>
+                </li>
+              </ol>
+
+              <!-- Gutenberg block types explainer -->
+              <div class="gutenberg-tip">
+                <div class="gutenberg-tip-title">🧱 Gutenberg Block Types you can use:</div>
+                <div class="block-grid">
+                  <div class="block-item"><code>/paragraph</code><span>Normal body text</span></div>
+                  <div class="block-item"><code>/heading</code><span>H1 to H6 titles</span></div>
+                  <div class="block-item"><code>/image</code><span>Insert a photo</span></div>
+                  <div class="block-item"><code>/list</code><span>Bullet or numbered list</span></div>
+                  <div class="block-item"><code>/button</code><span>Clickable button</span></div>
+                  <div class="block-item"><code>/quote</code><span>Highlighted quote</span></div>
+                </div>
+                <div class="gutenberg-shortcut">
+                  💡 <strong>Shortcut:</strong> Click any empty line and press <kbd>/</kbd> to search for any block by name.
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Publish the Home page</div>
+              <div class="step-desc">When you are happy with the content:</div>
+              <ol class="sub-steps">
+                <li>Click the blue <strong>Publish</strong> button in the top-right corner</li>
+                <li>A confirmation panel slides in — click <strong>Publish</strong> again to confirm</li>
+                <li>Click <strong>View Page</strong> to preview what visitors will see</li>
+              </ol>
+              <div class="step-note note-green">✅ You should see your Home page live on the site!</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Create the "About Us" page</div>
+              <div class="step-desc">
+                Click the black WordPress <strong>W</strong> logo in the very top-left to return to the Dashboard.
+                Then go to <strong>Pages → Add New</strong> again.
+              </div>
+              <ol class="sub-steps">
+                <li>Title: <code>About Us</code></li>
+                <li>Add 2–3 paragraphs of dummy text describing the site</li>
+                <li>Try adding a <strong>Heading block</strong> (type <kbd>/</kbd> then <kbd>heading</kbd>) above the paragraphs</li>
+                <li>Click <strong>Publish → Publish</strong></li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Create the "Contact" page</div>
+              <div class="step-desc">
+                Go to <strong>Pages → Add New</strong> one more time.
+              </div>
+              <ol class="sub-steps">
+                <li>Title: <code>Contact</code></li>
+                <li>Add a short paragraph: <em>"Use the form below to get in touch."</em></li>
+                <li>Click <strong>Publish → Publish</strong></li>
+              </ol>
+              <div class="step-note note-blue">
+                💡 We will add a real contact form later using a Plugin (Week 10).
+                For now, just the page needs to exist.
+              </div>
+            </div>
+          </li>
+
+          <!-- SETTING STATIC FRONT PAGE — most important step in Phase 2 -->
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="important-badge">★ KEY STEP</span>
+                Set the static front page
+              </div>
+              <div class="step-desc">
+                Right now, visiting your site still shows a list of blog posts (or a blank page).
+                We need to tell WordPress to show the <strong>Home page</strong> instead.
+              </div>
+
+              <!-- Before / After comparison -->
+              <div class="before-after">
+                <div class="ba-card ba-bad">
+                  <div class="ba-label">❌ Current (Default)</div>
+                  <div class="ba-value">"Your homepage displays: Latest Posts"</div>
+                  <div class="ba-explain">Shows a blog feed — not good for a business site</div>
+                </div>
+                <div class="ba-arrow">→</div>
+                <div class="ba-card ba-good">
+                  <div class="ba-label">✅ What We Want</div>
+                  <div class="ba-value">"Your homepage displays: A static page"</div>
+                  <div class="ba-explain">Shows our Home page content when visitors arrive</div>
+                </div>
+              </div>
+
+              <div class="step-desc" style="margin-top:1rem;"><strong>How to change it:</strong></div>
+              <ol class="sub-steps">
+                <li>In the left menu go to <strong>Settings → Reading</strong></li>
+                <li>Find the option <em>"Your homepage displays"</em></li>
+                <li>Select the radio button <strong>"A static page"</strong></li>
+                <li>
+                  Two dropdowns appear:
+                  <ul style="margin-top:0.4rem; padding-left:1.2rem;">
+                    <li><strong>Homepage:</strong> select <code>Home</code> from the dropdown</li>
+                    <li><strong>Posts page:</strong> leave it as <em>— Select —</em> for now</li>
+                  </ul>
+                </li>
+                <li>Scroll to the bottom and click <strong>Save Changes</strong></li>
+              </ol>
+
+              <div class="step-note note-green">
+                ✅ Click "Visit Site" — you should now see your <strong>Home</strong> page content,
+                not a list of posts!
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3 · POSTS, CATEGORIES & TAGS (45 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 3</span>
+        <h2>Posts, Categories &amp; Tags</h2>
+        <span class="phase-time">⏱ 45 min</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- CONCEPT: Categories vs Tags -->
+        <div class="concept-box concept-split">
+          <div class="concept-half concept-half-teal">
+            <div class="concept-title">🗂️ CATEGORIES — Broad Groups</div>
+            <ul class="concept-list">
+              <li>The <strong>table of contents</strong> of your site</li>
+              <li>A post usually has <strong>1 or 2</strong> categories</li>
+              <li>Must be created <em>before</em> writing posts</li>
+              <li><strong>Today:</strong> Hardware &amp; Software</li>
+            </ul>
+          </div>
+          <div class="concept-half concept-half-purple">
+            <div class="concept-title">🏷️ TAGS — Specific Keywords</div>
+            <ul class="concept-list">
+              <li>The <strong>index at the back</strong> of a book</li>
+              <li>A post can have <strong>many</strong> tags</li>
+              <li>Created on-the-fly while writing</li>
+              <li><strong>Today:</strong> cpu · tech · future · AI</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="concept-box concept-gold">
+          <strong>📰 Newspaper analogy:</strong>
+          Categories = Sports · Politics · Business &nbsp;|&nbsp;
+          Tags = Messi · World Cup · Barcelona · Transfer
+        </div>
+
+        <ol class="step-list" data-phase="phase3">
+
+          <!-- CREATE CATEGORIES -->
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Create the "Hardware" category</div>
+              <div class="step-desc">We build the taxonomy <em>before</em> writing posts:</div>
+              <ol class="sub-steps">
+                <li>In the left menu click <strong>Posts → Categories</strong></li>
+                <li>In the <em>"Name"</em> field on the left, type: <code>Hardware</code></li>
+                <li>The <em>"Slug"</em> field auto-fills — leave it as is</li>
+                <li>Click the <strong>Add New Category</strong> button</li>
+              </ol>
+              <div class="step-note note-green">
+                ✅ "Hardware" appears in the category list on the right side.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Create the "Software" category</div>
+              <ol class="sub-steps">
+                <li>In the <em>"Name"</em> field, type: <code>Software</code></li>
+                <li>Click <strong>Add New Category</strong></li>
+              </ol>
+              <div class="step-note note-green">
+                ✅ You should now see both Hardware and Software in the list.
+              </div>
+            </div>
+          </li>
+
+          <!-- WRITE FIRST POST -->
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="important-badge">★ POST 1</span>
+                Write the first post — "The Future of Quantum Computing"
+              </div>
+              <div class="step-desc">Go to <strong>Posts → Add New</strong>.</div>
+              <ol class="sub-steps">
+                <li>Click the <em>"Add title"</em> area → type: <code>The Future of Quantum Computing</code></li>
+                <li>Click below the title → type two paragraphs of content about quantum computing</li>
+              </ol>
+              <div class="step-desc" style="margin-top:0.8rem;">
+                <strong>Now assign the taxonomy using the right sidebar:</strong>
+                <span class="sidebar-tip">(If you cannot see the sidebar, click the gear ⚙️ icon at the top-right)</span>
+              </div>
+              <ol class="sub-steps" start="3">
+                <li>Find the <strong>Categories</strong> panel in the right sidebar</li>
+                <li>Check the box next to <strong>Hardware</strong></li>
+                <li>Uncheck <strong>Uncategorized</strong> (always remove this)</li>
+                <li>Find the <strong>Tags</strong> panel (scroll down in the sidebar)</li>
+                <li>
+                  Type each tag and press <kbd>Enter</kbd> or <kbd>,</kbd> after each one:
+                  <div class="tag-demo">
+                    <span class="tag-chip">cpu</span>
+                    <span class="tag-chip">tech</span>
+                    <span class="tag-chip">future</span>
+                    <span class="tag-chip">quantum</span>
+                  </div>
+                </li>
+                <li>Click <strong>Publish → Publish</strong></li>
+              </ol>
+              <div class="step-note note-green">
+                ✅ Post 1 is live! It should appear in Posts → All Posts with category "Hardware".
+              </div>
+            </div>
+          </li>
+
+          <!-- POST 2 -->
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="important-badge">★ POST 2</span>
+                Write a second post — assign to "Software"
+              </div>
+              <div class="step-desc">Go to <strong>Posts → Add New</strong>.</div>
+              <ol class="sub-steps">
+                <li>Title: <code>Top 10 Programming Languages in 2025</code></li>
+                <li>Add 2 paragraphs of content</li>
+                <li>In the right sidebar → <strong>Categories</strong> → check <strong>Software</strong>, uncheck Uncategorized</li>
+                <li>Add tags: <span class="tag-chip-inline">python</span> <span class="tag-chip-inline">javascript</span> <span class="tag-chip-inline">coding</span></li>
+                <li>Click <strong>Publish → Publish</strong></li>
+              </ol>
+            </div>
+          </li>
+
+          <!-- POST 3 -->
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="important-badge">★ POST 3</span>
+                Write a third post — assign to "Hardware"
+              </div>
+              <div class="step-desc">Go to <strong>Posts → Add New</strong>.</div>
+              <ol class="sub-steps">
+                <li>Title: <code>The Best Graphics Cards of 2025</code></li>
+                <li>Add 2 paragraphs of content</li>
+                <li>Categories → check <strong>Hardware</strong>, uncheck Uncategorized</li>
+                <li>Add tags: <span class="tag-chip-inline">gpu</span> <span class="tag-chip-inline">gaming</span> <span class="tag-chip-inline">nvidia</span></li>
+                <li>Click <strong>Publish → Publish</strong></li>
+              </ol>
+              <div class="step-note note-green">
+                ✅ You now have 3 published posts. Go to Posts → All Posts to verify all three are there.
+              </div>
+            </div>
+          </li>
+
+          <!-- VERIFY -->
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Verify everything on the front-end</div>
+              <div class="step-desc">
+                Click the house icon → "Visit Site". Your site should now show
+                the Home page content (not a list of posts).
+              </div>
+              <ol class="sub-steps">
+                <li>You should see your <strong>Home</strong> page welcome text</li>
+                <li>The black admin bar should be visible at the top (you are logged in)</li>
+                <li>Try typing <code>http://localhost/mywebsite/category/hardware/</code> in the browser — you should see all Hardware posts listed</li>
+              </ol>
+              <div class="step-note note-blue">
+                💡 WordPress auto-creates archive pages for every category and tag — no extra work needed!
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      FINAL AUDIT CHECKLIST
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="audit-section" id="audit">
+      <header class="phase-header phase-gold">
+        <span class="phase-badge">End of Session</span>
+        <h2>Final Checklist — Is Your Site Complete?</h2>
+      </header>
+
+      <div class="phase-body">
+        <p class="phase-intro">
+          Tick every item below. If anything is missing, fix it before moving on to Session 3.
+        </p>
+
+        <ul class="audit-list" data-phase="audit">
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Home page is set as the static front page</div>
+              <div class="step-desc">Settings → Reading → "A static page" → Homepage = Home</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">3 pages exist: Home, About Us, Contact</div>
+              <div class="step-desc">Pages → All Pages — you should see all three with "Published" status</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">2 categories exist: Hardware and Software</div>
+              <div class="step-desc">Posts → Categories — both should appear in the list</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">3 published posts — each with a category and tags</div>
+              <div class="step-desc">Posts → All Posts — 3 posts, none in "Uncategorized", all have tags</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">No dummy content remains</div>
+              <div class="step-desc">No "Hello world!" post, no "Sample Page", no sample comments</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Visiting the site shows the Home page — not a list of posts</div>
+              <div class="step-desc">Click "Visit Site" — you see your Home page welcome content</div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- Completion banner — shown by JS when all audit items checked -->
+        <div class="session-complete" id="session-complete" style="display:none;">
+          🎉 Session 2 Complete! You now have a working multi-page WordPress site.
+          <br>Next: <strong>Session 3 — Media Library, Featured Images &amp; SEO URLs</strong>
+        </div>
+
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <p>Web Client Programming &nbsp;·&nbsp; Week 09 Session 02 &nbsp;·&nbsp;
+       Dashboard Navigation &amp; Content Creation
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
