@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 9 Session 3 — Media & Structure Step-by-Step Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+    HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <nav class="top-bar">
+      <span class="site-logo">Week 9 · Session 3</span>
+      <span class="week-label">Media &amp; Structure Polish</span>
+    </nav>
+
+    <hgroup class="hero-text">
+      <h1>Step-by-Step Lab Guide</h1>
+      <p>
+        Media Library · Featured Images · Gutenberg Media · Permalinks · SEO URLs
+        <br>Follow every step in order — tick each box as you finish it!
+      </p>
+    </hgroup>
+
+    <!-- Overall progress bar -->
+    <div class="overall-progress-wrap">
+      <div class="overall-progress-label">
+        Overall Progress:
+        <span id="overall-done">0</span> / <span id="overall-total">0</span> steps completed
+      </div>
+      <div class="overall-track">
+        <div class="overall-fill" id="overall-fill"></div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+    QUICK NAVIGATION
+  ============================================================ -->
+  <nav class="phase-nav" aria-label="Jump to phase">
+    <a href="#prereq"  class="phase-nav-link">Before You Start</a>
+    <a href="#phase-1" class="phase-nav-link">Phase 1 · Media Library</a>
+    <a href="#phase-1b" class="phase-nav-link">Phase 1b · Featured Images</a>
+    <a href="#phase-2a" class="phase-nav-link">Phase 2a · Inline Images</a>
+    <a href="#phase-2b" class="phase-nav-link">Phase 2b · YouTube Embed</a>
+    <a href="#phase-3"  class="phase-nav-link">Phase 3 · Permalinks</a>
+    <a href="#phase-4"  class="phase-nav-link">Phase 4 · Audit</a>
+  </nav>
+
+
+  <!-- ============================================================
+    MAIN CONTENT
+  ============================================================ -->
+  <main class="page-content">
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PREREQ — BEFORE YOU START
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="prereq">
+      <header class="phase-header phase-gray">
+        <span class="phase-badge">Prerequisites</span>
+        <h2>Before You Start</h2>
+      </header>
+
+      <div class="phase-body">
+
+        <div class="concept-box concept-blue">
+          <div class="concept-title">📋 What you need from Session 2</div>
+          <div class="checklist-inline">
+            <span class="ci-item">✅ XAMPP installed and running</span>
+            <span class="ci-item">✅ WordPress installed at <code>http://localhost/mywebsite</code></span>
+            <span class="ci-item">✅ 3 published posts with categories &amp; tags</span>
+            <span class="ci-item">✅ Home, About Us, and Contact pages published</span>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="prereq">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Start XAMPP — Apache &amp; MySQL must both be green</div>
+              <div class="step-desc">
+                Open the XAMPP Control Panel. Click <strong>Start</strong> next to both
+                <strong>Apache</strong> and <strong>MySQL</strong>. Wait for them to turn green.
+              </div>
+              <div class="visual-mockup visual-dark">
+                <div class="mock-xampp-row">
+                  <span class="mx-service">Apache</span>
+                  <span class="mx-status green">● Running</span>
+                  <span class="mx-btn red">Stop</span>
+                  <span class="mx-btn gray">Admin</span>
+                </div>
+                <div class="mock-xampp-row">
+                  <span class="mx-service">MySQL</span>
+                  <span class="mx-status green">● Running</span>
+                  <span class="mx-btn red">Stop</span>
+                  <span class="mx-btn gray">Admin</span>
+                </div>
+              </div>
+              <div class="note note-red">
+                ⚠️ If either one shows red or stays stopped, click Start next to it. Do NOT continue until both are green!
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Log in to WordPress</div>
+              <div class="step-desc">Open your browser and navigate to:</div>
+              <div class="url-box">http://localhost/mywebsite/wp-admin</div>
+              <div class="creds-grid">
+                <div class="cred-row">
+                  <span class="cred-label">Username</span>
+                  <code>admin</code>
+                </div>
+                <div class="cred-row">
+                  <span class="cred-label">Password</span>
+                  <code>12345</code>
+                </div>
+              </div>
+              <div class="note note-green">
+                ✅ You should land on the WordPress Dashboard (dark grey admin panel).
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Download 4–5 free images to your computer</div>
+              <div class="step-desc">
+                You will need real images for this session. Use one of these free sources — no account required:
+              </div>
+              <div class="link-cards">
+                <a class="link-card" href="https://unsplash.com" target="_blank" rel="noopener">
+                  <div class="lc-name">Unsplash</div>
+                  <div class="lc-url">unsplash.com</div>
+                  <div class="lc-desc">Search "technology" or "computers" → click Download Free</div>
+                </a>
+                <a class="link-card" href="https://pexels.com" target="_blank" rel="noopener">
+                  <div class="lc-name">Pexels</div>
+                  <div class="lc-url">pexels.com</div>
+                  <div class="lc-desc">Search "hardware" or "coding" → click the Download button</div>
+                </a>
+              </div>
+              <div class="note note-blue">
+                💡 Save all images to a folder on your Desktop called <strong>wp-images</strong> so they are easy to find.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1 · THE MEDIA LIBRARY (Part 1: Upload & Alt Text)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1">
+      <header class="phase-header phase-blue">
+        <span class="phase-badge">Phase 1  ·  45 min</span>
+        <h2>The Media Library — Upload &amp; Alt Text</h2>
+        <span class="phase-time">Part 1 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- Concept: What is the Media Library -->
+        <div class="concept-box concept-blue">
+          <div class="concept-title">📂 What is the Media Library?</div>
+          <p>
+            The Media Library is WordPress's built-in <strong>file manager</strong>.
+            Every image, PDF, or video you upload gets stored here.
+            When you insert an image into a post or page, you pick it from this library
+            — you do not link to files on your computer directly.
+          </p>
+        </div>
+
+        <ol class="step-list" data-phase="phase1">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open the Media Library uploader</div>
+              <div class="step-desc">
+                In the left-hand WordPress menu, hover over <strong>Media</strong>.
+                A sub-menu slides out — click <strong>Add New</strong>.
+              </div>
+              <div class="nav-path">
+                <span class="np-item">Media</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Add New</span>
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                You will see a large dotted upload box with the text
+                <em>"Drop files anywhere to upload"</em>.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Bulk-upload all your downloaded images at once</div>
+              <div class="step-desc">
+                Open the <strong>wp-images</strong> folder on your Desktop.
+                Select ALL the images at once (use <kbd>Ctrl</kbd>+<kbd>A</kbd> on Windows or
+                <kbd>Cmd</kbd>+<kbd>A</kbd> on Mac), then drag-and-drop them
+                into the WordPress upload box.
+              </div>
+              <div class="visual-mockup visual-light">
+                <div class="mock-upload-box">
+                  <div class="mub-icon">☁️</div>
+                  <div class="mub-text">Drop files anywhere to upload</div>
+                  <div class="mub-sub">or</div>
+                  <div class="mub-btn">Select Files</div>
+                </div>
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                A progress bar appears for each file. Wait until all images show
+                a green checkmark before continuing.
+              </div>
+              <div class="note note-green">
+                ✅ You should now see all your images as thumbnails in the Media Library grid.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Add Alt Text to every image
+              </div>
+              <div class="step-desc">
+                <strong>What is Alt Text?</strong> It is a text description of an image.
+                You used it in HTML Week 2 as the <code>alt=""</code> attribute.
+                In WordPress, you add it through the Media Library.
+              </div>
+
+              <!-- Why alt text matters -->
+              <div class="why-grid">
+                <div class="why-card why-access">
+                  <div class="why-icon">♿</div>
+                  <div class="why-title">Accessibility</div>
+                  <div class="why-desc">
+                    Screen-reader software reads the alt text aloud for blind users.
+                    Without it, they hear "image" — nothing useful.
+                  </div>
+                </div>
+                <div class="why-card why-seo">
+                  <div class="why-icon">🔍</div>
+                  <div class="why-title">SEO (Google)</div>
+                  <div class="why-desc">
+                    Google's image crawler cannot "see" photos.
+                    It reads alt text to understand what the image is about
+                    and rank it in Google Images.
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-desc" style="margin-top:0.8rem;"><strong>How to add alt text:</strong></div>
+              <ol class="sub-steps">
+                <li>In the Media Library grid, click on any image thumbnail</li>
+                <li>
+                  The <strong>Attachment Details</strong> panel opens on the right side of the screen.
+                  You will see fields for: Title, Caption, Alt Text, Description
+                </li>
+                <li>
+                  Click the <strong>Alt Text</strong> field and type a clear description of the image.
+                  <br><strong>Good alt text examples:</strong>
+                  <div class="alt-examples">
+                    <div class="alt-ex-item">
+                      <span class="alt-ex-bad">❌ Bad:</span>
+                      <code>image1.jpg</code>
+                      <span class="alt-ex-why">Filename — means nothing</span>
+                    </div>
+                    <div class="alt-ex-item">
+                      <span class="alt-ex-bad">❌ Bad:</span>
+                      <code>photo</code>
+                      <span class="alt-ex-why">Too vague</span>
+                    </div>
+                    <div class="alt-ex-item">
+                      <span class="alt-ex-good">✅ Good:</span>
+                      <code>Close-up of a computer CPU chip on a motherboard</code>
+                      <span class="alt-ex-why">Descriptive, specific</span>
+                    </div>
+                    <div class="alt-ex-item">
+                      <span class="alt-ex-good">✅ Good:</span>
+                      <code>Developer typing code on a laptop keyboard</code>
+                      <span class="alt-ex-why">Describes the scene clearly</span>
+                    </div>
+                  </div>
+                </li>
+                <li>WordPress saves alt text automatically as you type — no Save button needed</li>
+                <li>Click the <strong>X</strong> in the top-right to close the panel, then click the next image and repeat</li>
+              </ol>
+              <div class="note note-blue">
+                💡 You must add alt text to <strong>every single image</strong> in the library before using them.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Verify all images have alt text</div>
+              <div class="step-desc">
+                Go back to <strong>Media → Library</strong> (the full grid view).
+                Click each image one by one and confirm the Alt Text field is filled in.
+                Do not leave any image with an empty alt text.
+              </div>
+              <div class="note note-green">
+                ✅ Every image in your library should now have a meaningful alt text description.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1b · FEATURED IMAGES (same 45-min block)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1b">
+      <header class="phase-header phase-blue">
+        <span class="phase-badge">Phase 1  ·  Continued</span>
+        <h2>Setting Featured Images on All Posts</h2>
+        <span class="phase-time">Part 2 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- Concept: What is a featured image -->
+        <div class="concept-box concept-blue">
+          <div class="concept-title">🖼️ What is a Featured Image?</div>
+          <p>
+            The Featured Image is the <strong>main thumbnail</strong> that represents a post.
+            It is not the same as an image you put inside the post content —
+            it is a separate designated "cover image" that WordPress displays in many places:
+          </p>
+          <div class="appear-grid">
+            <div class="appear-item">
+              <div class="appear-icon">🏠</div>
+              <div class="appear-label">Homepage</div>
+              <div class="appear-desc">Post card thumbnail in the blog list</div>
+            </div>
+            <div class="appear-item">
+              <div class="appear-icon">📘</div>
+              <div class="appear-label">Facebook / Telegram</div>
+              <div class="appear-desc">Preview image when you paste the URL in a chat</div>
+            </div>
+            <div class="appear-item">
+              <div class="appear-icon">🔍</div>
+              <div class="appear-label">Google Search</div>
+              <div class="appear-desc">Some themes show it in search result snippets</div>
+            </div>
+            <div class="appear-item">
+              <div class="appear-icon">📩</div>
+              <div class="appear-label">RSS / Newsletters</div>
+              <div class="appear-desc">Displayed in email digests and RSS readers</div>
+            </div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase1b">
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ POST 1</span>
+                Set featured image on your first post
+              </div>
+              <div class="step-desc">Follow these exact steps:</div>
+              <ol class="sub-steps">
+                <li>Go to <strong>Posts → All Posts</strong> in the left menu</li>
+                <li>Hover over your first post (e.g. "The Future of Quantum Computing") — links appear below the title</li>
+                <li>Click <strong>Edit</strong> — the Gutenberg editor opens for that post</li>
+                <li>
+                  Look at the <strong>right sidebar</strong> panel.
+                  If the sidebar is not visible, click the gear icon <kbd>⚙️</kbd> in the top-right toolbar.
+                </li>
+                <li>In the right sidebar, scroll down until you see the <strong>Featured Image</strong> panel</li>
+                <li>Click <strong>"Set featured image"</strong> — the Media Library popup opens</li>
+                <li>Click on one of your uploaded images to select it (a blue checkmark appears)</li>
+                <li>
+                  Click the blue button in the bottom-right of the popup
+                  (it says <strong>"Set featured image"</strong>)
+                </li>
+                <li>The image now appears as a preview in the Featured Image panel in the sidebar</li>
+                <li>Click the blue <strong>Update</strong> button in the top-right to save the post</li>
+              </ol>
+              <div class="visual-mockup visual-light" style="margin-top:0.8rem;">
+                <div class="mock-sidebar">
+                  <div class="mock-sidebar-panel">
+                    <div class="msp-title">Featured Image</div>
+                    <div class="msp-img-placeholder">[ Selected image preview ]</div>
+                    <div class="msp-links">
+                      <span class="msp-link">Set featured image</span> ·
+                      <span class="msp-link">Remove featured image</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="note note-green">✅ You will see the image thumbnail in the sidebar after setting it.</div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ POST 2</span>
+                Set featured image on your second post
+              </div>
+              <ol class="sub-steps">
+                <li>Go to <strong>Posts → All Posts</strong></li>
+                <li>Click <strong>Edit</strong> on your second post</li>
+                <li>Right sidebar → <strong>Featured Image</strong> panel → <strong>Set featured image</strong></li>
+                <li>Choose a <em>different</em> image from the first post</li>
+                <li>Click <strong>Update</strong></li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ POST 3</span>
+                Set featured image on your third post
+              </div>
+              <ol class="sub-steps">
+                <li>Go to <strong>Posts → All Posts</strong></li>
+                <li>Click <strong>Edit</strong> on your third post</li>
+                <li>Right sidebar → <strong>Featured Image</strong> → <strong>Set featured image</strong></li>
+                <li>Choose a <em>different</em> image again</li>
+                <li>Click <strong>Update</strong></li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Verify featured images in the Posts list</div>
+              <div class="step-desc">
+                Go to <strong>Posts → All Posts</strong>.
+                In the list view you should see a small <strong>thumbnail column</strong>
+                on the left of each post title. All three posts should now show a coloured image —
+                not a grey placeholder box.
+              </div>
+              <div class="note note-green">✅ All three posts have a featured image assigned.</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2a · INLINE IMAGES IN GUTENBERG
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2a">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 2  ·  45 min</span>
+        <h2>Gutenberg Media — Inline Images</h2>
+        <span class="phase-time">Part 1 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <div class="concept-box concept-purple">
+          <div class="concept-title">🧱 Featured Image vs Inline Image — What is the difference?</div>
+          <div class="compare-two">
+            <div class="ct-col">
+              <div class="ct-label ct-label-teal">Featured Image</div>
+              <ul class="ct-list">
+                <li>Set in the sidebar — NOT inside content</li>
+                <li>The "cover" of the post</li>
+                <li>Shows on homepage cards, social media</li>
+                <li>Only ONE per post</li>
+              </ul>
+            </div>
+            <div class="ct-col">
+              <div class="ct-label ct-label-purple">Inline Image</div>
+              <ul class="ct-list">
+                <li>Added as an Image block inside the content</li>
+                <li>Appears between paragraphs</li>
+                <li>You can align it, add captions</li>
+                <li>Can have MANY per post/page</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase2a">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open the About Us page for editing</div>
+              <ol class="sub-steps">
+                <li>In the left menu, click <strong>Pages → All Pages</strong></li>
+                <li>Hover over <strong>About Us</strong> → click <strong>Edit</strong></li>
+                <li>The Gutenberg block editor opens for the About Us page</li>
+              </ol>
+              <div class="nav-path">
+                <span class="np-item">Pages</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item">All Pages</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Edit (About Us)</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Click the area where you want to insert the image</div>
+              <div class="step-desc">
+                Click at the end of one of your paragraphs so the cursor is placed there,
+                then press <kbd>Enter</kbd> to create a new empty block on the next line.
+              </div>
+              <div class="note note-blue">
+                💡 The image will be inserted wherever your cursor is. You can always
+                drag blocks up or down with the ⠿ handle on the left side of any block.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Insert an Image block
+              </div>
+              <div class="step-desc">There are two ways to add an Image block — try the slash-command method:</div>
+
+              <div class="method-tabs">
+                <div class="method-tab method-recommended">
+                  <div class="mt-label">Method 1 — Slash Command (fastest) ⭐ Recommended</div>
+                  <ol class="sub-steps">
+                    <li>On the new empty line, type <kbd>/</kbd> (forward slash)</li>
+                    <li>A block search popup appears — type <code>image</code></li>
+                    <li>Press <kbd>Enter</kbd> or click the <strong>Image</strong> option</li>
+                    <li>The Image block is inserted and you see three options: Upload, Media Library, URL</li>
+                  </ol>
+                </div>
+                <div class="method-tab">
+                  <div class="mt-label">Method 2 — Plus Button</div>
+                  <ol class="sub-steps">
+                    <li>Click the <kbd>+</kbd> icon that appears in the left margin or top toolbar</li>
+                    <li>Type <code>image</code> in the search box that appears</li>
+                    <li>Click the <strong>Image</strong> block from the results</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Select an image from the Media Library</div>
+              <ol class="sub-steps">
+                <li>Inside the Image block, click <strong>Media Library</strong></li>
+                <li>The Media Library popup opens — click one of your uploaded images</li>
+                <li>A blue checkmark appears on the selected image</li>
+                <li>Click the blue <strong>Select</strong> button in the bottom-right corner</li>
+                <li>The image appears inside the page content</li>
+              </ol>
+              <div class="note note-blue">
+                💡 Do NOT click "Upload" — your images are already in the Media Library.
+                Always pick from there to avoid duplicate files.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Style the image using the block toolbar
+              </div>
+              <div class="step-desc">
+                Click on the inserted image. A toolbar appears <strong>directly above the image</strong>.
+                It has alignment and sizing options:
+              </div>
+
+              <div class="toolbar-guide">
+                <div class="tg-row">
+                  <div class="tg-btn">⬅ Align Left</div>
+                  <div class="tg-desc">Image sits on the left, text flows to the right</div>
+                </div>
+                <div class="tg-row">
+                  <div class="tg-btn">↔ Align Center</div>
+                  <div class="tg-desc">Image centred, full width — text above and below</div>
+                </div>
+                <div class="tg-row">
+                  <div class="tg-btn">➡ Align Right</div>
+                  <div class="tg-desc">Image sits on the right, text wraps to the left — most professional look</div>
+                </div>
+                <div class="tg-row">
+                  <div class="tg-btn">↕ Resize handles</div>
+                  <div class="tg-desc">Drag the blue dots on the corners of the selected image to resize it</div>
+                </div>
+              </div>
+
+              <div class="step-desc" style="margin-top:0.7rem;">
+                <strong>Try this:</strong> Set the image alignment to <strong>Align Right</strong>.
+                Your paragraph text will wrap around the left side of the image —
+                this is the most commonly used layout for blog posts.
+              </div>
+              <div class="note note-blue">
+                💡 You can also add a <strong>Caption</strong> to your image by clicking the
+                "Write caption…" text that appears directly below the image block.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Update the About Us page to save your changes</div>
+              <ol class="sub-steps">
+                <li>Click the blue <strong>Update</strong> button in the top-right corner</li>
+                <li>After it saves, click <strong>View Page</strong> (the link that appears)</li>
+                <li>You should see the About Us page with your image embedded in the content</li>
+              </ol>
+              <div class="note note-green">✅ The About Us page now has an inline image inside its content.</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2b · EMBED YOUTUBE VIDEO
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2b">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 2  ·  Continued</span>
+        <h2>Embedding a YouTube Video — Zero HTML Required!</h2>
+        <span class="phase-time">Part 2 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- CMS power comparison -->
+        <div class="concept-box concept-split">
+          <div class="concept-half concept-half-red">
+            <div class="concept-title">😓 Week 2 — Raw HTML</div>
+            <div class="code-snippet">
+              <span class="cs-gray">&lt;iframe</span>
+              <span class="cs-teal"> width="560"</span>
+              <span class="cs-teal"> height="315"</span><br>
+              <span class="cs-teal"> src="https://youtube.com/embed/VIDEO_ID"</span><br>
+              <span class="cs-teal"> frameborder="0"</span>
+              <span class="cs-teal"> allowfullscreen</span><span class="cs-gray">&gt;</span><br>
+              <span class="cs-gray">&lt;/iframe&gt;</span>
+            </div>
+            <p style="font-size:.85rem;color:#991b1b;margin-top:.5rem;">
+              Had to write 5 lines of HTML. Had to find the embed URL. Easy to get wrong.
+            </p>
+          </div>
+          <div class="concept-half concept-half-green">
+            <div class="concept-title">✅ Week 9 — WordPress CMS</div>
+            <div class="code-snippet" style="background:#134e1b;">
+              <span class="cs-green">https://www.youtube.com/watch?v=abc123</span>
+            </div>
+            <p style="font-size:.85rem;color:#166534;margin-top:.5rem;">
+              Just paste the regular URL. WordPress detects it and converts it to a
+              responsive video embed automatically. No HTML needed!
+            </p>
+          </div>
+        </div>
+
+        <div class="concept-box concept-gold">
+          <strong>💡 Auto-embed platforms:</strong> WordPress auto-embeds content from
+          YouTube · Vimeo · Twitter/X · Instagram · Spotify · SoundCloud · TED · Flickr
+          and 30+ other platforms — always by just pasting the URL.
+        </div>
+
+        <ol class="step-list" data-phase="phase2b">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Go to YouTube and find a tech video</div>
+              <div class="step-desc">
+                Open a new browser tab and go to <a href="https://youtube.com" target="_blank" rel="noopener">youtube.com</a>.
+                Search for something like <em>"future of technology"</em> or
+                <em>"how computers work"</em> and click on any video.
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                Once the video is playing, look at the browser's address bar.
+                The URL will look like this:
+              </div>
+              <div class="url-box">https://www.youtube.com/watch?v=<span style="color:#f0c87c;">dQw4w9WgXcQ</span></div>
+              <div class="note note-blue">
+                💡 Copy the full URL from the address bar, not the "Share" link —
+                both work, but the address bar URL is simpler.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Copy the YouTube URL</div>
+              <div class="step-desc">
+                Click inside the browser address bar → press
+                <kbd>Ctrl</kbd>+<kbd>A</kbd> to select all → press <kbd>Ctrl</kbd>+<kbd>C</kbd> to copy.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Create a new Post: "My Favourite Tech Video"</div>
+              <div class="step-desc">Switch back to WordPress (the other browser tab) and go to:</div>
+              <div class="nav-path">
+                <span class="np-item">Posts</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Add New</span>
+              </div>
+              <ol class="sub-steps" style="margin-top:0.5rem;">
+                <li>Click the <em>"Add title"</em> area at the top</li>
+                <li>Type: <code>My Favourite Tech Video</code></li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Paste the YouTube URL directly into the editor
+              </div>
+              <div class="step-desc">This is the magic step:</div>
+              <ol class="sub-steps">
+                <li>Click below the title to create a new empty paragraph block</li>
+                <li>Press <kbd>Ctrl</kbd>+<kbd>V</kbd> (or <kbd>Cmd</kbd>+<kbd>V</kbd> on Mac) to paste the YouTube URL</li>
+                <li>
+                  You will see the URL text appear for a second, then WordPress
+                  automatically detects it is a YouTube link and converts it into
+                  a <strong>live embedded video player</strong>
+                </li>
+              </ol>
+              <div class="embed-demo">
+                <div class="ed-step">
+                  <span class="ed-num">1</span>
+                  <span class="ed-label">You paste the URL</span>
+                  <div class="ed-preview ed-url">https://www.youtube.com/watch?v=abc123</div>
+                </div>
+                <div class="ed-arrow">↓</div>
+                <div class="ed-step">
+                  <span class="ed-num">2</span>
+                  <span class="ed-label">WordPress converts it automatically</span>
+                  <div class="ed-preview ed-video">
+                    <div class="ed-play">▶</div>
+                    <div class="ed-video-label">Embedded Video Player</div>
+                  </div>
+                </div>
+              </div>
+              <div class="note note-green">
+                ✅ You should see a video player directly inside the editor — click the preview
+                area to confirm it looks like a video thumbnail, not plain text.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Add a short introduction paragraph before the video</div>
+              <div class="step-desc">
+                Click above the video block and press <kbd>Enter</kbd> to insert a new paragraph block there,
+                or use the <kbd>+</kbd> icon. Type one or two sentences introducing the video:
+                <br><em>"This is a fascinating video about the future of quantum computing that I recommend watching."</em>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Assign a category and set a featured image</div>
+              <ol class="sub-steps">
+                <li>In the right sidebar → <strong>Categories</strong> panel → check <strong>Hardware</strong> or <strong>Software</strong></li>
+                <li>Uncheck <strong>Uncategorized</strong></li>
+                <li>Scroll down in the sidebar → <strong>Featured Image</strong> → click <strong>Set featured image</strong></li>
+                <li>Choose one of your uploaded images from the Media Library</li>
+                <li>Click the blue <strong>Set featured image</strong> button</li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Publish the post and preview it</div>
+              <ol class="sub-steps">
+                <li>Click <strong>Publish → Publish</strong> (confirm twice)</li>
+                <li>Click <strong>View Post</strong> when the link appears</li>
+                <li>You should see the embedded video player live on the post page</li>
+                <li>Click the play button — the video should play directly on your site!</li>
+              </ol>
+              <div class="note note-green">
+                ✅ You now have 4 posts total — and the latest one has a live embedded YouTube video
+                without writing a single line of HTML.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3 · PERMALINKS & SEO (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3">
+      <header class="phase-header phase-teal">
+        <span class="phase-badge">Phase 3  ·  30 min</span>
+        <h2>Permalinks &amp; SEO-Friendly URLs</h2>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- SEO concept -->
+        <div class="concept-box concept-teal">
+          <div class="concept-title">🔍 What is SEO and why do URLs matter?</div>
+          <p>
+            <strong>SEO = Search Engine Optimisation.</strong>
+            It is the practice of making your website appear higher in Google search results.
+            One of Google's most important ranking signals is the <strong>URL of a page</strong>.
+            Google reads the URL to understand what the page is about.
+          </p>
+        </div>
+
+        <!-- Bad vs good URL visual -->
+        <div class="url-comparison">
+          <div class="uc-card uc-bad">
+            <div class="uc-label">❌ Default URL (terrible for SEO)</div>
+            <div class="uc-url">http://localhost/mywebsite/<span class="uc-highlight-bad">?p=14</span></div>
+            <ul class="uc-reasons">
+              <li>Google reads <code>?p=14</code> — means nothing, zero keywords</li>
+              <li>Cannot rank for any search term</li>
+              <li>Ugly when shared in messages or social media</li>
+              <li>Hard for humans to remember</li>
+            </ul>
+          </div>
+          <div class="uc-arrow">→</div>
+          <div class="uc-card uc-good">
+            <div class="uc-label">✅ Post Name URL (great for SEO)</div>
+            <div class="uc-url">localhost/mywebsite/<span class="uc-highlight-good">the-future-of-quantum-computing/</span></div>
+            <ul class="uc-reasons">
+              <li>Google reads keywords: <em>future, quantum, computing</em></li>
+              <li>Can rank for relevant searches</li>
+              <li>Clean, professional, shareable</li>
+              <li>Auto-generated from the post title</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase3">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">First, check your current ugly URL</div>
+              <div class="step-desc">Before fixing it, see the problem yourself:</div>
+              <ol class="sub-steps">
+                <li>Click the house icon (top-left admin bar) → <strong>Visit Site</strong></li>
+                <li>Click on any blog post to open it</li>
+                <li>Look at the URL in your browser address bar</li>
+                <li>It probably shows something like <code>/?p=14</code> or <code>/?p=7</code></li>
+              </ol>
+              <div class="note note-red">
+                ⚠️ That number after <code>?p=</code> is WordPress's internal database ID.
+                It means nothing to Google or to humans.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Go to Settings → Permalinks
+              </div>
+              <div class="step-desc">Return to the WordPress Dashboard and navigate to:</div>
+              <div class="nav-path">
+                <span class="np-item">Settings</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Permalinks</span>
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                You will see a list of permalink structure options with radio buttons.
+                Currently <strong>"Plain"</strong> is selected — this creates the <code>?p=14</code> URLs.
+              </div>
+              <div class="permalink-options">
+                <div class="plo-item plo-selected-bad">
+                  <span class="plo-radio">◉</span>
+                  <span class="plo-label">Plain</span>
+                  <span class="plo-example">http://localhost/mywebsite/?p=14</span>
+                  <span class="plo-badge bad">Currently selected — BAD for SEO</span>
+                </div>
+                <div class="plo-item">
+                  <span class="plo-radio">○</span>
+                  <span class="plo-label">Day and name</span>
+                  <span class="plo-example">/mywebsite/2025/01/15/post-name/</span>
+                </div>
+                <div class="plo-item">
+                  <span class="plo-radio">○</span>
+                  <span class="plo-label">Month and name</span>
+                  <span class="plo-example">/mywebsite/2025/01/post-name/</span>
+                </div>
+                <div class="plo-item plo-recommended">
+                  <span class="plo-radio">○</span>
+                  <span class="plo-label">Post name</span>
+                  <span class="plo-example">/mywebsite/the-future-of-quantum-computing/</span>
+                  <span class="plo-badge good">← Select this one!</span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Select "Post name" and save</div>
+              <ol class="sub-steps">
+                <li>Click the radio button next to <strong>Post name</strong></li>
+                <li>Scroll to the very bottom of the page</li>
+                <li>Click the <strong>Save Changes</strong> button</li>
+                <li>The page reloads and shows a green success message</li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Test the new URL format</div>
+              <ol class="sub-steps">
+                <li>Click the house icon → <strong>Visit Site</strong></li>
+                <li>If you see a 404 error on the homepage itself, do not panic — see the troubleshooting box below</li>
+                <li>Click on one of your blog posts</li>
+                <li>Check the URL in the address bar — it should now show something like:</li>
+              </ol>
+              <div class="url-box">http://localhost/mywebsite/<span style="color:#a8d8a8;">the-future-of-quantum-computing/</span></div>
+              <div class="note note-green">
+                ✅ The URL now contains the post title — clean, readable, and SEO-friendly!
+              </div>
+            </div>
+          </li>
+
+        </ol>
+
+        <!-- TROUBLESHOOTING: 404 error -->
+        <div class="trouble-box">
+          <div class="tb-header">🔴 Troubleshooting — "404 Not Found" error after changing Permalinks</div>
+          <div class="tb-body">
+
+            <p><strong>Why this happens:</strong></p>
+            <p>
+              Post-name URLs need Apache's <strong>mod_rewrite</strong> module to work.
+              This module rewrites the URL path (like <code>/quantum-computing/</code>)
+              into the PHP code WordPress needs to load the right page.
+              On some XAMPP installations it is disabled by default,
+              so Apache does not know how to translate the friendly URL — hence 404.
+            </p>
+
+            <p style="margin-top:0.8rem;"><strong>The Fix — Enable mod_rewrite:</strong></p>
+            <ol class="sub-steps" style="margin-top:0.4rem;">
+              <li>Open the <strong>XAMPP Control Panel</strong></li>
+              <li>Click the <strong>Config</strong> button next to Apache (NOT the Start/Stop button)</li>
+              <li>A dropdown opens — click <strong>httpd.conf</strong> to open it in Notepad</li>
+              <li>
+                Press <kbd>Ctrl</kbd>+<kbd>F</kbd> to open Find and search for:
+                <code>#LoadModule rewrite_module</code>
+              </li>
+              <li>
+                Find the line that looks like:
+                <div class="code-line"><span class="cl-comment">#</span>LoadModule rewrite_module modules/mod_rewrite.so</div>
+              </li>
+              <li>
+                Delete the <code>#</code> at the very beginning of that line so it becomes:
+                <div class="code-line cl-fixed">LoadModule rewrite_module modules/mod_rewrite.so</div>
+                <div class="note note-blue" style="margin-top:0.4rem;">
+                  💡 The <code>#</code> symbol in config files means "this line is disabled (commented out)".
+                  Removing it enables the line. This is exactly like CSS comments!
+                </div>
+              </li>
+              <li>Press <kbd>Ctrl</kbd>+<kbd>S</kbd> to save the file and close Notepad</li>
+              <li>In the XAMPP Control Panel, click <strong>Stop</strong> next to Apache, then click <strong>Start</strong> again</li>
+              <li>Revisit your site — the 404 error should be gone</li>
+            </ol>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 4 · MINI-AUDIT (15 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4">
+      <header class="phase-header phase-gold">
+        <span class="phase-badge">Phase 4  ·  15 min</span>
+        <h2>Site Mini-Audit — Is Your Site Fully Polished?</h2>
+      </header>
+
+      <div class="phase-body">
+        <p class="phase-intro">
+          Go through every item in this checklist.
+          If anything is missing, fix it <strong>now</strong> before moving to Week 10 (Themes &amp; Plugins).
+        </p>
+
+        <ul class="step-list" data-phase="phase4">
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Static Home Page is set</div>
+              <div class="step-desc">
+                Settings → Reading → "Your homepage displays" = "A static page" → Homepage = Home.
+                Visiting your site shows the Home page welcome text — not a list of posts.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">At least 4 posts are published</div>
+              <div class="step-desc">
+                Posts → All Posts — count should be 4 or more (3 original + 1 video post), all with "Published" status.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Every post has a Category assigned (not Uncategorized)</div>
+              <div class="step-desc">
+                In Posts → All Posts, check the Category column — no post should show "Uncategorized".
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Every post has Tags assigned</div>
+              <div class="step-desc">
+                Edit each post and confirm the Tags panel in the right sidebar has at least 2–3 tags.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Every post has a Featured Image</div>
+              <div class="step-desc">
+                Posts → All Posts — the thumbnail column on the left should show an image for every post, not a grey box.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Every image in the Media Library has Alt Text</div>
+              <div class="step-desc">
+                Media → Library → click each image and confirm the Alt Text field is filled in.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">About Us page has an inline image inside the content</div>
+              <div class="step-desc">
+                Pages → About Us → click View — there should be an image visible inside the page body,
+                not just text.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">URLs are using the "Post name" permalink format</div>
+              <div class="step-desc">
+                Click any post on your site — the URL in the address bar should read
+                <code>/mywebsite/post-title/</code> and NOT <code>/?p=14</code>.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">The YouTube video post plays correctly</div>
+              <div class="step-desc">
+                Open the "My Favourite Tech Video" post — the embedded YouTube player should be visible
+                and the video should play when you click it.
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- Completion message -->
+        <div id="session-complete" class="session-complete" style="display:none;">
+          🎉 Session 3 Complete! Your WordPress site is now polished with media and SEO-friendly URLs.
+          <br><strong>Next Week: Themes &amp; Plugins — making your site look great and adding real features!</strong>
+        </div>
+
+        <!-- Preview next session -->
+        <div class="next-session-box">
+          <div class="nsb-title">🔮 Preview — Week 10: Themes &amp; Plugins</div>
+          <div class="nsb-body">
+            <div class="nsb-item">
+              <div class="nsb-icon">🎨</div>
+              <div>
+                <strong>Themes</strong> — Install a free professional theme and completely
+                change how your site looks. No coding needed!
+              </div>
+            </div>
+            <div class="nsb-item">
+              <div class="nsb-icon">🔌</div>
+              <div>
+                <strong>Contact Form Plugin</strong> — Install a plugin to add a working
+                contact form to your Contact page.
+              </div>
+            </div>
+            <div class="nsb-item">
+              <div class="nsb-icon">📊</div>
+              <div>
+                <strong>SEO Plugin</strong> — Install Yoast SEO to get a full SEO score
+                for every post and page.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <p>
+      Web Client Programming &nbsp;·&nbsp; Week 09 Session 03 &nbsp;·&nbsp;
+      Media Management &amp; Structure Polish
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
