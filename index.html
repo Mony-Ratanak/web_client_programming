@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 10 Session 1 — Themes & Block Layouts Step-by-Step Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+    HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <nav class="top-bar">
+      <span class="site-logo">Week 10 · Session 1</span>
+      <span class="week-label">Themes &amp; Block Layouts</span>
+    </nav>
+
+    <hgroup class="hero-text">
+      <h1>Step-by-Step Lab Guide</h1>
+      <p>Install Astra · Theme Customizer · Cover Block · Columns Block · Modern Homepage</p>
+    </hgroup>
+
+    <!-- Overall progress bar -->
+    <div class="overall-progress-wrap">
+      <div class="overall-progress-label">
+        Overall Progress: <span id="overall-done">0</span> /
+        <span id="overall-total">0</span> steps completed
+      </div>
+      <div class="overall-track">
+        <div class="overall-fill" id="overall-fill"></div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+    QUICK NAVIGATION
+  ============================================================ -->
+  <nav class="phase-nav" aria-label="Jump to phase">
+    <a href="#prereq"   class="phase-nav-link">Before You Start</a>
+    <a href="#concept"  class="phase-nav-link">Key Concept</a>
+    <a href="#phase-1"  class="phase-nav-link">Phase 1 · Install Astra</a>
+    <a href="#phase-2a" class="phase-nav-link">Phase 2a · Typography &amp; Colours</a>
+    <a href="#phase-2b" class="phase-nav-link">Phase 2b · Logo &amp; Site Identity</a>
+    <a href="#phase-3a" class="phase-nav-link">Phase 3a · Cover Block Hero</a>
+    <a href="#phase-3b" class="phase-nav-link">Phase 3b · Columns Block</a>
+    <a href="#phase-4"  class="phase-nav-link">Phase 4 · Refine &amp; Audit</a>
+  </nav>
+
+
+  <!-- ============================================================
+    MAIN CONTENT
+  ============================================================ -->
+  <main class="page-content">
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PREREQ — BEFORE YOU START
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="prereq">
+      <header class="phase-header phase-gray">
+        <span class="phase-badge">Prerequisites</span>
+        <h2>Before You Start</h2>
+      </header>
+
+      <div class="phase-body">
+
+        <div class="concept-box concept-blue">
+          <div class="concept-title">📋 What you need from Week 9</div>
+          <div class="checklist-inline">
+            <span class="ci-item">✅ WordPress installed at <code>http://localhost/mywebsite</code></span>
+            <span class="ci-item">✅ At least 4 published posts with categories and tags</span>
+            <span class="ci-item">✅ Featured images set on all posts</span>
+            <span class="ci-item">✅ Home, About Us, and Contact pages published</span>
+            <span class="ci-item">✅ Home page set as static front page (Settings → Reading)</span>
+            <span class="ci-item">✅ Permalinks using Post name format</span>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="prereq">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Start XAMPP — Apache &amp; MySQL must both be green</div>
+              <div class="step-desc">
+                Open the XAMPP Control Panel. Click <strong>Start</strong> next to both
+                <strong>Apache</strong> and <strong>MySQL</strong>. Both must turn green.
+              </div>
+              <div class="visual-mockup visual-dark">
+                <div class="mock-xampp-row">
+                  <span class="mx-service">Apache</span>
+                  <span class="mx-status green">● Running</span>
+                  <span class="mx-btn red">Stop</span>
+                  <span class="mx-btn gray">Admin</span>
+                </div>
+                <div class="mock-xampp-row">
+                  <span class="mx-service">MySQL</span>
+                  <span class="mx-status green">● Running</span>
+                  <span class="mx-btn red">Stop</span>
+                  <span class="mx-btn gray">Admin</span>
+                </div>
+              </div>
+              <div class="note note-red">
+                ⚠️ Do NOT continue until both Apache AND MySQL show green running status.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Log in to WordPress Dashboard</div>
+              <div class="step-desc">Open your browser and go to:</div>
+              <div class="url-box">http://localhost/mywebsite/wp-admin</div>
+              <div class="creds-grid">
+                <div class="cred-row"><span class="cred-label">Username</span><code>admin</code></div>
+                <div class="cred-row"><span class="cred-label">Password</span><code>12345</code></div>
+              </div>
+              <div class="note note-green">✅ You should see the dark grey WordPress Dashboard.</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      KEY CONCEPT — CONTENT vs PRESENTATION
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="concept">
+      <header class="phase-header phase-navy">
+        <span class="phase-badge">Key Concept</span>
+        <h2>Content vs Presentation — Why Themes are Powerful</h2>
+      </header>
+
+      <div class="phase-body">
+
+        <p class="phase-intro">
+          Before installing a theme, understand the most important idea in WordPress:
+          <strong>Content and Presentation are completely separated.</strong>
+        </p>
+
+        <div class="concept-split-box">
+          <div class="csb-col csb-left">
+            <div class="csb-title">Weeks 1–4 · HTML/CSS Files</div>
+            <ul class="csb-list">
+              <li>Layout lived <em>inside</em> your HTML/CSS files</li>
+              <li>Change the layout → you had to rewrite HTML</li>
+              <li>Change the font → update every CSS file</li>
+              <li>Content and design were <strong>mixed together</strong></li>
+            </ul>
+          </div>
+          <div class="csb-arrow">→</div>
+          <div class="csb-col csb-right">
+            <div class="csb-title">WordPress · Theme System</div>
+            <ul class="csb-list">
+              <li>All content (posts, pages) stored in the <strong>database</strong></li>
+              <li>Presentation (layout, fonts) controlled by the <strong>theme</strong></li>
+              <li>Swap themes in 1 click → <strong>all content stays intact</strong></li>
+              <li>Change the global font in <strong>one single field</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="analogy-box">
+          <div class="analogy-icon">📚</div>
+          <div class="analogy-text">
+            <strong>The Book Analogy:</strong> The <strong>database</strong> is the book's written text.
+            The <strong>theme</strong> is the cover design and print layout.
+            You can rebind the same book in a completely new cover
+            — <em>without changing a single word inside</em>.
+          </div>
+        </div>
+
+        <div class="concept-box concept-gold">
+          <strong>🎯 Today's proof:</strong> We will install the Astra theme.
+          The entire look of the site will change instantly —
+          but every post, page, image, and category from Week 9 will remain exactly where it was.
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1 · INSTALLING ASTRA (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1">
+      <header class="phase-header phase-blue">
+        <span class="phase-badge">Phase 1  ·  30 min</span>
+        <h2>Install &amp; Activate the Astra Theme</h2>
+      </header>
+
+      <div class="phase-body">
+
+        <div class="concept-box concept-blue">
+          <div class="concept-title">🎨 What is a WordPress Theme?</div>
+          <p>
+            A theme is a collection of PHP templates, CSS stylesheets, and JavaScript files
+            that control how your entire website <strong>looks</strong> —
+            fonts, colours, spacing, header style, footer layout, everything visual.
+            The free WordPress Theme Repository has over <strong>10,000 themes</strong>
+            you can install in one click.
+          </p>
+        </div>
+
+        <!-- Theme comparison cards -->
+        <div class="theme-cards">
+          <div class="theme-card theme-recommended">
+            <div class="tc-badge badge-green">★ Recommended</div>
+            <div class="tc-name">Astra</div>
+            <div class="tc-desc">Most popular, fastest loading, best Gutenberg support. Used by 1.5 million+ websites. Use this today.</div>
+          </div>
+          <div class="theme-card">
+            <div class="tc-badge badge-teal">Also Good</div>
+            <div class="tc-name">GeneratePress</div>
+            <div class="tc-desc">Extremely lightweight and developer-friendly. Also compatible with Gutenberg.</div>
+          </div>
+          <div class="theme-card">
+            <div class="tc-badge badge-teal">Also Good</div>
+            <div class="tc-name">Kadence</div>
+            <div class="tc-desc">Modern design tools, great free version, excellent block editor compatibility.</div>
+          </div>
+          <div class="theme-card theme-avoid">
+            <div class="tc-badge badge-red">Avoid</div>
+            <div class="tc-name">Divi / Elementor</div>
+            <div class="tc-desc">Page-builder themes. They conflict with native Gutenberg blocks used in this course.</div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase1">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Go to Appearance → Themes</div>
+              <div class="step-desc">
+                In the left-hand WordPress menu, hover over <strong>Appearance</strong>.
+                A sub-menu slides out — click <strong>Themes</strong>.
+              </div>
+              <div class="nav-path">
+                <span class="np-item">Appearance</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Themes</span>
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                You will see the currently installed themes as thumbnail cards.
+                Your active theme (probably <em>Twenty Twenty-Four</em>) has a blue
+                <strong>Active</strong> label in the top-left corner.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Click "Add New Theme" at the top of the page</div>
+              <div class="step-desc">
+                Click the large <strong>Add New Theme</strong> button (or the dashed
+                <strong>+</strong> card on some WordPress versions).
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                You are now browsing the <strong>WordPress.org Theme Repository</strong>
+                — thousands of free themes, all reviewed and safe to install.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Search for "Astra" and install it
+              </div>
+              <ol class="sub-steps">
+                <li>Find the <strong>Search themes…</strong> input box in the top-right area</li>
+                <li>Type: <code>Astra</code></li>
+                <li>The Astra theme card appears — look for the blue/teal icon and <em>"by Brainstorm Force"</em></li>
+                <li>Hover your mouse over the Astra card — two buttons appear: <strong>Install</strong> and <strong>Preview</strong></li>
+                <li>Click <strong>Install</strong></li>
+                <li>Wait about 10–15 seconds while WordPress downloads and installs Astra</li>
+              </ol>
+              <div class="note note-blue">
+                💡 The Install button downloads the theme files to your server. The theme is NOT active yet — it is just installed.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Click "Activate" to apply Astra to your site
+              </div>
+              <div class="step-desc">
+                After installation, the <strong>Install</strong> button changes to two new buttons:
+                <strong>Activate</strong> and <strong>Live Preview</strong>.
+              </div>
+              <ol class="sub-steps">
+                <li>Click <strong>Activate</strong> (not Live Preview)</li>
+                <li>WordPress applies Astra to your site immediately</li>
+                <li>You are redirected back to the Themes page — Astra now has the <strong>Active</strong> label</li>
+              </ol>
+              <div class="note note-green">✅ Astra is now active! Your site is using it right now.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Visit your site to see the change</div>
+              <ol class="sub-steps">
+                <li>In the black admin bar at the top, hover over the <strong>house icon</strong> (your site name)</li>
+                <li>Click <strong>Visit Site</strong></li>
+                <li>Your entire website now has a clean, modern look — completely different from before</li>
+              </ol>
+              <div class="note note-green">
+                ✅ All your posts, pages, images, and categories from Week 9 are still there.
+                Only the visual presentation has changed.
+                <strong>This is the power of separating content from presentation!</strong>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2a · CUSTOMIZER — TYPOGRAPHY & COLOURS (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2a">
+      <header class="phase-header phase-teal">
+        <span class="phase-badge">Phase 2  ·  30 min</span>
+        <h2>Theme Customizer — Typography &amp; Colours</h2>
+        <span class="phase-time">Part 1 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <div class="concept-box concept-teal">
+          <div class="concept-title">⚙️ What is the Theme Customizer?</div>
+          <p>
+            The Customizer is a <strong>live-preview editor</strong> that controls
+            <strong>global CSS</strong> — styles that apply to every single page of your site at once.
+            Think of it as your site's <em>global stylesheet</em>, but with a visual interface.
+          </p>
+          <div class="two-col" style="margin-top:0.8rem;">
+            <div>
+              <strong>Customizer controls:</strong>
+              <ul style="margin-top:0.3rem; padding-left:1.2rem; font-size:.9rem;">
+                <li>Site-wide font (typography)</li>
+                <li>Brand colour (buttons, links, accents)</li>
+                <li>Logo and site identity</li>
+                <li>Header and footer layout</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Block Editor controls:</strong>
+              <ul style="margin-top:0.3rem; padding-left:1.2rem; font-size:.9rem;">
+                <li>Individual page content</li>
+                <li>Block-specific styles</li>
+                <li>Per-page layouts</li>
+                <li>Images and text inside pages</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase2a">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open the Theme Customizer</div>
+              <div class="step-desc">Return to the Dashboard, then navigate to:</div>
+              <div class="nav-path">
+                <span class="np-item">Appearance</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Customize</span>
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                The Customizer opens. You will see:
+              </div>
+              <ul class="sub-steps">
+                <li>A <strong>left sidebar</strong> with all the settings panels</li>
+                <li>A <strong>live preview</strong> of your site on the right — it updates as you make changes</li>
+                <li>A <strong>Publish</strong> button at the top-left — you must click this to save changes</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Change the global typography (font)
+              </div>
+              <div class="step-desc">
+                This changes the font for your <strong>entire website</strong> in one setting.
+              </div>
+              <ol class="sub-steps">
+                <li>In the left sidebar, click <strong>Global</strong> to expand it</li>
+                <li>Click <strong>Typography</strong></li>
+                <li>Find the <strong>Base Font</strong> dropdown</li>
+                <li>
+                  Click the dropdown and try one of these popular Google Fonts:
+                  <div class="font-options">
+                    <span class="font-chip" style="font-family:sans-serif;">Roboto — clean, modern, great for tech</span>
+                    <span class="font-chip" style="font-weight:600;">Montserrat — bold, professional look</span>
+                    <span class="font-chip" style="font-style:italic;">Open Sans — friendly, very readable</span>
+                  </div>
+                </li>
+                <li>Watch the <strong>live preview</strong> on the right update instantly — no page reload needed</li>
+              </ol>
+              <div class="note note-blue">
+                💡 This is the power of the Customizer — the live preview means you can try different fonts
+                and see the result immediately, before committing to it.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Adjust font sizes (optional but recommended)</div>
+              <div class="step-desc">
+                While still in Typography, scroll down to find:
+              </div>
+              <ul class="sub-steps">
+                <li><strong>Headings Font Size</strong> — controls all H1, H2, H3 sizes globally</li>
+                <li><strong>Body Font Size</strong> — controls paragraph text size (16px is standard)</li>
+              </ul>
+              <div class="note note-blue">
+                💡 Leave these at the default values if you are happy with them.
+                You can always come back to the Customizer to adjust later.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Change the brand colour (Theme Color)
+              </div>
+              <div class="step-desc">
+                The Theme Color controls buttons, links, and accent colours across the entire site.
+              </div>
+              <ol class="sub-steps">
+                <li>In the left sidebar, click the <strong>back arrow</strong> ← to return to the main Customizer menu</li>
+                <li>Click <strong>Global</strong> again → then click <strong>Colors</strong></li>
+                <li>Find <strong>Theme Color</strong> (sometimes called Accent Color)</li>
+                <li>Click the colour swatch — a colour picker appears</li>
+                <li>
+                  Choose a colour that fits a tech news site. Some ideas:
+                  <div class="color-swatches">
+                    <span class="cs-item" style="background:#1f7a8c;"><span class="cs-hex">#1f7a8c</span><span class="cs-name">Teal</span></span>
+                    <span class="cs-item" style="background:#2e75b6;"><span class="cs-hex">#2e75b6</span><span class="cs-name">Blue</span></span>
+                    <span class="cs-item" style="background:#1f3864;"><span class="cs-hex">#1f3864</span><span class="cs-name">Navy</span></span>
+                    <span class="cs-item" style="background:#6b2fa0;"><span class="cs-hex">#6b2fa0</span><span class="cs-name">Purple</span></span>
+                    <span class="cs-item" style="background:#c00000;"><span class="cs-hex">#c00000</span><span class="cs-name">Red</span></span>
+                  </div>
+                  Or type your own hex code directly in the <code>#</code> field.
+                </li>
+                <li>Watch the preview update — buttons and links on the right side change colour</li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ SAVE</span>
+                Click Publish to save your changes
+              </div>
+              <div class="step-desc">
+                <strong>IMPORTANT:</strong> Changes in the Customizer are NOT saved automatically.
+                You must click the blue <strong>Publish</strong> button at the very top of the left sidebar.
+              </div>
+              <div class="note note-red">
+                ⚠️ If you close the Customizer without clicking Publish, ALL your changes will be lost!
+                Always Publish before leaving.
+              </div>
+              <div class="note note-green">
+                ✅ After Publish — the site now uses your custom font and brand colour globally.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2b · SITE IDENTITY & LOGO
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2b">
+      <header class="phase-header phase-teal">
+        <span class="phase-badge">Phase 2  ·  Continued</span>
+        <h2>Customizer — Site Identity &amp; Logo</h2>
+        <span class="phase-time">Part 2 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <p class="phase-intro">
+          The <strong>Site Identity</strong> section controls the logo, site title, tagline,
+          and the small browser tab icon (favicon).
+          A proper logo replaces the plain text site name for a more professional look.
+        </p>
+
+        <div class="concept-box concept-gold">
+          <strong>💡 No logo yet?</strong> Create a free simple logo right now at
+          <a href="https://canva.com" target="_blank" rel="noopener"><strong>canva.com</strong></a> —
+          search for "logo" templates, add your site name, and download as
+          <strong>PNG with transparent background</strong>.
+          Takes less than 5 minutes.
+        </div>
+
+        <ol class="step-list" data-phase="phase2b">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Navigate to Site Identity in the Customizer</div>
+              <div class="step-desc">
+                If you already closed the Customizer, go to <strong>Appearance → Customize</strong> again.
+                In the left sidebar, click <strong>Site Identity</strong>.
+              </div>
+              <div class="step-desc" style="margin-top:0.4rem;">
+                You will see fields for: Logo · Site Title · Tagline · Site Icon (favicon).
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Upload your logo
+              </div>
+              <ol class="sub-steps">
+                <li>Click the <strong>Select logo</strong> button</li>
+                <li>The Media Library popup opens — click <strong>Upload Files</strong> tab</li>
+                <li>Click <strong>Select Files</strong> and choose your logo PNG from your computer</li>
+                <li>WordPress uploads the logo and adds it to your Media Library</li>
+                <li>
+                  A <strong>crop dialog</strong> may appear. Click
+                  <strong>Skip Cropping</strong> to keep the original dimensions
+                </li>
+                <li>Click the blue <strong>Select</strong> button to confirm the logo</li>
+              </ol>
+              <div class="note note-blue">
+                💡 Always use <strong>PNG format with a transparent background</strong> for logos —
+                it means the logo blends into any header colour without a white rectangle around it.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Control how the site title appears</div>
+              <div class="step-desc">
+                Below the logo, find the <strong>"Display Site Title and Tagline"</strong> checkbox.
+              </div>
+              <div class="before-after">
+                <div class="ba-card ba-bad">
+                  <div class="ba-label">If your logo has your site name in it:</div>
+                  <div class="ba-value">Uncheck "Display Site Title" to hide the plain text name</div>
+                  <div class="ba-explain">Prevents duplication — logo text + plain text would look odd</div>
+                </div>
+                <div class="ba-arrow">OR</div>
+                <div class="ba-card ba-good">
+                  <div class="ba-label">If your logo is an icon / symbol only:</div>
+                  <div class="ba-value">Keep "Display Site Title" checked</div>
+                  <div class="ba-explain">The site name appears as text next to the icon logo</div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Update the Site Tagline</div>
+              <div class="step-desc">
+                Find the <strong>Tagline</strong> text field.
+                Delete the default text and type something descriptive:
+              </div>
+              <div class="example-text">
+                "Your #1 Source for Tech News"
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                The tagline often appears under the logo in the header and in browser tab titles.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ SAVE</span>
+                Click Publish → Exit the Customizer
+              </div>
+              <ol class="sub-steps">
+                <li>Click the blue <strong>Publish</strong> button at the top of the left sidebar</li>
+                <li>Wait for the saving animation to complete</li>
+                <li>Click the <strong>X</strong> button in the very top-left to exit and return to the Dashboard</li>
+              </ol>
+              <div class="note note-green">
+                ✅ Your site now has a custom font, brand colour, and logo applied globally.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3a · COVER BLOCK HERO SECTION (45 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3a">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 3  ·  45 min</span>
+        <h2>Homepage Layout — The Cover Block (Hero Section)</h2>
+        <span class="phase-time">Part 1 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- What we're building preview -->
+        <div class="hero-preview">
+          <div class="hp-overlay">
+            <div class="hp-h1">Welcome to TechWorld</div>
+            <div class="hp-btn">Read Our Blog</div>
+          </div>
+          <div class="hp-label">← This is the Cover Block: full-width background image + H1 headline + Button overlay</div>
+        </div>
+
+        <!-- Cover block explainer -->
+        <div class="block-explainer">
+          <div class="be-item">
+            <div class="be-icon be-blue">CSS</div>
+            <div class="be-text">
+              <strong>What you did in Week 3–4:</strong><br>
+              <code>background-image: url(...)</code><br>
+              <code>background: rgba(0,0,0,0.5)</code><br>
+              <code>width: 100%; position: relative</code>
+            </div>
+          </div>
+          <div class="be-arrow">= same as →</div>
+          <div class="be-item">
+            <div class="be-icon be-wp">WP</div>
+            <div class="be-text">
+              <strong>What the Cover Block does:</strong><br>
+              Background image → set via Upload button<br>
+              Dark overlay → Opacity slider in sidebar<br>
+              Full width → Align button in toolbar
+            </div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase3a">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open the Home page for editing</div>
+              <div class="nav-path">
+                <span class="np-item">Pages</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item">All Pages</span>
+                <span class="np-arrow">→</span>
+                <span class="np-item np-active">Edit (Home)</span>
+              </div>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                The Gutenberg block editor opens for the Home page.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Delete ALL existing content blocks</div>
+              <div class="step-desc">
+                The Home page currently has the plain welcome text you wrote in Week 9.
+                We are rebuilding it from scratch with a proper layout.
+              </div>
+              <ol class="sub-steps">
+                <li>Click on the first block in the editor to select it</li>
+                <li>Press <kbd>Ctrl</kbd>+<kbd>A</kbd> to select ALL blocks on the page</li>
+                <li>Press <kbd>Delete</kbd> or <kbd>Backspace</kbd> to remove them</li>
+              </ol>
+              <div class="step-desc" style="margin-top:0.5rem;">
+                Alternative method: click each block → click the 3-dot menu (<strong>⋮</strong>)
+                at the right of the toolbar → click <strong>Remove Block</strong>.
+              </div>
+              <div class="note note-blue">
+                💡 The editor should now show a single empty block with the
+                <em>"Type / to choose a block"</em> placeholder text.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Add the Cover block using the slash command
+              </div>
+              <div class="step-desc">The fastest way to add any block is the slash command:</div>
+              <ol class="sub-steps">
+                <li>Click the empty editor area</li>
+                <li>Type <kbd>/</kbd> (forward slash) — a block search popup appears</li>
+                <li>Type <code>cover</code></li>
+                <li>The Cover block option appears — click it or press <kbd>Enter</kbd></li>
+              </ol>
+              <div class="gutenberg-shortcut-box">
+                <div class="gsb-title">🧱 Gutenberg Block Shortcut</div>
+                <div class="gsb-content">
+                  Press <kbd>/</kbd> on any empty line to search and insert any block instantly.
+                  This is the fastest way to build pages in Gutenberg.
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Upload a background image for the Cover block
+              </div>
+              <div class="step-desc">
+                The Cover block appears with options to add a background.
+              </div>
+              <ol class="sub-steps">
+                <li>Click <strong>Upload</strong> inside the Cover block</li>
+                <li>
+                  Choose a wide, landscape-format image from your computer
+                  (a city skyline, tech background, or any professional-looking wide photo).
+                  <br><em>Tip: images from unsplash.com in landscape format work perfectly.</em>
+                </li>
+                <li>The image becomes the background of the Cover block</li>
+              </ol>
+              <div class="note note-blue">
+                💡 Alternatively, click <strong>Media Library</strong> if you already have
+                a suitable landscape image uploaded from Week 9.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Add the H1 headline inside the Cover block</div>
+              <div class="step-desc">
+                The Cover block now has a dark overlay with a cursor inside it.
+              </div>
+              <ol class="sub-steps">
+                <li>Click inside the Cover block — a cursor appears</li>
+                <li>Type <kbd>/</kbd> → type <code>heading</code> → press <kbd>Enter</kbd></li>
+                <li>Type your headline: <code>Welcome to TechWorld</code></li>
+                <li>
+                  Look at the toolbar above the heading block.
+                  Find the <strong>H2</strong> label → click it → change to <strong>H1</strong>
+                  (your main page headline should always be H1)
+                </li>
+              </ol>
+              <div class="note note-blue">
+                💡 H1 is the most important heading on the page for SEO.
+                Only use H1 once per page — your hero headline is the perfect place.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Add a Buttons block below the H1 headline</div>
+              <ol class="sub-steps">
+                <li>Click after the H1 headline text → press <kbd>Enter</kbd> to create a new line inside the Cover</li>
+                <li>Type <kbd>/</kbd> → type <code>buttons</code> → press <kbd>Enter</kbd></li>
+                <li>A button block appears — click the button text and type: <code>Read Our Blog</code></li>
+                <li>
+                  Click the <strong>link icon</strong> (🔗) in the button's toolbar to add a URL.
+                  Type: <code>http://localhost/mywebsite/</code>
+                  (this links to the homepage — WordPress will show the blog if no static page was set,
+                  or you can link to any of your category pages)
+                </li>
+                <li>Press <kbd>Enter</kbd> to confirm the link</li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Set the Cover block to "Full Width"
+              </div>
+              <div class="step-desc">
+                By default, the Cover block is constrained to the page content width (~800px).
+                <strong>Full Width</strong> stretches it to 100% of the browser window —
+                essential for a professional hero section.
+              </div>
+              <ol class="sub-steps">
+                <li>Click on the outer edge of the Cover block to select the whole block
+                  (not just the text inside it)</li>
+                <li>Look at the toolbar that appears <strong>directly above the Cover block</strong></li>
+                <li>
+                  Find the <strong>Align</strong> icon — it looks like horizontal lines
+                  with arrows, or sometimes shows a width symbol
+                </li>
+                <li>Click it — a dropdown appears with: None · Wide Width · Full Width</li>
+                <li>Select <strong>Full Width</strong></li>
+                <li>The Cover block immediately stretches to fill the entire browser width</li>
+              </ol>
+
+              <div class="css-connection">
+                <div class="cc-label">CSS Connection:</div>
+                <div class="cc-code">/* What Full Width does behind the scenes */<br>.wp-block-cover.alignfull {<br>  width: 100vw;<br>  margin-left: calc(-50vw + 50%);<br>}</div>
+              </div>
+
+              <div class="note note-blue">
+                💡 If you cannot see the Align icon, make sure you selected the <strong>outer</strong>
+                Cover block — not a heading or button block inside it.
+                Click on the very edge of the dark background area.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Adjust the overlay opacity so text is readable
+              </div>
+              <div class="step-desc">
+                The dark overlay between the background image and the text controls contrast.
+                Without enough overlay, white text on a light photo is unreadable.
+              </div>
+
+              <!-- Opacity visualisation -->
+              <div class="opacity-demo">
+                <div class="od-item" style="background:rgba(0,0,0,0.1);">
+                  <div class="od-text">Opacity 10%<br><small>Text barely readable</small></div>
+                </div>
+                <div class="od-item" style="background:rgba(0,0,0,0.4);">
+                  <div class="od-text">Opacity 40%<br><small>Starting to work</small></div>
+                </div>
+                <div class="od-item" style="background:rgba(0,0,0,0.6);">
+                  <div class="od-text">Opacity 60%<br><small>✅ Good balance</small></div>
+                </div>
+                <div class="od-item" style="background:rgba(0,0,0,0.85);">
+                  <div class="od-text">Opacity 85%<br><small>Too dark — barely see image</small></div>
+                </div>
+              </div>
+
+              <div class="step-desc" style="margin-top:0.8rem;"><strong>How to adjust opacity:</strong></div>
+              <ol class="sub-steps">
+                <li>Click the Cover block to select it</li>
+                <li>Look at the <strong>right sidebar</strong> panel (not the toolbar above the block)</li>
+                <li>Find the <strong>Overlay</strong> section — it has an opacity slider</li>
+                <li>
+                  Drag the slider until the text reads clearly.
+                  A value between <strong>40–60</strong> usually works well
+                </li>
+              </ol>
+
+              <div class="css-connection">
+                <div class="cc-label">CSS Connection:</div>
+                <div class="cc-code">/* This is the same as what you used in Week 3 */<br>.cover-overlay {<br>  background: rgba(0, 0, 0, <strong>0.50</strong>);  /* 50 = opacity 50 */<br>}</div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Click Update to save and preview the hero section</div>
+              <ol class="sub-steps">
+                <li>Click the blue <strong>Update</strong> button in the top-right corner</li>
+                <li>Click <strong>View Page</strong> in the link that appears</li>
+                <li>You should see a full-width hero banner with your background image,
+                    dark overlay, headline, and button</li>
+              </ol>
+              <div class="note note-green">
+                ✅ The hero section is complete! Your homepage now has a professional
+                full-width banner — just like real websites you see every day.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3b · COLUMNS BLOCK FEATURES SECTION
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3b">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 3  ·  Continued</span>
+        <h2>Homepage Layout — Columns Block (Features Section)</h2>
+        <span class="phase-time">Part 2 of 2</span>
+      </header>
+
+      <div class="phase-body">
+
+        <!-- Columns preview mock -->
+        <div class="columns-preview">
+          <div class="col-preview-item">
+            <div class="cp-img">[ Image ]</div>
+            <div class="cp-h3">Fast Performance</div>
+            <div class="cp-p">Our site loads in under 1 second with optimised content.</div>
+          </div>
+          <div class="col-preview-item">
+            <div class="cp-img">[ Image ]</div>
+            <div class="cp-h3">Latest Tech News</div>
+            <div class="cp-p">Updated daily with expert reviews and industry news.</div>
+          </div>
+          <div class="col-preview-item">
+            <div class="cp-img">[ Image ]</div>
+            <div class="cp-h3">Expert Reviews</div>
+            <div class="cp-p">Written by professionals with years of industry experience.</div>
+          </div>
+        </div>
+
+        <!-- CSS vs Columns comparison -->
+        <div class="block-explainer">
+          <div class="be-item">
+            <div class="be-icon be-blue">CSS</div>
+            <div class="be-text">
+              <strong>Week 5 Flexbox:</strong><br>
+              <code>display: flex;</code><br>
+              <code>gap: 20px;</code><br>
+              <code>.col { width: 33.33%; }</code>
+            </div>
+          </div>
+          <div class="be-arrow">= same as →</div>
+          <div class="be-item">
+            <div class="be-icon be-wp">WP</div>
+            <div class="be-text">
+              <strong>Columns Block:</strong><br>
+              Select 33/33/33 layout<br>
+              Click + inside each column<br>
+              Add Image · H3 · Paragraph
+            </div>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase3b">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Add a new block BELOW the Cover block</div>
+              <div class="step-desc">
+                In the block editor, scroll down past the Cover block.
+                Click on the area below it — a new empty block line appears.
+              </div>
+              <div class="note note-blue">
+                💡 If clicking below doesn't work, click the very bottom edge of the
+                Cover block and press the <kbd>↓</kbd> arrow key to move the cursor below it.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ KEY STEP</span>
+                Add the Columns block and choose 33/33/33 layout
+              </div>
+              <ol class="sub-steps">
+                <li>Type <kbd>/</kbd> → type <code>columns</code> → press <kbd>Enter</kbd></li>
+                <li>
+                  A <strong>visual layout chooser</strong> appears showing different column layouts:
+                  <div class="layout-chooser">
+                    <div class="lc-item">50/50</div>
+                    <div class="lc-item lc-selected">33/33/33 ← Select this</div>
+                    <div class="lc-item">25/50/25</div>
+                    <div class="lc-item">70/30</div>
+                  </div>
+                </li>
+                <li>Click the <strong>33 / 33 / 33</strong> option — three equal columns appear</li>
+              </ol>
+              <div class="note note-blue">
+                💡 33/33/33 = three columns each taking exactly 1/3 of the width.
+                This is identical to CSS <code>flex: 1</code> or <code>width: 33.33%</code>
+                — Gutenberg just makes it visual.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ COLUMN 1</span>
+                Build the first column: Image + H3 + Paragraph
+              </div>
+              <div class="step-desc">Click inside <strong>Column 1</strong> (the leftmost column).</div>
+              <ol class="sub-steps">
+                <li>
+                  <strong>Add an Image:</strong> Type <kbd>/</kbd> → <code>image</code> → Enter.
+                  Click <strong>Media Library</strong> → select one of your uploaded images.
+                </li>
+                <li>
+                  <strong>Add a Heading:</strong> Click below the image → type <kbd>/</kbd> → <code>heading</code> → Enter.
+                  Type a feature name, e.g. <code>Fast Performance</code>.
+                  Change the heading level to <strong>H3</strong> in the toolbar
+                  (H3 because H1 is already used in the Cover block — heading hierarchy matters!).
+                </li>
+                <li>
+                  <strong>Add a Paragraph:</strong> Click below the heading → type <kbd>/</kbd> → <code>paragraph</code> → Enter.
+                  Write 1–2 sentences describing this feature, e.g.:
+                  <em>"Our site is optimised for speed, delivering content in under one second."</em>
+                </li>
+              </ol>
+              <div class="note note-blue">
+                💡 Heading hierarchy: H1 (once per page) → H2 (main sections) → H3 (sub-sections).
+                Never skip levels — this affects accessibility and Google search ranking.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ COLUMN 2</span>
+                Build the second column: Image + H3 + Paragraph
+              </div>
+              <div class="step-desc">Click inside <strong>Column 2</strong> (the middle column).</div>
+              <ol class="sub-steps">
+                <li>Add an Image block → choose a <em>different</em> image from Column 1</li>
+                <li>Add a Heading (H3) → type: <code>Latest Tech News</code></li>
+                <li>Add a Paragraph → write 1–2 sentences:
+                  <em>"We publish fresh tech news, reviews, and analysis every single day."</em>
+                </li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="badge-important">★ COLUMN 3</span>
+                Build the third column: Image + H3 + Paragraph
+              </div>
+              <div class="step-desc">Click inside <strong>Column 3</strong> (the rightmost column).</div>
+              <ol class="sub-steps">
+                <li>Add an Image block → choose a <em>different</em> image again</li>
+                <li>Add a Heading (H3) → type: <code>Expert Reviews</code></li>
+                <li>Add a Paragraph → write 1–2 sentences:
+                  <em>"All reviews are written by experienced professionals in the technology field."</em>
+                </li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Add padding around the Columns block</div>
+              <div class="step-desc">
+                The columns might sit too close to the hero banner.
+                Add some breathing room:
+              </div>
+              <ol class="sub-steps">
+                <li>Click the outer <strong>Columns block</strong> wrapper to select it
+                  (not a single column — the full three-column group)</li>
+                <li>In the <strong>right sidebar</strong>, look for the <strong>Dimensions</strong> section</li>
+                <li>Find <strong>Padding</strong> — click the icon and add padding to the top and bottom
+                  (e.g. <code>40px</code> top and bottom)</li>
+              </ol>
+              <div class="note note-blue">
+                💡 This is the same as CSS <code>padding: 40px 0;</code> — Gutenberg just has a visual control for it.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Click Update → Preview the full homepage</div>
+              <ol class="sub-steps">
+                <li>Click the blue <strong>Update</strong> button</li>
+                <li>Click <strong>View Page</strong></li>
+                <li>Your homepage should now show: <strong>Full-width hero banner</strong> → <strong>3-column features grid</strong></li>
+              </ol>
+              <div class="note note-green">
+                ✅ Your homepage now has a professional modern layout!
+                This looks like a real website — not just a plain blog.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 4 · REFINE & FINAL AUDIT (15 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4">
+      <header class="phase-header phase-gold">
+        <span class="phase-badge">Phase 4  ·  15 min</span>
+        <h2>Refine &amp; Final Audit</h2>
+      </header>
+
+      <div class="phase-body">
+
+        <p class="phase-intro">
+          Polish the homepage and verify everything works before calling it complete.
+          A well-built page must look good, work correctly, and be responsive.
+        </p>
+
+        <ul class="step-list" data-phase="phase4">
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Balance the three column images</div>
+              <div class="step-desc">
+                All three column images should be roughly the same visual height.
+                If one image is portrait and two are landscape, the columns will look uneven.
+                Swap any mismatched image for one with a similar aspect ratio to the others.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Check heading hierarchy is correct</div>
+              <div class="step-desc">
+                Verify: <strong>H1</strong> appears once in the Cover block headline →
+                <strong>H3</strong> appears in each column.
+                Never skip from H1 directly to H3 without H2 — this breaks accessibility
+                and hurts Google ranking.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Test the "Read Our Blog" button link</div>
+              <div class="step-desc">
+                Click the button on the live site.
+                It should navigate to your blog/posts page or category page.
+                If it opens a 404 error, go back and fix the button URL.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Check the hero overlay — text must be readable</div>
+              <div class="step-desc">
+                On the live site, view the hero section.
+                The headline and button must be clearly legible against the background image.
+                If text is hard to read, go back to the editor → select the Cover block →
+                increase the opacity slider in the right sidebar.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Test responsiveness on a narrow window</div>
+              <div class="step-desc">
+                Drag your browser window narrower to simulate a mobile screen.
+                Gutenberg's Columns block automatically stacks vertically on small screens —
+                you should see one column per row, not three crushed columns side by side.
+              </div>
+              <div class="note note-blue">
+                💡 This is <strong>responsive design by default</strong> — Gutenberg handles
+                the CSS <code>@media</code> queries automatically.
+                In Weeks 3–4 you had to write these manually!
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Preview as a logged-out visitor (incognito window)</div>
+              <div class="step-desc">
+                Open a <strong>private / incognito browser window</strong> and type your site URL.
+                The black admin bar must <strong>NOT</strong> appear — regular visitors never see it.
+                The site should look exactly like a real public website.
+              </div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Verify the Astra theme is still active</div>
+              <div class="step-desc">
+                Go to <strong>Appearance → Themes</strong>. Astra should have the
+                <strong>Active</strong> label. Your custom font and brand colour should be visible.
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- Completion banner -->
+        <div id="session-complete" class="session-complete" style="display:none;">
+          🎉 Session 1 Complete! Your site now has a professionally designed homepage.
+          <br><strong>Next Session: Plugins — Contact Form, Yoast SEO &amp; Security features!</strong>
+        </div>
+
+        <!-- Next session preview -->
+        <div class="next-session-box">
+          <div class="nsb-title">🔌 Preview — Week 10 Session 2: Plugins</div>
+          <div class="nsb-body">
+            <div class="nsb-item">
+              <div class="nsb-icon">📬</div>
+              <div>
+                <strong>Contact Form Plugin</strong> — Install WPForms or Contact Form 7.
+                Add a working email contact form to your Contact page — no PHP coding needed.
+              </div>
+            </div>
+            <div class="nsb-item">
+              <div class="nsb-icon">📊</div>
+              <div>
+                <strong>Yoast SEO Plugin</strong> — Get a full SEO score for every post and page.
+                Adds a meta description field and readability analysis to the editor.
+              </div>
+            </div>
+            <div class="nsb-item">
+              <div class="nsb-icon">🔒</div>
+              <div>
+                <strong>Security Plugin</strong> — Learn how to protect your WordPress site
+                from common attacks with a free security plugin.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <p>
+      Web Client Programming &nbsp;·&nbsp; Week 10 Session 01 &nbsp;·&nbsp;
+      WordPress Themes &amp; Block Editor Layouts
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
