@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 10 Session 3 Lab Guide — SEO Plugins and Custom Menus for Web Client Programming at ITC.">
+  <meta name="author" content="ITC – Web Client Programming">
+  <title>Week 10 · Session 3 — SEO Plugins &amp; Custom Menus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+    SITE HEADER — hero + overall progress bar
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <nav class="top-bar" aria-label="Course navigation">
+      <span class="course-badge">Web Client Programming</span>
+      <span class="session-label">Week 10 · Session 3  ·  2 Hours</span>
+    </nav>
+
+    <hgroup class="hero-text">
+      <p class="hero-eyebrow">Phase-by-Phase Lab Guide</p>
+      <h1>SEO Plugins &amp; Custom Menus</h1>
+      <p class="hero-sub">Yoast SEO · Focus Keyphrase · Meta Description · Custom Navigation · Drop-down Menus</p>
+    </hgroup>
+
+    <div class="overall-progress-wrapper" role="region" aria-label="Overall session progress">
+      <div class="overall-progress-label">
+        <span>Overall Progress</span>
+        <span id="overall-count">0 / 32 steps</span>
+      </div>
+      <div class="progress-bar-track"
+           role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+           aria-label="Overall completion percentage" id="overall-bar-track">
+        <div class="progress-bar-fill" id="overall-bar"></div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+    PHASE NAVIGATION — sticky tabs
+  ============================================================ -->
+  <nav class="phase-nav" aria-label="Jump to phase" id="phase-nav">
+    <ol class="phase-nav-list" role="list">
+      <li>
+        <a href="#phase-1" class="phase-nav-btn" data-phase="1">
+          <span class="phase-dot" id="dot-1" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 1</strong>
+            <small>Install Yoast · 30 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-1" aria-label="Phase 1 progress"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#phase-2" class="phase-nav-btn" data-phase="2">
+          <span class="phase-dot" id="dot-2" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 2</strong>
+            <small>On-Page SEO · 45 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-2" aria-label="Phase 2 progress"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#phase-3" class="phase-nav-btn" data-phase="3">
+          <span class="phase-dot" id="dot-3" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 3</strong>
+            <small>Custom Menus · 30 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-3" aria-label="Phase 3 progress"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#phase-4" class="phase-nav-btn" data-phase="4">
+          <span class="phase-dot" id="dot-4" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 4</strong>
+            <small>Wrap-Up · 15 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-4" aria-label="Phase 4 progress"></span>
+        </a>
+      </li>
+    </ol>
+  </nav>
+
+
+  <!-- ============================================================
+    MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content" class="main-content">
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      CONCEPT SECTION — The Three Pillars of WordPress
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="concept-section" id="concept-pillars"
+             aria-labelledby="pillars-heading">
+      <header class="section-header">
+        <p class="section-eyebrow">Before We Start</p>
+        <h2 id="pillars-heading">The Three Pillars of WordPress</h2>
+        <p class="section-lead">
+          This week you are completing all three pillars of building a professional
+          WordPress site. By the end of Session 3, your site will have everything:
+        </p>
+      </header>
+
+      <div class="pillars-grid" role="list">
+        <article class="pillar-card pillar-blue" role="listitem">
+          <div class="pillar-icon" aria-hidden="true">🎨</div>
+          <h3>Themes → Design</h3>
+          <p>Controls how the site <strong>LOOKS</strong> — fonts, colours, layout, header structure.</p>
+          <p class="pillar-done">✅ Session 1: Astra theme installed &amp; customized</p>
+        </article>
+
+        <article class="pillar-card pillar-teal" role="listitem">
+          <div class="pillar-icon" aria-hidden="true">🧩</div>
+          <h3>Plugins → Function</h3>
+          <p>Adds what the site <strong>DOES</strong> — contact forms, e-commerce, security.</p>
+          <p class="pillar-done">✅ Session 2: WPForms + Limit Login Attempts installed</p>
+        </article>
+
+        <article class="pillar-card pillar-green" role="listitem">
+          <div class="pillar-icon" aria-hidden="true">🔍</div>
+          <h3>SEO → Visibility</h3>
+          <p>Helps Google <strong>FIND &amp; RANK</strong> the site on search results.</p>
+          <p class="pillar-today">🎯 Today: Yoast SEO + Custom Navigation Menus</p>
+        </article>
+      </div>
+
+      <aside class="tip-box tip-gold">
+        <strong>💡 Why does this matter?</strong>
+        A beautiful, fully functional website still <em>fails</em> if no one can find it
+        on Google. SEO is what makes the search engine notice your site.
+        Yoast SEO acts like a personal coach — it reads each post and tells you
+        <em>exactly</em> what to improve to rank higher.
+      </aside>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1 — Installing Yoast SEO  (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1" data-phase="1"
+             aria-labelledby="phase1-title">
+
+      <!-- Phase header -->
+      <header class="phase-header phase-header--blue">
+        <div class="phase-number" aria-hidden="true">1</div>
+        <div class="phase-header-text">
+          <h2 id="phase1-title">Phase 1 — Installing Yoast SEO</h2>
+          <p>30 minutes · Understand SEO, install the plugin, run the setup wizard</p>
+        </div>
+        <div class="phase-progress-wrapper"
+             role="region" aria-label="Phase 1 progress">
+          <p class="phase-progress-label" id="p1-label">0 / 10 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--blue" id="p1-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── 1a: What is SEO? ─────────────────────────────────── -->
+      <section class="subsection" id="phase1-seo-concept"
+               aria-labelledby="seo-heading">
+        <h3 id="seo-heading">What is SEO?</h3>
+
+        <p>
+          <strong>SEO (Search Engine Optimization)</strong> is the practice of making your
+          web pages easy for search engines like Google to understand, index, and rank.
+          No matter how well-designed or functional your site is, it can be completely
+          <em>invisible</em> on Google without proper SEO.
+        </p>
+
+        <div class="comparison-grid">
+          <article class="compare-card compare-red">
+            <h4>Without SEO</h4>
+            <ul>
+              <li>Google doesn't know what your page is about</li>
+              <li>Your page ranks on page 5, 6, or doesn't rank at all</li>
+              <li>Almost zero organic (free) visitors arrive</li>
+              <li>Content exists on the web, but no one finds it</li>
+            </ul>
+          </article>
+
+          <div class="vs-divider" aria-hidden="true">
+            <span>→</span>
+          </div>
+
+          <article class="compare-card compare-green">
+            <h4>With Yoast SEO</h4>
+            <ul>
+              <li>Google understands your topic and target keywords</li>
+              <li>Your page has a real chance to reach Page 1</li>
+              <li>A custom meta description persuades people to click</li>
+              <li>Yoast's coach tells you exactly what to improve</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- SEO flow diagram -->
+        <figure class="seo-flow" aria-label="On-page SEO optimization loop">
+          <div class="flow-row" role="list">
+            <div class="flow-step" role="listitem">
+              <span class="flow-icon" aria-hidden="true">📝</span>
+              <strong>Write Post</strong>
+              <small>A useful blog post</small>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <div class="flow-step" role="listitem">
+              <span class="flow-icon" aria-hidden="true">🔑</span>
+              <strong>Add Keyphrase</strong>
+              <small>What users search for</small>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <div class="flow-step" role="listitem">
+              <span class="flow-icon" aria-hidden="true">🚦</span>
+              <strong>Yoast Grades It</strong>
+              <small>Red → Green score</small>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <div class="flow-step" role="listitem">
+              <span class="flow-icon" aria-hidden="true">📈</span>
+              <strong>Google Ranks It</strong>
+              <small>More visitors!</small>
+            </div>
+          </div>
+          <figcaption>The on-page SEO loop — Yoast guides you through every step.</figcaption>
+        </figure>
+
+        <aside class="connection-box">
+          <strong>🔗 Week 6 Connection:</strong>
+          In Week 6 you wrote <code>&lt;meta name="description" content="..."&gt;</code>
+          in your HTML <code>&lt;head&gt;</code>. The <em>Meta Description</em> you set in Yoast
+          today fills <strong>exactly that same HTML tag</strong> — Yoast just gives you a friendly
+          form instead of raw code, and makes sure Google uses it properly.
+        </aside>
+      </section>
+
+
+      <!-- ── 1b: Install & Activate Yoast ─────────────────────── -->
+      <section class="subsection" id="phase1-install"
+               aria-labelledby="install-heading">
+        <h3 id="install-heading">Install &amp; Activate Yoast SEO</h3>
+
+        <p>
+          Yoast SEO has <strong>5,000,000+ active installations</strong> — the most trusted
+          SEO plugin for WordPress. Installation follows the same process as any plugin.
+        </p>
+
+        <aside class="tip-box tip-gold">
+          <strong>💡 Session 2 Rule still applies:</strong> Only install plugins from
+          <strong>Plugins → Add New</strong> in the WordPress Dashboard. Never download
+          from random websites or pirated sources.
+        </aside>
+
+        <ol class="step-list" aria-label="Install Yoast SEO steps">
+
+          <li class="step-item" id="step-s1-1">
+            <label class="step-label" for="cb-s1-1">
+              <input type="checkbox" id="cb-s1-1" class="step-checkbox"
+                     data-key="cb-s1-1" data-phase="1"
+                     aria-describedby="desc-s1-1">
+              <span class="step-circle" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Log into your WordPress Dashboard</strong>
+                <p id="desc-s1-1" class="step-desc">
+                  Open your browser and navigate to
+                  <code>http://localhost/<em>your-site</em>/wp-admin</code>.
+                  Log in with the username and password you created during the
+                  WordPress installation in Week 9.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> You see the WordPress Dashboard — the black admin bar
+                  at the top and the left-hand sidebar menu.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-2">
+            <label class="step-label" for="cb-s1-2">
+              <input type="checkbox" id="cb-s1-2" class="step-checkbox"
+                     data-key="cb-s1-2" data-phase="1"
+                     aria-describedby="desc-s1-2">
+              <span class="step-circle" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Plugins → Add New Plugin</strong>
+                <p id="desc-s1-2" class="step-desc">
+                  In the left sidebar, click <strong>Plugins</strong> to expand the submenu,
+                  then click <strong>Add New Plugin</strong>. This opens the WordPress Plugin
+                  Repository — the official store with 60,000+ free plugins.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> You see the "Add Plugins" page with a search bar in
+                  the top-right corner.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-3">
+            <label class="step-label" for="cb-s1-3">
+              <input type="checkbox" id="cb-s1-3" class="step-checkbox"
+                     data-key="cb-s1-3" data-phase="1"
+                     aria-describedby="desc-s1-3">
+              <span class="step-circle" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Search for "Yoast SEO"</strong>
+                <p id="desc-s1-3" class="step-desc">
+                  Type <strong>Yoast SEO</strong> in the search box (top-right corner).
+                  After a moment the results appear. Identify the correct plugin by checking:
+                </p>
+                <ul class="sub-list">
+                  <li>The <strong>red Yoast logo</strong> — a white "Y" inside a red square</li>
+                  <li>Author: <em>Team Yoast</em></li>
+                  <li><strong>5+ million active installations</strong></li>
+                  <li>Star rating of 4.6 or above</li>
+                </ul>
+                <div class="step-warning">
+                  ⚠️ There are many SEO plugins with similar names. Make sure you select
+                  <strong>"Yoast SEO" by Team Yoast</strong> with 5M+ installs — not a
+                  copycat or alternative.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-4">
+            <label class="step-label" for="cb-s1-4">
+              <input type="checkbox" id="cb-s1-4" class="step-checkbox"
+                     data-key="cb-s1-4" data-phase="1"
+                     aria-describedby="desc-s1-4">
+              <span class="step-circle" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Install Now"</strong>
+                <p id="desc-s1-4" class="step-desc">
+                  Click the blue <strong>Install Now</strong> button next to Yoast SEO.
+                  WordPress downloads the plugin from the repository. This typically takes
+                  10–20 seconds depending on your internet connection.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> A spinner appears briefly, then the button changes
+                  from "Install Now" to <strong>"Activate"</strong>.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-5">
+            <label class="step-label" for="cb-s1-5">
+              <input type="checkbox" id="cb-s1-5" class="step-checkbox"
+                     data-key="cb-s1-5" data-phase="1"
+                     aria-describedby="desc-s1-5">
+              <span class="step-circle" aria-hidden="true">5</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Activate"</strong>
+                <p id="desc-s1-5" class="step-desc">
+                  After installation finishes, click the <strong>Activate</strong> button.
+                  WordPress enables Yoast SEO on your site and returns you to the
+                  Installed Plugins page.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> A green "Plugin activated" notice appears at the top.
+                  A new <strong>"Yoast SEO"</strong> item appears in the left sidebar — just
+                  like WPForms added its own menu item in Session 2. This is how
+                  <em>every plugin</em> extends the WordPress admin.
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+      </section>
+
+
+      <!-- ── 1c: Configuration Wizard ─────────────────────────── -->
+      <section class="subsection" id="phase1-wizard"
+               aria-labelledby="wizard-heading">
+        <h3 id="wizard-heading">First-Time Configuration Wizard</h3>
+
+        <p>
+          When Yoast is first activated, it prompts you with a setup wizard that tells
+          Google the basic <em>identity</em> of your website. You only run this
+          <strong>once</strong>.
+        </p>
+
+        <ol class="step-list" aria-label="Yoast configuration wizard steps"
+            start="6">
+
+          <li class="step-item" id="step-s1-6">
+            <label class="step-label" for="cb-s1-6">
+              <input type="checkbox" id="cb-s1-6" class="step-checkbox"
+                     data-key="cb-s1-6" data-phase="1"
+                     aria-describedby="desc-s1-6">
+              <span class="step-circle" aria-hidden="true">6</span>
+              <div class="step-content">
+                <strong class="step-title">Open the "First-time SEO configuration" wizard</strong>
+                <p id="desc-s1-6" class="step-desc">
+                  After activation, Yoast usually displays a blue notification bar at the top
+                  of the Dashboard saying <em>"First-time SEO configuration."</em>
+                  Click the link to open the wizard.
+                </p>
+                <div class="step-result">
+                  💡 <em>If the notification isn't there:</em> Go to <strong>Yoast SEO →
+                  Dashboard</strong> in the left sidebar and look for a "Start configuration"
+                  button there.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-7">
+            <label class="step-label" for="cb-s1-7">
+              <input type="checkbox" id="cb-s1-7" class="step-checkbox"
+                     data-key="cb-s1-7" data-phase="1"
+                     aria-describedby="desc-s1-7">
+              <span class="step-circle" aria-hidden="true">7</span>
+              <div class="step-content">
+                <strong class="step-title">Enter your Site Name</strong>
+                <p id="desc-s1-7" class="step-desc">
+                  The wizard asks for your <strong>site name</strong> — this is what Google
+                  displays as the brand name alongside your page title in search results.
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Example names:</span>
+                  <code>ITC Tech Blog</code> &nbsp;or&nbsp; <code>My WordPress Site</code>
+                </div>
+                <p class="step-desc">
+                  Type a clear, descriptive name that represents your practice site.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-8">
+            <label class="step-label" for="cb-s1-8">
+              <input type="checkbox" id="cb-s1-8" class="step-checkbox"
+                     data-key="cb-s1-8" data-phase="1"
+                     aria-describedby="desc-s1-8">
+              <span class="step-circle" aria-hidden="true">8</span>
+              <div class="step-content">
+                <strong class="step-title">Choose: Organization or Person</strong>
+                <p id="desc-s1-8" class="step-desc">
+                  Yoast asks whether the site represents an <strong>Organization</strong>
+                  (a company, brand, or institution) or a <strong>Person</strong>
+                  (an individual blogger or personal portfolio). This tells Google
+                  which <em>type of entity</em> runs the site.
+                </p>
+                <ul class="sub-list">
+                  <li>Choose <strong>Organization</strong> if it represents a company or school</li>
+                  <li>Choose <strong>Person</strong> if it is your personal blog or portfolio</li>
+                </ul>
+                <p class="step-desc">
+                  For this lab, either option is fine — choose what best matches your site.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-9">
+            <label class="step-label" for="cb-s1-9">
+              <input type="checkbox" id="cb-s1-9" class="step-checkbox"
+                     data-key="cb-s1-9" data-phase="1"
+                     aria-describedby="desc-s1-9">
+              <span class="step-circle" aria-hidden="true">9</span>
+              <div class="step-content">
+                <strong class="step-title">Upload a Site Logo (optional)</strong>
+                <p id="desc-s1-9" class="step-desc">
+                  Yoast asks for a <strong>logo image</strong>. Google can display this logo in:
+                </p>
+                <ul class="sub-list">
+                  <li>The <strong>Knowledge Panel</strong> — the info box on the right in Google search</li>
+                  <li><strong>Rich results</strong> for articles (when your content qualifies)</li>
+                  <li>Google's <strong>image search</strong></li>
+                </ul>
+                <p class="step-desc">
+                  Upload any small PNG or JPG as a placeholder. You can skip this step for
+                  the lab if you have no logo ready — it is not required.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-10">
+            <label class="step-label" for="cb-s1-10">
+              <input type="checkbox" id="cb-s1-10" class="step-checkbox"
+                     data-key="cb-s1-10" data-phase="1"
+                     aria-describedby="desc-s1-10">
+              <span class="step-circle" aria-hidden="true">10</span>
+              <div class="step-content">
+                <strong class="step-title">Complete the wizard and save all settings</strong>
+                <p id="desc-s1-10" class="step-desc">
+                  Click through any remaining wizard screens (there may be 2–3 more).
+                  At the end click <strong>Save and continue</strong> or <strong>Finish</strong>.
+                  Yoast saves your site identity settings and returns you to the Dashboard.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> You are back at the Dashboard. The first-time wizard
+                  notification is gone. Yoast SEO is now fully active and protecting every
+                  page on your site with an SEO foundation.
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <!-- Phase 1 completion banner -->
+        <div class="phase-complete-banner" id="banner-1"
+             role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🎉</span>
+          <div>
+            <strong>Phase 1 Complete!</strong>
+            <p>Yoast SEO is installed and configured. Move to Phase 2 — time to
+               optimize your first post!</p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2 — On-Page SEO Optimization  (45 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2" data-phase="2"
+             aria-labelledby="phase2-title">
+
+      <header class="phase-header phase-header--teal">
+        <div class="phase-number" aria-hidden="true">2</div>
+        <div class="phase-header-text">
+          <h2 id="phase2-title">Phase 2 — On-Page SEO Optimization</h2>
+          <p>45 minutes · Focus Keyphrase, Meta Description, Traffic-Light score</p>
+        </div>
+        <div class="phase-progress-wrapper"
+             role="region" aria-label="Phase 2 progress">
+          <p class="phase-progress-label" id="p2-label">0 / 8 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--teal" id="p2-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── 2a: Yoast Meta Box concept ───────────────────────── -->
+      <section class="subsection" id="phase2-meta-box"
+               aria-labelledby="meta-box-heading">
+        <h3 id="meta-box-heading">The Yoast SEO Meta Box</h3>
+
+        <p>
+          Every post and page now has a large new panel <em>below the content editor</em>
+          called the <strong>Yoast SEO Meta Box</strong>. This is your SEO control center
+          for that specific page. The mock panel below shows you what to expect — try
+          clicking "Edit snippet" to see how the snippet editor works!
+        </p>
+
+        <!-- Interactive Yoast Mock Panel -->
+        <figure class="yoast-mock" aria-label="Interactive Yoast SEO panel mock-up">
+          <figcaption class="yoast-mock-caption">
+            Yoast SEO Panel — scroll below the post editor to find this
+          </figcaption>
+
+          <div class="yoast-panel" role="region" aria-label="Yoast SEO panel">
+
+            <!-- Yoast tabs -->
+            <nav class="yoast-tabs" aria-label="Yoast panel tabs">
+              <button class="yoast-tab yoast-tab--active" id="tab-seo"
+                      onclick="switchYoastTab('seo')" aria-selected="true" role="tab">
+                <span class="yoast-score-dot yoast-dot--orange" aria-label="Orange SEO score"></span>
+                SEO
+              </button>
+              <button class="yoast-tab" id="tab-readability"
+                      onclick="switchYoastTab('readability')" aria-selected="false" role="tab">
+                <span class="yoast-score-dot yoast-dot--green" aria-label="Green readability score"></span>
+                Readability
+              </button>
+            </nav>
+
+            <div class="yoast-panel-body" id="yoast-body-seo">
+
+              <!-- Snippet preview section -->
+              <div class="yoast-snippet-section">
+                <p class="yoast-section-label">Snippet preview — how your post looks on Google:</p>
+                <div class="snippet-preview" aria-label="Google search result preview">
+                  <div class="snippet-title" id="mock-title">
+                    The Future of Quantum Computing | ITC Tech Blog
+                  </div>
+                  <div class="snippet-url">
+                    https://techblog.itc › quantum-computing-future
+                  </div>
+                  <div class="snippet-desc" id="mock-desc">
+                    Discover how quantum computing will change the future of technology,
+                    AI, and data security in the next decade.
+                  </div>
+                </div>
+                <button class="yoast-btn" id="edit-snippet-btn"
+                        onclick="toggleSnippetEdit()"
+                        aria-expanded="false"
+                        aria-controls="snippet-edit-area">
+                  Edit snippet ▼
+                </button>
+              </div>
+
+              <!-- Snippet edit fields (collapsed by default) -->
+              <div class="yoast-snippet-edit" id="snippet-edit-area" hidden>
+                <label class="yoast-field-label" for="mock-seo-title">SEO title</label>
+                <input type="text" id="mock-seo-title" class="yoast-input"
+                       value="The Future of Quantum Computing | ITC Tech Blog"
+                       oninput="updateMockTitle(this.value)"
+                       placeholder="Enter an SEO title…">
+
+                <label class="yoast-field-label" for="mock-meta-desc">
+                  Meta description
+                  <span class="yoast-char-count" id="desc-char-count">0 / 156</span>
+                </label>
+                <textarea id="mock-meta-desc" class="yoast-textarea" rows="2"
+                          oninput="updateMockDesc(this.value)"
+                          placeholder="Write a compelling 120–156 character description…"
+                >Discover how quantum computing will change the future of technology, AI, and data security in the next decade.</textarea>
+                <div class="desc-meter-track" role="progressbar"
+                     aria-valuemin="0" aria-valuemax="156" aria-label="Description length meter">
+                  <div class="desc-meter-fill" id="desc-meter-fill"></div>
+                </div>
+                <p class="desc-meter-hint" id="desc-meter-hint">
+                  Aim for 120–156 characters — the bar turns <strong>green</strong> when ideal.
+                </p>
+              </div>
+
+              <!-- Focus keyphrase -->
+              <div class="yoast-keyphrase-section">
+                <label class="yoast-field-label" for="mock-keyphrase">Focus keyphrase</label>
+                <div class="keyphrase-row">
+                  <input type="text" id="mock-keyphrase" class="yoast-input keyphrase-input"
+                         value="quantum computing future"
+                         placeholder="e.g. quantum computing future">
+                  <p class="keyphrase-hint">
+                    The exact phrase a user types into Google to find this post.
+                  </p>
+                </div>
+              </div>
+
+              <!-- SEO analysis dots -->
+              <div class="yoast-analysis" aria-label="SEO analysis results">
+                <p class="yoast-section-label">SEO analysis:</p>
+                <ul class="analysis-list">
+                  <li class="analysis-item analysis-green">
+                    <span class="analysis-dot analysis-dot--green" role="img" aria-label="Good"></span>
+                    Keyphrase in introduction: <em>found — good!</em>
+                  </li>
+                  <li class="analysis-item analysis-green">
+                    <span class="analysis-dot analysis-dot--green" role="img" aria-label="Good"></span>
+                    Meta description: <em>custom description added</em>
+                  </li>
+                  <li class="analysis-item analysis-orange">
+                    <span class="analysis-dot analysis-dot--orange" role="img" aria-label="Could improve"></span>
+                    Keyphrase density: <em>1.2% — could be slightly higher</em>
+                  </li>
+                  <li class="analysis-item analysis-red">
+                    <span class="analysis-dot analysis-dot--red" role="img" aria-label="Needs work"></span>
+                    Internal links: <em>no internal links found — add some!</em>
+                  </li>
+                  <li class="analysis-item analysis-red">
+                    <span class="analysis-dot analysis-dot--red" role="img" aria-label="Needs work"></span>
+                    Outbound links: <em>0 outbound links found</em>
+                  </li>
+                </ul>
+              </div>
+
+            </div><!-- end yoast-panel-body -->
+          </div><!-- end yoast-panel -->
+        </figure>
+
+        <!-- Input → Output concept explainer -->
+        <div class="two-col-explainer">
+          <article class="explainer-card explainer-input">
+            <header class="explainer-hd">
+              <h4>What You Set in Yoast</h4>
+            </header>
+            <div class="explainer-body">
+              <p class="explainer-field-label">Focus Keyphrase:</p>
+              <code class="explainer-code">quantum computing future</code>
+              <p class="explainer-field-label">Meta Description:</p>
+              <p class="explainer-meta-text">
+                A clear 1–2 sentence summary that YOU write, including the keyphrase,
+                to persuade searchers to click on your result.
+              </p>
+            </div>
+          </article>
+
+          <div class="explainer-arrow" aria-hidden="true">→</div>
+
+          <article class="explainer-card explainer-output">
+            <header class="explainer-hd">
+              <h4>What Google Shows Searchers</h4>
+            </header>
+            <div class="explainer-body">
+              <div class="google-snippet-demo" aria-label="Example Google search result">
+                <div class="gs-title">
+                  The Future of Quantum Computing | ITC Tech Blog
+                </div>
+                <div class="gs-url">
+                  https://techblog.itc › quantum-computing-future
+                </div>
+                <div class="gs-desc">
+                  Discover how quantum computing will change the future of technology,
+                  AI, and data security in the next decade.
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+
+      <!-- ── 2b: Step-by-step optimization ─────────────────────── -->
+      <section class="subsection" id="phase2-optimize"
+               aria-labelledby="optimize-heading">
+        <h3 id="optimize-heading">Optimize Your "Quantum Computing" Post</h3>
+
+        <p>
+          Go to your Quantum Computing post (or any tech post you wrote in a previous
+          session) and follow these steps inside the Yoast panel.
+        </p>
+
+        <ol class="step-list" aria-label="SEO optimization steps">
+
+          <li class="step-item" id="step-s2-1">
+            <label class="step-label" for="cb-s2-1">
+              <input type="checkbox" id="cb-s2-1" class="step-checkbox"
+                     data-key="cb-s2-1" data-phase="2"
+                     aria-describedby="desc-s2-1">
+              <span class="step-circle step-circle--teal" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Posts → All Posts → Edit your post</strong>
+                <p id="desc-s2-1" class="step-desc">
+                  In the left sidebar, click <strong>Posts → All Posts</strong>.
+                  Find your <em>"Quantum Computing"</em> post. Hover over it and click
+                  <strong>Edit</strong> to open it in the Gutenberg block editor.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The Gutenberg editor opens with your post content visible.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-2">
+            <label class="step-label" for="cb-s2-2">
+              <input type="checkbox" id="cb-s2-2" class="step-checkbox"
+                     data-key="cb-s2-2" data-phase="2"
+                     aria-describedby="desc-s2-2">
+              <span class="step-circle step-circle--teal" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Scroll below the editor to find the Yoast SEO panel</strong>
+                <p id="desc-s2-2" class="step-desc">
+                  Scroll down <strong>below the block content editor area</strong>. You will
+                  see a large new section labeled <strong>"Yoast SEO"</strong>.
+                  This is the meta box that Yoast adds to every post and page.
+                </p>
+                <div class="step-warning">
+                  ⚠️ <em>Can't see the Yoast panel?</em> Click the three-dot menu (⋮) in the
+                  top-right of the editor → click <strong>Preferences</strong> → ensure
+                  <strong>Yoast SEO</strong> is checked under "Complementary Content".
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-3">
+            <label class="step-label" for="cb-s2-3">
+              <input type="checkbox" id="cb-s2-3" class="step-checkbox"
+                     data-key="cb-s2-3" data-phase="2"
+                     aria-describedby="desc-s2-3">
+              <span class="step-circle step-circle--teal" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Enter the Focus Keyphrase</strong>
+                <p id="desc-s2-3" class="step-desc">
+                  Find the <strong>Focus keyphrase</strong> field in the Yoast panel and type:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Type exactly:</span>
+                  <code>quantum computing future</code>
+                </div>
+                <ul class="sub-list">
+                  <li>Use <strong>lowercase</strong> — Google is not case-sensitive</li>
+                  <li>Use <strong>3–5 words</strong> — not too broad, not too narrow</li>
+                  <li>Choose a phrase your post genuinely covers well</li>
+                </ul>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> As soon as you type the keyphrase, the SEO Analysis
+                  section updates in real time, showing red/orange/green dots.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-4">
+            <label class="step-label" for="cb-s2-4">
+              <input type="checkbox" id="cb-s2-4" class="step-checkbox"
+                     data-key="cb-s2-4" data-phase="2"
+                     aria-describedby="desc-s2-4">
+              <span class="step-circle step-circle--teal" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Edit snippet" to open the snippet editor</strong>
+                <p id="desc-s2-4" class="step-desc">
+                  At the top of the Yoast panel, find the <strong>Snippet preview</strong>
+                  section. It shows a preview of how your post currently looks on Google —
+                  the auto-generated preview is usually cut off or missing important
+                  information.
+                </p>
+                <p class="step-desc">
+                  Click the <strong>Edit snippet ▼</strong> button. This expands the
+                  snippet editor showing three fields: <em>SEO title</em>, <em>Slug</em>,
+                  and <em>Meta description</em>.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The snippet fields are now visible and editable.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-5">
+            <label class="step-label" for="cb-s2-5">
+              <input type="checkbox" id="cb-s2-5" class="step-checkbox"
+                     data-key="cb-s2-5" data-phase="2"
+                     aria-describedby="desc-s2-5">
+              <span class="step-circle step-circle--teal" aria-hidden="true">5</span>
+              <div class="step-content">
+                <strong class="step-title">Write a custom Meta Description</strong>
+                <p id="desc-s2-5" class="step-desc">
+                  Click the <strong>Meta description</strong> field and replace any
+                  auto-generated text with your own compelling description.
+                  Include your Focus Keyphrase naturally.
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Use this example:</span>
+                  <code>Discover how quantum computing will change the future of
+technology, AI, and data security in the next decade.</code>
+                </div>
+                <ul class="sub-list">
+                  <li>Target <strong>120–156 characters</strong> — watch the progress bar turn Green</li>
+                  <li>Include your <strong>keyphrase</strong> naturally</li>
+                  <li>Write like an <strong>ad</strong> — make searchers want to click!</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-6">
+            <label class="step-label" for="cb-s2-6">
+              <input type="checkbox" id="cb-s2-6" class="step-checkbox"
+                     data-key="cb-s2-6" data-phase="2"
+                     aria-describedby="desc-s2-6">
+              <span class="step-circle step-circle--teal" aria-hidden="true">6</span>
+              <div class="step-content">
+                <strong class="step-title">Read and understand the SEO Analysis feedback</strong>
+                <p id="desc-s2-6" class="step-desc">
+                  Scroll down to the <strong>SEO Analysis</strong> section in the Yoast
+                  panel. Each check has a coloured dot explaining what it means:
+                </p>
+
+                <!-- Traffic light explainer -->
+                <div class="traffic-light-explainer" role="list">
+                  <div class="tl-row tl-row--red" role="listitem">
+                    <span class="tl-dot tl-dot--red" role="img" aria-label="Red — Needs work"></span>
+                    <div>
+                      <strong>Red — Needs work.</strong>
+                      This check is hurting your ranking potential and should be fixed.
+                      <br>
+                      <em>Common red issues: keyphrase not in post title, no internal links,
+                      meta description too short or missing, keyphrase not in introduction.</em>
+                    </div>
+                  </div>
+                  <div class="tl-row tl-row--orange" role="listitem">
+                    <span class="tl-dot tl-dot--orange" role="img" aria-label="Orange — Could improve"></span>
+                    <div>
+                      <strong>Orange — Could improve.</strong>
+                      Not critical, but worth addressing to boost your score.
+                      <br>
+                      <em>Common orange issues: keyphrase density slightly low,
+                      some sentences are too long to read comfortably.</em>
+                    </div>
+                  </div>
+                  <div class="tl-row tl-row--green" role="listitem">
+                    <span class="tl-dot tl-dot--green" role="img" aria-label="Green — Good"></span>
+                    <div>
+                      <strong>Green — Good!</strong>
+                      This criterion is well-optimized.
+                      Getting a green overall score is the industry standard for
+                      professional content writers.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge" id="step-s2-7">
+            <label class="step-label" for="cb-s2-7">
+              <input type="checkbox" id="cb-s2-7" class="step-checkbox"
+                     data-key="cb-s2-7" data-phase="2"
+                     aria-describedby="desc-s2-7">
+              <span class="step-circle step-circle--teal" aria-hidden="true">7</span>
+              <div class="step-content">
+                <strong class="step-title">🎯 Challenge: Fix at least 2 red warnings</strong>
+                <p id="desc-s2-7" class="step-desc">
+                  Now scroll back up to your post content and <strong>edit the post
+                  itself</strong> to fix at least two of the red warnings.
+                  Common fixes:
+                </p>
+                <ul class="sub-list">
+                  <li>
+                    <strong>No internal links:</strong> Highlight a word or phrase in your
+                    post and add a link to another page or post on your site
+                    (e.g., link the word "contact" to your Contact page)
+                  </li>
+                  <li>
+                    <strong>Keyphrase density too low:</strong> Naturally use the phrase
+                    <em>quantum computing future</em> two or three more times in the body text
+                  </li>
+                  <li>
+                    <strong>Keyphrase not in title:</strong> Edit the post title
+                    (the big H1 at the top) to include "quantum computing"
+                  </li>
+                </ul>
+                <div class="step-result">
+                  ✅ <em>Goal:</em> The overall score circle at the top of the Yoast panel
+                  changes to <strong>Green</strong>. This means the post is well-optimized
+                  for your target keyphrase!
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-8">
+            <label class="step-label" for="cb-s2-8">
+              <input type="checkbox" id="cb-s2-8" class="step-checkbox"
+                     data-key="cb-s2-8" data-phase="2"
+                     aria-describedby="desc-s2-8">
+              <span class="step-circle step-circle--teal" aria-hidden="true">8</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Update" to publish your changes</strong>
+                <p id="desc-s2-8" class="step-desc">
+                  Click the blue <strong>Update</strong> button in the top-right corner of
+                  the Gutenberg editor. WordPress saves all your changes — the new
+                  keyphrase, the custom meta description, the improved content —
+                  and updates the live post on your site.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The post is updated. The Yoast analysis reflects all
+                  your changes. Your overall SEO score should now be Green (or at least Orange,
+                  which means you are on the right track).
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <!-- Phase 2 completion banner -->
+        <div class="phase-complete-banner" id="banner-2"
+             role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🎉</span>
+          <div>
+            <strong>Phase 2 Complete!</strong>
+            <p>Your post is now SEO-optimized. Move to Phase 3 — let's fix that navigation bar!</p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3 — Building Custom Menus  (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3" data-phase="3"
+             aria-labelledby="phase3-title">
+
+      <header class="phase-header phase-header--purple">
+        <div class="phase-number" aria-hidden="true">3</div>
+        <div class="phase-header-text">
+          <h2 id="phase3-title">Phase 3 — Building Custom Menus</h2>
+          <p>30 minutes · Create Main Navbar, add pages &amp; categories, make a drop-down</p>
+        </div>
+        <div class="phase-progress-wrapper"
+             role="region" aria-label="Phase 3 progress">
+          <p class="phase-progress-label" id="p3-label">0 / 10 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--purple" id="p3-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── 3a: The Navigation Problem ───────────────────────── -->
+      <section class="subsection" id="phase3-problem"
+               aria-labelledby="nav-problem-heading">
+        <h3 id="nav-problem-heading">The Navigation Problem</h3>
+
+        <p>
+          By default, WordPress auto-generates your navigation menu from all pages in
+          <strong>alphabetical order</strong> — messy, uncontrolled, and unprofessional.
+        </p>
+
+        <div class="comparison-grid comparison-grid--2col">
+          <article class="compare-card compare-red">
+            <h4>❌ Default Menu (Messy)</h4>
+
+            <!-- Mock bad nav bar -->
+            <nav class="mock-nav mock-nav--bad"
+                 aria-label="Example of a bad default WordPress menu">
+              <span>About</span>
+              <span>Cart</span>
+              <span>Checkout</span>
+              <span>Contact</span>
+              <span>Home</span>
+              <span>Privacy Policy</span>
+            </nav>
+
+            <ul>
+              <li>Alphabetical order — "About" before "Home"!</li>
+              <li>Unwanted pages (Cart, Checkout) show up</li>
+              <li>No categories, no drop-downs possible</li>
+              <li>WordPress decides what appears — not you</li>
+            </ul>
+          </article>
+
+          <div class="vs-divider" aria-hidden="true"><span>→</span></div>
+
+          <article class="compare-card compare-green">
+            <h4>✅ Custom Menu (Organized)</h4>
+
+            <!-- Mock good nav bar -->
+            <nav class="mock-nav mock-nav--good"
+                 aria-label="Example of a well-organized custom menu">
+              <span>Home</span>
+              <span class="has-dropdown" aria-haspopup="true">
+                About ▾
+                <span class="mock-dropdown" role="menu">
+                  <span role="menuitem">Our Story</span>
+                </span>
+              </span>
+              <span>Hardware</span>
+              <span>Software</span>
+              <span>Contact</span>
+            </nav>
+
+            <ul>
+              <li>YOU control which items appear and in what order</li>
+              <li>Only the pages you choose are shown</li>
+              <li>Categories can be menu items too</li>
+              <li>Drop-down sub-menus for better organization</li>
+            </ul>
+          </article>
+        </div>
+
+        <aside class="tip-box tip-blue">
+          <strong>💡 How news sites do it:</strong>
+          BBC, CNN, and other news sites use <em>category menus</em> exactly like what
+          you are building today. When a visitor clicks "Technology" in their nav, WordPress
+          automatically displays an archive page listing every post tagged as Technology —
+          no extra coding required!
+        </aside>
+      </section>
+
+
+      <!-- ── 3b: Create the menu ───────────────────────────────── -->
+      <section class="subsection" id="phase3-create"
+               aria-labelledby="create-menu-heading">
+        <h3 id="create-menu-heading">Creating the "Main Navbar" Menu</h3>
+
+        <p>Navigate to the Menu editor and build your custom navigation from scratch.</p>
+
+        <ol class="step-list" aria-label="Create custom menu steps">
+
+          <li class="step-item" id="step-s3-1">
+            <label class="step-label" for="cb-s3-1">
+              <input type="checkbox" id="cb-s3-1" class="step-checkbox"
+                     data-key="cb-s3-1" data-phase="3"
+                     aria-describedby="desc-s3-1">
+              <span class="step-circle step-circle--purple" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Appearance → Menus</strong>
+                <p id="desc-s3-1" class="step-desc">
+                  In the left sidebar, hover over <strong>Appearance</strong> to expand its
+                  submenu. Click <strong>Menus</strong>.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The Menu editor opens. On the right you see an empty
+                  "Menu Structure" box. On the left you see the "Add menu items" panel
+                  (with tabs for Pages, Posts, Categories, etc.).
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-2">
+            <label class="step-label" for="cb-s3-2">
+              <input type="checkbox" id="cb-s3-2" class="step-checkbox"
+                     data-key="cb-s3-2" data-phase="3"
+                     aria-describedby="desc-s3-2">
+              <span class="step-circle step-circle--purple" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Type a Menu Name: "Main Navbar"</strong>
+                <p id="desc-s3-2" class="step-desc">
+                  At the top of the Menus page, find the <strong>Menu Name</strong> field.
+                  Click on it and type:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Menu Name:</span>
+                  <code>Main Navbar</code>
+                </div>
+                <p class="step-desc">
+                  This is a label for you to identify the menu — visitors never see this name.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-3">
+            <label class="step-label" for="cb-s3-3">
+              <input type="checkbox" id="cb-s3-3" class="step-checkbox"
+                     data-key="cb-s3-3" data-phase="3"
+                     aria-describedby="desc-s3-3">
+              <span class="step-circle step-circle--purple" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Click the "Create Menu" button</strong>
+                <p id="desc-s3-3" class="step-desc">
+                  Click the <strong>Create Menu</strong> button next to the Menu Name field.
+                  WordPress saves an empty menu with the name "Main Navbar" and reloads
+                  the page so you can start adding items.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The page refreshes. You see a confirmation that the menu
+                  was created. The Menu Structure on the right is still empty — ready for items.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-4">
+            <label class="step-label" for="cb-s3-4">
+              <input type="checkbox" id="cb-s3-4" class="step-checkbox"
+                     data-key="cb-s3-4" data-phase="3"
+                     aria-describedby="desc-s3-4">
+              <span class="step-circle step-circle--purple" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Add Pages: Home, About Us, Contact</strong>
+                <p id="desc-s3-4" class="step-desc">
+                  In the <strong>Add menu items</strong> panel on the left, click
+                  <strong>Pages</strong> to expand that section. You will see a list of
+                  all your pages. Tick the checkbox next to:
+                </p>
+                <ul class="sub-list">
+                  <li><strong>Home</strong></li>
+                  <li><strong>About Us</strong></li>
+                  <li><strong>Contact</strong></li>
+                </ul>
+                <p class="step-desc">
+                  Then click the <strong>Add to Menu</strong> button. All three pages
+                  jump into the Menu Structure box on the right.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> Three drag-and-drop boxes labeled "Home", "About Us",
+                  and "Contact" now appear inside the Menu Structure area.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-5">
+            <label class="step-label" for="cb-s3-5">
+              <input type="checkbox" id="cb-s3-5" class="step-checkbox"
+                     data-key="cb-s3-5" data-phase="3"
+                     aria-describedby="desc-s3-5">
+              <span class="step-circle step-circle--purple" aria-hidden="true">5</span>
+              <div class="step-content">
+                <strong class="step-title">Add Categories: Hardware and Software</strong>
+                <p id="desc-s3-5" class="step-desc">
+                  Still in the left panel, find the <strong>Categories</strong> section —
+                  click to expand it. Tick the boxes for:
+                </p>
+                <ul class="sub-list">
+                  <li><strong>Hardware</strong></li>
+                  <li><strong>Software</strong></li>
+                </ul>
+                <p class="step-desc">
+                  Click <strong>Add to Menu</strong>. The two categories are added to your
+                  Menu Structure alongside the three pages.
+                </p>
+                <aside class="connection-box">
+                  <strong>🔗 Key Insight:</strong> You are adding <em>Categories</em> — not just
+                  Pages! When a visitor clicks "Hardware" in your navigation, WordPress
+                  automatically generates a <strong>category archive page</strong> that lists
+                  every post tagged with the Hardware category. No extra coding required!
+                </aside>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+      </section>
+
+
+      <!-- ── 3c: Organize, drop-down, assign ───────────────────── -->
+      <section class="subsection" id="phase3-organize"
+               aria-labelledby="organize-heading">
+        <h3 id="organize-heading">Reorder, Create a Drop-down &amp; Assign to Theme</h3>
+
+        <ol class="step-list" aria-label="Organize and assign menu steps"
+            start="6">
+
+          <li class="step-item" id="step-s3-6">
+            <label class="step-label" for="cb-s3-6">
+              <input type="checkbox" id="cb-s3-6" class="step-checkbox"
+                     data-key="cb-s3-6" data-phase="3"
+                     aria-describedby="desc-s3-6">
+              <span class="step-circle step-circle--purple" aria-hidden="true">6</span>
+              <div class="step-content">
+                <strong class="step-title">Reorder items by dragging them</strong>
+                <p id="desc-s3-6" class="step-desc">
+                  In the <strong>Menu Structure</strong> area, all your items are shown as
+                  draggable boxes. <strong>Click and drag</strong> them to arrange them in
+                  the correct order for your navigation bar:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Target order:</span>
+                  <code>Home → About Us → Hardware → Software → Contact</code>
+                </div>
+                <p class="step-desc">
+                  Drag each box up or down until the order matches the target.
+                  The order you see here is exactly the order your visitors will see.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-7">
+            <label class="step-label" for="cb-s3-7">
+              <input type="checkbox" id="cb-s3-7" class="step-checkbox"
+                     data-key="cb-s3-7" data-phase="3"
+                     aria-describedby="desc-s3-7">
+              <span class="step-circle step-circle--purple" aria-hidden="true">7</span>
+              <div class="step-content">
+                <strong class="step-title">Create a Drop-down by indenting the Hardware item</strong>
+                <p id="desc-s3-7" class="step-desc">
+                  You can <em>nest</em> a menu item under another to create a
+                  <strong>drop-down sub-menu</strong>. Here is how to do it:
+                </p>
+                <ol class="sub-list sub-list--numbered">
+                  <li>Find the <strong>Hardware</strong> box in the Menu Structure</li>
+                  <li>Click and drag it slightly <strong>to the right</strong>,
+                      positioning it directly below <strong>About Us</strong></li>
+                  <li>When you see it visually indented (offset to the right),
+                      release the mouse</li>
+                </ol>
+                <p class="step-desc">
+                  Now <strong>Hardware</strong> is a sub-item (child) of
+                  <strong>About Us</strong>. Hovering over "About Us" in the live nav bar
+                  reveals a drop-down containing "Hardware".
+                </p>
+
+                <!-- Indent diagram -->
+                <div class="indent-diagram" aria-label="Menu structure indentation diagram">
+                  <div class="indent-row">
+                    <span class="indent-icon" aria-hidden="true">📄</span>
+                    <span>Home</span>
+                    <small class="indent-note">top-level item</small>
+                  </div>
+                  <div class="indent-row">
+                    <span class="indent-icon" aria-hidden="true">📄</span>
+                    <span>About Us</span>
+                    <small class="indent-note">top-level — has a drop-down</small>
+                  </div>
+                  <div class="indent-row indent-row--child">
+                    <span class="indent-icon" aria-hidden="true">📁</span>
+                    <span>Hardware</span>
+                    <small class="indent-note">indented = child of About Us</small>
+                  </div>
+                  <div class="indent-row">
+                    <span class="indent-icon" aria-hidden="true">📁</span>
+                    <span>Software</span>
+                    <small class="indent-note">top-level item</small>
+                  </div>
+                  <div class="indent-row">
+                    <span class="indent-icon" aria-hidden="true">📄</span>
+                    <span>Contact</span>
+                    <small class="indent-note">top-level item</small>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-8">
+            <label class="step-label" for="cb-s3-8">
+              <input type="checkbox" id="cb-s3-8" class="step-checkbox"
+                     data-key="cb-s3-8" data-phase="3"
+                     aria-describedby="desc-s3-8">
+              <span class="step-circle step-circle--purple" aria-hidden="true">8</span>
+              <div class="step-content">
+                <strong class="step-title">Under "Menu Settings", tick "Primary Menu"</strong>
+                <p id="desc-s3-8" class="step-desc">
+                  Scroll down the Menus page to the <strong>Menu Settings</strong> section
+                  at the bottom. You will see a list of display locations that your theme
+                  (Astra) provides. Tick the checkbox next to <strong>Primary Menu</strong>
+                  (may also be labeled "Primary Navigation").
+                </p>
+                <p class="step-desc">
+                  This tells the Astra theme: <em>"Display this menu in the main
+                  header navigation bar."</em>
+                </p>
+                <div class="step-result">
+                  💡 Every WordPress theme defines named locations for menus
+                  (Primary, Footer, Sidebar, etc.). You are assigning your "Main Navbar"
+                  to the Primary location so it appears in the header.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-9">
+            <label class="step-label" for="cb-s3-9">
+              <input type="checkbox" id="cb-s3-9" class="step-checkbox"
+                     data-key="cb-s3-9" data-phase="3"
+                     aria-describedby="desc-s3-9">
+              <span class="step-circle step-circle--purple" aria-hidden="true">9</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Save Menu"</strong>
+                <p id="desc-s3-9" class="step-desc">
+                  Click the <strong>Save Menu</strong> button (bottom-right of the page).
+                  WordPress saves all menu items, the order, the indentation (drop-down
+                  structure), and the theme location assignment.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> A success notice says "Menu saved." Your custom
+                  navigation menu is now live on the website.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-10">
+            <label class="step-label" for="cb-s3-10">
+              <input type="checkbox" id="cb-s3-10" class="step-checkbox"
+                     data-key="cb-s3-10" data-phase="3"
+                     aria-describedby="desc-s3-10">
+              <span class="step-circle step-circle--purple" aria-hidden="true">10</span>
+              <div class="step-content">
+                <strong class="step-title">Visit the front-end and test every nav link</strong>
+                <p id="desc-s3-10" class="step-desc">
+                  Open a new browser tab and go to
+                  <code>http://localhost/<em>your-site</em>/</code>
+                  (or click the site name in the admin top bar). On the front-end, verify:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ Nav bar shows: <strong>Home · About Us · Software · Contact</strong>
+                      in the correct order</li>
+                  <li>✅ Hovering over <strong>About Us</strong> reveals a drop-down
+                      with <strong>Hardware</strong></li>
+                  <li>✅ Clicking <strong>Hardware</strong> → loads a category archive
+                      page listing all Hardware posts</li>
+                  <li>✅ Clicking <strong>Contact</strong> → opens the Contact page
+                      with your WPForms form from Session 2</li>
+                  <li>✅ No broken links or 404 "Not Found" pages</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <!-- Phase 3 completion banner -->
+        <div class="phase-complete-banner" id="banner-3"
+             role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🎉</span>
+          <div>
+            <strong>Phase 3 Complete!</strong>
+            <p>Your custom navigation is live. One phase to go — the final review!</p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 4 — Final Review & Wrap-Up  (15 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4" data-phase="4"
+             aria-labelledby="phase4-title">
+
+      <header class="phase-header phase-header--orange">
+        <div class="phase-number" aria-hidden="true">4</div>
+        <div class="phase-header-text">
+          <h2 id="phase4-title">Phase 4 — Final Review &amp; Wrap-Up</h2>
+          <p>15 minutes · Test all features, review the 3 pillars, preview Week 11</p>
+        </div>
+        <div class="phase-progress-wrapper"
+             role="region" aria-label="Phase 4 progress">
+          <p class="phase-progress-label" id="p4-label">0 / 4 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--orange" id="p4-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── 4a: Site Review ───────────────────────────────────── -->
+      <section class="subsection" id="phase4-review"
+               aria-labelledby="review-heading">
+        <h3 id="review-heading">Full Site Review</h3>
+
+        <p>
+          Click around your site and confirm that all three pillars work together
+          as a complete, professional website.
+        </p>
+
+        <ol class="step-list" aria-label="Site review checklist">
+
+          <li class="step-item" id="step-s4-1">
+            <label class="step-label" for="cb-s4-1">
+              <input type="checkbox" id="cb-s4-1" class="step-checkbox"
+                     data-key="cb-s4-1" data-phase="4"
+                     aria-describedby="desc-s4-1">
+              <span class="step-circle step-circle--orange" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Test all navigation menu links</strong>
+                <p id="desc-s4-1" class="step-desc">
+                  On the front-end of your site, click every item in the navigation bar
+                  and verify it goes to the correct destination:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ <strong>Home</strong> → takes you to the homepage</li>
+                  <li>✅ <strong>About Us</strong> → hover reveals the Hardware drop-down</li>
+                  <li>✅ <strong>Hardware</strong> (dropdown item) → category archive page</li>
+                  <li>✅ <strong>Software</strong> → category archive page</li>
+                  <li>✅ <strong>Contact</strong> → Contact page with WPForms form</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s4-2">
+            <label class="step-label" for="cb-s4-2">
+              <input type="checkbox" id="cb-s4-2" class="step-checkbox"
+                     data-key="cb-s4-2" data-phase="4"
+                     aria-describedby="desc-s4-2">
+              <span class="step-circle step-circle--orange" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Test the Contact Form (from Session 2)</strong>
+                <p id="desc-s4-2" class="step-desc">
+                  Navigate to the Contact page and verify the WPForms form still works:
+                </p>
+                <ul class="sub-list">
+                  <li>Submit with <strong>all fields empty</strong>
+                      → red error messages appear under each required field</li>
+                  <li>Enter a <strong>bad email</strong> (e.g. "hello")
+                      → the email field shows "Please enter a valid email address"</li>
+                  <li>Fill all fields correctly and click Submit
+                      → a green success message appears: "Thanks for contacting us!"</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s4-3">
+            <label class="step-label" for="cb-s4-3">
+              <input type="checkbox" id="cb-s4-3" class="step-checkbox"
+                     data-key="cb-s4-3" data-phase="4"
+                     aria-describedby="desc-s4-3">
+              <span class="step-circle step-circle--orange" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Verify the Yoast Green Score on your post</strong>
+                <p id="desc-s4-3" class="step-desc">
+                  Go back to <strong>Posts → All Posts → Edit</strong> your Quantum Computing post.
+                  Scroll to the Yoast SEO panel and confirm:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ The overall SEO score dot is <strong>Green</strong>
+                      (or at least Orange)</li>
+                  <li>✅ Your custom Meta Description appears in the Snippet Preview</li>
+                  <li>✅ The Focus Keyphrase is set to
+                      <code>quantum computing future</code></li>
+                  <li>✅ The meta description progress bar is Green
+                      (120–156 characters)</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s4-4">
+            <label class="step-label" for="cb-s4-4">
+              <input type="checkbox" id="cb-s4-4" class="step-checkbox"
+                     data-key="cb-s4-4" data-phase="4"
+                     aria-describedby="desc-s4-4">
+              <span class="step-circle step-circle--orange" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Assess the full site — all 3 pillars complete</strong>
+                <p id="desc-s4-4" class="step-desc">
+                  Visit your homepage and check that your site now has everything from
+                  this week:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ <strong>Astra theme</strong> — clean, professional look and feel</li>
+                  <li>✅ <strong>Custom navigation</strong> — Home, About Us▾, Software, Contact</li>
+                  <li>✅ <strong>Blog posts</strong> tagged with Hardware and Software categories</li>
+                  <li>✅ <strong>Contact page</strong> with a working WPForms form</li>
+                  <li>✅ <strong>Yoast SEO</strong> green score on the Quantum Computing post</li>
+                </ul>
+                <div class="step-result">
+                  🏆 If all five boxes are ticked, your site is complete for Week 10!
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <!-- Phase 4 completion banner -->
+        <div class="phase-complete-banner phase-complete-banner--final" id="banner-4"
+             role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🏆</span>
+          <div>
+            <strong>Week 10 Complete!</strong>
+            <p>All 3 pillars — Design, Function, and Visibility — are done. Your WordPress site
+               is now professional, functional, and SEO-ready!</p>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ── 4b: Summary ───────────────────────────────────────── -->
+      <section class="subsection" id="phase4-summary"
+               aria-labelledby="summary-heading">
+        <h3 id="summary-heading">Week 10 — Key Concepts Summary</h3>
+
+        <div class="summary-grid" role="list">
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon summary-icon--blue" aria-hidden="true">🎨</div>
+            <div class="summary-content">
+              <h4>Themes → Design</h4>
+              <dl>
+                <dt>This week:</dt>
+                <dd>Session 1 — Astra theme installed, colors &amp; fonts customized</dd>
+                <dt>Key idea:</dt>
+                <dd>A theme controls only the visual appearance — fonts, layout, colors.
+                    It does NOT add features.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon summary-icon--teal" aria-hidden="true">🧩</div>
+            <div class="summary-content">
+              <h4>Plugins → Function</h4>
+              <dl>
+                <dt>This week:</dt>
+                <dd>Session 2 — WPForms contact form, Limit Login Attempts security</dd>
+                <dt>Key idea:</dt>
+                <dd>A plugin is a PHP/JS package that adds features. You can run many
+                    plugins simultaneously — unlike themes (only one active).</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon summary-icon--green" aria-hidden="true">🔍</div>
+            <div class="summary-content">
+              <h4>SEO → Visibility</h4>
+              <dl>
+                <dt>This week:</dt>
+                <dd>Session 3 — Yoast SEO, keyphrase, meta description, custom menus</dd>
+                <dt>Key idea:</dt>
+                <dd>SEO tells Google what your content is about so it can rank your pages.
+                    The traffic-light system gives instant, actionable feedback.</dd>
+              </dl>
+            </div>
+          </article>
+        </div>
+
+        <!-- Quick reference table -->
+        <section aria-labelledby="ref-table-heading">
+          <h4 id="ref-table-heading">Quick Reference — Key Terms</h4>
+          <div class="table-wrapper" role="region" aria-label="Key terms table" tabindex="0">
+            <table class="reference-table">
+              <caption class="sr-only">Key SEO and menu terms from Session 3</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Term</th>
+                  <th scope="col">What It Is</th>
+                  <th scope="col">Where in WordPress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Focus Keyphrase</strong></td>
+                  <td>The exact search phrase you want your post to rank for on Google</td>
+                  <td>Yoast SEO panel → Focus keyphrase field</td>
+                </tr>
+                <tr>
+                  <td><strong>Meta Description</strong></td>
+                  <td>The 1–2 line summary shown under your title in Google results</td>
+                  <td>Yoast SEO panel → Edit snippet → Meta description</td>
+                </tr>
+                <tr>
+                  <td><strong>Snippet Preview</strong></td>
+                  <td>A live preview of exactly how your page appears in Google search results</td>
+                  <td>Yoast SEO panel → top section</td>
+                </tr>
+                <tr>
+                  <td><strong>SEO Analysis</strong></td>
+                  <td>Red/orange/green dots that rate your on-page optimization against best practices</td>
+                  <td>Yoast SEO panel → scroll down</td>
+                </tr>
+                <tr>
+                  <td><strong>Primary Menu</strong></td>
+                  <td>The main navigation bar displayed in your site's header</td>
+                  <td>Appearance → Menus → Menu Settings</td>
+                </tr>
+                <tr>
+                  <td><strong>Drop-down Menu</strong></td>
+                  <td>A sub-menu that appears on hover; made by indenting a child item</td>
+                  <td>Appearance → Menus → drag item to the right</td>
+                </tr>
+                <tr>
+                  <td><strong>Category Menu Item</strong></td>
+                  <td>A menu link that goes to an archive of all posts in that category</td>
+                  <td>Appearance → Menus → Categories panel → Add to Menu</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Week 11 preview -->
+        <aside class="tip-box tip-navy" id="week11-preview">
+          <strong>🚀 Coming Up — Week 11: Custom CSS for WordPress</strong>
+          <p>
+            Next week you will use CSS to override your theme's default styles
+            and make your site <em>truly unique</em>. You will edit the
+            <strong>Additional CSS</strong> panel inside the WordPress Customizer —
+            the same CSS properties you learned in Weeks 3–5, now applied directly
+            to your live WordPress site!
+          </p>
+        </aside>
+
+      </section>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    SESSION COMPLETE OVERLAY
+  ============================================================ -->
+  <div class="session-complete-overlay" id="session-complete"
+       role="dialog" aria-modal="true"
+       aria-labelledby="complete-title" hidden>
+    <div class="session-complete-card">
+      <p class="session-complete-icon" aria-hidden="true">🏆</p>
+      <h2 id="complete-title">Session Complete!</h2>
+      <p>
+        You have finished <strong>Week 10 · Session 3</strong>.
+        Your WordPress site now has all 3 pillars:
+        <strong>Design</strong>, <strong>Function</strong>, and <strong>Visibility</strong>.
+      </p>
+      <button class="btn-reset btn-reset--lg" onclick="resetProgress()">
+        🔄 Reset &amp; Start Over
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+    SITE FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p>
+        <strong>Web Client Programming</strong>
+        &nbsp;·&nbsp; Week 10 · Session 3
+        &nbsp;·&nbsp; Institute of Technology of Cambodia
+      </p>
+      <p class="footer-lo">
+        LO7: Manage WordPress themes, plugins, and advanced CMS features
+      </p>
+      <button class="btn-reset" onclick="resetProgress()">
+        🔄 Reset All Progress
+      </button>
+    </div>
+  </footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
