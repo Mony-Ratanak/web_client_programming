@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 11 Session 1 Lab Guide — Advanced Customization and Footer Widgets for Web Client Programming at ITC.">
+  <meta name="author" content="ITC – Web Client Programming">
+  <title>Week 11 · Session 1 — Advanced Customization &amp; Footer Widgets</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+    SITE HEADER
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <nav class="top-bar" aria-label="Course navigation">
+      <span class="course-badge">Web Client Programming</span>
+      <span class="session-label">Week 11 · Session 1  ·  2 Hours</span>
+    </nav>
+
+    <hgroup class="hero-text">
+      <p class="hero-eyebrow">Phase-by-Phase Lab Guide</p>
+      <h1>Advanced Customization &amp; Footer Widgets</h1>
+      <p class="hero-sub">Customizer Deep Dive · Header Builder · Widget Areas · Footer Columns · Footer Navigation</p>
+    </hgroup>
+
+    <div class="overall-progress-wrapper" role="region" aria-label="Overall session progress">
+      <div class="overall-progress-label">
+        <span>Overall Progress</span>
+        <span id="overall-count">0 / 28 steps</span>
+      </div>
+      <div class="progress-bar-track"
+           role="progressbar" aria-valuemin="0" aria-valuemax="100"
+           aria-valuenow="0" aria-label="Overall completion" id="overall-bar-track">
+        <div class="progress-bar-fill" id="overall-bar"></div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+    PHASE NAVIGATION — sticky
+  ============================================================ -->
+  <nav class="phase-nav" aria-label="Jump to phase" id="phase-nav">
+    <ol class="phase-nav-list" role="list">
+      <li>
+        <a href="#phase-1" class="phase-nav-btn" data-phase="1">
+          <span class="phase-dot" id="dot-1" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 1</strong><small>Customizer · 30 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-1"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#phase-2" class="phase-nav-btn" data-phase="2">
+          <span class="phase-dot" id="dot-2" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 2</strong><small>Footer Widgets · 45 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-2"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#phase-3" class="phase-nav-btn" data-phase="3">
+          <span class="phase-dot" id="dot-3" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 3</strong><small>Footer Menu · 30 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-3"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#phase-4" class="phase-nav-btn" data-phase="4">
+          <span class="phase-dot" id="dot-4" aria-hidden="true"></span>
+          <span class="phase-nav-text">
+            <strong>Phase 4</strong><small>Wrap-Up · 15 min</small>
+          </span>
+          <span class="phase-nav-count" id="nav-count-4"></span>
+        </a>
+      </li>
+    </ol>
+  </nav>
+
+
+  <!-- ============================================================
+    MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content" class="main-content">
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      CONCEPT — What is the Customizer?
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="concept-section" id="concept-customizer"
+             aria-labelledby="customizer-heading">
+      <header class="section-header">
+        <p class="section-eyebrow">Before We Start</p>
+        <h2 id="customizer-heading">The WordPress Customizer</h2>
+        <p class="section-lead">
+          The Customizer is your live preview control panel — you see every change
+          in real time on the right side of the screen before you save anything.
+          <strong>Appearance → Customize</strong> opens it.
+        </p>
+      </header>
+
+      <!-- Interactive Customizer mock -->
+      <figure class="customizer-mock" aria-label="WordPress Customizer interface mock-up">
+        <figcaption class="mock-caption">
+          WordPress Customizer — Appearance → Customize
+        </figcaption>
+        <div class="customizer-layout">
+
+          <!-- Left sidebar panel -->
+          <aside class="customizer-sidebar" aria-label="Customizer navigation panel">
+            <div class="customizer-sidebar-header">
+              <span class="customizer-site-name">ITC Tech Blog</span>
+              <button class="customizer-close-btn" aria-label="Close customizer">✕</button>
+            </div>
+            <nav class="customizer-nav" aria-label="Customizer sections">
+              <button class="c-nav-item c-nav-active" onclick="selectCustomizerSection(this, 'header')">
+                <span>Header Builder</span><span class="c-nav-arrow">›</span>
+              </button>
+              <button class="c-nav-item" onclick="selectCustomizerSection(this, 'global')">
+                <span>Global</span><span class="c-nav-arrow">›</span>
+              </button>
+              <button class="c-nav-item" onclick="selectCustomizerSection(this, 'footer')">
+                <span>Footer Builder</span><span class="c-nav-arrow">›</span>
+              </button>
+              <button class="c-nav-item" onclick="selectCustomizerSection(this, 'colors')">
+                <span>Global Color</span><span class="c-nav-arrow">›</span>
+              </button>
+              <button class="c-nav-item" onclick="selectCustomizerSection(this, 'typography')">
+                <span>Global Typography</span><span class="c-nav-arrow">›</span>
+              </button>
+              <button class="c-nav-item" onclick="selectCustomizerSection(this, 'menus')">
+                <span>Menus</span><span class="c-nav-arrow">›</span>
+              </button>
+            </nav>
+            <div class="customizer-info-panel" id="customizer-info">
+              <p class="customizer-info-title" id="c-info-title">Header Builder</p>
+              <p class="customizer-info-desc" id="c-info-desc">
+                Drag elements (Logo, Menu, Button, Search) into the
+                3-column header grid rows. Changes preview live on the right.
+              </p>
+            </div>
+            <div class="customizer-publish-row">
+              <button class="customizer-publish-btn">Publish</button>
+            </div>
+          </aside>
+
+          <!-- Right preview pane -->
+          <div class="customizer-preview" aria-label="Live preview of your website">
+            <div class="preview-label">Live Preview</div>
+            <!-- Mock site header -->
+            <div class="preview-site-header">
+              <span class="preview-logo">ITC Tech Blog</span>
+              <nav class="preview-nav" aria-label="Preview navigation">
+                <span>Home</span><span>About ▾</span><span>Software</span><span>Contact</span>
+              </nav>
+              <button class="preview-cta-btn">Get a Quote</button>
+            </div>
+            <!-- Mock hero -->
+            <div class="preview-hero">
+              <div class="preview-hero-text">
+                <div class="preview-skeleton preview-skeleton--title"></div>
+                <div class="preview-skeleton preview-skeleton--sub"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <!-- Three columns explainer -->
+      <div class="three-col-concept" role="list">
+        <article class="concept-card concept-blue" role="listitem">
+          <div class="concept-icon" aria-hidden="true">⚙️</div>
+          <h3>Dashboard Settings</h3>
+          <p>The left panel holds all the controls — site title, logo, colors, layout settings.</p>
+        </article>
+        <article class="concept-card concept-teal" role="listitem">
+          <div class="concept-icon" aria-hidden="true">👁</div>
+          <h3>Live Preview Pane</h3>
+          <p>The right panel shows your actual site updating in real time — no need to Save &amp; Refresh.</p>
+        </article>
+        <article class="concept-card concept-purple" role="listitem">
+          <div class="concept-icon" aria-hidden="true">🎨</div>
+          <h3>Theme Extras (Astra)</h3>
+          <p>Astra adds its own sections: Header Builder, Footer Builder, Global Typography, and more.</p>
+        </article>
+      </div>
+
+      <aside class="tip-box tip-gold">
+        <strong>💡 Important:</strong> Every theme adds <em>different</em> sections to the Customizer.
+        What you see in Astra will not look the same in another theme — but the
+        core WordPress sections (Site Identity, Menus, Additional CSS) are always there.
+      </aside>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 1 — Customizer Deep Dive (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1" data-phase="1"
+             aria-labelledby="phase1-title">
+
+      <header class="phase-header phase-header--blue">
+        <div class="phase-number" aria-hidden="true">1</div>
+        <div class="phase-header-text">
+          <h2 id="phase1-title">Phase 1 — Customizer Deep Dive</h2>
+          <p>30 minutes · Header Builder, layout settings, global typography</p>
+        </div>
+        <div class="phase-progress-wrapper" role="region" aria-label="Phase 1 progress">
+          <p class="phase-progress-label" id="p1-label">0 / 8 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--blue" id="p1-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── Header Builder concept ─────────────────────────── -->
+      <section class="subsection" id="phase1-header-builder"
+               aria-labelledby="hb-heading">
+        <h3 id="hb-heading">The Astra Header Builder</h3>
+        <p>
+          Unlike the plain WordPress header, Astra's <strong>Header Builder</strong>
+          gives you a visual drag-and-drop grid to place elements exactly where you want them.
+          The header is divided into <strong>3 rows × 3 columns</strong>.
+        </p>
+
+        <!-- Interactive Header Builder mock -->
+        <figure class="header-builder-mock" aria-label="Interactive Astra Header Builder grid">
+          <figcaption class="mock-caption">
+            Astra Header Builder — drag elements from the panel below into the grid slots
+          </figcaption>
+
+          <div class="hb-grid-wrapper">
+            <!-- Column labels -->
+            <div class="hb-col-labels" aria-hidden="true">
+              <span>Left Column</span>
+              <span>Centre Column</span>
+              <span>Right Column</span>
+            </div>
+
+            <!-- Main header row (the one students configure) -->
+            <div class="hb-row hb-row--main" role="region" aria-label="Main header row">
+              <div class="hb-cell hb-cell--left" id="hb-left"
+                   ondragover="event.preventDefault()" ondrop="dropElement(event,'left')"
+                   aria-label="Left column drop zone">
+                <div class="hb-element hb-logo" draggable="true"
+                     ondragstart="dragElement(event,'logo')" id="el-logo"
+                     title="Logo — drag to reposition">
+                  🏷 Logo
+                </div>
+              </div>
+              <div class="hb-cell hb-cell--center" id="hb-center"
+                   ondragover="event.preventDefault()" ondrop="dropElement(event,'center')"
+                   aria-label="Centre column drop zone">
+                <div class="hb-element hb-menu" draggable="true"
+                     ondragstart="dragElement(event,'menu')" id="el-menu"
+                     title="Primary Menu — drag to reposition">
+                  ≡ Primary Menu
+                </div>
+              </div>
+              <div class="hb-cell hb-cell--right" id="hb-right"
+                   ondragover="event.preventDefault()" ondrop="dropElement(event,'button')"
+                   aria-label="Right column drop zone">
+                <div class="hb-element hb-button" draggable="true"
+                     ondragstart="dragElement(event,'button')" id="el-button"
+                     title="Button — drag to reposition">
+                  ● Get a Quote
+                </div>
+              </div>
+            </div>
+
+            <p class="hb-hint" aria-live="polite" id="hb-hint">
+              💡 Try dragging the elements to different columns to see how the header layout changes!
+            </p>
+          </div>
+        </figure>
+
+        <aside class="connection-box">
+          <strong>🔗 Connection to previous sessions:</strong> The "Primary Menu" element you drag
+          into the center column is the same <em>Main Navbar</em> you built in
+          Week 10 Session 3 — the Header Builder just controls <em>where</em> it sits in the header.
+        </aside>
+      </section>
+
+
+      <!-- ── Phase 1 steps ──────────────────────────────────── -->
+      <section class="subsection" id="phase1-steps"
+               aria-labelledby="p1-steps-heading">
+        <h3 id="p1-steps-heading">Customizer Step-by-Step Instructions</h3>
+
+        <ol class="step-list" aria-label="Phase 1 Customizer steps">
+
+          <li class="step-item" id="step-s1-1">
+            <label class="step-label" for="cb-s1-1">
+              <input type="checkbox" id="cb-s1-1" class="step-checkbox"
+                     data-key="cb-s1-1" data-phase="1" aria-describedby="desc-s1-1">
+              <span class="step-circle" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Start XAMPP and log into WordPress Dashboard</strong>
+                <p id="desc-s1-1" class="step-desc">
+                  Open XAMPP Control Panel, start <strong>Apache</strong> and <strong>MySQL</strong>,
+                  then open your browser and go to
+                  <code>http://localhost/<em>your-site</em>/wp-admin</code>.
+                  Log in with your admin username and password.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The WordPress Dashboard is visible with the black admin bar and left sidebar.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-2">
+            <label class="step-label" for="cb-s1-2">
+              <input type="checkbox" id="cb-s1-2" class="step-checkbox"
+                     data-key="cb-s1-2" data-phase="1" aria-describedby="desc-s1-2">
+              <span class="step-circle" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Appearance → Customize</strong>
+                <p id="desc-s1-2" class="step-desc">
+                  In the left sidebar, hover over <strong>Appearance</strong> and click
+                  <strong>Customize</strong>. The Customizer opens in a split-screen view:
+                  the settings panel on the left, and your live site preview on the right.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> You see the Customizer panel on the left with Astra-specific sections
+                  (Header Builder, Footer Builder, Global, etc.). Your site renders live on the right.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-3">
+            <label class="step-label" for="cb-s1-3">
+              <input type="checkbox" id="cb-s1-3" class="step-checkbox"
+                     data-key="cb-s1-3" data-phase="1" aria-describedby="desc-s1-3">
+              <span class="step-circle" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Header Builder" in the left panel</strong>
+                <p id="desc-s1-3" class="step-desc">
+                  Find and click <strong>Header Builder</strong> in the Customizer sidebar.
+                  You will see a visual representation of your header divided into rows and
+                  three columns (Left, Center, Right).
+                </p>
+                <ul class="sub-list">
+                  <li>Each row of the header can hold different elements</li>
+                  <li>The main (middle) row is where your primary navigation should go</li>
+                  <li>Elements appear as labelled blocks you can drag and click</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-4">
+            <label class="step-label" for="cb-s1-4">
+              <input type="checkbox" id="cb-s1-4" class="step-checkbox"
+                     data-key="cb-s1-4" data-phase="1" aria-describedby="desc-s1-4">
+              <span class="step-circle" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Drag your Primary Menu to the centre column</strong>
+                <p id="desc-s1-4" class="step-desc">
+                  In the Header Builder grid, find the <strong>Primary Menu</strong> element
+                  (it might already be on the left). Click and drag it to the
+                  <strong>centre column</strong> of the main header row.
+                </p>
+                <p class="step-desc">
+                  Watch the live preview on the right update immediately —
+                  the menu jumps to the centre of your header.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> Primary Menu now appears in the centre of the header in the preview pane.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-5">
+            <label class="step-label" for="cb-s1-5">
+              <input type="checkbox" id="cb-s1-5" class="step-checkbox"
+                     data-key="cb-s1-5" data-phase="1" aria-describedby="desc-s1-5">
+              <span class="step-circle" aria-hidden="true">5</span>
+              <div class="step-content">
+                <strong class="step-title">Add a Button to the far-right column</strong>
+                <p id="desc-s1-5" class="step-desc">
+                  Look for available elements below the header grid — you should see a
+                  <strong>Button</strong> element. Drag it into the <strong>right column</strong>.
+                  Then click on the Button element to open its settings and set the label to:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Button text:</span>
+                  <code>Get a Quote</code>
+                </div>
+                <p class="step-desc">
+                  You can also set a link destination (e.g., your Contact page URL).
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> A "Get a Quote" button appears on the right side of your header, next to the navigation menu.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-6">
+            <label class="step-label" for="cb-s1-6">
+              <input type="checkbox" id="cb-s1-6" class="step-checkbox"
+                     data-key="cb-s1-6" data-phase="1" aria-describedby="desc-s1-6">
+              <span class="step-circle" aria-hidden="true">6</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Global → Container and set to Boxed layout</strong>
+                <p id="desc-s1-6" class="step-desc">
+                  Click the back arrow in the Customizer to go back to the main panel.
+                  Find and click <strong>Global</strong>, then click <strong>Container</strong>.
+                  You will see a layout option with two choices:
+                </p>
+
+                <div class="boxed-vs-full">
+                  <div class="layout-option layout-boxed layout-selected" id="opt-boxed"
+                       onclick="selectLayout('boxed')" role="button" tabindex="0"
+                       aria-pressed="true" aria-label="Boxed layout option">
+                    <div class="layout-diagram layout-diagram--boxed">
+                      <div class="ld-outer">
+                        <div class="ld-inner"></div>
+                      </div>
+                    </div>
+                    <strong>Boxed</strong>
+                    <small>Content constrained inside a centered box</small>
+                  </div>
+                  <div class="layout-option layout-full" id="opt-full"
+                       onclick="selectLayout('full')" role="button" tabindex="0"
+                       aria-pressed="false" aria-label="Full width layout option">
+                    <div class="layout-diagram layout-diagram--full">
+                      <div class="ld-full"></div>
+                    </div>
+                    <strong>Full Width</strong>
+                    <small>Content stretches edge-to-edge</small>
+                  </div>
+                </div>
+
+                <p class="step-desc">
+                  Select <strong>Boxed</strong> for this lab.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-7">
+            <label class="step-label" for="cb-s1-7">
+              <input type="checkbox" id="cb-s1-7" class="step-checkbox"
+                     data-key="cb-s1-7" data-phase="1" aria-describedby="desc-s1-7">
+              <span class="step-circle" aria-hidden="true">7</span>
+              <div class="step-content">
+                <strong class="step-title">Explore Global → Colors and Typography (optional)</strong>
+                <p id="desc-s1-7" class="step-desc">
+                  Go back to the Global section and explore:
+                </p>
+                <ul class="sub-list">
+                  <li><strong>Colors:</strong> Change the primary accent color of the theme
+                      (headlines, buttons, links) — try a different color and watch the preview</li>
+                  <li><strong>Typography:</strong> Change the body font or heading font.
+                      Try "Roboto" for body text and "Playfair Display" for headings</li>
+                </ul>
+                <div class="step-result">
+                  💡 You don't need to keep these changes — just explore to see what is possible.
+                  You can reset to the default at any time before clicking Publish.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s1-8">
+            <label class="step-label" for="cb-s1-8">
+              <input type="checkbox" id="cb-s1-8" class="step-checkbox"
+                     data-key="cb-s1-8" data-phase="1" aria-describedby="desc-s1-8">
+              <span class="step-circle" aria-hidden="true">8</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Publish" to save all Customizer changes</strong>
+                <p id="desc-s1-8" class="step-desc">
+                  When you are happy with all your changes, click the blue
+                  <strong>Publish</strong> button at the top of the Customizer panel.
+                  This saves everything: the header layout, the button, and the container setting.
+                </p>
+                <div class="step-warning">
+                  ⚠️ Changes in the Customizer are NOT saved until you click <strong>Publish</strong>.
+                  If you close the browser without publishing, all your changes will be lost!
+                </div>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The Publish button turns grey (indicating no unsaved changes).
+                  Your header with the centered menu and "Get a Quote" button is now live.
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-complete-banner" id="banner-1" role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🎉</span>
+          <div>
+            <strong>Phase 1 Complete!</strong>
+            <p>Your header is configured and saved. Move to Phase 2 — time to build the footer!</p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 2 — Widgets & Footer  (45 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2" data-phase="2"
+             aria-labelledby="phase2-title">
+
+      <header class="phase-header phase-header--teal">
+        <div class="phase-number" aria-hidden="true">2</div>
+        <div class="phase-header-text">
+          <h2 id="phase2-title">Phase 2 — Understanding Widgets &amp; Building the Footer</h2>
+          <p>45 minutes · Widget Areas, 3-column footer: About Us · Contact Info · Social Icons</p>
+        </div>
+        <div class="phase-progress-wrapper" role="region" aria-label="Phase 2 progress">
+          <p class="phase-progress-label" id="p2-label">0 / 10 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--teal" id="p2-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── Widgets concept ────────────────────────────────── -->
+      <section class="subsection" id="phase2-concept"
+               aria-labelledby="widget-heading">
+        <h3 id="widget-heading">What is a Widget?</h3>
+        <p>
+          A <strong>Widget</strong> is a block of content you can place inside a specific
+          area of your theme — usually the Sidebar or the Footer. Since WordPress 5.8,
+          widgets use the same Gutenberg blocks you already know.
+        </p>
+
+        <div class="widget-grid" role="list">
+          <article class="widget-card" role="listitem">
+            <div class="widget-icon wicon--blue" aria-hidden="true">¶</div>
+            <div class="widget-info">
+              <strong>Paragraph block</strong>
+              <span>Plain text, bio description, address</span>
+            </div>
+          </article>
+          <article class="widget-card" role="listitem">
+            <div class="widget-icon wicon--teal" aria-hidden="true">H</div>
+            <div class="widget-info">
+              <strong>Heading block</strong>
+              <span>Column title: "About Us", "Contact Info"</span>
+            </div>
+          </article>
+          <article class="widget-card" role="listitem">
+            <div class="widget-icon wicon--purple" aria-hidden="true">SI</div>
+            <div class="widget-info">
+              <strong>Social Icons block</strong>
+              <span>Facebook, Twitter / X, Instagram links</span>
+            </div>
+          </article>
+          <article class="widget-card" role="listitem">
+            <div class="widget-icon wicon--orange" aria-hidden="true">≡</div>
+            <div class="widget-info">
+              <strong>Navigation Menu block</strong>
+              <span>Show a saved menu (e.g. Footer Menu)</span>
+            </div>
+          </article>
+          <article class="widget-card" role="listitem">
+            <div class="widget-icon wicon--green" aria-hidden="true">Img</div>
+            <div class="widget-info">
+              <strong>Image block</strong>
+              <span>Logo, brand graphic, photo</span>
+            </div>
+          </article>
+          <article class="widget-card" role="listitem">
+            <div class="widget-icon wicon--wp" aria-hidden="true">LP</div>
+            <div class="widget-info">
+              <strong>Latest Posts block</strong>
+              <span>Auto-updating list of recent blog posts</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Interactive live footer preview -->
+        <figure class="footer-preview-wrapper" aria-label="Live footer preview — updates as you complete steps">
+          <figcaption class="mock-caption">
+            Footer Preview — tick the steps below to see each column appear!
+          </figcaption>
+          <div class="footer-preview" id="footer-preview" role="region" aria-live="polite">
+            <div class="footer-col footer-col--1" id="fp-col1">
+              <div class="footer-col-empty" id="fp-col1-empty">
+                <span class="fp-empty-label">Footer Area 1</span>
+                <span class="fp-empty-hint">Complete steps 2–4</span>
+              </div>
+              <div class="footer-col-content" id="fp-col1-content" hidden>
+                <h4 class="fp-heading">About Us</h4>
+                <p class="fp-text">A tech blog by ITC students, covering hardware, software, and the latest in computing.</p>
+              </div>
+            </div>
+            <div class="footer-col footer-col--2" id="fp-col2">
+              <div class="footer-col-empty" id="fp-col2-empty">
+                <span class="fp-empty-label">Footer Area 2</span>
+                <span class="fp-empty-hint">Complete steps 5–7</span>
+              </div>
+              <div class="footer-col-content" id="fp-col2-content" hidden>
+                <h4 class="fp-heading">Contact Info</h4>
+                <p class="fp-text">No. 1 ITC Road, Phnom Penh<br>Tel: 012 000 000<br>info@techblog.kh</p>
+              </div>
+            </div>
+            <div class="footer-col footer-col--3" id="fp-col3">
+              <div class="footer-col-empty" id="fp-col3-empty">
+                <span class="fp-empty-label">Footer Area 3</span>
+                <span class="fp-empty-hint">Complete steps 8–9</span>
+              </div>
+              <div class="footer-col-content" id="fp-col3-content" hidden>
+                <h4 class="fp-heading">Follow Us</h4>
+                <div class="fp-social">
+                  <span class="fp-social-icon fp-fb" title="Facebook">f</span>
+                  <span class="fp-social-icon fp-tw" title="Twitter / X">𝕏</span>
+                  <span class="fp-social-icon fp-ig" title="Instagram">📸</span>
+                </div>
+                <p class="fp-text">Follow us on social media for the latest tech news and updates.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-preview-bar">
+            <span>© 2025 ITC Tech Blog</span>
+            <span>Privacy Policy · Contact</span>
+          </div>
+        </figure>
+
+        <aside class="connection-box">
+          <strong>🔗 Connection to what you already know:</strong> The block editor inside
+          Widgets works <em>exactly</em> the same as the Gutenberg editor you used to write
+          blog posts. The "+" button, block search, and settings panel are identical.
+          You already know how to use it!
+        </aside>
+      </section>
+
+
+      <!-- ── Phase 2 steps ──────────────────────────────────── -->
+      <section class="subsection" id="phase2-steps"
+               aria-labelledby="p2-steps-heading">
+        <h3 id="p2-steps-heading">Building the 3-Column Footer</h3>
+
+        <ol class="step-list" aria-label="Phase 2 footer widget steps">
+
+          <li class="step-item" id="step-s2-1">
+            <label class="step-label" for="cb-s2-1">
+              <input type="checkbox" id="cb-s2-1" class="step-checkbox"
+                     data-key="cb-s2-1" data-phase="2" data-fp-trigger="none"
+                     aria-describedby="desc-s2-1">
+              <span class="step-circle step-circle--teal" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Appearance → Widgets</strong>
+                <p id="desc-s2-1" class="step-desc">
+                  In the left sidebar click <strong>Appearance</strong> → <strong>Widgets</strong>.
+                  You will see all the widget areas provided by the Astra theme — typically
+                  <em>Sidebar</em>, <em>Footer Widget Area 1</em>, <em>Footer Widget Area 2</em>,
+                  <em>Footer Widget Area 3</em>, and sometimes more.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The Widgets editor opens showing collapsible sections
+                  for each widget area.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-2">
+            <label class="step-label" for="cb-s2-2">
+              <input type="checkbox" id="cb-s2-2" class="step-checkbox"
+                     data-key="cb-s2-2" data-phase="2" data-fp-trigger="col1-start"
+                     aria-describedby="desc-s2-2">
+              <span class="step-circle step-circle--teal" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Expand Footer Widget Area 1</strong>
+                <p id="desc-s2-2" class="step-desc">
+                  Click on <strong>Footer Widget Area 1</strong> to expand it.
+                  You will see a Gutenberg-style block editor area with a
+                  <strong>"+"</strong> button to add new blocks.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The Footer Widget Area 1 expands, showing an empty block editor
+                  with a "+" icon to add blocks.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-3">
+            <label class="step-label" for="cb-s2-3">
+              <input type="checkbox" id="cb-s2-3" class="step-checkbox"
+                     data-key="cb-s2-3" data-phase="2" data-fp-trigger="none"
+                     aria-describedby="desc-s2-3">
+              <span class="step-circle step-circle--teal" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Add a Heading block → type "About Us"</strong>
+                <p id="desc-s2-3" class="step-desc">
+                  Click the <strong>+</strong> button inside Footer Widget Area 1.
+                  Search for <strong>Heading</strong> and click it. In the heading block
+                  that appears, type:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Heading text:</span>
+                  <code>About Us</code>
+                </div>
+                <p class="step-desc">
+                  In the right-side settings panel, set the heading level to
+                  <strong>H3</strong> (not H1 or H2, which are too large for a footer column).
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-4">
+            <label class="step-label" for="cb-s2-4">
+              <input type="checkbox" id="cb-s2-4" class="step-checkbox"
+                     data-key="cb-s2-4" data-phase="2" data-fp-trigger="col1"
+                     aria-describedby="desc-s2-4">
+              <span class="step-circle step-circle--teal" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Add a Paragraph block with a site description</strong>
+                <p id="desc-s2-4" class="step-desc">
+                  Click <strong>+</strong> again below the Heading. Add a
+                  <strong>Paragraph</strong> block and write 2–3 sentences describing
+                  your site. Example:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Example text:</span>
+                  <code>A tech blog by ITC students covering hardware, software, and the
+latest developments in computing and AI.</code>
+                </div>
+                <div class="step-result">
+                  ✅ Footer Area 1 preview appeared above — it shows "About Us" with a description!
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-5">
+            <label class="step-label" for="cb-s2-5">
+              <input type="checkbox" id="cb-s2-5" class="step-checkbox"
+                     data-key="cb-s2-5" data-phase="2" data-fp-trigger="col2-start"
+                     aria-describedby="desc-s2-5">
+              <span class="step-circle step-circle--teal" aria-hidden="true">5</span>
+              <div class="step-content">
+                <strong class="step-title">Expand Footer Widget Area 2</strong>
+                <p id="desc-s2-5" class="step-desc">
+                  Scroll down and click on <strong>Footer Widget Area 2</strong> to expand it.
+                  This column will hold the Contact Information.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-6">
+            <label class="step-label" for="cb-s2-6">
+              <input type="checkbox" id="cb-s2-6" class="step-checkbox"
+                     data-key="cb-s2-6" data-phase="2" data-fp-trigger="none"
+                     aria-describedby="desc-s2-6">
+              <span class="step-circle step-circle--teal" aria-hidden="true">6</span>
+              <div class="step-content">
+                <strong class="step-title">Add a Heading block → type "Contact Info"</strong>
+                <p id="desc-s2-6" class="step-desc">
+                  Click <strong>+</strong> → add a <strong>Heading</strong> block → set level to <strong>H3</strong> → type:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Heading text:</span>
+                  <code>Contact Info</code>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-7">
+            <label class="step-label" for="cb-s2-7">
+              <input type="checkbox" id="cb-s2-7" class="step-checkbox"
+                     data-key="cb-s2-7" data-phase="2" data-fp-trigger="col2"
+                     aria-describedby="desc-s2-7">
+              <span class="step-circle step-circle--teal" aria-hidden="true">7</span>
+              <div class="step-content">
+                <strong class="step-title">Add a Paragraph block with a fake address</strong>
+                <p id="desc-s2-7" class="step-desc">
+                  Click <strong>+</strong> → add a <strong>Paragraph</strong> block → type a fake address:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Example address:</span>
+                  <code>No. 1 ITC Road, Phnom Penh
+Tel: 012 000 000
+info@techblog.kh</code>
+                </div>
+                <p class="step-desc">
+                  Use <kbd>Shift + Enter</kbd> for a soft line break between each line
+                  (keeps them in the same paragraph block).
+                </p>
+                <div class="step-result">
+                  ✅ Footer Area 2 preview appeared above — "Contact Info" column is now showing!
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-8">
+            <label class="step-label" for="cb-s2-8">
+              <input type="checkbox" id="cb-s2-8" class="step-checkbox"
+                     data-key="cb-s2-8" data-phase="2" data-fp-trigger="col3-start"
+                     aria-describedby="desc-s2-8">
+              <span class="step-circle step-circle--teal" aria-hidden="true">8</span>
+              <div class="step-content">
+                <strong class="step-title">Expand Footer Widget Area 3</strong>
+                <p id="desc-s2-8" class="step-desc">
+                  Scroll down and click on <strong>Footer Widget Area 3</strong>.
+                  This column will hold the Social Icons.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-9">
+            <label class="step-label" for="cb-s2-9">
+              <input type="checkbox" id="cb-s2-9" class="step-checkbox"
+                     data-key="cb-s2-9" data-phase="2" data-fp-trigger="col3"
+                     aria-describedby="desc-s2-9">
+              <span class="step-circle step-circle--teal" aria-hidden="true">9</span>
+              <div class="step-content">
+                <strong class="step-title">Add a Social Icons block → Facebook, Twitter, Instagram</strong>
+                <p id="desc-s2-9" class="step-desc">
+                  Click <strong>+</strong> → search for <strong>Social Icons</strong> → click to add it.
+                  Click the <strong>+</strong> inside the block to add each platform:
+                </p>
+                <ul class="sub-list">
+                  <li>Click <strong>+</strong> → select <strong>Facebook</strong> → enter your Facebook URL
+                      (e.g. <code>https://facebook.com/yourpage</code>)</li>
+                  <li>Click <strong>+</strong> again → select <strong>Twitter / X</strong> → enter the URL</li>
+                  <li>Click <strong>+</strong> again → select <strong>Instagram</strong> → enter the URL</li>
+                </ul>
+                <div class="step-warning">
+                  ⚠️ Each icon needs a <strong>full URL starting with https://</strong>.
+                  A blank URL hides the icon completely — that's why icons sometimes disappear!
+                </div>
+                <div class="step-result">
+                  ✅ Footer Area 3 preview appeared above — the social icons column is now showing!
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s2-10">
+            <label class="step-label" for="cb-s2-10">
+              <input type="checkbox" id="cb-s2-10" class="step-checkbox"
+                     data-key="cb-s2-10" data-phase="2" data-fp-trigger="none"
+                     aria-describedby="desc-s2-10">
+              <span class="step-circle step-circle--teal" aria-hidden="true">10</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Update" and check the live footer</strong>
+                <p id="desc-s2-10" class="step-desc">
+                  Click the <strong>Update</strong> button at the top of the Widgets page.
+                  Then open a new tab, go to
+                  <code>http://localhost/<em>your-site</em>/</code>, and
+                  <strong>scroll to the very bottom</strong>.
+                </p>
+                <ul class="sub-list">
+                  <li>✅ Three columns appear side-by-side on a desktop screen</li>
+                  <li>✅ Column heights are roughly balanced (adjust paragraph length if one is too short or long)</li>
+                  <li>✅ Social icons are visible and show the correct platform logos</li>
+                  <li>✅ On a narrow screen (mobile), the columns stack vertically — this is normal!</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-complete-banner" id="banner-2" role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🎉</span>
+          <div>
+            <strong>Phase 2 Complete!</strong>
+            <p>Your 3-column footer is live. Move to Phase 3 — building the footer navigation menu!</p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 3 — Secondary (Footer) Menu  (30 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3" data-phase="3"
+             aria-labelledby="phase3-title">
+
+      <header class="phase-header phase-header--purple">
+        <div class="phase-number" aria-hidden="true">3</div>
+        <div class="phase-header-text">
+          <h2 id="phase3-title">Phase 3 — Secondary (Footer) Navigation Menu</h2>
+          <p>30 minutes · Create Footer Menu, add Privacy Policy &amp; Contact, assign to footer</p>
+        </div>
+        <div class="phase-progress-wrapper" role="region" aria-label="Phase 3 progress">
+          <p class="phase-progress-label" id="p3-label">0 / 6 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--purple" id="p3-bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ── Two menus concept ──────────────────────────────── -->
+      <section class="subsection" id="phase3-concept"
+               aria-labelledby="two-menus-heading">
+        <h3 id="two-menus-heading">Why Does a Site Need Two Menus?</h3>
+        <p>
+          Professional websites <em>always</em> separate their navigation into two
+          distinct menus, each with a completely different purpose:
+        </p>
+
+        <div class="two-menus-comparison">
+          <article class="menu-card menu-card--primary">
+            <header class="menu-card-header">
+              <span class="menu-card-badge">Primary Menu — Action</span>
+            </header>
+            <div class="menu-card-body">
+              <nav class="menu-demo-nav" aria-label="Primary menu example">
+                <span class="mdn-item mdn-active">Home</span>
+                <span class="mdn-item">About ▾</span>
+                <span class="mdn-item">Hardware</span>
+                <span class="mdn-item">Software</span>
+                <span class="mdn-item">Contact</span>
+              </nav>
+              <ul class="menu-card-list">
+                <li>Lives in the <strong>header</strong> — always visible</li>
+                <li>Drives visitors toward key actions: read, buy, contact</li>
+                <li>Short items, 5–7 max, clearly named</li>
+                <li>Purpose: <strong>discovery &amp; conversion</strong></li>
+              </ul>
+            </div>
+          </article>
+
+          <div class="two-menus-vs" aria-hidden="true">vs</div>
+
+          <article class="menu-card menu-card--footer">
+            <header class="menu-card-header">
+              <span class="menu-card-badge menu-card-badge--footer">Footer Menu — Information</span>
+            </header>
+            <div class="menu-card-body">
+              <nav class="menu-demo-footer" aria-label="Footer menu example">
+                <span class="mdf-item">Privacy Policy</span>
+                <span class="mdf-sep">·</span>
+                <span class="mdf-item">Terms of Service</span>
+                <span class="mdf-sep">·</span>
+                <span class="mdf-item">Contact</span>
+                <span class="mdf-sep">·</span>
+                <span class="mdf-item">Sitemap</span>
+              </nav>
+              <ul class="menu-card-list">
+                <li>Lives in the <strong>footer</strong> — out of the way</li>
+                <li>Provides legal &amp; compliance links visitors expect to find</li>
+                <li>Visitors scroll down specifically to find these links</li>
+                <li>Purpose: <strong>compliance &amp; trust</strong></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <aside class="tip-box tip-blue">
+          <strong>💡 The industry pattern:</strong> BBC, Apple, Amazon, and virtually every
+          professional website uses exactly this two-menu pattern. Putting "Privacy Policy"
+          in the main navigation would clutter it — the footer menu handles required
+          links cleanly and where users expect them.
+        </aside>
+      </section>
+
+
+      <!-- ── Phase 3 steps ──────────────────────────────────── -->
+      <section class="subsection" id="phase3-steps"
+               aria-labelledby="p3-steps-heading">
+        <h3 id="p3-steps-heading">Creating &amp; Assigning the Footer Menu</h3>
+
+        <ol class="step-list" aria-label="Phase 3 footer menu steps">
+
+          <li class="step-item" id="step-s3-1">
+            <label class="step-label" for="cb-s3-1">
+              <input type="checkbox" id="cb-s3-1" class="step-checkbox"
+                     data-key="cb-s3-1" data-phase="3" aria-describedby="desc-s3-1">
+              <span class="step-circle step-circle--purple" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Go to Appearance → Menus</strong>
+                <p id="desc-s3-1" class="step-desc">
+                  In the left sidebar, click <strong>Appearance → Menus</strong>.
+                  You should see your existing <em>Main Navbar</em> from Week 10 Session 3
+                  listed in the "Select a menu to edit" dropdown at the top.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The Menu editor opens. You can see "Main Navbar" (or whatever
+                  you named it) in the dropdown. The Menu Structure on the right shows its current items.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-2">
+            <label class="step-label" for="cb-s3-2">
+              <input type="checkbox" id="cb-s3-2" class="step-checkbox"
+                     data-key="cb-s3-2" data-phase="3" aria-describedby="desc-s3-2">
+              <span class="step-circle step-circle--purple" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Click "Create a new menu"</strong>
+                <p id="desc-s3-2" class="step-desc">
+                  Find the link that says <strong>"create a new menu"</strong>
+                  (it appears near the top of the page, next to the dropdown). Click it.
+                  A blank menu creation form appears with a <strong>Menu Name</strong> field.
+                </p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-3">
+            <label class="step-label" for="cb-s3-3">
+              <input type="checkbox" id="cb-s3-3" class="step-checkbox"
+                     data-key="cb-s3-3" data-phase="3" aria-describedby="desc-s3-3">
+              <span class="step-circle step-circle--purple" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Name it "Footer Menu" and click Create Menu</strong>
+                <p id="desc-s3-3" class="step-desc">
+                  In the Menu Name field, type:
+                </p>
+                <div class="step-example">
+                  <span class="example-label">Menu Name:</span>
+                  <code>Footer Menu</code>
+                </div>
+                <p class="step-desc">
+                  Then click the <strong>Create Menu</strong> button. WordPress saves an
+                  empty menu and reloads the editor so you can add items.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> The page reloads. "Footer Menu" is now selected in the dropdown.
+                  The Menu Structure area is empty — ready for items.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-4">
+            <label class="step-label" for="cb-s3-4">
+              <input type="checkbox" id="cb-s3-4" class="step-checkbox"
+                     data-key="cb-s3-4" data-phase="3" aria-describedby="desc-s3-4">
+              <span class="step-circle step-circle--purple" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Add pages: Privacy Policy and Contact</strong>
+                <p id="desc-s3-4" class="step-desc">
+                  In the <strong>Add menu items</strong> panel on the left, click
+                  <strong>Pages</strong> to expand it. Tick the checkboxes next to:
+                </p>
+                <ul class="sub-list">
+                  <li><strong>Privacy Policy</strong> (WordPress creates this page by default)</li>
+                  <li><strong>Contact</strong> (the page you built in Week 10 Session 2)</li>
+                </ul>
+                <p class="step-desc">
+                  Then click <strong>Add to Menu</strong>. Both pages appear in the Menu Structure.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> "Privacy Policy" and "Contact" appear as drag-and-drop
+                  boxes in the Menu Structure area on the right.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-5">
+            <label class="step-label" for="cb-s3-5">
+              <input type="checkbox" id="cb-s3-5" class="step-checkbox"
+                     data-key="cb-s3-5" data-phase="3" aria-describedby="desc-s3-5">
+              <span class="step-circle step-circle--purple" aria-hidden="true">5</span>
+              <div class="step-content">
+                <strong class="step-title">Assign to Footer Menu location and click Save Menu</strong>
+                <p id="desc-s3-5" class="step-desc">
+                  Scroll down to the <strong>Menu Settings</strong> section at the bottom.
+                  Look for <strong>Display locations</strong>. Two ways to assign:
+                </p>
+                <div class="two-way-assign">
+                  <div class="assign-option assign-option--preferred">
+                    <strong class="assign-label">Option A — Theme location (preferred)</strong>
+                    <p>Tick the checkbox next to <strong>Footer Menu</strong> under Display locations.
+                       This tells Astra to put this menu in the footer automatically.</p>
+                  </div>
+                  <div class="assign-option assign-option--alt">
+                    <strong class="assign-label">Option B — Widget (if Option A is not available)</strong>
+                    <p>Go to <strong>Appearance → Widgets → Footer Widget Area 4</strong> →
+                       add a <strong>Navigation Menu</strong> block → select "Footer Menu" from the dropdown.</p>
+                  </div>
+                </div>
+                <p class="step-desc">
+                  After assigning, click <strong>Save Menu</strong>.
+                </p>
+                <div class="step-result">
+                  ✅ <em>Expected:</em> "Menu saved" confirmation appears.
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s3-6">
+            <label class="step-label" for="cb-s3-6">
+              <input type="checkbox" id="cb-s3-6" class="step-checkbox"
+                     data-key="cb-s3-6" data-phase="3" aria-describedby="desc-s3-6">
+              <span class="step-circle step-circle--purple" aria-hidden="true">6</span>
+              <div class="step-content">
+                <strong class="step-title">Visit the front end and verify the footer navigation</strong>
+                <p id="desc-s3-6" class="step-desc">
+                  Open a new browser tab and visit
+                  <code>http://localhost/<em>your-site</em>/</code>.
+                  Scroll to the very bottom of the page and check:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ <strong>Privacy Policy</strong> and <strong>Contact</strong> links appear
+                      in the footer (below the 3 widget columns)</li>
+                  <li>✅ Clicking <strong>Privacy Policy</strong> opens the Privacy Policy page</li>
+                  <li>✅ Clicking <strong>Contact</strong> opens the Contact page with the WPForms form</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-complete-banner" id="banner-3" role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🎉</span>
+          <div>
+            <strong>Phase 3 Complete!</strong>
+            <p>Your footer menu is live. Just the final review left!</p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+      PHASE 4 — Wrap-Up  (15 min)
+    ══════════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4" data-phase="4"
+             aria-labelledby="phase4-title">
+
+      <header class="phase-header phase-header--orange">
+        <div class="phase-number" aria-hidden="true">4</div>
+        <div class="phase-header-text">
+          <h2 id="phase4-title">Phase 4 — Final Review &amp; Wrap-Up</h2>
+          <p>15 minutes · Test header to footer, verify all features, preview Week 12</p>
+        </div>
+        <div class="phase-progress-wrapper" role="region" aria-label="Phase 4 progress">
+          <p class="phase-progress-label" id="p4-label">0 / 4 steps</p>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill progress-bar-fill--orange" id="p4-bar"></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="subsection" id="phase4-review"
+               aria-labelledby="review-heading">
+        <h3 id="review-heading">Full Site Review — Top to Bottom</h3>
+        <p>
+          Click through every section of your site from the header to the footer.
+          A site that <em>looks</em> complete in the admin editor can still have broken
+          links on the live front end.
+        </p>
+
+        <aside class="tip-box tip-red">
+          <strong>🚨 Always test on the front end!</strong>
+          Changes saved in the admin area don't guarantee the public site works correctly.
+          Open a fresh incognito browser tab to see what a real visitor sees.
+        </aside>
+
+        <ol class="step-list" aria-label="Phase 4 review steps">
+
+          <li class="step-item" id="step-s4-1">
+            <label class="step-label" for="cb-s4-1">
+              <input type="checkbox" id="cb-s4-1" class="step-checkbox"
+                     data-key="cb-s4-1" data-phase="4" aria-describedby="desc-s4-1">
+              <span class="step-circle step-circle--orange" aria-hidden="true">1</span>
+              <div class="step-content">
+                <strong class="step-title">Test the header — menu, logo, and button</strong>
+                <p id="desc-s4-1" class="step-desc">
+                  On the front end, verify the header looks correct:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ Primary Menu is in the <strong>centre</strong> of the header</li>
+                  <li>✅ <strong>"Get a Quote"</strong> button is visible on the right</li>
+                  <li>✅ Hovering over <strong>About Us</strong> still shows the Hardware drop-down</li>
+                  <li>✅ Clicking the button goes to the correct link</li>
+                  <li>✅ The layout is <strong>Boxed</strong> — content is centred with space on both sides</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s4-2">
+            <label class="step-label" for="cb-s4-2">
+              <input type="checkbox" id="cb-s4-2" class="step-checkbox"
+                     data-key="cb-s4-2" data-phase="4" aria-describedby="desc-s4-2">
+              <span class="step-circle step-circle--orange" aria-hidden="true">2</span>
+              <div class="step-content">
+                <strong class="step-title">Test the 3-column footer widget areas</strong>
+                <p id="desc-s4-2" class="step-desc">
+                  Scroll to the bottom of the page and check:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ Three columns display side-by-side (on desktop)</li>
+                  <li>✅ Column 1: <strong>About Us</strong> heading + site description</li>
+                  <li>✅ Column 2: <strong>Contact Info</strong> heading + address &amp; phone</li>
+                  <li>✅ Column 3: <strong>Follow Us</strong> + Social Icons (Facebook, Twitter, Instagram)</li>
+                  <li>✅ The three columns appear roughly balanced in height</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s4-3">
+            <label class="step-label" for="cb-s4-3">
+              <input type="checkbox" id="cb-s4-3" class="step-checkbox"
+                     data-key="cb-s4-3" data-phase="4" aria-describedby="desc-s4-3">
+              <span class="step-circle step-circle--orange" aria-hidden="true">3</span>
+              <div class="step-content">
+                <strong class="step-title">Test the footer navigation links</strong>
+                <p id="desc-s4-3" class="step-desc">
+                  Find the footer menu (below or near the widget columns) and verify:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ <strong>Privacy Policy</strong> link is visible and loads the page</li>
+                  <li>✅ <strong>Contact</strong> link is visible and loads the Contact page</li>
+                  <li>✅ The WPForms form on the Contact page still works (submit test)</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item" id="step-s4-4">
+            <label class="step-label" for="cb-s4-4">
+              <input type="checkbox" id="cb-s4-4" class="step-checkbox"
+                     data-key="cb-s4-4" data-phase="4" aria-describedby="desc-s4-4">
+              <span class="step-circle step-circle--orange" aria-hidden="true">4</span>
+              <div class="step-content">
+                <strong class="step-title">Final site assessment — all 3 pillars complete</strong>
+                <p id="desc-s4-4" class="step-desc">
+                  Your site should now have everything from Weeks 10–11:
+                </p>
+                <ul class="sub-list">
+                  <li>✅ <strong>Astra theme</strong> — professional look, Boxed layout, custom header</li>
+                  <li>✅ <strong>Custom navigation</strong> — Home, About Us▾, Software, Contact + "Get a Quote" button</li>
+                  <li>✅ <strong>Blog posts</strong> — tagged with Hardware / Software categories</li>
+                  <li>✅ <strong>SEO-optimized post</strong> — Yoast green score on Quantum Computing post</li>
+                  <li>✅ <strong>3-column footer</strong> — About, Contact Info, Social Icons</li>
+                  <li>✅ <strong>Footer menu</strong> — Privacy Policy + Contact links</li>
+                </ul>
+                <div class="step-result">
+                  🏆 If all six items are confirmed, your Week 11 site is complete!
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-complete-banner phase-complete-banner--final" id="banner-4"
+             role="status" aria-live="polite" hidden>
+          <span class="banner-icon" aria-hidden="true">🏆</span>
+          <div>
+            <strong>Week 11 Complete!</strong>
+            <p>Your WordPress site now has a fully customized header, a professional
+               3-column footer, and secondary navigation. Excellent work!</p>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ── Summary ────────────────────────────────────────── -->
+      <section class="subsection" id="phase4-summary"
+               aria-labelledby="summary-heading">
+        <h3 id="summary-heading">Key Concepts — Quick Reference</h3>
+
+        <div class="summary-grid" role="list">
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon si-blue" aria-hidden="true">⚙️</div>
+            <div>
+              <h4>Customizer</h4>
+              <p>Live preview settings hub. Changes are visible instantly but only saved when you click <strong>Publish</strong>.</p>
+            </div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon si-teal" aria-hidden="true">🏗</div>
+            <div>
+              <h4>Header Builder</h4>
+              <p>Astra's drag-and-drop grid for placing Logo, Menu, Button, and Search into 3 header columns.</p>
+            </div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon si-purple" aria-hidden="true">📦</div>
+            <div>
+              <h4>Widget Area</h4>
+              <p>A named slot in your theme (Footer Area 1, 2, 3…) where you drop Gutenberg blocks to add content.</p>
+            </div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon si-orange" aria-hidden="true">🦶</div>
+            <div>
+              <h4>Footer Widgets</h4>
+              <p>Gutenberg blocks placed inside footer areas — typically Heading + Paragraph + Social Icons + Navigation Menu.</p>
+            </div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon si-green" aria-hidden="true">🗺</div>
+            <div>
+              <h4>Footer Menu</h4>
+              <p>A secondary navigation menu holding legal / compliance links (Privacy Policy, Terms) — lives in the footer, out of the main nav.</p>
+            </div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="summary-icon si-wp" aria-hidden="true">⬜</div>
+            <div>
+              <h4>Boxed Layout</h4>
+              <p>Container setting that constrains page content to a max-width box, centred on the page with whitespace on both sides.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Quick reference table -->
+        <section aria-labelledby="ref-table-heading">
+          <h4 id="ref-table-heading">Where to Find Everything</h4>
+          <div class="table-wrapper" role="region" aria-label="Where to find settings" tabindex="0">
+            <table class="reference-table">
+              <caption class="sr-only">Quick reference for where to find each feature in WordPress</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">WordPress Path</th>
+                  <th scope="col">What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Header Builder</strong></td>
+                  <td><code>Appearance → Customize → Header Builder</code></td>
+                  <td>Drag Logo, Menu, Button into header columns</td>
+                </tr>
+                <tr>
+                  <td><strong>Container Layout</strong></td>
+                  <td><code>Appearance → Customize → Global → Container</code></td>
+                  <td>Switch between Boxed and Full Width</td>
+                </tr>
+                <tr>
+                  <td><strong>Global Colors</strong></td>
+                  <td><code>Appearance → Customize → Global → Colors</code></td>
+                  <td>Change site-wide primary / accent colors</td>
+                </tr>
+                <tr>
+                  <td><strong>Footer Widget Areas</strong></td>
+                  <td><code>Appearance → Widgets → Footer Widget Area 1/2/3</code></td>
+                  <td>Add Gutenberg blocks to footer columns</td>
+                </tr>
+                <tr>
+                  <td><strong>Footer Menu</strong></td>
+                  <td><code>Appearance → Menus → create new → assign Footer Menu location</code></td>
+                  <td>Secondary nav with legal links in footer</td>
+                </tr>
+                <tr>
+                  <td><strong>Publish (Customizer)</strong></td>
+                  <td>Blue Publish button, top of Customizer panel</td>
+                  <td>Save ALL pending Customizer changes to the live site</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Week 12 preview -->
+        <aside class="tip-box tip-navy" id="week12-preview">
+          <strong>🚀 Coming Up — Week 12: Custom CSS</strong>
+          <p>
+            Next week you will go beyond clicking and changing settings — you will
+            <strong>write CSS code</strong> directly inside WordPress using
+            <em>Appearance → Customize → Additional CSS</em>. The same CSS rules
+            you learned in Weeks 3–5 will now override your theme and make your
+            site look truly one-of-a-kind!
+          </p>
+        </aside>
+
+      </section>
+    </section>
+
+  </main>
+
+
+  <!-- SESSION COMPLETE OVERLAY -->
+  <div class="session-complete-overlay" id="session-complete"
+       role="dialog" aria-modal="true" aria-labelledby="complete-title" hidden>
+    <div class="session-complete-card">
+      <p class="session-complete-icon" aria-hidden="true">🏆</p>
+      <h2 id="complete-title">Session Complete!</h2>
+      <p>You've finished <strong>Week 11 · Session 1</strong>. Your WordPress site
+         now has a fully built header, 3-column footer, and secondary navigation!</p>
+      <button class="btn-reset btn-reset--lg" onclick="resetProgress()">
+        🔄 Reset &amp; Start Over
+      </button>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p>
+        <strong>Web Client Programming</strong>
+        &nbsp;·&nbsp; Week 11 · Session 1
+        &nbsp;·&nbsp; Institute of Technology of Cambodia
+      </p>
+      <p class="footer-lo">
+        LO7: Manage WordPress themes, plugins, and advanced CMS features
+      </p>
+      <button class="btn-reset" onclick="resetProgress()">
+        🔄 Reset All Progress
+      </button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
