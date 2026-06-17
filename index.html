@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 12 Session 1 Lab Guide — Introduction to Elementor Page Builder. Install, interface navigation, sections/columns/widgets, styling with Content/Style/Advanced tabs.">
+  <title>Week 12 · Session 1 — Introduction to Elementor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header class="site-header" role="banner">
+    <nav class="top-bar" aria-label="Course navigation">
+      <span class="course-badge">Web Client Programming</span>
+      <span class="session-label">Week 12 · Session 1  ·  2 Hours</span>
+    </nav>
+    <hgroup class="hero-band">
+      <p class="eyebrow">Phase-by-Phase Lab Guide</p>
+      <h1>Introduction to <span class="el-red">Elementor</span> Page Builder</h1>
+      <p class="hero-sub">Install · Interface · Section → Column → Widget · Content / Style / Advanced Tabs</p>
+    </hgroup>
+    <div class="overall-bar-wrap" role="region" aria-label="Overall progress">
+      <div class="overall-bar-meta">
+        <span>Overall Progress</span>
+        <span id="overall-count">0 / 26 steps</span>
+      </div>
+      <div class="bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="overall-track">
+        <div class="bar-fill" id="overall-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════ PHASE NAV ══════════ -->
+  <nav class="phase-nav" id="phase-nav" aria-label="Jump to phase">
+    <ol class="pnav-list" role="list">
+      <li><a href="#phase-1" class="pnav-btn" data-phase="1">
+        <span class="pdot" id="dot-1" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 1</strong><small>Install · 30 min</small></span>
+        <span class="pnav-count" id="nc-1"></span>
+      </a></li>
+      <li><a href="#phase-2" class="pnav-btn" data-phase="2">
+        <span class="pdot" id="dot-2" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 2</strong><small>Interface · 45 min</small></span>
+        <span class="pnav-count" id="nc-2"></span>
+      </a></li>
+      <li><a href="#phase-3" class="pnav-btn" data-phase="3">
+        <span class="pdot" id="dot-3" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 3</strong><small>Styling · 30 min</small></span>
+        <span class="pnav-count" id="nc-3"></span>
+      </a></li>
+      <li><a href="#phase-4" class="pnav-btn" data-phase="4">
+        <span class="pdot" id="dot-4" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 4</strong><small>Save & Preview · 15 min</small></span>
+        <span class="pnav-count" id="nc-4"></span>
+      </a></li>
+    </ol>
+  </nav>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="main-content" id="main-content">
+
+    <!-- ══ CONCEPT: Gutenberg vs Elementor ══ -->
+    <section class="card" id="concept" aria-labelledby="concept-h">
+      <header class="card-header">
+        <p class="eyebrow">Before We Start</p>
+        <h2 id="concept-h">Gutenberg vs Elementor — When to Use Which</h2>
+        <p class="card-lead">Both are WordPress editors. The key difference is <strong>control</strong> — Elementor gives you visual, pixel-perfect layout control that Gutenberg cannot match.</p>
+      </header>
+
+      <div class="compare-grid" role="list">
+        <article class="compare-card compare-gut" role="listitem">
+          <h3>Gutenberg Block Editor</h3>
+          <ul>
+            <li>Built into WordPress — no installation needed</li>
+            <li>Best for: blog posts, simple pages, widgets</li>
+            <li>Blocks: paragraph, heading, image, columns</li>
+            <li>Limited visual layout control</li>
+            <li>CSS goes in Additional CSS panel</li>
+            <li>You used this in <strong>Weeks 9–11</strong></li>
+          </ul>
+          <div class="compare-verdict compare-verdict--blue">Use for: Content & Blogs</div>
+        </article>
+
+        <div class="compare-vs" aria-hidden="true">VS</div>
+
+        <article class="compare-card compare-el" role="listitem">
+          <h3><span class="el-red">Elementor</span> Page Builder</h3>
+          <ul>
+            <li>Plugin — install from Plugins → Add New</li>
+            <li>Best for: landing pages, full-site layouts</li>
+            <li>Drag-and-drop visual editor in real time</li>
+            <li>Pixel-perfect spacing, colour, typography</li>
+            <li>Style tab = CSS without writing code</li>
+            <li>Used by <strong>12+ million websites</strong> worldwide</li>
+          </ul>
+          <div class="compare-verdict compare-verdict--red">Use for: Visual Page Design</div>
+        </article>
+      </div>
+
+      <aside class="tip-box tip-gold">
+        <strong>💡 Professional developers use BOTH:</strong> Gutenberg for writing content (posts, pages with text), Elementor for designing pages where the <em>layout itself</em> is the product — landing pages, homepages, about pages.
+      </aside>
+
+      <!-- Elementor Interface Preview -->
+      <div class="el-preview-wrap">
+        <h3 class="preview-title">What Elementor Looks Like (before you open it)</h3>
+        <div class="el-preview" aria-hidden="true">
+          <!-- Left panel -->
+          <div class="elp-panel">
+            <div class="elp-panel-header">
+              <span class="elp-logo">≡ Elementor</span>
+              <span class="elp-grid">⊞</span>
+            </div>
+            <div class="elp-search">🔍 Search Widget…</div>
+            <div class="elp-section-label">BASIC</div>
+            <div class="elp-widgets">
+              <div class="elp-widget">
+                <span class="elw-icon">H</span>
+                <span class="elw-name">Heading</span>
+              </div>
+              <div class="elp-widget">
+                <span class="elw-icon elw-icon--teal">T</span>
+                <span class="elw-name">Text</span>
+              </div>
+              <div class="elp-widget">
+                <span class="elw-icon elw-icon--purple">Img</span>
+                <span class="elw-name">Image</span>
+              </div>
+              <div class="elp-widget">
+                <span class="elw-icon elw-icon--orange">Btn</span>
+                <span class="elw-name">Button</span>
+              </div>
+              <div class="elp-widget">
+                <span class="elw-icon elw-icon--green">Vid</span>
+                <span class="elw-name">Video</span>
+              </div>
+              <div class="elp-widget">
+                <span class="elw-icon elw-icon--gray">50+</span>
+                <span class="elw-name">More</span>
+              </div>
+            </div>
+            <div class="elp-bottom-bar">
+              <button class="elp-btn-icon" title="Settings">⚙</button>
+              <button class="elp-btn-icon" title="History">↩</button>
+              <button class="elp-update-btn">UPDATE</button>
+            </div>
+          </div>
+          <!-- Canvas -->
+          <div class="elp-canvas">
+            <div class="elp-canvas-label">CANVAS — Live Preview (drag widgets here)</div>
+            <div class="elp-canvas-empty">
+              <div class="elp-add-section">
+                <span class="elp-plus">+</span>
+                <span>Click to add a new Section</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 1 — Install Elementor & Setup (30 min)
+    ═══════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1" data-phase="1" aria-labelledby="p1-title">
+      <header class="phase-hdr ph-blue">
+        <div class="ph-num">1</div>
+        <div class="ph-text">
+          <h2 id="p1-title">Phase 1 — Installing Elementor &amp; Setup</h2>
+          <p>30 minutes · Install the plugin · Create the canvas page · Open Elementor editor</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p1-label">0 / 6 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-blue" id="p1-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p1h">
+        <h3 id="p1h">Installing &amp; Activating Elementor</h3>
+        <p>Elementor is a free plugin available in the WordPress Plugin Directory. It installs in under 2 minutes and immediately adds a new visual editor to every page you create.</p>
+
+        <aside class="connection-box">
+          <strong>🔗 Why we're adding a page builder now:</strong> In Weeks 9–11 you used Gutenberg — great for content. This week you learn why agencies and freelancers almost always use Elementor for client sites: <em>you can build professional layouts faster, with more visual control, and without writing any CSS code.</em>
+        </aside>
+
+        <ol class="step-list" aria-label="Phase 1 install steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-1">
+              <input type="checkbox" id="cb-s1-1" class="step-cb" data-key="cb-s1-1" data-phase="1">
+              <span class="step-circle">1</span>
+              <div class="step-body">
+                <strong class="step-title">Start XAMPP and log into WordPress Dashboard</strong>
+                <p class="step-desc">Open XAMPP Control Panel → click <strong>Start</strong> next to Apache → click <strong>Start</strong> next to MySQL. Wait until both show green running status. Open your browser and go to:</p>
+                <div class="code-eg"><code>http://localhost/<em>your-site-name</em>/wp-admin</code></div>
+                <p class="step-desc">Log in with your admin username and password.</p>
+                <div class="step-ok">✅ <em>Expected:</em> The WordPress Dashboard appears with the dark admin bar at the top.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-2">
+              <input type="checkbox" id="cb-s1-2" class="step-cb" data-key="cb-s1-2" data-phase="1">
+              <span class="step-circle">2</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Plugins → Add New Plugin</strong>
+                <p class="step-desc">In the left admin sidebar, hover over <strong>Plugins</strong> → click <strong>Add New Plugin</strong>. The WordPress Plugin Directory browser opens — you can search thousands of free plugins from here.</p>
+                <div class="step-ok">✅ <em>Expected:</em> A page titled "Add Plugins" with a search bar in the top right and featured plugins displayed below.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-3">
+              <input type="checkbox" id="cb-s1-3" class="step-cb" data-key="cb-s1-3" data-phase="1">
+              <span class="step-circle">3</span>
+              <div class="step-body">
+                <strong class="step-title">Search for "Elementor Website Builder" → Install → Activate</strong>
+                <p class="step-desc">In the search bar (top right), type <strong>Elementor Website Builder</strong>. The first result should be the official plugin with:</p>
+                <ul class="sub-list">
+                  <li>Author: <strong>Elementor.com</strong></li>
+                  <li>5+ million active installations</li>
+                  <li>A blue "E" logo</li>
+                </ul>
+                <p class="step-desc">Click <strong>Install Now</strong>. The button changes to a loading spinner. When it changes to <strong>Activate</strong>, click it.</p>
+                <div class="step-warn">⚠️ <strong>Setup wizard:</strong> After activation, Elementor may show a setup wizard. Click <strong>Skip</strong> in the top-right corner — we'll configure it manually.</div>
+                <div class="step-ok">✅ <em>Expected:</em> The Plugins page shows Elementor with a blue "Deactivate" link — this means it's active.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-4">
+              <input type="checkbox" id="cb-s1-4" class="step-cb" data-key="cb-s1-4" data-phase="1">
+              <span class="step-circle">4</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Pages → Add New. Title it "Elementor Homepage"</strong>
+                <p class="step-desc">In the left sidebar, click <strong>Pages → Add New</strong>. The Gutenberg editor opens. Click the title field and type:</p>
+                <div class="code-eg"><span class="ce-label">Page title:</span><code>Elementor Homepage</code></div>
+                <div class="step-ok">💡 This title is for admin reference. Elementor will take over the full editing experience once you click the blue button in Step 6.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-5">
+              <input type="checkbox" id="cb-s1-5" class="step-cb" data-key="cb-s1-5" data-phase="1">
+              <span class="step-circle">5</span>
+              <div class="step-body">
+                <strong class="step-title">In the right sidebar → Template → select "Elementor Full Width"</strong>
+                <p class="step-desc">Look at the right-hand settings panel. Under the <strong>Page</strong> tab, find the <strong>Template</strong> dropdown. Change it from Default Template to:</p>
+                <div class="template-choice-grid">
+                  <div class="tc-option tc-selected">
+                    <strong>✅ Elementor Full Width</strong>
+                    <p>Keeps your site's header and footer. Content area is full width — no sidebar. <strong>Use this one.</strong></p>
+                  </div>
+                  <div class="tc-option">
+                    <strong>Elementor Canvas</strong>
+                    <p>Completely blank — no header, no footer. Used for standalone landing pages without your theme's navigation.</p>
+                  </div>
+                </div>
+                <p class="step-desc">Then click <strong>Publish</strong> (top right of the editor).</p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-6">
+              <input type="checkbox" id="cb-s1-6" class="step-cb" data-key="cb-s1-6" data-phase="1">
+              <span class="step-circle">6</span>
+              <div class="step-body">
+                <strong class="step-title">Click the blue "Edit with Elementor" button</strong>
+                <p class="step-desc">After publishing, the Gutenberg editor shows a large blue button at the top of the page that says <strong>"Edit with Elementor"</strong>. Click it.</p>
+                <div class="step-warn">⚠️ The Elementor editor opens in the same browser tab. It looks very different from the WordPress Dashboard — this is intentional. You are now in the visual editor.</div>
+                <div class="step-ok">✅ <em>Expected:</em> A dark left panel with widget icons on the left, and a light canvas area on the right with a "+" icon in the centre. You are now in the Elementor editor!</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-1" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 1 Complete — Elementor is Open!</strong>
+          <p>You've installed Elementor and opened the visual editor. Move to Phase 2 to explore the interface!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 2 — The Elementor Interface (45 min)
+    ═══════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2" data-phase="2" aria-labelledby="p2-title">
+      <header class="phase-hdr ph-teal">
+        <div class="ph-num">2</div>
+        <div class="ph-text">
+          <h2 id="p2-title">Phase 2 — The Elementor Interface</h2>
+          <p>45 minutes · Left Panel · Canvas · Section → Column → Widget hierarchy</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p2-label">0 / 10 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-teal" id="p2-fill"></div></div>
+        </div>
+      </header>
+
+      <!-- UI Overview Concept -->
+      <section class="subsect" aria-labelledby="ui-h">
+        <h3 id="ui-h">The Three Parts of the Elementor Interface</h3>
+        <p>Elementor divides your screen into three key areas. Understanding each one before you start building will save you a lot of confusion.</p>
+
+        <!-- Interactive Elementor Interface Mock -->
+        <figure class="el-interface-mock" aria-label="Interactive Elementor interface guide">
+          <figcaption class="demo-caption">Click each part of the interface to learn what it does</figcaption>
+          <div class="el-mock-layout">
+            <!-- Left panel -->
+            <div class="elm-panel" id="elm-panel" onclick="selectPart('panel')" role="button" tabindex="0" aria-pressed="false">
+              <div class="elm-panel-top">
+                <span class="elm-logo">≡ E</span>
+                <button class="elm-grid-btn" aria-label="Widget grid">⊞</button>
+              </div>
+              <div class="elm-search">🔍 Search…</div>
+              <div class="elm-widget-grid">
+                <div class="elm-w"><span class="elmw-i elmw-i--blue">H</span><span>Heading</span></div>
+                <div class="elm-w"><span class="elmw-i elmw-i--teal">T</span><span>Text</span></div>
+                <div class="elm-w"><span class="elmw-i elmw-i--purple">Im</span><span>Image</span></div>
+                <div class="elm-w"><span class="elmw-i elmw-i--orange">Bt</span><span>Button</span></div>
+                <div class="elm-w"><span class="elmw-i elmw-i--green">Vi</span><span>Video</span></div>
+                <div class="elm-w"><span class="elmw-i elmw-i--gray">⋯</span><span>More</span></div>
+              </div>
+              <div class="elm-panel-label">LEFT PANEL</div>
+              <div class="elm-bottom">
+                <span class="elm-bottom-btn">⚙</span>
+                <span class="elm-bottom-btn">↩</span>
+                <span class="elm-update">UPDATE</span>
+              </div>
+            </div>
+            <!-- Canvas -->
+            <div class="elm-canvas" id="elm-canvas" onclick="selectPart('canvas')" role="button" tabindex="0" aria-pressed="false">
+              <div class="elm-canvas-top">CANVAS — Live Preview</div>
+              <div class="elm-canvas-body">
+                <div class="elm-section-mock">
+                  <div class="elm-section-label">SECTION (click ⋮⋮ to select)</div>
+                  <div class="elm-cols">
+                    <div class="elm-col">
+                      <div class="elm-col-label">Column 1</div>
+                      <div class="elm-widget-mock elm-widget-heading">Welcome to Elementor</div>
+                      <div class="elm-widget-mock elm-widget-text">Drag a Text Editor here…</div>
+                    </div>
+                    <div class="elm-col">
+                      <div class="elm-col-label">Column 2</div>
+                      <div class="elm-widget-mock elm-widget-image">🖼 Image Widget</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="elm-add-section">+ Add Section</div>
+              </div>
+            </div>
+          </div>
+          <!-- Info panel -->
+          <div class="el-info-panel" id="el-info-panel">
+            <div class="el-info-content" id="el-info-default">
+              <p>👆 Click the <strong>Left Panel</strong> or <strong>Canvas</strong> above to learn about each part of the Elementor interface.</p>
+            </div>
+            <div class="el-info-content" id="el-info-panel-txt" hidden>
+              <h4>Left Panel</h4>
+              <p>The left panel has two modes:</p>
+              <ul>
+                <li><strong>Widget Mode (grid icon):</strong> Shows all available widgets — drag them to the canvas</li>
+                <li><strong>Settings Mode (pencil icon):</strong> Shows the settings for the currently selected widget</li>
+                <li><strong>Bottom bar:</strong> ⚙ Settings · ↩ Undo (Ctrl+Z) · 🟢 Update (Save)</li>
+              </ul>
+            </div>
+            <div class="el-info-content" id="el-info-canvas-txt" hidden>
+              <h4>Canvas (Right Area)</h4>
+              <p>This is your live page preview. Everything you see here is exactly what visitors will see.</p>
+              <ul>
+                <li>Click any element to select it and edit it</li>
+                <li>Drag widgets from the left panel and drop them here</li>
+                <li>Blue outline = Section is selected | Grey = Column is selected</li>
+              </ul>
+            </div>
+          </div>
+        </figure>
+
+        <!-- Section > Column > Widget Hierarchy -->
+        <div class="hierarchy-section">
+          <h3>The Most Important Concept: Section → Column → Widget</h3>
+          <p>You <strong>cannot</strong> skip levels. You can't place a Widget directly on the canvas — it must go inside a Column, which must be inside a Section.</p>
+
+          <div class="hierarchy-diagram" role="img" aria-label="Section Column Widget hierarchy diagram">
+            <div class="hier-level hier-section">
+              <div class="hier-label">
+                <span class="hier-num hier-num--blue">1</span>
+                <div>
+                  <strong>SECTION</strong>
+                  <p>The full-width row container. Click the 6-dot icon (⋮⋮) that appears at the top to select the whole section.</p>
+                </div>
+              </div>
+              <div class="hier-inside">
+                <div class="hier-level hier-column">
+                  <div class="hier-label">
+                    <span class="hier-num hier-num--teal">2</span>
+                    <div>
+                      <strong>COLUMN</strong>
+                      <p>Lives inside a section. Click the book/page icon that appears at the top of a column to select it. One section can have 1–10 columns.</p>
+                    </div>
+                  </div>
+                  <div class="hier-inside">
+                    <div class="hier-level hier-widget">
+                      <div class="hier-label">
+                        <span class="hier-num hier-num--red">3</span>
+                        <div>
+                          <strong>WIDGET</strong>
+                          <p>The actual content — Heading, Image, Button, Video, etc. Drag from the left panel and drop into a column. Click a widget on the canvas to edit it.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hier-level hier-column">
+                  <div class="hier-label">
+                    <span class="hier-num hier-num--teal">2</span>
+                    <div>
+                      <strong>COLUMN 2</strong>
+                      <p>Second column in the same section — this gives us the two-column layout.</p>
+                    </div>
+                  </div>
+                  <div class="hier-inside">
+                    <div class="hier-level hier-widget">
+                      <div class="hier-label">
+                        <span class="hier-num hier-num--red">3</span>
+                        <div>
+                          <strong>WIDGET</strong>
+                          <p>Image widget placed in the right column.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="tip-box tip-red">
+            <strong>🚨 The #1 rule in Elementor:</strong>
+            You cannot drag a Widget directly onto the canvas without a Section + Column first.
+            Always: <strong>Section first → Column second → Widget third.</strong>
+          </aside>
+        </div>
+
+        <!-- Phase 2 Steps -->
+        <h3>Building the Two-Column Layout — Step by Step</h3>
+
+        <ol class="step-list" aria-label="Phase 2 layout building steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-1">
+              <input type="checkbox" id="cb-s2-1" class="step-cb" data-key="cb-s2-1" data-phase="2">
+              <span class="step-circle step-teal">1</span>
+              <div class="step-body">
+                <strong class="step-title">On the canvas, click the maroon "+" icon to add a new Section</strong>
+                <p class="step-desc">In the centre of the empty canvas there is a maroon/dark-red <strong>+</strong> icon. Click it. A popup appears showing different column layout options.</p>
+                <div class="step-ok">✅ <em>Expected:</em> A popup titled "Select your Structure" appears with options for 1 column, 2 columns, 3 columns, etc.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-2">
+              <input type="checkbox" id="cb-s2-2" class="step-cb" data-key="cb-s2-2" data-phase="2">
+              <span class="step-circle step-teal">2</span>
+              <div class="step-body">
+                <strong class="step-title">Choose the two-column layout (two equal boxes side by side)</strong>
+                <p class="step-desc">Click the icon that shows two equal-width columns side by side. A new section with two columns appears on the canvas with a blue dashed outline around it.</p>
+                <ul class="sub-list">
+                  <li>The <strong>blue bounding box at the top</strong> with 6 dots (⋮⋮) = the Section handle</li>
+                  <li>The <strong>grey icon inside each column</strong> = the Column handle</li>
+                </ul>
+                <div class="step-ok">✅ <em>Expected:</em> Two empty columns appear on the canvas, side by side. Each column has a placeholder with a "+" icon inside.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-3">
+              <input type="checkbox" id="cb-s2-3" class="step-cb" data-key="cb-s2-3" data-phase="2">
+              <span class="step-circle step-teal">3</span>
+              <div class="step-body">
+                <strong class="step-title">From the left panel, drag a "Heading" widget into the LEFT column</strong>
+                <p class="step-desc">Look at the left panel. Find the <strong>Heading</strong> widget (it has an "H" icon). Click and hold your mouse button on it. Drag it across to the <strong>left column</strong> on the canvas. Release the mouse when you see a blue highlight in the left column.</p>
+                <div class="step-warn">⚠️ <strong>Dragging tips:</strong> Move your mouse slowly when crossing from the left panel to the canvas. If it doesn't drop correctly, try hovering the widget over the column until you see a blue/green highlight appear, then release.</div>
+                <div class="step-ok">✅ <em>Expected:</em> A "Heading" widget appears in the left column with the text "Add Your Heading Text Here". The left panel switches to show the Heading widget settings.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-4">
+              <input type="checkbox" id="cb-s2-4" class="step-cb" data-key="cb-s2-4" data-phase="2">
+              <span class="step-circle step-teal">4</span>
+              <div class="step-body">
+                <strong class="step-title">In the left panel (Content tab), change the heading text</strong>
+                <p class="step-desc">The left panel now shows the Heading widget's Content tab. Find the <strong>Title</strong> field. Click it and change the text to:</p>
+                <div class="code-eg"><span class="ce-label">Heading text:</span><code>Welcome to Elementor</code></div>
+                <p class="step-desc">Watch the canvas update live as you type — you don't need to save or refresh!</p>
+                <div class="step-ok">✅ <em>Expected:</em> The heading on the canvas now shows "Welcome to Elementor" in real time.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-5">
+              <input type="checkbox" id="cb-s2-5" class="step-cb" data-key="cb-s2-5" data-phase="2">
+              <span class="step-circle step-teal">5</span>
+              <div class="step-body">
+                <strong class="step-title">Drag a "Text Editor" widget into the LEFT column below the heading</strong>
+                <p class="step-desc">In the left panel, click the grid icon (⊞) in the top right to go back to the widget list. Find the <strong>Text Editor</strong> widget. Drag it to the left column — drop it <em>below</em> the heading you just added.</p>
+                <p class="step-desc">After dropping, the Text Editor will show placeholder Lorem Ipsum text. You can leave it for now or type something briefly.</p>
+                <div class="step-ok">✅ <em>Expected:</em> The left column now has two stacked items: the Heading at the top and a Text Editor block below it.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-6">
+              <input type="checkbox" id="cb-s2-6" class="step-cb" data-key="cb-s2-6" data-phase="2">
+              <span class="step-circle step-teal">6</span>
+              <div class="step-body">
+                <strong class="step-title">Drag an "Image" widget into the RIGHT column</strong>
+                <p class="step-desc">Click the grid icon to go back to widgets. Find <strong>Image</strong>. Drag it into the <strong>right column</strong>.</p>
+                <p class="step-desc">After dropping, click on the image placeholder or the <strong>Choose Image</strong> button that appears in the left panel. The WordPress Media Library popup opens — select any image you've previously uploaded (from any earlier week's work).</p>
+                <div class="step-ok">✅ <em>Expected:</em> Your chosen image fills the right column. The two-column layout is now visible: text on the left, image on the right.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-7">
+              <input type="checkbox" id="cb-s2-7" class="step-cb" data-key="cb-s2-7" data-phase="2">
+              <span class="step-circle step-teal">7</span>
+              <div class="step-body">
+                <strong class="step-title">Explore: click the Section handle (⋮⋮) at the top to see Section settings</strong>
+                <p class="step-desc">Hover over the section on the canvas. A blue bar appears at the very top with a 6-dot grid icon (⋮⋮). Click it. The left panel switches to show <strong>Section settings</strong> with Content, Style, and Advanced tabs for the entire section row.</p>
+                <div class="step-ok">💡 This is how you set a section's background colour, minimum height, or full-screen layout — all applied to the entire row at once.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-8">
+              <input type="checkbox" id="cb-s2-8" class="step-cb" data-key="cb-s2-8" data-phase="2">
+              <span class="step-circle step-teal">8</span>
+              <div class="step-body">
+                <strong class="step-title">Explore: click the Column handle (book icon) to see Column settings</strong>
+                <p class="step-desc">Hover over the left column. A small grey icon that looks like two pages (📄) appears at the top. Click it. The left panel switches to <strong>Column settings</strong>. You can change column width, background colour, and padding from here.</p>
+                <div class="step-ok">💡 This is how you make one column wider than the other — for example, 60% content / 40% image, instead of the default 50/50 split.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-9">
+              <input type="checkbox" id="cb-s2-9" class="step-cb" data-key="cb-s2-9" data-phase="2">
+              <span class="step-circle step-teal">9</span>
+              <div class="step-body">
+                <strong class="step-title">Practice: right-click any widget to see the context menu options</strong>
+                <p class="step-desc">Right-click on any widget on the canvas. A context menu appears with options:</p>
+                <ul class="sub-list">
+                  <li><strong>Duplicate</strong> — creates an exact copy of the widget</li>
+                  <li><strong>Move to</strong> — move the widget to a different column or section</li>
+                  <li><strong>Delete</strong> — removes the widget (Ctrl+Z to undo!)</li>
+                  <li><strong>Save as Template</strong> — save the widget for reuse on other pages</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-10">
+              <input type="checkbox" id="cb-s2-10" class="step-cb" data-key="cb-s2-10" data-phase="2">
+              <span class="step-circle step-teal">10</span>
+              <div class="step-body">
+                <strong class="step-title">Practice undo: make any change then press Ctrl+Z</strong>
+                <p class="step-desc">Make a small change (like deleting a widget or changing some text). Then press <kbd>Ctrl + Z</kbd> (Windows) or <kbd>Cmd + Z</kbd> (Mac) to undo it. This is critically important — always use Ctrl+Z if you make a mistake.</p>
+                <div class="step-ok">✅ <em>Expected:</em> The last change is reversed. You can undo multiple steps. Alternatively, click the <strong>History</strong> (↩) icon at the bottom of the left panel to see a full list of changes.</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-2" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 2 Complete — Interface Mastered!</strong>
+          <p>You've built a two-column layout and understand the Section → Column → Widget hierarchy. Move to Phase 3 to style your widgets!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 3 — Styling in Elementor (30 min)
+    ═══════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3" data-phase="3" aria-labelledby="p3-title">
+      <header class="phase-hdr ph-purple">
+        <div class="ph-num">3</div>
+        <div class="ph-text">
+          <h2 id="p3-title">Phase 3 — Styling in Elementor</h2>
+          <p>30 minutes · Content tab · Style tab (CSS!) · Advanced tab (Box Model)</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p3-label">0 / 6 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-purple" id="p3-fill"></div></div>
+        </div>
+      </header>
+
+      <!-- Three Tabs Concept -->
+      <section class="subsect" aria-labelledby="tabs-h">
+        <h3 id="tabs-h">The Three Tabs — The Heart of Elementor Styling</h3>
+        <p>When you click any widget on the canvas, the left panel shows three tabs. Understanding what each tab controls is the key to using Elementor professionally.</p>
+
+        <!-- Interactive Three-Tab Switcher -->
+        <figure class="three-tabs-demo" aria-label="Interactive three-tab demo showing Content, Style, and Advanced tabs">
+          <figcaption class="demo-caption">Click each tab below to see what it controls — and how it maps to CSS from Week 3</figcaption>
+          <div class="ttd-tabs">
+            <button class="ttd-tab ttd-tab--active" id="ttab-content" onclick="showTab3('content',this)">Content</button>
+            <button class="ttd-tab ttd-tab--style"  id="ttab-style"   onclick="showTab3('style',this)">Style</button>
+            <button class="ttd-tab ttd-tab--adv"    id="ttab-adv"     onclick="showTab3('adv',this)">Advanced</button>
+          </div>
+
+          <div class="ttd-body">
+            <!-- Content tab content -->
+            <div class="ttd-panel" id="ttp-content">
+              <div class="ttd-split">
+                <div class="ttd-left">
+                  <h4>Content Tab</h4>
+                  <p class="ttd-subtitle">Controls <strong>WHAT the widget IS</strong></p>
+                  <div class="el-settings-mock">
+                    <div class="esm-row"><span class="esm-label">Title</span><input class="esm-input" type="text" value="Welcome to Elementor" readonly></div>
+                    <div class="esm-row"><span class="esm-label">Link</span><input class="esm-input" type="text" value="https://..." readonly></div>
+                    <div class="esm-row"><span class="esm-label">Size</span><select class="esm-select"><option>H2</option></select></div>
+                    <div class="esm-row"><span class="esm-label">Alignment</span>
+                      <div class="esm-align">
+                        <button class="esm-align-btn esm-align-active">⇤</button>
+                        <button class="esm-align-btn">≡</button>
+                        <button class="esm-align-btn">⇥</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ttd-right">
+                  <h4>These settings control:</h4>
+                  <ul class="ttd-list">
+                    <li><strong>The actual text</strong> — change the heading, paragraph, or button label</li>
+                    <li><strong>Links</strong> — add a URL for buttons and images</li>
+                    <li><strong>Heading level</strong> — H1, H2, H3, H4, H5, H6</li>
+                    <li><strong>Alignment</strong> — left, center, right, justify</li>
+                    <li><strong>Image source</strong> — choose or upload an image</li>
+                  </ul>
+                  <aside class="ttd-note ttd-note--blue">
+                    💡 If you want to change <em>what</em> something says or links to, you're in the right tab.
+                  </aside>
+                </div>
+              </div>
+            </div>
+
+            <!-- Style tab content -->
+            <div class="ttd-panel" id="ttp-style" hidden>
+              <div class="ttd-split">
+                <div class="ttd-left">
+                  <h4>Style Tab</h4>
+                  <p class="ttd-subtitle">Controls <strong>HOW it LOOKS</strong> (CSS!)</p>
+                  <div class="el-settings-mock el-settings-mock--dark">
+                    <div class="esm-row"><span class="esm-label esm-label--light">Text Colour</span>
+                      <div class="esm-color-row">
+                        <div class="esm-color-swatch" style="background:#E63946"></div>
+                        <span class="esm-color-hex">#E63946</span>
+                      </div>
+                    </div>
+                    <div class="esm-row"><span class="esm-label esm-label--light">Typography</span>
+                      <button class="esm-pencil-btn">✏ Edit</button>
+                    </div>
+                    <div class="esm-sub-rows" id="typography-rows">
+                      <div class="esm-row esm-sub"><span class="esm-label esm-label--light">Family</span><span class="esm-val">Roboto</span></div>
+                      <div class="esm-row esm-sub"><span class="esm-label esm-label--light">Size</span><span class="esm-val">36px</span></div>
+                      <div class="esm-row esm-sub"><span class="esm-label esm-label--light">Weight</span><span class="esm-val">700 (Bold)</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ttd-right">
+                  <h4>CSS connection (from Week 3!):</h4>
+                  <div class="css-mapping-grid">
+                    <div class="css-map-row">
+                      <span class="css-el">Text Colour</span>
+                      <span class="css-arrow">→</span>
+                      <code>color: #E63946;</code>
+                    </div>
+                    <div class="css-map-row">
+                      <span class="css-el">Font Family</span>
+                      <span class="css-arrow">→</span>
+                      <code>font-family: Roboto;</code>
+                    </div>
+                    <div class="css-map-row">
+                      <span class="css-el">Font Size</span>
+                      <span class="css-arrow">→</span>
+                      <code>font-size: 36px;</code>
+                    </div>
+                    <div class="css-map-row">
+                      <span class="css-el">Font Weight</span>
+                      <span class="css-arrow">→</span>
+                      <code>font-weight: 700;</code>
+                    </div>
+                    <div class="css-map-row">
+                      <span class="css-el">Line Height</span>
+                      <span class="css-arrow">→</span>
+                      <code>line-height: 1.6;</code>
+                    </div>
+                  </div>
+                  <aside class="ttd-note ttd-note--purple">
+                    💡 Elementor generates CSS code behind the scenes. The Style tab is just a visual form for the CSS properties you already learned in Week 3!
+                  </aside>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced tab content -->
+            <div class="ttd-panel" id="ttp-adv" hidden>
+              <div class="ttd-split">
+                <div class="ttd-left">
+                  <h4>Advanced Tab</h4>
+                  <p class="ttd-subtitle">Controls <strong>SPACING &amp; POSITION</strong></p>
+                  <div class="box-model-mini">
+                    <div class="bm-margin">
+                      <span class="bm-label bm-label--orange">MARGIN</span>
+                      <span class="bm-hint">Space outside</span>
+                      <div class="bm-border-box">
+                        <span class="bm-label bm-label--blue">BORDER</span>
+                        <div class="bm-padding-box">
+                          <span class="bm-label bm-label--green">PADDING</span>
+                          <span class="bm-hint">Space inside</span>
+                          <div class="bm-content-box">CONTENT</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bm-fields">
+                      <div class="bm-field-row">
+                        <span>Top Margin:</span>
+                        <input class="bm-input" type="number" value="50" min="0">
+                        <span>px</span>
+                      </div>
+                      <div class="bm-field-row">
+                        <span>Padding:</span>
+                        <input class="bm-input" type="number" value="20" min="0">
+                        <span>px</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ttd-right">
+                  <h4>CSS connection (Box Model from Week 3!):</h4>
+                  <div class="css-mapping-grid">
+                    <div class="css-map-row">
+                      <span class="css-el">Margin Top</span>
+                      <span class="css-arrow">→</span>
+                      <code>margin-top: 50px;</code>
+                    </div>
+                    <div class="css-map-row">
+                      <span class="css-el">Padding</span>
+                      <span class="css-arrow">→</span>
+                      <code>padding: 20px;</code>
+                    </div>
+                    <div class="css-map-row">
+                      <span class="css-el">Z-Index</span>
+                      <span class="css-arrow">→</span>
+                      <code>z-index: 10;</code>
+                    </div>
+                  </div>
+                  <div class="chain-link-explainer">
+                    <div class="chain-icon" aria-hidden="true">🔗</div>
+                    <div>
+                      <strong>The chain-link icon (🔗):</strong>
+                      <p>When the chain-link is <em>linked</em> (blue), all four sides (top, right, bottom, left) change together. Click it to <em>unlink</em> (grey) so you can set each side independently. Unlink → type 50 in the Top field only.</p>
+                    </div>
+                  </div>
+                  <aside class="ttd-note ttd-note--orange">
+                    💡 Advanced tab also has: Custom CSS (for that widget only), Motion Effects (animations on scroll), and Responsive settings (show/hide on mobile).
+                  </aside>
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <!-- Phase 3 Steps -->
+        <h3>Styling Your Heading Widget — Step by Step</h3>
+
+        <ol class="step-list" aria-label="Phase 3 styling steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-1">
+              <input type="checkbox" id="cb-s3-1" class="step-cb" data-key="cb-s3-1" data-phase="3">
+              <span class="step-circle step-purple">1</span>
+              <div class="step-body">
+                <strong class="step-title">Click the "Welcome to Elementor" heading on the canvas</strong>
+                <p class="step-desc">Click directly on the heading text in the left column. A blue outline appears around it and a small floating toolbar appears above it with icons for duplicate, move, and delete. The left panel shows the <strong>Heading widget settings</strong> with three tabs: <strong>Content · Style · Advanced</strong>.</p>
+                <div class="step-ok">✅ <em>Expected:</em> Left panel header now shows "Heading" with three tabs at the top of the settings area.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-2">
+              <input type="checkbox" id="cb-s3-2" class="step-cb" data-key="cb-s3-2" data-phase="3">
+              <span class="step-circle step-purple">2</span>
+              <div class="step-body">
+                <strong class="step-title">Content tab: verify the title text reads "Welcome to Elementor"</strong>
+                <p class="step-desc">You should already be on the <strong>Content</strong> tab. Verify the Title field shows "Welcome to Elementor". Also change the heading level to <strong>H1</strong> using the HTML Tag dropdown — this is the main headline of your page.</p>
+                <div class="step-ok">💡 The Content tab controls what the widget IS. If you need to change the text, link, or heading size — this is where you do it.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-3">
+              <input type="checkbox" id="cb-s3-3" class="step-cb" data-key="cb-s3-3" data-phase="3">
+              <span class="step-circle step-purple">3</span>
+              <div class="step-body">
+                <strong class="step-title">Click the "Style" tab → change the Text Colour</strong>
+                <p class="step-desc">Click the <strong>Style</strong> tab in the left panel. You'll see a <strong>Text Colour</strong> option at the top. Click the colour swatch next to it — a colour picker appears. Choose any colour you like. Try <code>#E63946</code> (Elementor red) or <code>#2E75B6</code> (course blue).</p>
+                <div class="step-ok">✅ <em>Expected:</em> The heading colour on the canvas changes immediately as you pick a colour — no save needed to preview.</div>
+                <div class="step-note">🔗 <strong>Week 3 connection:</strong> This sets <code>color: #E63946;</code> on the heading element. Elementor writes the CSS for you.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-4">
+              <input type="checkbox" id="cb-s3-4" class="step-cb" data-key="cb-s3-4" data-phase="3">
+              <span class="step-circle step-purple">4</span>
+              <div class="step-body">
+                <strong class="step-title">Still in Style tab: click the pencil ✏ icon next to "Typography"</strong>
+                <p class="step-desc">Below the Text Colour option, find the <strong>Typography</strong> row. Click the pencil icon (✏) to expand the typography settings. Change:</p>
+                <ul class="sub-list">
+                  <li><strong>Family:</strong> Click the font dropdown and type <em>Roboto</em> — select it from the list. The font loads from Google Fonts automatically.</li>
+                  <li><strong>Size:</strong> Change to <em>36px</em> (or higher — this is your main headline)</li>
+                  <li><strong>Weight:</strong> Select <em>700 (Bold)</em></li>
+                  <li><strong>Line Height:</strong> Try <em>1.4</em> for better readability</li>
+                </ul>
+                <div class="step-ok">✅ <em>Expected:</em> The heading updates live — bigger, bolder, in Roboto font. These typography settings equal: <code>font-family: Roboto; font-size: 36px; font-weight: 700; line-height: 1.4;</code></div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-5">
+              <input type="checkbox" id="cb-s3-5" class="step-cb" data-key="cb-s3-5" data-phase="3">
+              <span class="step-circle step-purple">5</span>
+              <div class="step-body">
+                <strong class="step-title">Click the "Advanced" tab → unlink Margin → set Top Margin to 50px</strong>
+                <p class="step-desc">Click the <strong>Advanced</strong> tab. Find the <strong>Margin</strong> row. You'll see four input fields (Top, Right, Bottom, Left) with a chain-link icon between them.</p>
+                <ol class="sub-list sub-list--ordered">
+                  <li>Click the <strong>chain-link icon</strong> — it turns grey (unlinked)</li>
+                  <li>Click in the <strong>Top</strong> field and type <strong>50</strong></li>
+                  <li>Press Tab or click outside — the heading moves 50px down from the top of the column</li>
+                </ol>
+                <div class="step-note">🔗 <strong>Week 3 connection:</strong> This sets <code>margin-top: 50px;</code>. The chain-link represents "linked/unlinked" shorthand vs individual margin properties.</div>
+                <div class="step-ok">✅ <em>Expected:</em> The heading visibly shifts downward by 50 pixels on the canvas.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s3-6">
+              <input type="checkbox" id="cb-s3-6" class="step-cb" data-key="cb-s3-6" data-phase="3">
+              <span class="step-circle step-purple">6</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Challenge: style the Image widget in the right column</strong>
+                <p class="step-desc">Click on the image in the right column. Explore its Style and Advanced tabs:</p>
+                <ul class="sub-list">
+                  <li><strong>Style tab → Width:</strong> Set to 80% to make the image slightly smaller</li>
+                  <li><strong>Style tab → Border Radius:</strong> Try 15px to round the corners</li>
+                  <li><strong>Style tab → Box Shadow:</strong> Enable it — adds a drop shadow (same as CSS <code>box-shadow</code> property)</li>
+                  <li><strong>Advanced → Padding:</strong> Add 20px padding around the image inside the column</li>
+                </ul>
+                <div class="step-ok">🎯 If you complete this challenge, your image will have rounded corners, a shadow, and breathing room — all without writing a single line of CSS!</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-3" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 3 Complete — Styling Done!</strong>
+          <p>Your heading is styled with custom colour, Roboto font, and a top margin. Move to Phase 4 to save and preview!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 4 — Save, Preview & Wrap-Up (15 min)
+    ═══════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4" data-phase="4" aria-labelledby="p4-title">
+      <header class="phase-hdr ph-orange">
+        <div class="ph-num">4</div>
+        <div class="ph-text">
+          <h2 id="p4-title">Phase 4 — Save, Preview &amp; Wrap-Up</h2>
+          <p>15 minutes · Update button · Eyeball preview · Review key concepts</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p4-label">0 / 4 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-orange" id="p4-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p4h">
+        <h3 id="p4h">Saving and Previewing Your Elementor Page</h3>
+
+        <ol class="step-list" aria-label="Phase 4 save and preview steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-1">
+              <input type="checkbox" id="cb-s4-1" class="step-cb" data-key="cb-s4-1" data-phase="4">
+              <span class="step-circle step-orange">1</span>
+              <div class="step-body">
+                <strong class="step-title">Click the green "UPDATE" button at the bottom left to save</strong>
+                <p class="step-desc">At the very bottom of the left panel, find the large green <strong>UPDATE</strong> button. Click it. A small loading animation appears, then a success message "Your changes have been saved."</p>
+                <div class="step-warn">⚠️ <strong>Important:</strong> Elementor does NOT auto-save. If you close the browser without clicking Update, all your changes are lost. Develop the habit of saving every 5–10 minutes with <kbd>Ctrl+S</kbd> or the Update button.</div>
+                <div class="step-ok">✅ <em>Expected:</em> A green checkmark and "Your changes have been saved." message appears briefly at the bottom of the left panel.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-2">
+              <input type="checkbox" id="cb-s4-2" class="step-cb" data-key="cb-s4-2" data-phase="4">
+              <span class="step-circle step-orange">2</span>
+              <div class="step-body">
+                <strong class="step-title">Click the "Eyeball" (👁) icon next to the Update button to preview</strong>
+                <p class="step-desc">Next to the green Update button at the bottom left, there is an eye icon (👁). Click it. Your page opens in a new browser tab showing the <strong>live front-end view</strong> — exactly what a visitor would see.</p>
+                <div class="step-ok">✅ <em>You should see:</em> Your full-width page with the header from your theme, then the two-column section: "Welcome to Elementor" heading (in your chosen colour and font) on the left, and the image on the right.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-3">
+              <input type="checkbox" id="cb-s4-3" class="step-cb" data-key="cb-s4-3" data-phase="4">
+              <span class="step-circle step-orange">3</span>
+              <div class="step-body">
+                <strong class="step-title">Inspect the page in DevTools to see the CSS Elementor generated</strong>
+                <p class="step-desc">On the preview page, press <kbd>F12</kbd> to open DevTools. Right-click on the heading text → Inspect. Look at the Styles panel on the right. You will see CSS rules like:</p>
+                <div class="code-display">
+                  <div class="cd-hdr"><span>Elementor-generated CSS (visible in DevTools)</span></div>
+                  <pre><code><span class="cd-sel">.elementor-heading-title</span> <span class="cd-brace">{</span>
+    <span class="cd-prop">color</span><span class="cd-colon">:</span> <span class="cd-val">#E63946</span><span class="cd-semi">;</span>
+    <span class="cd-prop">font-family</span><span class="cd-colon">:</span> <span class="cd-val">"Roboto", Sans-serif</span><span class="cd-semi">;</span>
+    <span class="cd-prop">font-size</span><span class="cd-colon">:</span> <span class="cd-val">36px</span><span class="cd-semi">;</span>
+    <span class="cd-prop">font-weight</span><span class="cd-colon">:</span> <span class="cd-val">700</span><span class="cd-semi">;</span>
+    <span class="cd-prop">margin-top</span><span class="cd-colon">:</span> <span class="cd-val">50px</span><span class="cd-semi">;</span>
+<span class="cd-brace">}</span></code></pre>
+                </div>
+                <div class="step-ok">💡 This proves that Elementor's Style tab is just writing CSS for you! The exact same properties you learned in Week 3 — Elementor just uses a visual form instead of code.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-4">
+              <input type="checkbox" id="cb-s4-4" class="step-cb" data-key="cb-s4-4" data-phase="4">
+              <span class="step-circle step-orange">4</span>
+              <div class="step-body">
+                <strong class="step-title">Final verification — confirm all elements are correct</strong>
+                <p class="step-desc">Review your completed Elementor page and confirm all of these:</p>
+                <ul class="sub-list">
+                  <li>✅ Page uses "Elementor Full Width" template — no sidebar visible</li>
+                  <li>✅ Two-column section built: heading + text on left, image on right</li>
+                  <li>✅ Heading text: "Welcome to Elementor"</li>
+                  <li>✅ Heading has a custom colour (not default black)</li>
+                  <li>✅ Heading has a different font (Roboto or similar)</li>
+                  <li>✅ Heading has a top margin pushing it down</li>
+                  <li>✅ Image is visible in the right column</li>
+                </ul>
+                <div class="step-ok">🏆 If all 7 are confirmed — Phase 4 complete! You've successfully introduced yourself to Elementor.</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner phase-banner--final" id="banner-4" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🏆</span>
+          <div><strong>Session Complete — Welcome to Elementor!</strong>
+          <p>You've installed Elementor, built a two-column layout, and styled a widget using the Content, Style, and Advanced tabs. You now have the foundations to build any layout!</p></div>
+        </div>
+      </section>
+
+      <!-- Summary Section -->
+      <section class="subsect" aria-labelledby="sum-h">
+        <h3 id="sum-h">Quick Reference — Everything You Learned Today</h3>
+
+        <div class="summary-grid" role="list">
+          <article class="summary-card" role="listitem">
+            <div class="sc-icon sc-blue">⚡</div>
+            <div><h4>Why Elementor</h4><p>Visual drag-and-drop. Pixel-perfect control. No CSS needed for basic styling. Used by 12M+ websites.</p></div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="sc-icon sc-red">🔌</div>
+            <div><h4>Install</h4><p>Plugins → Add New → search "Elementor Website Builder" → Install → Activate → Skip wizard.</p></div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="sc-icon sc-teal">🖥</div>
+            <div><h4>Interface</h4><p>Left Panel = widgets + settings. Canvas = live preview. Bottom bar = Settings, Undo, Update.</p></div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="sc-icon sc-purple">⚙</div>
+            <div><h4>Section → Column → Widget</h4><p>The strict 3-level hierarchy. Can't skip levels. Section first, column second, widget third.</p></div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="sc-icon sc-orange">🎨</div>
+            <div><h4>Three Tabs</h4><p>Content = what it is. Style = how it looks (CSS!). Advanced = spacing &amp; box model (margin/padding).</p></div>
+          </article>
+          <article class="summary-card" role="listitem">
+            <div class="sc-icon sc-green">💾</div>
+            <div><h4>Save &amp; Preview</h4><p>Ctrl+S or green Update button to save. Eyeball icon (👁) to preview the live front-end page.</p></div>
+          </article>
+        </div>
+
+        <!-- Keyboard shortcuts reference -->
+        <div class="shortcuts-table-wrap">
+          <h4>Essential Keyboard Shortcuts</h4>
+          <div class="table-wrap" role="region" tabindex="0">
+            <table class="ref-table">
+              <caption class="sr-only">Elementor keyboard shortcuts</caption>
+              <thead><tr><th>Shortcut</th><th>Action</th><th>When to Use</th></tr></thead>
+              <tbody>
+                <tr><td><kbd>Ctrl + S</kbd></td><td>Save (Update)</td><td>After every major change</td></tr>
+                <tr><td><kbd>Ctrl + Z</kbd></td><td>Undo last action</td><td>When you made a mistake</td></tr>
+                <tr><td><kbd>Ctrl + Shift + Z</kbd></td><td>Redo</td><td>After undoing too many times</td></tr>
+                <tr><td><kbd>Ctrl + D</kbd></td><td>Duplicate selected element</td><td>When you want a copy of a widget/column/section</td></tr>
+                <tr><td><kbd>Delete</kbd></td><td>Delete selected element</td><td>Remove unwanted widgets</td></tr>
+                <tr><td><kbd>Esc</kbd></td><td>Deselect / close panel</td><td>When settings panel is too cluttered</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="tip-box tip-navy">
+          <strong>🚀 Coming Up — Week 12 Session 2:</strong>
+          <p>Now that you know the basics, next session you'll use Elementor to build a <strong>complete professional layout</strong> — multiple sections, a hero with a background image, a features grid, and responsive mobile settings. Everything you learned today is the foundation for that.</p>
+        </aside>
+      </section>
+    </section>
+
+  </main>
+
+  <!-- SESSION COMPLETE OVERLAY -->
+  <div class="session-overlay" id="session-overlay" role="dialog" aria-modal="true" aria-labelledby="ov-title" hidden>
+    <div class="overlay-card">
+      <p class="ov-icon">🏆</p>
+      <h2 id="ov-title">Session Complete!</h2>
+      <p>You've finished <strong>Week 12 · Session 1</strong>. Elementor is installed and you've built your first visual layout!</p>
+      <button class="btn-reset btn-reset--lg" onclick="resetAll()">🔄 Reset &amp; Start Over</button>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-in">
+      <p><strong>Web Client Programming</strong> &nbsp;·&nbsp; Week 12 · Session 1 &nbsp;·&nbsp; Institute of Technology of Cambodia</p>
+      <p class="footer-lo">LO7: Manage WordPress themes, plugins, and advanced CMS features</p>
+      <button class="btn-reset" onclick="resetAll()">🔄 Reset All Progress</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
