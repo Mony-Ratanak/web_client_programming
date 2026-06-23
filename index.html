@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 12 Session 3 Lab Guide — User Roles & Site Backups. WordPress user management, Principle of Least Privilege, All-in-One WP Migration, UpdraftPlus.">
+  <title>Week 12 · Session 3 — User Roles &amp; Site Backups</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header class="site-header" role="banner">
+    <nav class="top-bar" aria-label="Course navigation">
+      <span class="course-badge">Web Client Programming</span>
+      <span class="session-label">Week 12 · Session 3  ·  2 Hours</span>
+    </nav>
+    <hgroup class="hero-band">
+      <p class="eyebrow">Phase-by-Phase Lab Guide</p>
+      <h1>User Roles &amp; <span class="wp-blue">Site Backups</span></h1>
+      <p class="hero-sub">User Roles · Least Privilege · Add Users · All-in-One WP Migration · .wpress Export</p>
+    </hgroup>
+    <div class="overall-bar-wrap" role="region" aria-label="Overall progress">
+      <div class="overall-bar-meta">
+        <span>Overall Progress</span>
+        <span id="overall-count">0 / 26 steps</span>
+      </div>
+      <div class="bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="overall-track">
+        <div class="bar-fill" id="overall-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ PHASE NAV ══ -->
+  <nav class="phase-nav" id="phase-nav" aria-label="Jump to phase">
+    <ol class="pnav-list" role="list">
+      <li><a href="#phase-1" class="pnav-btn" data-phase="1">
+        <span class="pdot" id="dot-1" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 1</strong><small>User Roles · 45 min</small></span>
+        <span class="pnav-count" id="nc-1"></span>
+      </a></li>
+      <li><a href="#phase-2" class="pnav-btn" data-phase="2">
+        <span class="pdot" id="dot-2" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 2</strong><small>Site Backup · 45 min</small></span>
+        <span class="pnav-count" id="nc-2"></span>
+      </a></li>
+      <li><a href="#phase-3" class="pnav-btn" data-phase="3">
+        <span class="pdot" id="dot-3" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 3</strong><small>Alternatives · 15 min</small></span>
+        <span class="pnav-count" id="nc-3"></span>
+      </a></li>
+      <li><a href="#phase-4" class="pnav-btn" data-phase="4">
+        <span class="pdot" id="dot-4" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 4</strong><small>Wrap-Up · 15 min</small></span>
+        <span class="pnav-count" id="nc-4"></span>
+      </a></li>
+    </ol>
+  </nav>
+
+  <main class="main-content" id="main-content">
+
+    <!-- ══ CONCEPT: 5 Roles ══ -->
+    <section class="card" id="concept" aria-labelledby="concept-h">
+      <header class="card-header">
+        <p class="eyebrow">Key Concept — Understand This Before Starting</p>
+        <h2 id="concept-h">The 5 WordPress User Roles</h2>
+        <p class="card-lead">WordPress has a built-in <strong>role-based access control</strong> system. Every user is assigned exactly one role, which determines what they can see and do in the admin panel.</p>
+      </header>
+
+      <!-- Interactive role explorer -->
+      <figure class="role-explorer" aria-label="Interactive WordPress user role comparison">
+        <figcaption class="demo-caption">Click any role to see exactly what it can and cannot do</figcaption>
+        <div class="re-roles" role="list">
+          <button class="re-role re-admin" onclick="showRole('admin',this)" aria-pressed="true">
+            <span class="re-icon">👑</span>
+            <span class="re-name">Administrator</span>
+            <span class="re-power">All powers</span>
+          </button>
+          <button class="re-role re-editor" onclick="showRole('editor',this)" aria-pressed="false">
+            <span class="re-icon">✏</span>
+            <span class="re-name">Editor</span>
+            <span class="re-power">All content</span>
+          </button>
+          <button class="re-role re-author" onclick="showRole('author',this)" aria-pressed="false">
+            <span class="re-icon">📝</span>
+            <span class="re-name">Author</span>
+            <span class="re-power">Own content</span>
+          </button>
+          <button class="re-role re-contributor" onclick="showRole('contributor',this)" aria-pressed="false">
+            <span class="re-icon">💡</span>
+            <span class="re-name">Contributor</span>
+            <span class="re-power">Draft only</span>
+          </button>
+          <button class="re-role re-subscriber" onclick="showRole('subscriber',this)" aria-pressed="false">
+            <span class="re-icon">👤</span>
+            <span class="re-name">Subscriber</span>
+            <span class="re-power">Profile only</span>
+          </button>
+        </div>
+
+        <div class="re-details" id="re-details">
+          <div class="re-detail-panel" id="re-panel-admin">
+            <h4>👑 Administrator</h4>
+            <p class="re-tagline">Full access to everything. Give this role ONLY to yourself (the developer).</p>
+            <div class="re-perms-grid">
+              <div class="re-perm re-can"><span>✓</span> Manage themes &amp; Customize</div>
+              <div class="re-perm re-can"><span>✓</span> Install &amp; delete plugins</div>
+              <div class="re-perm re-can"><span>✓</span> Create &amp; delete users</div>
+              <div class="re-perm re-can"><span>✓</span> Change site settings</div>
+              <div class="re-perm re-can"><span>✓</span> Publish/edit/delete ALL posts</div>
+              <div class="re-perm re-can"><span>✓</span> Export &amp; import site data</div>
+            </div>
+            <div class="re-dashboard-mock">
+              <div class="rdm-label">What the Admin Dashboard sidebar looks like:</div>
+              <div class="rdm-items">
+                <span class="rdm-item rdm-active">📊 Dashboard</span>
+                <span class="rdm-item rdm-active">📝 Posts</span>
+                <span class="rdm-item rdm-active">📄 Pages</span>
+                <span class="rdm-item rdm-active">🎨 Appearance</span>
+                <span class="rdm-item rdm-active">🔌 Plugins</span>
+                <span class="rdm-item rdm-active">👥 Users</span>
+                <span class="rdm-item rdm-active">⚙ Settings</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="re-detail-panel" id="re-panel-editor" hidden>
+            <h4>✏ Editor</h4>
+            <p class="re-tagline">Can manage ALL content — posts and pages by any user. Perfect for client access or team leads.</p>
+            <div class="re-perms-grid">
+              <div class="re-perm re-can"><span>✓</span> Publish/edit/delete any post</div>
+              <div class="re-perm re-can"><span>✓</span> Manage all pages</div>
+              <div class="re-perm re-can"><span>✓</span> Moderate comments</div>
+              <div class="re-perm re-can"><span>✓</span> Upload media files</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot change themes</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot install plugins</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot manage users</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot change site settings</div>
+            </div>
+            <div class="re-dashboard-mock">
+              <div class="rdm-label">What the Editor Dashboard sidebar looks like:</div>
+              <div class="rdm-items">
+                <span class="rdm-item rdm-active">📊 Dashboard</span>
+                <span class="rdm-item rdm-active">📝 Posts</span>
+                <span class="rdm-item rdm-active">📄 Pages</span>
+                <span class="rdm-item rdm-active">💬 Comments</span>
+                <span class="rdm-item rdm-hidden">🎨 Appearance (hidden)</span>
+                <span class="rdm-item rdm-hidden">🔌 Plugins (hidden)</span>
+                <span class="rdm-item rdm-hidden">👥 Users (hidden)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="re-detail-panel" id="re-panel-author" hidden>
+            <h4>📝 Author</h4>
+            <p class="re-tagline">Can write and publish their OWN posts only. Cannot touch other users' content.</p>
+            <div class="re-perms-grid">
+              <div class="re-perm re-can"><span>✓</span> Write and publish own posts</div>
+              <div class="re-perm re-can"><span>✓</span> Edit and delete own posts</div>
+              <div class="re-perm re-can"><span>✓</span> Upload media files</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot edit other users' posts</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot manage pages</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot install plugins/themes</div>
+            </div>
+            <div class="re-use-case"><strong>Common use case:</strong> A blog with multiple writers. Each writer manages their own articles without interfering with others.</div>
+          </div>
+
+          <div class="re-detail-panel" id="re-panel-contributor" hidden>
+            <h4>💡 Contributor</h4>
+            <p class="re-tagline">Can WRITE posts but CANNOT publish them. An Editor or Admin must review and approve before going live.</p>
+            <div class="re-perms-grid">
+              <div class="re-perm re-can"><span>✓</span> Write and save posts as Draft</div>
+              <div class="re-perm re-can"><span>✓</span> Edit own pending posts</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot publish posts</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot upload media files</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot manage pages</div>
+            </div>
+            <div class="re-use-case"><strong>Common use case:</strong> Guest bloggers or student writers who submit content for editorial review before it goes live.</div>
+          </div>
+
+          <div class="re-detail-panel" id="re-panel-subscriber" hidden>
+            <h4>👤 Subscriber</h4>
+            <p class="re-tagline">Can ONLY manage their own profile. Used for member-only content, comments, or login-gated pages.</p>
+            <div class="re-perms-grid">
+              <div class="re-perm re-can"><span>✓</span> Read published content</div>
+              <div class="re-perm re-can"><span>✓</span> Manage own profile &amp; password</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot create or edit posts</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot access WordPress admin</div>
+              <div class="re-perm re-cannot"><span>✗</span> Cannot change any site settings</div>
+            </div>
+            <div class="re-use-case"><strong>Common use case:</strong> Membership site members who need to log in to access private content or leave comments on posts.</div>
+          </div>
+        </div>
+      </figure>
+
+      <aside class="tip-box tip-red">
+        <strong>🔐 The Principle of Least Privilege</strong>
+        Only give users the <em>minimum permissions</em> they need to do their job. When building a site for a client, give them <strong>Editor</strong> access — never <strong>Admin</strong>. If they accidentally delete a plugin, the whole site could break. <em>You</em> maintain Admin control.
+      </aside>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════
+         PHASE 1 — WordPress User Roles (45 min)
+    ════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1" data-phase="1" aria-labelledby="p1-title">
+      <header class="phase-hdr ph-blue">
+        <div class="ph-num">1</div>
+        <div class="ph-text">
+          <h2 id="p1-title">Phase 1 — WordPress User Roles</h2>
+          <p>45 minutes · Create a new user · Assign the Editor role · Test role-based access</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p1-label">0 / 8 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-blue" id="p1-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p1h">
+        <h3 id="p1h">Creating &amp; Testing a New User Account</h3>
+        <p>You'll create a new "Editor" user, log in as that user, and see first-hand how WordPress limits access based on the assigned role.</p>
+
+        <ol class="step-list" aria-label="Phase 1 user role steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-1">
+              <input type="checkbox" id="cb-s1-1" class="step-cb" data-key="cb-s1-1" data-phase="1">
+              <span class="step-circle">1</span>
+              <div class="step-body">
+                <strong class="step-title">Exit Elementor — return to the WordPress Dashboard</strong>
+                <p class="step-desc">If you are still in the Elementor editor, look at the top of the left panel for a WordPress logo or a back-arrow icon. Click it to exit Elementor and return to the standard WordPress admin Dashboard. Alternatively, go directly to <code>localhost/your-site/wp-admin/</code> in a new tab.</p>
+                <div class="step-ok">✅ <em>Expected:</em> The standard WordPress Dashboard appears — the familiar dark admin interface with the full left sidebar.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-2">
+              <input type="checkbox" id="cb-s1-2" class="step-cb" data-key="cb-s1-2" data-phase="1">
+              <span class="step-circle">2</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Users → Add New User</strong>
+                <p class="step-desc">In the left admin sidebar, click <strong>Users</strong>. In the sub-menu that expands, click <strong>Add New User</strong> (or just click Users → Add New at the top of the Users list page).</p>
+                <div class="step-ok">✅ <em>Expected:</em> The "Add New User" form opens with fields for username, email, first name, last name, password, and role.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-3">
+              <input type="checkbox" id="cb-s1-3" class="step-cb" data-key="cb-s1-3" data-phase="1">
+              <span class="step-circle">3</span>
+              <div class="step-body">
+                <strong class="step-title">Fill in the form: Username "guest_editor", any email address</strong>
+                <p class="step-desc">Fill in the required fields:</p>
+                <div class="field-examples">
+                  <div class="fe-row"><span class="fe-label">Username:</span><code>guest_editor</code><span class="fe-note">(required, no spaces)</span></div>
+                  <div class="fe-row"><span class="fe-label">Email:</span><code>editor@test.com</code><span class="fe-note">(fake email works on localhost)</span></div>
+                  <div class="fe-row"><span class="fe-label">Password:</span><span class="fe-note">WordPress will auto-generate a strong one — you can keep it or set your own</span></div>
+                </div>
+                <div class="step-note">💡 <strong>On a real/live site:</strong> Use a real email address — WordPress will send the login credentials to that email automatically.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-4">
+              <input type="checkbox" id="cb-s1-4" class="step-cb" data-key="cb-s1-4" data-phase="1">
+              <span class="step-circle">4</span>
+              <div class="step-body">
+                <strong class="step-title">Set the Role dropdown to "Editor" → click Add New User</strong>
+                <p class="step-desc">At the bottom of the form, find the <strong>Role</strong> dropdown. It defaults to <strong>Subscriber</strong>. Change it to <strong>Editor</strong>. Then click the blue <strong>Add New User</strong> button.</p>
+                <div class="step-ok">✅ <em>Expected:</em> A success message appears: "New user created." The user "guest_editor" now appears in the Users list with the role "Editor".</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-5">
+              <input type="checkbox" id="cb-s1-5" class="step-cb" data-key="cb-s1-5" data-phase="1">
+              <span class="step-circle">5</span>
+              <div class="step-body">
+                <strong class="step-title">Copy the password shown → then Log Out of your Admin account</strong>
+                <p class="step-desc">Note or copy the password WordPress generated for guest_editor. Then log out of your Admin account: click your <strong>Admin username</strong> in the top-right corner of the admin bar → click <strong>Log Out</strong>.</p>
+                <div class="step-warn">⚠️ <strong>Important:</strong> Do NOT forget your Admin username and password. You will need to log back in after testing the Editor role.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-6">
+              <input type="checkbox" id="cb-s1-6" class="step-cb" data-key="cb-s1-6" data-phase="1">
+              <span class="step-circle">6</span>
+              <div class="step-body">
+                <strong class="step-title">Log in as "guest_editor" — observe the Dashboard</strong>
+                <p class="step-desc">Log in with the username <strong>guest_editor</strong> and the password you noted. Look carefully at the left sidebar. Compare what you see now with what you saw as Admin.</p>
+                <!-- Side-by-side dashboard comparison -->
+                <div class="dashboard-compare">
+                  <div class="dc-panel dc-admin">
+                    <div class="dc-label">👑 Admin sees:</div>
+                    <ul class="dc-menu">
+                      <li class="dc-item dc-yes">📊 Dashboard</li>
+                      <li class="dc-item dc-yes">📝 Posts</li>
+                      <li class="dc-item dc-yes">📄 Pages</li>
+                      <li class="dc-item dc-yes dc-highlight">🎨 Appearance ←</li>
+                      <li class="dc-item dc-yes dc-highlight">🔌 Plugins ←</li>
+                      <li class="dc-item dc-yes dc-highlight">👥 Users ←</li>
+                      <li class="dc-item dc-yes dc-highlight">⚙ Settings ←</li>
+                    </ul>
+                  </div>
+                  <div class="dc-vs" aria-hidden="true">→</div>
+                  <div class="dc-panel dc-editor">
+                    <div class="dc-label">✏ Editor sees:</div>
+                    <ul class="dc-menu">
+                      <li class="dc-item dc-yes">📊 Dashboard</li>
+                      <li class="dc-item dc-yes">📝 Posts ✓</li>
+                      <li class="dc-item dc-yes">📄 Pages ✓</li>
+                      <li class="dc-item dc-no">🎨 Appearance — HIDDEN</li>
+                      <li class="dc-item dc-no">🔌 Plugins — HIDDEN</li>
+                      <li class="dc-item dc-no">👥 Users — HIDDEN</li>
+                      <li class="dc-item dc-no">⚙ Settings — HIDDEN</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="step-ok">✅ This is <strong>role-based security in action</strong>. The Editor can manage content but cannot accidentally (or maliciously) delete your plugins or themes.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-7">
+              <input type="checkbox" id="cb-s1-7" class="step-cb" data-key="cb-s1-7" data-phase="1">
+              <span class="step-circle">7</span>
+              <div class="step-body">
+                <strong class="step-title">Log back out → log back in as your Administrator account</strong>
+                <p class="step-desc">Log out of the guest_editor account. Log back in with your original Administrator username and password. Verify the full admin sidebar is back (Appearance, Plugins, Users, Settings all visible).</p>
+                <div class="step-ok">✅ <em>Expected:</em> Full admin sidebar restored. You are back as the site owner with complete control.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s1-8">
+              <input type="checkbox" id="cb-s1-8" class="step-cb" data-key="cb-s1-8" data-phase="1">
+              <span class="step-circle">8</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Challenge: Change the guest_editor role to Subscriber and test again</strong>
+                <p class="step-desc">Go to <strong>Users → All Users</strong>. Click on <strong>guest_editor</strong> to edit their profile. Scroll down to the <strong>Role</strong> dropdown — change it to <strong>Subscriber</strong>. Click <strong>Update User</strong>. Then log in as guest_editor again. What can the Subscriber access now?</p>
+                <div class="step-ok">💡 A Subscriber can barely access the dashboard at all — only their profile page. This demonstrates why Subscriber is used for comment-only or membership access.</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-1" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 1 Complete — User Roles Mastered!</strong>
+          <p>You've created a user, tested role-based access, and understood the Principle of Least Privilege. Move to Phase 2 — backing up your site!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════
+         PHASE 2 — Site Backups & Exporting (45 min)
+    ════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2" data-phase="2" aria-labelledby="p2-title">
+      <header class="phase-hdr ph-teal">
+        <div class="ph-num">2</div>
+        <div class="ph-text">
+          <h2 id="p2-title">Phase 2 — Site Backups &amp; Exporting</h2>
+          <p>45 minutes · Files + Database concept · All-in-One WP Migration · Export to .wpress</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p2-label">0 / 10 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-teal" id="p2-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p2-concept-h">
+        <h3 id="p2-concept-h">Why You Can't Just Copy the Files</h3>
+        <p>A WordPress site consists of <strong>two completely separate parts</strong>. You need both to have a working backup. Many beginners only back up one and wonder why their site doesn't work on another computer.</p>
+
+        <!-- Files + Database visual -->
+        <div class="two-parts-diagram">
+          <div class="tpd-part tpd-files">
+            <div class="tpd-header">
+              <span class="tpd-icon">📁</span>
+              <h4>FILES — The htdocs Folder</h4>
+            </div>
+            <ul class="tpd-list">
+              <li>WordPress core PHP files</li>
+              <li>Themes (Astra, child theme)</li>
+              <li>Plugins (Elementor, WPForms...)</li>
+              <li>Uploaded images &amp; media</li>
+            </ul>
+            <div class="tpd-path">📂 <code>htdocs/your-site/</code></div>
+            <div class="tpd-issue">❌ If you only copy this: site structure exists but <strong>ALL content is gone</strong> (no posts, no pages, no settings)</div>
+          </div>
+
+          <div class="tpd-plus" aria-hidden="true">+</div>
+
+          <div class="tpd-part tpd-db">
+            <div class="tpd-header">
+              <span class="tpd-icon">🗃</span>
+              <h4>DATABASE — MySQL</h4>
+            </div>
+            <ul class="tpd-list">
+              <li>All post and page content (text)</li>
+              <li>Comments and user accounts</li>
+              <li>Plugin settings &amp; options</li>
+              <li>Navigation menus &amp; widgets</li>
+            </ul>
+            <div class="tpd-path">🗄 <code>phpMyAdmin → your_db</code></div>
+            <div class="tpd-issue">❌ If you only export this: content exists but <strong>no theme, no images</strong> — blank white page</div>
+          </div>
+        </div>
+
+        <div class="solution-banner">
+          <span class="sb-icon">✅</span>
+          <div>
+            <strong>The Solution: All-in-One WP Migration</strong>
+            <p>This plugin combines FILES + DATABASE into a single <strong>.wpress</strong> file. One file = your entire website, ready to restore or deploy anywhere.</p>
+          </div>
+        </div>
+
+        <!-- .wpress contents visual -->
+        <div class="wpress-visual">
+          <h4 class="wpress-title">What's Inside a .wpress File</h4>
+          <div class="wpress-boxes">
+            <div class="wpb wpb-db"><div class="wpb-icon">📝</div><strong>Database</strong><p>SQL dump with all posts, settings, users</p></div>
+            <div class="wpb-plus" aria-hidden="true">+</div>
+            <div class="wpb wpb-theme"><div class="wpb-icon">🎨</div><strong>Themes</strong><p>Astra + child theme + Customizer settings</p></div>
+            <div class="wpb-plus" aria-hidden="true">+</div>
+            <div class="wpb wpb-plugins"><div class="wpb-icon">🔌</div><strong>Plugins</strong><p>Elementor, WPForms, All-in-One etc.</p></div>
+            <div class="wpb-plus" aria-hidden="true">+</div>
+            <div class="wpb wpb-media"><div class="wpb-icon">🖼</div><strong>Media</strong><p>All uploaded images &amp; files</p></div>
+            <div class="wpb-arrow" aria-hidden="true">→</div>
+            <div class="wpb wpb-final"><div class="wpb-icon">📦</div><strong>.wpress</strong><p>One file = entire site!</p></div>
+          </div>
+        </div>
+
+        <ol class="step-list" aria-label="Phase 2 backup steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-1">
+              <input type="checkbox" id="cb-s2-1" class="step-cb" data-key="cb-s2-1" data-phase="2">
+              <span class="step-circle step-teal">1</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Plugins → Add New Plugin</strong>
+                <p class="step-desc">In the WordPress admin sidebar, click <strong>Plugins → Add New Plugin</strong>. The Plugin Directory browser opens.</p>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-2">
+              <input type="checkbox" id="cb-s2-2" class="step-cb" data-key="cb-s2-2" data-phase="2">
+              <span class="step-circle step-teal">2</span>
+              <div class="step-body">
+                <strong class="step-title">Search for "All-in-One WP Migration" → Install → Activate</strong>
+                <p class="step-desc">In the search box (top right), type <strong>All-in-One WP Migration</strong>. Find the plugin by <strong>ServMask</strong> (over 5 million active installations). Click <strong>Install Now</strong>, then <strong>Activate</strong>.</p>
+                <div class="plugin-card">
+                  <div class="pc-icon">🔄</div>
+                  <div class="pc-info">
+                    <strong>All-in-One WP Migration</strong>
+                    <p>By ServMask · 5+ million active installations · ★★★★★ (Free up to 512MB)</p>
+                  </div>
+                </div>
+                <div class="step-ok">✅ <em>Expected:</em> After activation, a new "All-in-One WP Migration" item appears in the left admin sidebar.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-3">
+              <input type="checkbox" id="cb-s2-3" class="step-cb" data-key="cb-s2-3" data-phase="2">
+              <span class="step-circle step-teal">3</span>
+              <div class="step-body">
+                <strong class="step-title">Click "All-in-One WP Migration" in the left sidebar → click "Export"</strong>
+                <p class="step-desc">Click the <strong>All-in-One WP Migration</strong> menu item in the left sidebar. A sub-menu expands with: Export, Import, Backups, Settings. Click <strong>Export</strong>.</p>
+                <div class="step-ok">✅ <em>Expected:</em> The Export page opens with a large "EXPORT TO" button/dropdown.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-4">
+              <input type="checkbox" id="cb-s2-4" class="step-cb" data-key="cb-s2-4" data-phase="2">
+              <span class="step-circle step-teal">4</span>
+              <div class="step-body">
+                <strong class="step-title">Click "Export To" → select "File"</strong>
+                <p class="step-desc">Click the <strong>EXPORT TO</strong> button. A dropdown appears with destination options: File, FTP, Dropbox, Google Drive, etc. Click <strong>File</strong> to save the export to your local computer.</p>
+                <div class="export-flow-visual">
+                  <div class="efv-step efv-active">
+                    <div class="efv-num">1</div>
+                    <div>Click<br><strong>Export To</strong></div>
+                  </div>
+                  <div class="efv-arrow">→</div>
+                  <div class="efv-step efv-active">
+                    <div class="efv-num">2</div>
+                    <div>Select<br><strong>File</strong></div>
+                  </div>
+                  <div class="efv-arrow">→</div>
+                  <div class="efv-step">
+                    <div class="efv-num">3</div>
+                    <div>Progress<br>bar runs</div>
+                  </div>
+                  <div class="efv-arrow">→</div>
+                  <div class="efv-step">
+                    <div class="efv-num">4</div>
+                    <div>Green button<br>flashes</div>
+                  </div>
+                  <div class="efv-arrow">→</div>
+                  <div class="efv-step">
+                    <div class="efv-num">5</div>
+                    <div>Click<br><strong>Download</strong></div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-5">
+              <input type="checkbox" id="cb-s2-5" class="step-cb" data-key="cb-s2-5" data-phase="2">
+              <span class="step-circle step-teal">5</span>
+              <div class="step-body">
+                <strong class="step-title">Wait for the progress bar to complete (30–90 seconds)</strong>
+                <p class="step-desc">A progress bar appears showing the plugin packaging your site. This process:</p>
+                <ul class="sub-list">
+                  <li>Exports the MySQL database to a SQL file</li>
+                  <li>Compresses all theme and plugin files</li>
+                  <li>Includes all uploaded media</li>
+                  <li>Wraps everything into a single compressed archive</li>
+                </ul>
+                <div class="step-note">💡 The time depends on your site size. A typical student site with images takes about 30–90 seconds.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-6">
+              <input type="checkbox" id="cb-s2-6" class="step-cb" data-key="cb-s2-6" data-phase="2">
+              <span class="step-circle step-teal">6</span>
+              <div class="step-body">
+                <strong class="step-title">Click the flashing green "Download localhost" button</strong>
+                <p class="step-desc">When the progress bar completes, a large <strong>green flashing button</strong> appears at the bottom of the progress modal. Click <strong>Download localhost</strong> (or the name of your site). Your browser downloads the .wpress file.</p>
+                <div class="step-warn">⚠️ Click the download button <strong>while it's still showing</strong>. If you close the modal without downloading, you may need to start the export again.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-7">
+              <input type="checkbox" id="cb-s2-7" class="step-cb" data-key="cb-s2-7" data-phase="2">
+              <span class="step-circle step-teal">7</span>
+              <div class="step-body">
+                <strong class="step-title">Verify the .wpress file in your Downloads folder</strong>
+                <p class="step-desc">Open your Downloads folder. You should see a file with a name like:</p>
+                <div class="code-eg"><code>localhost_my-site_2025-06-15_10-30-42.wpress</code></div>
+                <p class="step-desc">The filename format is: <code>hostname_sitename_date_time.wpress</code></p>
+                <div class="step-ok">✅ If you can see this file in your Downloads folder, your backup is complete!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-8">
+              <input type="checkbox" id="cb-s2-8" class="step-cb" data-key="cb-s2-8" data-phase="2">
+              <span class="step-circle step-teal">8</span>
+              <div class="step-body">
+                <strong class="step-title">Copy the .wpress file to a USB drive or Google Drive</strong>
+                <p class="step-desc">Don't leave it only in Downloads — that folder can be accidentally emptied. Copy it to at least <strong>one additional safe location</strong>:</p>
+                <ul class="sub-list">
+                  <li>🔌 USB Flash Drive — physical offline backup</li>
+                  <li>☁ Google Drive — cloud backup accessible from anywhere</li>
+                  <li>📧 Email it to yourself as an attachment (if under 25MB)</li>
+                </ul>
+                <div class="step-ok">🏆 <strong>Best practice:</strong> The 3-2-1 rule — 3 copies, on 2 different types of media, with 1 stored offsite (cloud).</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-9">
+              <input type="checkbox" id="cb-s2-9" class="step-cb" data-key="cb-s2-9" data-phase="2">
+              <span class="step-circle step-teal">9</span>
+              <div class="step-body">
+                <strong class="step-title">Understand how to IMPORT this file later</strong>
+                <p class="step-desc">Although you won't import today, it's important to know the process for Week 14:</p>
+                <ol class="sub-list sub-list--ordered">
+                  <li>Install WordPress on the new server</li>
+                  <li>Install the All-in-One WP Migration plugin</li>
+                  <li>Go to All-in-One WP Migration → Import</li>
+                  <li>Upload the .wpress file</li>
+                  <li>Click "Proceed" — your entire site is restored in minutes</li>
+                </ol>
+                <div class="step-note">💡 This is why we're creating the .wpress export now — <strong>Week 14 you will use this exact file to deploy to a live web server</strong>!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s2-10">
+              <input type="checkbox" id="cb-s2-10" class="step-cb" data-key="cb-s2-10" data-phase="2">
+              <span class="step-circle step-teal">10</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Check the file size — what does the number tell you?</strong>
+                <p class="step-desc">Right-click the .wpress file → Properties (Windows) or Get Info (Mac). Look at the file size in MB.</p>
+                <ul class="sub-list">
+                  <li>Small site with few images: 5–20 MB</li>
+                  <li>Site with many images: 50–200 MB</li>
+                  <li>Large e-commerce site: 500 MB+</li>
+                </ul>
+                <p class="step-desc">The free version of All-in-One supports up to 512 MB. A site over 512 MB needs the paid version or the manual phpMyAdmin + FTP method.</p>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-2" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 2 Complete — Site Backed Up!</strong>
+          <p>Your .wpress file is your entire website in one file. Keep it safe! Move to Phase 3 — exploring alternative backup strategies.</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════
+         PHASE 3 — Alternative Backup Strategies (15 min)
+    ════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3" data-phase="3" aria-labelledby="p3-title">
+      <header class="phase-hdr ph-purple">
+        <div class="ph-num">3</div>
+        <div class="ph-text">
+          <h2 id="p3-title">Phase 3 — Alternative Backup Strategies</h2>
+          <p>15 minutes · UpdraftPlus · Scheduled backups · Cloud storage · Real-world scenarios</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p3-label">0 / 4 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-purple" id="p3-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p3h">
+        <h3 id="p3h">UpdraftPlus — The Industry Standard for Live Sites</h3>
+        <p>All-in-One WP Migration is great for <em>migrating</em> a site once. But for a live production website that's being updated daily, you need <strong>automatic scheduled backups</strong> — that's where UpdraftPlus comes in.</p>
+
+        <!-- Plugin comparison -->
+        <div class="plugin-comparison">
+          <div class="pc-card pc-aiowpm">
+            <div class="pc-card-header">All-in-One WP Migration</div>
+            <ul class="pc-list">
+              <li class="pc-yes">✓ Manual one-time export</li>
+              <li class="pc-yes">✓ Single .wpress file</li>
+              <li class="pc-yes">✓ Perfect for migration</li>
+              <li class="pc-yes">✓ Used in this lab + Week 14</li>
+              <li class="pc-no">✗ No automatic scheduling</li>
+              <li class="pc-no">✗ No cloud storage in free version</li>
+            </ul>
+            <div class="pc-use-when"><strong>Use when:</strong> Moving or deploying a site</div>
+          </div>
+          <div class="pc-vs" aria-hidden="true">vs</div>
+          <div class="pc-card pc-updraft">
+            <div class="pc-card-header">UpdraftPlus</div>
+            <ul class="pc-list">
+              <li class="pc-yes">✓ Automatic scheduled backups</li>
+              <li class="pc-yes">✓ Weekly, daily, or hourly</li>
+              <li class="pc-yes">✓ Sends to Google Drive / Dropbox</li>
+              <li class="pc-yes">✓ 3+ million active installs</li>
+              <li class="pc-yes">✓ One-click restore</li>
+              <li class="pc-yes">✓ Industry standard for live sites</li>
+            </ul>
+            <div class="pc-use-when"><strong>Use when:</strong> Running a live production website</div>
+          </div>
+        </div>
+
+        <!-- Real-world scenarios -->
+        <div class="scenarios-section">
+          <h4>Real-World Disaster Scenarios — Why Off-Site Backup Is Critical</h4>
+          <div class="scenarios-grid">
+            <div class="scenario scenario-fire">
+              <div class="sc-icon">🔥</div>
+              <strong>Server fire / hardware failure</strong>
+              <p>The hosting server's hard drive dies. Without an offsite backup, the site is gone forever. With Google Drive backup: restore in 10 minutes.</p>
+            </div>
+            <div class="scenario scenario-hack">
+              <div class="sc-icon">🔓</div>
+              <strong>Hacker deletes the database</strong>
+              <p>Ransomware or a malicious actor deletes all content. Your backups saved to the same server are also gone. Cloud backup = the only survivor.</p>
+            </div>
+            <div class="scenario scenario-plugin">
+              <div class="sc-icon">🔌</div>
+              <strong>Bad plugin update crashes the site</strong>
+              <p>A plugin update introduces a fatal PHP error. The site shows a white screen of death. Restore from yesterday's backup and roll back the update.</p>
+            </div>
+            <div class="scenario scenario-human">
+              <div class="sc-icon">🤦</div>
+              <strong>Human error — accidentally deleted</strong>
+              <p>You accidentally delete 200 blog posts while trying to bulk-edit. "Ctrl+Z" doesn't work in WordPress. Yesterday's backup restores them all.</p>
+            </div>
+          </div>
+        </div>
+
+        <ol class="step-list" aria-label="Phase 3 UpdraftPlus steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-1">
+              <input type="checkbox" id="cb-s3-1" class="step-cb" data-key="cb-s3-1" data-phase="3">
+              <span class="step-circle step-purple">1</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Plugins → Add New → search "UpdraftPlus"</strong>
+                <p class="step-desc">Go to Plugins → Add New Plugin. Search for <strong>UpdraftPlus WordPress Backup Plugin</strong>. You will see it has over 3 million active installations and a 5-star rating. <em>Do not install it yet</em> — just look at the plugin page screenshots.</p>
+                <div class="step-ok">💡 Notice the plugin description mentions: "Backups remotely to Dropbox, Google Drive, Amazon S3, FTP, SFTP, email". This is why it's the industry standard for live sites.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-2">
+              <input type="checkbox" id="cb-s3-2" class="step-cb" data-key="cb-s3-2" data-phase="3">
+              <span class="step-circle step-purple">2</span>
+              <div class="step-body">
+                <strong class="step-title">Click "More Details" to see the plugin screenshots</strong>
+                <p class="step-desc">Click <strong>More Details</strong> on the UpdraftPlus plugin card. Browse the screenshots. You'll see the settings panel with:</p>
+                <ul class="sub-list">
+                  <li><strong>Schedule backups:</strong> "Every 2 days", "Weekly", "Monthly"</li>
+                  <li><strong>Choose storage:</strong> Google Drive, Dropbox, Amazon S3</li>
+                  <li><strong>Backup components:</strong> Database, Plugins, Themes, Uploads, Others</li>
+                  <li><strong>Email notifications:</strong> Receive an email confirming each backup completed</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-3">
+              <input type="checkbox" id="cb-s3-3" class="step-cb" data-key="cb-s3-3" data-phase="3">
+              <span class="step-circle step-purple">3</span>
+              <div class="step-body">
+                <strong class="step-title">Discussion: which backup strategy would you use for a client?</strong>
+                <p class="step-desc">Discuss with the student next to you — for each scenario below, which tool would you choose?</p>
+                <div class="discussion-table">
+                  <div class="dt-row dt-header">
+                    <span>Scenario</span><span>Tool</span>
+                  </div>
+                  <div class="dt-row">
+                    <span>Moving site from localhost to a live server</span>
+                    <span class="dt-answer">All-in-One WP Migration</span>
+                  </div>
+                  <div class="dt-row">
+                    <span>A client's live e-commerce site that updates daily</span>
+                    <span class="dt-answer">UpdraftPlus (weekly auto + Google Drive)</span>
+                  </div>
+                  <div class="dt-row">
+                    <span>Creating a staging (testing) copy of a live site</span>
+                    <span class="dt-answer">All-in-One WP Migration</span>
+                  </div>
+                  <div class="dt-row">
+                    <span>Disaster recovery plan for a high-traffic news site</span>
+                    <span class="dt-answer">UpdraftPlus (daily + offsite cloud)</span>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s3-4">
+              <input type="checkbox" id="cb-s3-4" class="step-cb" data-key="cb-s3-4" data-phase="3">
+              <span class="step-circle step-purple">4</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Optional: Install UpdraftPlus and explore the Settings page</strong>
+                <p class="step-desc">If time allows, click <strong>Install Now</strong> on UpdraftPlus, then Activate. Go to <strong>Settings → UpdraftPlus Backups</strong>. Explore the settings panel and look at:</p>
+                <ul class="sub-list">
+                  <li>The "Files backup schedule" dropdown — see the frequency options</li>
+                  <li>The "Remote storage" section — Google Drive, Dropbox, etc.</li>
+                  <li>The "Backup Now" button — you can take a manual backup any time</li>
+                </ul>
+                <div class="step-ok">💡 You don't need to configure Google Drive today — just understand what the plugin offers. On a real live site, you'd connect it to cloud storage immediately after launch.</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-3" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 3 Complete — Backup Strategies Understood!</strong>
+          <p>You know when to use All-in-One vs UpdraftPlus. Final phase — wrap up and get ready for Week 13!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════
+         PHASE 4 — Wrap-Up & Course Transition (15 min)
+    ════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4" data-phase="4" aria-labelledby="p4-title">
+      <header class="phase-hdr ph-orange">
+        <div class="ph-num">4</div>
+        <div class="ph-text">
+          <h2 id="p4-title">Phase 4 — Wrap-Up &amp; Transition to Web Hosting</h2>
+          <p>15 minutes · Verify .wpress saved · Week 13 preview · Course milestone</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p4-label">0 / 4 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-orange" id="p4-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p4h">
+        <h3 id="p4h">Final Verification &amp; Week 13 Preview</h3>
+
+        <ol class="step-list" aria-label="Phase 4 wrap-up steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-1">
+              <input type="checkbox" id="cb-s4-1" class="step-cb" data-key="cb-s4-1" data-phase="4">
+              <span class="step-circle step-orange">1</span>
+              <div class="step-body">
+                <strong class="step-title">Verify your .wpress file is saved in at least two places</strong>
+                <p class="step-desc">Do a final check — confirm your backup file exists in:</p>
+                <ul class="sub-list">
+                  <li>✅ Your computer's Downloads folder</li>
+                  <li>✅ A USB drive OR Google Drive / cloud storage</li>
+                </ul>
+                <div class="step-warn">🚨 <strong>This file is critical for Week 14!</strong> If you lose it, you will need to rebuild your entire site from scratch for the live deployment lab. Do NOT skip this step.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-2">
+              <input type="checkbox" id="cb-s4-2" class="step-cb" data-key="cb-s4-2" data-phase="4">
+              <span class="step-circle step-orange">2</span>
+              <div class="step-body">
+                <strong class="step-title">Complete the Session 3 checklist</strong>
+                <p class="step-desc">Verify all of these are true before finishing:</p>
+                <div class="final-checklist">
+                  <div class="fc-item"><span class="fc-check">✅</span> I understand all 5 WordPress User Roles and their permissions</div>
+                  <div class="fc-item"><span class="fc-check">✅</span> I created a "guest_editor" user with Editor role</div>
+                  <div class="fc-item"><span class="fc-check">✅</span> I tested the Dashboard as Editor and saw the limited sidebar</div>
+                  <div class="fc-item"><span class="fc-check">✅</span> I understand why files alone are not enough for a backup</div>
+                  <div class="fc-item"><span class="fc-check">✅</span> I installed All-in-One WP Migration and exported my site</div>
+                  <div class="fc-item"><span class="fc-check">✅</span> My .wpress file is saved securely in at least 2 locations</div>
+                  <div class="fc-item"><span class="fc-check">✅</span> I understand the difference between All-in-One and UpdraftPlus</div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-3">
+              <input type="checkbox" id="cb-s4-3" class="step-cb" data-key="cb-s4-3" data-phase="4">
+              <span class="step-circle step-orange">3</span>
+              <div class="step-body">
+                <strong class="step-title">Reflect: what did you build over the last 12 weeks?</strong>
+                <p class="step-desc">Take a moment to think about what you can now do:</p>
+                <div class="achievement-grid">
+                  <div class="ag-item"><span class="ag-icon">🌐</span><span>HTML/CSS/JS from scratch (Weeks 1–5)</span></div>
+                  <div class="ag-item"><span class="ag-icon">⚛</span><span>DOM manipulation &amp; Form validation (Weeks 6–7)</span></div>
+                  <div class="ag-item"><span class="ag-icon">📝</span><span>WordPress CMS setup &amp; content (Weeks 9–10)</span></div>
+                  <div class="ag-item"><span class="ag-icon">🎨</span><span>CSS overrides &amp; theme customisation (Week 11)</span></div>
+                  <div class="ag-item"><span class="ag-icon">🏗</span><span>Elementor page builder &amp; responsive design (Week 12)</span></div>
+                  <div class="ag-item"><span class="ag-icon">🔐</span><span>User management &amp; site backups (Today)</span></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-4">
+              <input type="checkbox" id="cb-s4-4" class="step-cb" data-key="cb-s4-4" data-phase="4">
+              <span class="step-circle step-orange">4</span>
+              <div class="step-body">
+                <strong class="step-title">Preview: Week 13 — Web Hosting &amp; Getting Online</strong>
+                <p class="step-desc">Your site currently lives only on your laptop. Next week that changes — you'll move it to a real web server so the entire world can access it:</p>
+                <div class="week13-preview">
+                  <div class="w13-step"><span class="w13-num">1</span><div><strong>Choose a hosting provider</strong><p>Shared hosting, VPS, or cloud (DigitalOcean, SiteGround, InfinityFree)</p></div></div>
+                  <div class="w13-step"><span class="w13-num">2</span><div><strong>Register a domain name</strong><p>yourname.com — your site's address on the internet</p></div></div>
+                  <div class="w13-step"><span class="w13-num">3</span><div><strong>Upload WordPress to the server</strong><p>FTP / cPanel File Manager + phpMyAdmin for the database</p></div></div>
+                  <div class="w13-step"><span class="w13-num">4</span><div><strong>Import your .wpress file</strong><p>Use All-in-One WP Migration to restore your entire site instantly</p></div></div>
+                  <div class="w13-step w13-final"><span class="w13-num">🌐</span><div><strong>Your site is live!</strong><p>Anyone in the world can visit your URL and see your site</p></div></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner phase-banner--final" id="banner-4" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🏆</span>
+          <div><strong>Week 12 Complete — Congratulations!</strong>
+          <p>You have successfully finished building, designing, securing, and backing up your WordPress site. Week 13: it goes live on the internet!</p></div>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="subsect" aria-labelledby="sum-h">
+        <h3 id="sum-h">Quick Reference — Session 3 Summary</h3>
+        <div class="summary-grid" role="list">
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-blue">👑</div><div><h4>5 User Roles</h4><p>Admin → Editor → Author → Contributor → Subscriber. Each role controls a specific level of access.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-red">🔐</div><div><h4>Least Privilege</h4><p>Give clients Editor, not Admin. Fewer permissions = fewer accidents. You maintain full control.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-teal">📁</div><div><h4>Files + Database</h4><p>WordPress = Files (themes/plugins/images) + Database (all content). You need BOTH for a complete backup.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-purple">🔄</div><div><h4>All-in-One Migration</h4><p>Install, Export → File, Download. Creates a .wpress file = your entire site in one archive.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-orange">📦</div><div><h4>.wpress File</h4><p>Store on USB + Google Drive. This exact file will be used in Week 14 to deploy to a live server.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-green">⏰</div><div><h4>UpdraftPlus</h4><p>For live production sites. Schedules automatic weekly backups to Google Drive or Dropbox.</p></div></article>
+        </div>
+
+        <aside class="tip-box tip-navy">
+          <strong>🌐 Coming Up — Week 13: Web Hosting</strong>
+          <p>Your website currently lives only on your laptop. Next week you'll take it out of localhost and put it on the real internet. The .wpress file you made today is your ticket — it will be used to deploy your entire site to a live server in one click.</p>
+        </aside>
+      </section>
+    </section>
+
+  </main>
+
+  <!-- SESSION COMPLETE OVERLAY -->
+  <div class="session-overlay" id="session-overlay" role="dialog" aria-modal="true" aria-labelledby="ov-title" hidden>
+    <div class="overlay-card">
+      <p class="ov-icon">🏆</p>
+      <h2 id="ov-title">Week 12 Complete!</h2>
+      <p>You've mastered User Roles, created a backup, and are ready for Week 13: taking your site live on the real internet!</p>
+      <button class="btn-reset btn-reset--lg" onclick="resetAll()">🔄 Reset &amp; Start Over</button>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-in">
+      <p><strong>Web Client Programming</strong> &nbsp;·&nbsp; Week 12 · Session 3 &nbsp;·&nbsp; Institute of Technology of Cambodia</p>
+      <p class="footer-lo">LO7: Manage WordPress themes, plugins, and advanced CMS features</p>
+      <button class="btn-reset" onclick="resetAll()">🔄 Reset All Progress</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
