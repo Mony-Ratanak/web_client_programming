@@ -1,690 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 9 Session 2 — Step-by-Step Guide</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 13 Session 1 Lab Guide — Web Hosting & Domain Name Research. Domain names, TLDs, hosting types, SSL, Renewal Trap, InfinityFree setup.">
+  <title>Week 13 · Session 1 — Web Hosting &amp; Domain Research</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- ============================================================
-    HEADER
-  ============================================================ -->
-  <header class="site-header">
-    <nav class="top-bar">
-      <span class="site-logo">Week 9 · Session 2</span>
-      <span class="week-label">WordPress Dashboard & Content</span>
+  <header class="site-header" role="banner">
+    <nav class="top-bar" aria-label="Course navigation">
+      <span class="course-badge">Web Client Programming</span>
+      <span class="session-label">Week 13 · Session 1  ·  2 Hours</span>
     </nav>
-    <hgroup class="hero-text">
-      <h1>Step-by-Step Lab Guide</h1>
-      <p>Follow every step in order — tick each box as you finish it!</p>
+    <hgroup class="hero-band">
+      <p class="eyebrow">Phase-by-Phase Lab Guide</p>
+      <h1>Web Hosting &amp; <span class="blue-accent">Domain Research</span></h1>
+      <p class="hero-sub">Domain Names · TLDs · Hosting Types · SSL · Renewal Trap · InfinityFree Setup</p>
     </hgroup>
-
-    <!-- Overall progress bar across all phases -->
-    <div class="overall-progress-wrap">
-      <div class="overall-progress-label">
-        Overall Progress: <span id="overall-done">0</span> / <span id="overall-total">0</span> steps
+    <div class="overall-bar-wrap" role="region" aria-label="Overall progress">
+      <div class="overall-bar-meta">
+        <span>Overall Progress</span>
+        <span id="overall-count">0 / 26 steps</span>
       </div>
-      <div class="overall-track">
-        <div class="overall-fill" id="overall-fill"></div>
+      <div class="bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="overall-track">
+        <div class="bar-fill" id="overall-fill"></div>
       </div>
     </div>
   </header>
 
-
-  <!-- ============================================================
-    QUICK NAVIGATION
-  ============================================================ -->
-  <nav class="phase-nav" aria-label="Jump to phase">
-    <a href="#phase-0" class="phase-nav-link">Before You Start</a>
-    <a href="#phase-1" class="phase-nav-link">Phase 1 · Dashboard</a>
-    <a href="#phase-2" class="phase-nav-link">Phase 2 · Pages</a>
-    <a href="#phase-3" class="phase-nav-link">Phase 3 · Posts & Taxonomy</a>
-    <a href="#audit" class="phase-nav-link">Final Checklist</a>
+  <nav class="phase-nav" id="phase-nav" aria-label="Jump to phase">
+    <ol class="pnav-list" role="list">
+      <li><a href="#phase-1" class="pnav-btn" data-phase="1">
+        <span class="pdot" id="dot-1" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 1</strong><small>Domains · 45 min</small></span>
+        <span class="pnav-count" id="nc-1"></span>
+      </a></li>
+      <li><a href="#phase-2" class="pnav-btn" data-phase="2">
+        <span class="pdot" id="dot-2" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 2</strong><small>Hosting Plans · 45 min</small></span>
+        <span class="pnav-count" id="nc-2"></span>
+      </a></li>
+      <li><a href="#phase-3" class="pnav-btn" data-phase="3">
+        <span class="pdot" id="dot-3" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 3</strong><small>Free Hosting · 30 min</small></span>
+        <span class="pnav-count" id="nc-3"></span>
+      </a></li>
+    </ol>
   </nav>
 
+  <main class="main-content" id="main-content">
 
-  <!-- ============================================================
-    MAIN CONTENT
-  ============================================================ -->
-  <main class="page-content">
-
-
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 0 · BEFORE YOU START
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="phase-section" id="phase-0">
-      <header class="phase-header phase-gray">
-        <span class="phase-badge">Before You Start</span>
-        <h2>Make Sure Everything is Running</h2>
+    <!-- ══ CONCEPT: Domain vs Hosting ══ -->
+    <section class="card" id="concept" aria-labelledby="concept-h">
+      <header class="card-header">
+        <p class="eyebrow">Key Concept — Read This First</p>
+        <h2 id="concept-h">Domain Name vs Web Hosting — What's the Difference?</h2>
+        <p class="card-lead">These are two completely <strong>separate purchases</strong> from two different types of companies. You need both for a website to work.</p>
       </header>
 
-      <div class="phase-body">
-        <p class="phase-intro">
-          WordPress needs XAMPP to be running before you can log in.
-          These two checks take 30 seconds and prevent 90% of problems.
-        </p>
+      <div class="analogy-grid" role="list">
+        <article class="analogy-card analogy-hosting" role="listitem">
+          <div class="ac-icon">🏡</div>
+          <h3>Web Hosting</h3>
+          <p class="ac-tagline">The physical <strong>land and house</strong> where your files live</p>
+          <ul>
+            <li>A server (computer) running 24 hours a day, 7 days a week</li>
+            <li>Stores your PHP files, images, database, themes, plugins</li>
+            <li>You pay a monthly or yearly fee to <em>rent</em> server space</li>
+            <li>Without hosting: your site's files have no home on the internet</li>
+          </ul>
+          <div class="ac-example"><strong>Examples:</strong> Hostinger, SiteGround, InfinityFree (free), DigitalOcean</div>
+        </article>
 
-        <ol class="step-list" data-phase="phase0">
+        <div class="analogy-plus" aria-hidden="true">
+          <span>+</span>
+          <span class="analogy-equals">= working website</span>
+        </div>
 
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Open the XAMPP Control Panel</div>
-              <div class="step-desc">
-                Find XAMPP in your Start Menu (Windows) or Applications folder (Mac) and open it.
-              </div>
-              <div class="step-visual visual-dark">
-                <div class="mock-xampp">
-                  <div class="mock-xampp-row">
-                    <span class="mock-label">Apache</span>
-                    <span class="mock-status mock-green">Running  ●</span>
-                    <span class="mock-btn-row">
-                      <span class="mock-btn mock-btn-red">Stop</span>
-                      <span class="mock-btn mock-btn-gray">Admin</span>
-                    </span>
-                  </div>
-                  <div class="mock-xampp-row">
-                    <span class="mock-label">MySQL</span>
-                    <span class="mock-status mock-green">Running  ●</span>
-                    <span class="mock-btn-row">
-                      <span class="mock-btn mock-btn-red">Stop</span>
-                      <span class="mock-btn mock-btn-gray">Admin</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="step-note note-green">
-                ✅ Both Apache and MySQL must show green text before continuing.
-              </div>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Open your browser and go to the WordPress login page</div>
-              <div class="step-desc">
-                Type this URL exactly into your browser address bar:
-              </div>
-              <div class="url-display">http://localhost/mywebsite/wp-admin</div>
-              <div class="step-desc" style="margin-top:0.5rem;">
-                You should see the WordPress login screen. Enter:
-              </div>
-              <div class="creds-row">
-                <span class="cred-item"><strong>Username:</strong> <code>admin</code></span>
-                <span class="cred-item"><strong>Password:</strong> <code>12345</code></span>
-              </div>
-              <div class="step-note note-red">
-                ⚠️ If you see a white blank page or connection error — XAMPP is not running. Go back to Step 1.
-              </div>
-            </div>
-          </li>
-
-        </ol>
+        <article class="analogy-card analogy-domain" role="listitem">
+          <div class="ac-icon">📮</div>
+          <h3>Domain Name</h3>
+          <p class="ac-tagline">The <strong>street address</strong> visitors type in their browser</p>
+          <ul>
+            <li>The human-readable address: e.g. <code>soktechnews.com</code></li>
+            <li>Points visitors' browsers to your hosting server's IP address</li>
+            <li>You <strong>lease</strong> it (1–10 years) — you never permanently own it</li>
+            <li>Without a domain: visitors can't find your site (they'd need the IP address)</li>
+          </ul>
+          <div class="ac-example"><strong>Examples:</strong> Namecheap, GoDaddy, Google Domains</div>
+        </article>
       </div>
+
+      <!-- TLD Explorer -->
+      <div class="tld-section">
+        <h3>Top-Level Domains (TLDs) — The Extension After the Dot</h3>
+        <p>The extension at the end of a domain name determines its purpose, audience, and requirements.</p>
+
+        <figure class="tld-explorer" aria-label="Interactive TLD explorer">
+          <figcaption class="demo-caption">Click any TLD to learn about it — and when to use it</figcaption>
+          <div class="tld-buttons" role="list">
+            <button class="tld-btn tld-com active-tld" onclick="showTLD('com',this)">.com</button>
+            <button class="tld-btn tld-org" onclick="showTLD('org',this)">.org</button>
+            <button class="tld-btn tld-net" onclick="showTLD('net',this)">.net</button>
+            <button class="tld-btn tld-edu" onclick="showTLD('edu',this)">.edu</button>
+            <button class="tld-btn tld-kh"  onclick="showTLD('kh',this)">.kh 🇰🇭</button>
+            <button class="tld-btn tld-gov" onclick="showTLD('gov',this)">.gov</button>
+          </div>
+          <div class="tld-detail-panel" id="tld-panel">
+            <div id="tld-com">
+              <h4>.com — Commercial (Recommended)</h4>
+              <p>The most recognised TLD worldwide. Originally for commercial entities, now used by everyone. <strong>Use this for most projects.</strong></p>
+              <ul class="tld-facts">
+                <li>✅ Anyone can register — no restrictions</li>
+                <li>✅ Most trusted by visitors globally</li>
+                <li>✅ Cost: ~$10–15/year, instant registration</li>
+                <li>✅ Available on all major registrars</li>
+              </ul>
+            </div>
+            <div id="tld-org" hidden>
+              <h4>.org — Organisations &amp; Non-Profits</h4>
+              <p>Traditionally used by non-profit organisations, open-source projects, and community groups.</p>
+              <ul class="tld-facts">
+                <li>✅ Anyone can register — no restrictions</li>
+                <li>✅ Signals credibility for NGOs and communities</li>
+                <li>✅ Cost: ~$10–15/year</li>
+                <li>⚠ Less intuitive for commercial sites</li>
+              </ul>
+            </div>
+            <div id="tld-net" hidden>
+              <h4>.net — Network &amp; Technology</h4>
+              <p>Originally for network infrastructure, now commonly used as a .com alternative when .com is taken.</p>
+              <ul class="tld-facts">
+                <li>✅ Anyone can register</li>
+                <li>✅ Good fallback when .com is taken</li>
+                <li>✅ Cost: ~$10–15/year</li>
+                <li>⚠ Less memorable than .com for visitors</li>
+              </ul>
+            </div>
+            <div id="tld-edu" hidden>
+              <h4>.edu — Educational Institutions</h4>
+              <p>Strictly regulated — only accredited educational institutions can register a .edu domain.</p>
+              <ul class="tld-facts">
+                <li>🔒 Restricted to accredited schools and universities</li>
+                <li>✅ Highly trusted by visitors — signals academic credibility</li>
+                <li>🔒 Cannot be purchased by individuals or businesses</li>
+                <li>⚠ Examples: itc.edu.kh, mit.edu, harvard.edu</li>
+              </ul>
+            </div>
+            <div id="tld-kh" hidden>
+              <h4>.kh — Cambodia Country Code (Special Requirements!)</h4>
+              <p>Cambodia's country-code TLD, managed by the Telecommunication Regulator of Cambodia (tc.gov.kh). The .com.kh variant requires proof of business registration.</p>
+              <ul class="tld-facts">
+                <li>🔒 .com.kh requires <strong>company patent/registration</strong> documents</li>
+                <li>🔒 Manual approval process — can take days to weeks</li>
+                <li>💰 Higher annual cost than .com</li>
+                <li>✅ Signals a legitimate Cambodian business to local visitors</li>
+                <li>🔍 Research at: <strong>tc.gov.kh</strong></li>
+              </ul>
+              <div class="kh-note">💡 <strong>Student project recommendation:</strong> Use .com for your student site. Only register .com.kh after your business is officially registered with the Cambodian government.</div>
+            </div>
+            <div id="tld-gov" hidden>
+              <h4>.gov — Government Only</h4>
+              <p>Strictly reserved for government agencies. Cannot be purchased by individuals, businesses, or organisations.</p>
+              <ul class="tld-facts">
+                <li>🔒 Restricted to verified government entities only</li>
+                <li>✅ Maximum trust — visitors know it's an official government site</li>
+                <li>⚠ Examples: gov.kh, usa.gov, data.gov</li>
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+
+      <aside class="tip-box tip-gold">
+        <strong>💡 Important: You LEASE a domain — you never own it permanently</strong>
+        Nobody "buys" a domain forever. You register it for 1–10 years. If you don't renew it on time, anyone else can register it. ICANN (the Internet Corporation for Assigned Names and Numbers) is the global organisation that governs all domain registrations worldwide.
+      </aside>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 1 · DASHBOARD TOUR & CLEAN-UP (30 min)
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="phase-section" id="phase-1">
-      <header class="phase-header phase-blue">
-        <span class="phase-badge">Phase 1</span>
-        <h2>Dashboard Tour &amp; Spring Cleaning</h2>
-        <span class="phase-time">⏱ 30 min</span>
+    <!-- ═══════════════════════════════════════
+         PHASE 1 — Domain Name Searching (45 min)
+    ═══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1" data-phase="1" aria-labelledby="p1-title">
+      <header class="phase-hdr ph-blue">
+        <div class="ph-num">1</div>
+        <div class="ph-text">
+          <h2 id="p1-title">Phase 1 — Domain Name Searching</h2>
+          <p>45 minutes · Brainstorm your domain · Search registrars · Research .kh requirements</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p1-label">0 / 8 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-blue" id="p1-fill"></div></div>
+        </div>
       </header>
 
-      <div class="phase-body">
-        <p class="phase-intro">
-          Once logged in, you land on the WordPress <strong>Dashboard</strong>.
-          The black bar at the top means you are logged in as admin.
-          Let's explore the interface, then delete the dummy placeholder content.
-        </p>
+      <section class="subsect" aria-labelledby="p1h">
+        <h3 id="p1h">Researching Your Domain Name</h3>
+        <p>You've spent the last 12 weeks building a WordPress site. Now you need to think about what address people will use to visit it. A good domain name is short, memorable, and reflects your site's purpose.</p>
 
-        <!-- CONCEPT BOX: Left Menu Explained -->
-        <div class="concept-box concept-blue">
-          <div class="concept-title">📋 The Left-Hand Menu — What Each Section Does</div>
-          <div class="menu-map">
-            <div class="menu-item"><span class="menu-dot" style="background:#2e75b6"></span><strong>Dashboard</strong> — Site overview, updates, quick stats</div>
-            <div class="menu-item"><span class="menu-dot" style="background:#1f7a8c"></span><strong>Posts</strong> — All blog articles. Add New, Categories, Tags</div>
-            <div class="menu-item"><span class="menu-dot" style="background:#6b2fa0"></span><strong>Pages</strong> — Static pages like Home, About, Contact</div>
-            <div class="menu-item"><span class="menu-dot" style="background:#f0a500"></span><strong>Media</strong> — All uploaded images and files</div>
-            <div class="menu-item"><span class="menu-dot" style="background:#d04a00"></span><strong>Appearance</strong> — Themes, Menus, Widgets</div>
-            <div class="menu-item"><span class="menu-dot" style="background:#4caf50"></span><strong>Plugins</strong> — Add extra features to the site</div>
-            <div class="menu-item"><span class="menu-dot" style="background:#c00000"></span><strong>Settings</strong> — Reading, Permalinks, General info</div>
-          </div>
-        </div>
-
-        <ol class="step-list" data-phase="phase1">
+        <ol class="step-list" aria-label="Phase 1 domain research steps">
 
           <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Visit your site to see it from the front</div>
-              <div class="step-desc">
-                In the top-left corner of the black admin bar, hover over the house icon (your site name).
-                A dropdown appears — click <strong>"Visit Site"</strong>.
-              </div>
-              <div class="step-visual visual-dark">
-                <div class="mock-adminbar">
-                  <span class="mock-wp-logo">W</span>
-                  <span class="mock-site-name">My Class Site ▾
-                    <span class="mock-dropdown">
-                      <span class="mock-dd-item">Dashboard</span>
-                      <span class="mock-dd-item mock-dd-active">Visit Site</span>
-                    </span>
-                  </span>
-                  <span class="mock-adminbar-note">← hover here</span>
+            <label class="step-lbl" for="cb-s1-1">
+              <input type="checkbox" id="cb-s1-1" class="step-cb" data-key="cb-s1-1" data-phase="1">
+              <span class="step-circle">1</span>
+              <div class="step-body">
+                <strong class="step-title">Brainstorm a domain name for your WordPress site</strong>
+                <p class="step-desc">Think about the site you built over the last 12 weeks. What is it about? Who is the audience? Write down 3–5 possible domain names:</p>
+                <div class="domain-brainstorm">
+                  <div class="db-tips">
+                    <div class="db-tip db-do"><strong>✅ Good domain names:</strong><ul><li>Short (under 15 characters)</li><li>Easy to spell and remember</li><li>Relates to the site topic</li><li>No hyphens if possible</li></ul></div>
+                    <div class="db-tip db-dont"><strong>❌ Avoid:</strong><ul><li>Numbers that look like letters (0 vs O)</li><li>Multiple hyphens</li><li>Trademarked brand names</li><li>Very long names</li></ul></div>
+                  </div>
+                  <div class="db-example"><strong>Example ideas for "Sok Tech News":</strong>
+                    <div class="db-names">
+                      <span class="db-name">soktechnews.com</span>
+                      <span class="db-name">soktech.co</span>
+                      <span class="db-name">soktechweb.com</span>
+                      <span class="db-name">sokitnews.com</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="step-note note-blue">
-                💡 The black bar is ONLY visible to you (the admin). Regular visitors never see it.
-                Click the site name again to return to the Dashboard.
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-2">
+              <input type="checkbox" id="cb-s1-2" class="step-cb" data-key="cb-s1-2" data-phase="1">
+              <span class="step-circle">2</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Namecheap.com and search for your first choice domain</strong>
+                <p class="step-desc">Open a new browser tab and go to <a href="https://www.namecheap.com" target="_blank" rel="noopener"><strong>namecheap.com</strong></a>. Type your desired domain name in the search bar on the homepage. Click Search.</p>
+                <div class="step-ok">✅ <em>Expected:</em> Namecheap shows whether your domain is available and what it costs, plus alternative TLDs.</div>
+                <div class="step-note">💡 <strong>Namecheap vs GoDaddy:</strong> Both are reliable domain registrars. Namecheap is generally cheaper and has no hidden fees. GoDaddy is more well-known but pushes upsells aggressively. Either works fine.</div>
               </div>
-            </div>
+            </label>
           </li>
 
           <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Delete the "Hello World!" post</div>
-              <div class="step-desc">
-                WordPress creates a dummy post called "Hello world!" by default. Delete it:
+            <label class="step-lbl" for="cb-s1-3">
+              <input type="checkbox" id="cb-s1-3" class="step-cb" data-key="cb-s1-3" data-phase="1">
+              <span class="step-circle">3</span>
+              <div class="step-body">
+                <strong class="step-title">If .com is taken, try alternative TLDs or name variations</strong>
+                <p class="step-desc">Most short .com domains are already registered. Try these strategies:</p>
+                <ul class="sub-list">
+                  <li>Try <strong>.net</strong> or <strong>.co</strong> — both well-recognised alternatives</li>
+                  <li>Add a word: <code>soktech<strong>web</strong>.com</code> or <code>soktech<strong>news</strong>.com</code></li>
+                  <li>Add your country code: <code>soktech<strong>kh</strong>.com</code></li>
+                  <li>Try a verb: <code><strong>get</strong>soktech.com</code></li>
+                </ul>
+                <div class="step-ok">✅ <em>Goal:</em> Find at least one available domain that you'd be happy to use for your site. Note the name and annual price.</div>
               </div>
-              <ol class="sub-steps">
-                <li>In the left menu, click <strong>Posts</strong></li>
-                <li>Hover your mouse over <strong>"Hello world!"</strong> — a row of links appears below it</li>
-                <li>Click <strong>Trash</strong></li>
-              </ol>
-              <div class="step-note note-green">✅ The post list should now be empty.</div>
-            </div>
+            </label>
           </li>
 
           <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Delete the "Sample Page"</div>
-              <div class="step-desc">WordPress also creates a dummy page. Remove it:</div>
-              <ol class="sub-steps">
-                <li>Click <strong>Pages</strong> in the left menu</li>
-                <li>Hover over <strong>"Sample Page"</strong> → click <strong>Trash</strong></li>
-              </ol>
-              <div class="step-note note-green">✅ Pages list should now be empty.</div>
-            </div>
+            <label class="step-lbl" for="cb-s1-4">
+              <input type="checkbox" id="cb-s1-4" class="step-cb" data-key="cb-s1-4" data-phase="1">
+              <span class="step-circle">4</span>
+              <div class="step-body">
+                <strong class="step-title">Note the first-year price AND the renewal price</strong>
+                <p class="step-desc">On Namecheap's results page, find your chosen domain. Look carefully at:</p>
+                <ul class="sub-list">
+                  <li><strong>First year price</strong> — shown prominently (may be discounted)</li>
+                  <li><strong>Renewal price</strong> — click the domain name or look for a small "renews at" note</li>
+                </ul>
+                <div class="step-warn">⚠️ <strong>The Renewal Trap:</strong> A .com might show as $0.99 for year 1 but $15.98/year to renew. This is the true ongoing cost. Always compare the renewal price, not just the first-year price!</div>
+              </div>
+            </label>
           </li>
 
           <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Delete sample comments</div>
-              <div class="step-desc">Clear the default comment too:</div>
-              <ol class="sub-steps">
-                <li>Click <strong>Comments</strong> in the left menu (the speech-bubble icon)</li>
-                <li>Check the box next to any comment to select all</li>
-                <li>In the "Bulk actions" dropdown → choose <strong>Move to Trash</strong> → click Apply</li>
-              </ol>
-            </div>
+            <label class="step-lbl" for="cb-s1-5">
+              <input type="checkbox" id="cb-s1-5" class="step-cb" data-key="cb-s1-5" data-phase="1">
+              <span class="step-circle">5</span>
+              <div class="step-body">
+                <strong class="step-title">Fill in your domain research table</strong>
+                <p class="step-desc">Record what you found. Fill in the table below (or a document on your computer):</p>
+                <div class="research-table-wrap">
+                  <table class="research-table" aria-label="Domain research comparison table">
+                    <thead>
+                      <tr><th>Domain Name</th><th>Available?</th><th>Year 1 Price</th><th>Renewal Price</th><th>Your Rating</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="rt-example"><td><em>soktechnews.com</em></td><td><em>❌ Taken</em></td><td><em>—</em></td><td><em>—</em></td><td><em>—</em></td></tr>
+                      <tr><td>Your 1st choice</td><td></td><td></td><td></td><td></td></tr>
+                      <tr><td>Your 2nd choice</td><td></td><td></td><td></td><td></td></tr>
+                      <tr><td>Your 3rd choice</td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-6">
+              <input type="checkbox" id="cb-s1-6" class="step-cb" data-key="cb-s1-6" data-phase="1">
+              <span class="step-circle">6</span>
+              <div class="step-body">
+                <strong class="step-title">Research: visit tc.gov.kh and find .com.kh requirements</strong>
+                <p class="step-desc">Open a new tab and go to <a href="https://www.tc.gov.kh" target="_blank" rel="noopener"><strong>tc.gov.kh</strong></a> (Telecommunication Regulator of Cambodia). Navigate to the domain registration section and find the answer to:</p>
+                <ul class="sub-list">
+                  <li>What documents are required to register a .com.kh domain?</li>
+                  <li>What is the annual registration fee?</li>
+                  <li>Is there a waiting period for approval?</li>
+                </ul>
+                <div class="step-note">💡 .com.kh domains typically require a <strong>company patent/registration certificate</strong> from the Ministry of Commerce of Cambodia. Individual students cannot register one without a registered business.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-7">
+              <input type="checkbox" id="cb-s1-7" class="step-cb" data-key="cb-s1-7" data-phase="1">
+              <span class="step-circle">7</span>
+              <div class="step-body">
+                <strong class="step-title">Compare: .com vs .com.kh — fill in the comparison</strong>
+                <div class="compare-mini">
+                  <div class="cm-col cm-com">
+                    <div class="cm-header">.com</div>
+                    <ul>
+                      <li>Anyone can register</li>
+                      <li>Instant purchase</li>
+                      <li>~$10–15/year</li>
+                      <li>Global registrars</li>
+                    </ul>
+                  </div>
+                  <div class="cm-col cm-kh">
+                    <div class="cm-header">.com.kh 🇰🇭</div>
+                    <ul>
+                      <li>Requires: ___________</li>
+                      <li>Wait time: ___________</li>
+                      <li>Annual cost: ___________</li>
+                      <li>Managed by: tc.gov.kh</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s1-8">
+              <input type="checkbox" id="cb-s1-8" class="step-cb" data-key="cb-s1-8" data-phase="1">
+              <span class="step-circle">8</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Show your trainer: an available .com domain and its price</strong>
+                <p class="step-desc">Find one available domain on Namecheap that:</p>
+                <ul class="sub-list">
+                  <li>✅ Is a .com domain</li>
+                  <li>✅ Relates to your WordPress site topic</li>
+                  <li>✅ You know the <em>renewal price</em> (not just year 1)</li>
+                </ul>
+                <div class="step-ok">✅ Show your trainer the Namecheap search results page with your available domain highlighted.</div>
+              </div>
+            </label>
           </li>
 
         </ol>
-      </div>
+
+        <div class="phase-banner" id="banner-1" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 1 Complete — Domain Research Done!</strong>
+          <p>You've found an available domain and understand the difference between .com and .com.kh. Move to Phase 2 — comparing hosting plans!</p></div>
+        </div>
+      </section>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 2 · BUILDING STATIC PAGES (45 min)
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="phase-section" id="phase-2">
-      <header class="phase-header phase-teal">
-        <span class="phase-badge">Phase 2</span>
-        <h2>Building Static Pages</h2>
-        <span class="phase-time">⏱ 45 min</span>
+    <!-- ═══════════════════════════════════════
+         PHASE 2 — Hosting Plans (45 min)
+    ═══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2" data-phase="2" aria-labelledby="p2-title">
+      <header class="phase-hdr ph-teal">
+        <div class="ph-num">2</div>
+        <div class="ph-text">
+          <h2 id="p2-title">Phase 2 — Analysing Hosting Plans</h2>
+          <p>45 minutes · Hosting types · SSL certificates · The Renewal Trap · Plan comparison</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p2-label">0 / 10 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-teal" id="p2-fill"></div></div>
+        </div>
       </header>
 
-      <div class="phase-body">
+      <section class="subsect" aria-labelledby="p2-hosting-h">
+        <h3 id="p2-hosting-h">Types of Web Hosting</h3>
+        <p>Not all hosting is the same. The right choice depends on your site's traffic, your budget, and how much technical control you need.</p>
 
-        <!-- CONCEPT: Pages vs Posts -->
-        <div class="concept-box concept-split">
-          <div class="concept-half concept-half-teal">
-            <div class="concept-title">📄 PAGES — Static Content</div>
-            <ul class="concept-list">
-              <li>No publish date — timeless</li>
-              <li>Not in the blog feed</li>
-              <li>Always in the navigation menu</li>
-              <li><strong>Examples:</strong> Home · About Us · Contact</li>
-            </ul>
+        <!-- Hosting types interactive comparison -->
+        <figure class="hosting-cards" aria-label="Web hosting types comparison">
+          <figcaption class="demo-caption">Click each hosting type to learn more</figcaption>
+          <div class="hc-tabs">
+            <button class="hc-tab hc-active" id="hct-shared" onclick="showHosting('shared',this)">🏘 Shared</button>
+            <button class="hc-tab" id="hct-vps" onclick="showHosting('vps',this)">🏢 VPS</button>
+            <button class="hc-tab" id="hct-cloud" onclick="showHosting('cloud',this)">🏰 Cloud/Dedicated</button>
           </div>
-          <div class="concept-half concept-half-purple">
-            <div class="concept-title">📰 POSTS — Dynamic Content</div>
-            <ul class="concept-list">
-              <li>Have a date — newest first</li>
-              <li>Appear in the blog feed</li>
-              <li>Organised by Categories &amp; Tags</li>
-              <li><strong>Examples:</strong> News · Blog · Articles</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="concept-box concept-gold">
-          <strong>📖 Rule of thumb:</strong> If content does NOT change often → use a <strong>Page</strong>.
-          If content is regularly updated → use a <strong>Post</strong>.
-        </div>
-
-        <ol class="step-list" data-phase="phase2">
-
-          <!-- CREATE HOME PAGE -->
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Create the Home page</div>
-              <div class="step-desc">
-                Go to <strong>Pages → Add New</strong>.
-                The Gutenberg block editor opens. Close the welcome dialog if it appears.
-              </div>
-              <ol class="sub-steps">
-                <li>Click where it says <em>"Add title"</em> at the top → type: <code>Home</code></li>
-                <li>Click below the title → an empty paragraph block appears</li>
-                <li>Type a welcome message, for example:<br>
-                  <em>"Welcome to My Class Site. This is a tech news blog about the latest in hardware and software."</em>
-                </li>
-              </ol>
-
-              <!-- Gutenberg block types explainer -->
-              <div class="gutenberg-tip">
-                <div class="gutenberg-tip-title">🧱 Gutenberg Block Types you can use:</div>
-                <div class="block-grid">
-                  <div class="block-item"><code>/paragraph</code><span>Normal body text</span></div>
-                  <div class="block-item"><code>/heading</code><span>H1 to H6 titles</span></div>
-                  <div class="block-item"><code>/image</code><span>Insert a photo</span></div>
-                  <div class="block-item"><code>/list</code><span>Bullet or numbered list</span></div>
-                  <div class="block-item"><code>/button</code><span>Clickable button</span></div>
-                  <div class="block-item"><code>/quote</code><span>Highlighted quote</span></div>
-                </div>
-                <div class="gutenberg-shortcut">
-                  💡 <strong>Shortcut:</strong> Click any empty line and press <kbd>/</kbd> to search for any block by name.
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Publish the Home page</div>
-              <div class="step-desc">When you are happy with the content:</div>
-              <ol class="sub-steps">
-                <li>Click the blue <strong>Publish</strong> button in the top-right corner</li>
-                <li>A confirmation panel slides in — click <strong>Publish</strong> again to confirm</li>
-                <li>Click <strong>View Page</strong> to preview what visitors will see</li>
-              </ol>
-              <div class="step-note note-green">✅ You should see your Home page live on the site!</div>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Create the "About Us" page</div>
-              <div class="step-desc">
-                Click the black WordPress <strong>W</strong> logo in the very top-left to return to the Dashboard.
-                Then go to <strong>Pages → Add New</strong> again.
-              </div>
-              <ol class="sub-steps">
-                <li>Title: <code>About Us</code></li>
-                <li>Add 2–3 paragraphs of dummy text describing the site</li>
-                <li>Try adding a <strong>Heading block</strong> (type <kbd>/</kbd> then <kbd>heading</kbd>) above the paragraphs</li>
-                <li>Click <strong>Publish → Publish</strong></li>
-              </ol>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Create the "Contact" page</div>
-              <div class="step-desc">
-                Go to <strong>Pages → Add New</strong> one more time.
-              </div>
-              <ol class="sub-steps">
-                <li>Title: <code>Contact</code></li>
-                <li>Add a short paragraph: <em>"Use the form below to get in touch."</em></li>
-                <li>Click <strong>Publish → Publish</strong></li>
-              </ol>
-              <div class="step-note note-blue">
-                💡 We will add a real contact form later using a Plugin (Week 10).
-                For now, just the page needs to exist.
-              </div>
-            </div>
-          </li>
-
-          <!-- SETTING STATIC FRONT PAGE — most important step in Phase 2 -->
-          <li class="step-item step-important">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">
-                <span class="important-badge">★ KEY STEP</span>
-                Set the static front page
-              </div>
-              <div class="step-desc">
-                Right now, visiting your site still shows a list of blog posts (or a blank page).
-                We need to tell WordPress to show the <strong>Home page</strong> instead.
-              </div>
-
-              <!-- Before / After comparison -->
-              <div class="before-after">
-                <div class="ba-card ba-bad">
-                  <div class="ba-label">❌ Current (Default)</div>
-                  <div class="ba-value">"Your homepage displays: Latest Posts"</div>
-                  <div class="ba-explain">Shows a blog feed — not good for a business site</div>
-                </div>
-                <div class="ba-arrow">→</div>
-                <div class="ba-card ba-good">
-                  <div class="ba-label">✅ What We Want</div>
-                  <div class="ba-value">"Your homepage displays: A static page"</div>
-                  <div class="ba-explain">Shows our Home page content when visitors arrive</div>
-                </div>
-              </div>
-
-              <div class="step-desc" style="margin-top:1rem;"><strong>How to change it:</strong></div>
-              <ol class="sub-steps">
-                <li>In the left menu go to <strong>Settings → Reading</strong></li>
-                <li>Find the option <em>"Your homepage displays"</em></li>
-                <li>Select the radio button <strong>"A static page"</strong></li>
-                <li>
-                  Two dropdowns appear:
-                  <ul style="margin-top:0.4rem; padding-left:1.2rem;">
-                    <li><strong>Homepage:</strong> select <code>Home</code> from the dropdown</li>
-                    <li><strong>Posts page:</strong> leave it as <em>— Select —</em> for now</li>
+          <div class="hc-content">
+            <div id="hc-shared" class="hc-panel">
+              <div class="hc-split">
+                <div>
+                  <h4>🏘 Shared Hosting</h4>
+                  <p class="hc-sub">Many websites share the same server's CPU and RAM</p>
+                  <ul class="hc-list">
+                    <li>💰 <strong>Cost:</strong> $2–10/month — cheapest option</li>
+                    <li>⚡ <strong>Performance:</strong> Can be slow if neighbours use too many resources</li>
+                    <li>🔧 <strong>Technical skill:</strong> Very easy — managed by the host</li>
+                    <li>🔒 <strong>SSL:</strong> Usually included free</li>
+                    <li>🌱 <strong>Best for:</strong> Personal blogs, portfolio sites, small business sites under 10,000 visitors/month</li>
                   </ul>
-                </li>
-                <li>Scroll to the bottom and click <strong>Save Changes</strong></li>
-              </ol>
-
-              <div class="step-note note-green">
-                ✅ Click "Visit Site" — you should now see your <strong>Home</strong> page content,
-                not a list of posts!
-              </div>
-            </div>
-          </li>
-
-        </ol>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════════════════════
-      PHASE 3 · POSTS, CATEGORIES & TAGS (45 min)
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="phase-section" id="phase-3">
-      <header class="phase-header phase-purple">
-        <span class="phase-badge">Phase 3</span>
-        <h2>Posts, Categories &amp; Tags</h2>
-        <span class="phase-time">⏱ 45 min</span>
-      </header>
-
-      <div class="phase-body">
-
-        <!-- CONCEPT: Categories vs Tags -->
-        <div class="concept-box concept-split">
-          <div class="concept-half concept-half-teal">
-            <div class="concept-title">🗂️ CATEGORIES — Broad Groups</div>
-            <ul class="concept-list">
-              <li>The <strong>table of contents</strong> of your site</li>
-              <li>A post usually has <strong>1 or 2</strong> categories</li>
-              <li>Must be created <em>before</em> writing posts</li>
-              <li><strong>Today:</strong> Hardware &amp; Software</li>
-            </ul>
-          </div>
-          <div class="concept-half concept-half-purple">
-            <div class="concept-title">🏷️ TAGS — Specific Keywords</div>
-            <ul class="concept-list">
-              <li>The <strong>index at the back</strong> of a book</li>
-              <li>A post can have <strong>many</strong> tags</li>
-              <li>Created on-the-fly while writing</li>
-              <li><strong>Today:</strong> cpu · tech · future · AI</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="concept-box concept-gold">
-          <strong>📰 Newspaper analogy:</strong>
-          Categories = Sports · Politics · Business &nbsp;|&nbsp;
-          Tags = Messi · World Cup · Barcelona · Transfer
-        </div>
-
-        <ol class="step-list" data-phase="phase3">
-
-          <!-- CREATE CATEGORIES -->
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Create the "Hardware" category</div>
-              <div class="step-desc">We build the taxonomy <em>before</em> writing posts:</div>
-              <ol class="sub-steps">
-                <li>In the left menu click <strong>Posts → Categories</strong></li>
-                <li>In the <em>"Name"</em> field on the left, type: <code>Hardware</code></li>
-                <li>The <em>"Slug"</em> field auto-fills — leave it as is</li>
-                <li>Click the <strong>Add New Category</strong> button</li>
-              </ol>
-              <div class="step-note note-green">
-                ✅ "Hardware" appears in the category list on the right side.
-              </div>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Create the "Software" category</div>
-              <ol class="sub-steps">
-                <li>In the <em>"Name"</em> field, type: <code>Software</code></li>
-                <li>Click <strong>Add New Category</strong></li>
-              </ol>
-              <div class="step-note note-green">
-                ✅ You should now see both Hardware and Software in the list.
-              </div>
-            </div>
-          </li>
-
-          <!-- WRITE FIRST POST -->
-          <li class="step-item step-important">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">
-                <span class="important-badge">★ POST 1</span>
-                Write the first post — "The Future of Quantum Computing"
-              </div>
-              <div class="step-desc">Go to <strong>Posts → Add New</strong>.</div>
-              <ol class="sub-steps">
-                <li>Click the <em>"Add title"</em> area → type: <code>The Future of Quantum Computing</code></li>
-                <li>Click below the title → type two paragraphs of content about quantum computing</li>
-              </ol>
-              <div class="step-desc" style="margin-top:0.8rem;">
-                <strong>Now assign the taxonomy using the right sidebar:</strong>
-                <span class="sidebar-tip">(If you cannot see the sidebar, click the gear ⚙️ icon at the top-right)</span>
-              </div>
-              <ol class="sub-steps" start="3">
-                <li>Find the <strong>Categories</strong> panel in the right sidebar</li>
-                <li>Check the box next to <strong>Hardware</strong></li>
-                <li>Uncheck <strong>Uncategorized</strong> (always remove this)</li>
-                <li>Find the <strong>Tags</strong> panel (scroll down in the sidebar)</li>
-                <li>
-                  Type each tag and press <kbd>Enter</kbd> or <kbd>,</kbd> after each one:
-                  <div class="tag-demo">
-                    <span class="tag-chip">cpu</span>
-                    <span class="tag-chip">tech</span>
-                    <span class="tag-chip">future</span>
-                    <span class="tag-chip">quantum</span>
+                </div>
+                <div class="hc-visual">
+                  <div class="hcv-server">
+                    <div class="hcv-label">One Physical Server</div>
+                    <div class="hcv-sites">
+                      <div class="hcv-site hcv-you">Your Site ←</div>
+                      <div class="hcv-site">Site B</div>
+                      <div class="hcv-site">Site C</div>
+                      <div class="hcv-site">+ 100s more</div>
+                    </div>
+                    <div class="hcv-resources">CPU · RAM · Disk shared by all</div>
                   </div>
-                </li>
-                <li>Click <strong>Publish → Publish</strong></li>
-              </ol>
-              <div class="step-note note-green">
-                ✅ Post 1 is live! It should appear in Posts → All Posts with category "Hardware".
+                </div>
+              </div>
+              <div class="hc-providers"><strong>Common providers:</strong> Hostinger, SiteGround, Bluehost, DreamHost</div>
+            </div>
+
+            <div id="hc-vps" class="hc-panel" hidden>
+              <div class="hc-split">
+                <div>
+                  <h4>🏢 VPS (Virtual Private Server)</h4>
+                  <p class="hc-sub">Share hardware, but get a dedicated slice of resources</p>
+                  <ul class="hc-list">
+                    <li>💰 <strong>Cost:</strong> $20–80/month</li>
+                    <li>⚡ <strong>Performance:</strong> Consistent — your resources are reserved</li>
+                    <li>🔧 <strong>Technical skill:</strong> Medium — you manage some server settings</li>
+                    <li>🔒 <strong>SSL:</strong> You install it yourself (free via Let's Encrypt)</li>
+                    <li>🌱 <strong>Best for:</strong> E-commerce sites, apps with 10,000–100,000 visitors/month</li>
+                  </ul>
+                </div>
+                <div class="hc-visual">
+                  <div class="hcv-server">
+                    <div class="hcv-label">One Physical Server (partitioned)</div>
+                    <div class="hcv-vps-grid">
+                      <div class="hcv-vps hcv-you">Your VPS<br><small>2 CPU · 4 GB RAM</small></div>
+                      <div class="hcv-vps">VPS B<br><small>2 CPU · 4 GB RAM</small></div>
+                      <div class="hcv-vps">VPS C<br><small>4 CPU · 8 GB RAM</small></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="hc-providers"><strong>Common providers:</strong> DigitalOcean, Linode, Vultr, Hostinger VPS</div>
+            </div>
+
+            <div id="hc-cloud" class="hc-panel" hidden>
+              <div class="hc-split">
+                <div>
+                  <h4>🏰 Cloud / Dedicated Hosting</h4>
+                  <p class="hc-sub">Your own server resources — maximum power and control</p>
+                  <ul class="hc-list">
+                    <li>💰 <strong>Cost:</strong> $100–500+/month</li>
+                    <li>⚡ <strong>Performance:</strong> Maximum — no resource sharing whatsoever</li>
+                    <li>🔧 <strong>Technical skill:</strong> High — you manage the server entirely</li>
+                    <li>🌱 <strong>Best for:</strong> Large applications, 100,000+ visitors/month</li>
+                    <li>🏢 <strong>Used by:</strong> Netflix, Airbnb, Grab, large government portals</li>
+                  </ul>
+                </div>
+                <div class="hc-visual">
+                  <div class="hcv-server hcv-dedicated">
+                    <div class="hcv-label">Entire Server = Yours</div>
+                    <div class="hcv-your-all">
+                      <div class="hcv-you-big">Your Application</div>
+                      <div class="hcv-resources">Full CPU · Full RAM · Full Disk</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="hc-providers"><strong>Common providers:</strong> AWS (Amazon), Google Cloud, Microsoft Azure, Alibaba Cloud</div>
+            </div>
+          </div>
+        </figure>
+
+        <!-- SSL explainer -->
+        <div class="ssl-section">
+          <h3>SSL Certificates — The Padlock Icon (🔒)</h3>
+          <div class="ssl-split">
+            <div class="ssl-left">
+              <p>SSL (Secure Sockets Layer) encrypts the connection between a visitor's browser and your server. It's what turns <code>http://</code> into <code>https://</code> and shows the padlock icon.</p>
+              <div class="ssl-reasons">
+                <div class="ssl-reason ssl-yes"><span>✅</span><div><strong>HTTPS site:</strong> Data is encrypted. Passwords and form submissions are protected. Google ranks you higher in search results.</div></div>
+                <div class="ssl-reason ssl-no"><span>❌</span><div><strong>HTTP site:</strong> Chrome shows "Not Secure" warning. Visitors see a red warning. Google penalises your ranking. Login forms are a security risk.</div></div>
               </div>
             </div>
-          </li>
-
-          <!-- POST 2 -->
-          <li class="step-item step-important">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">
-                <span class="important-badge">★ POST 2</span>
-                Write a second post — assign to "Software"
+            <div class="ssl-right" aria-hidden="true">
+              <div class="browser-mock">
+                <div class="bm-bar bm-secure">🔒 https://yoursite.com</div>
+                <div class="bm-tag bm-secure-tag">Connection is secure</div>
               </div>
-              <div class="step-desc">Go to <strong>Posts → Add New</strong>.</div>
-              <ol class="sub-steps">
-                <li>Title: <code>Top 10 Programming Languages in 2025</code></li>
-                <li>Add 2 paragraphs of content</li>
-                <li>In the right sidebar → <strong>Categories</strong> → check <strong>Software</strong>, uncheck Uncategorized</li>
-                <li>Add tags: <span class="tag-chip-inline">python</span> <span class="tag-chip-inline">javascript</span> <span class="tag-chip-inline">coding</span></li>
-                <li>Click <strong>Publish → Publish</strong></li>
-              </ol>
+              <div class="browser-mock">
+                <div class="bm-bar bm-insecure">⚠ Not Secure  http://oldsite.com</div>
+                <div class="bm-tag bm-insecure-tag">Your connection is not private</div>
+              </div>
+              <p class="ssl-note">💡 Most hosting providers include <strong>Free SSL via Let's Encrypt</strong> — always enable it!</p>
             </div>
-          </li>
+          </div>
+        </div>
 
-          <!-- POST 3 -->
-          <li class="step-item step-important">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">
-                <span class="important-badge">★ POST 3</span>
-                Write a third post — assign to "Hardware"
+        <!-- The Renewal Trap -->
+        <div class="renewal-trap-section">
+          <h3>⚠ The Renewal Trap — The Most Important Lesson Today</h3>
+          <p>This is a real-world lesson that could save you (or your future clients) hundreds of dollars.</p>
+
+          <!-- Interactive renewal trap calculator -->
+          <figure class="renewal-demo" aria-label="Renewal trap pricing demonstration">
+            <figcaption class="demo-caption">Move the slider to see how promotional pricing compares to renewal costs</figcaption>
+            <div class="rt-viz">
+              <div class="rt-bars">
+                <div class="rt-bar-group">
+                  <div class="rt-bar rt-promo" id="rt-promo-bar" style="height:60px">
+                    <span id="rt-promo-label">$1.99</span>
+                  </div>
+                  <div class="rt-bar-label">Year 1<br><small>Promo</small></div>
+                </div>
+                <div class="rt-arrow-right" aria-hidden="true">→</div>
+                <div class="rt-bar-group">
+                  <div class="rt-bar rt-renewal" id="rt-renewal-bar" style="height:180px">
+                    <span id="rt-renewal-label">$11.99</span>
+                  </div>
+                  <div class="rt-bar-label">Year 2+<br><small>Renewal</small></div>
+                </div>
+                <div class="rt-arrow-right" aria-hidden="true">= </div>
+                <div class="rt-multiplier" id="rt-multiplier">6×<br>more<br>expensive</div>
               </div>
-              <div class="step-desc">Go to <strong>Posts → Add New</strong>.</div>
-              <ol class="sub-steps">
-                <li>Title: <code>The Best Graphics Cards of 2025</code></li>
-                <li>Add 2 paragraphs of content</li>
-                <li>Categories → check <strong>Hardware</strong>, uncheck Uncategorized</li>
-                <li>Add tags: <span class="tag-chip-inline">gpu</span> <span class="tag-chip-inline">gaming</span> <span class="tag-chip-inline">nvidia</span></li>
-                <li>Click <strong>Publish → Publish</strong></li>
-              </ol>
-              <div class="step-note note-green">
-                ✅ You now have 3 published posts. Go to Posts → All Posts to verify all three are there.
+              <div class="rt-controls">
+                <label class="rt-control-label">Select a hosting provider to see real pricing:</label>
+                <div class="rt-provider-btns">
+                  <button class="rt-provider active-provider" onclick="setProvider('hostinger',this)">Hostinger</button>
+                  <button class="rt-provider" onclick="setProvider('siteground',this)">SiteGround</button>
+                  <button class="rt-provider" onclick="setProvider('bluehost',this)">Bluehost</button>
+                  <button class="rt-provider" onclick="setProvider('namecheap',this)">Namecheap Hosting</button>
+                </div>
+                <p class="rt-disclaimer">* Prices are approximate and change frequently. Always verify on the provider's current website.</p>
               </div>
             </div>
-          </li>
+          </figure>
 
-          <!-- VERIFY -->
+          <div class="trap-tips">
+            <h4>How to Avoid the Renewal Trap:</h4>
+            <ul>
+              <li>✅ <strong>Always search</strong> "[provider name] renewal price" before buying</li>
+              <li>✅ <strong>Look for "renews at"</strong> text next to the promotional price</li>
+              <li>✅ <strong>Set a calendar reminder</strong> 30 days before your subscription expires to shop around</li>
+              <li>✅ <strong>Consider buying 2–3 years upfront</strong> at the promotional rate before it jumps</li>
+              <li>✅ <strong>Compare multiple providers</strong> using your hosting comparison table</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="step-list" aria-label="Phase 2 hosting research steps">
+
           <li class="step-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Verify everything on the front-end</div>
-              <div class="step-desc">
-                Click the house icon → "Visit Site". Your site should now show
-                the Home page content (not a list of posts).
+            <label class="step-lbl" for="cb-s2-1">
+              <input type="checkbox" id="cb-s2-1" class="step-cb" data-key="cb-s2-1" data-phase="2">
+              <span class="step-circle step-teal">1</span>
+              <div class="step-body">
+                <strong class="step-title">Go to Hostinger.com → navigate to WordPress Hosting plans</strong>
+                <p class="step-desc">Open <a href="https://www.hostinger.com" target="_blank" rel="noopener"><strong>hostinger.com</strong></a> in a new tab. In the top navigation, find <strong>Hosting → WordPress Hosting</strong>. The pricing page shows their plans.</p>
+                <div class="step-ok">✅ <em>Expected:</em> You see 3 WordPress hosting tiers — Single, Premium, and Business (names may vary). Look at the cheapest plan.</div>
               </div>
-              <ol class="sub-steps">
-                <li>You should see your <strong>Home</strong> page welcome text</li>
-                <li>The black admin bar should be visible at the top (you are logged in)</li>
-                <li>Try typing <code>http://localhost/mywebsite/category/hardware/</code> in the browser — you should see all Hardware posts listed</li>
-              </ol>
-              <div class="step-note note-blue">
-                💡 WordPress auto-creates archive pages for every category and tag — no extra work needed!
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-2">
+              <input type="checkbox" id="cb-s2-2" class="step-cb" data-key="cb-s2-2" data-phase="2">
+              <span class="step-circle step-teal">2</span>
+              <div class="step-body">
+                <strong class="step-title">Find the promotional price AND the renewal price for Hostinger's cheapest plan</strong>
+                <p class="step-desc">On the pricing page, look for the cheapest plan. The big number shown is the <strong>promotional price</strong>. Scroll down or look for smaller text that says "renews at" to find the <strong>real renewal price</strong>.</p>
+                <div class="step-warn">⚠️ The renewal price is often hidden in small print. You may need to click "See More Details" or scroll to the bottom of the pricing section.</div>
               </div>
-            </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-3">
+              <input type="checkbox" id="cb-s2-3" class="step-cb" data-key="cb-s2-3" data-phase="2">
+              <span class="step-circle step-teal">3</span>
+              <div class="step-body">
+                <strong class="step-title">Note: storage, free SSL, free domain, and email hosting included?</strong>
+                <p class="step-desc">For the cheapest plan, find these key features and note them:</p>
+                <ul class="sub-list">
+                  <li><strong>Storage:</strong> How many GB of SSD storage?</li>
+                  <li><strong>Free SSL:</strong> Is HTTPS included at no extra cost?</li>
+                  <li><strong>Free Domain:</strong> Is a free domain included for year 1?</li>
+                  <li><strong>Email hosting:</strong> Can you create email@yourdomain.com?</li>
+                  <li><strong>Number of websites:</strong> Can you host 1 site or multiple?</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-4">
+              <input type="checkbox" id="cb-s2-4" class="step-cb" data-key="cb-s2-4" data-phase="2">
+              <span class="step-circle step-teal">4</span>
+              <div class="step-body">
+                <strong class="step-title">Repeat the research for SiteGround.com</strong>
+                <p class="step-desc">Open <a href="https://www.siteground.com" target="_blank" rel="noopener"><strong>siteground.com</strong></a> in another tab. Find their WordPress Hosting plans. Find the same information: cheapest plan price, renewal price, storage, SSL, free domain.</p>
+                <div class="step-note">💡 SiteGround is generally more expensive than Hostinger but has better performance and customer support. It's a common choice for professional agency sites.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-5">
+              <input type="checkbox" id="cb-s2-5" class="step-cb" data-key="cb-s2-5" data-phase="2">
+              <span class="step-circle step-teal">5</span>
+              <div class="step-body">
+                <strong class="step-title">Fill in the hosting comparison table</strong>
+                <div class="hosting-table-wrap">
+                  <table class="hosting-table" aria-label="Hosting plan comparison">
+                    <thead>
+                      <tr><th>Feature</th><th>Hostinger<br><small>(cheapest)</small></th><th>SiteGround<br><small>(cheapest)</small></th><th>InfinityFree<br><small>(free)</small></th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Monthly price (yr 1)</td><td class="ht-fill"></td><td class="ht-fill"></td><td class="ht-given">Free</td></tr>
+                      <tr><td>Renewal price (yr 2)</td><td class="ht-fill ht-warn">⚠ Find this!</td><td class="ht-fill ht-warn">⚠ Find this!</td><td class="ht-given">Free</td></tr>
+                      <tr><td>Storage</td><td class="ht-fill"></td><td class="ht-fill"></td><td class="ht-given">5 GB</td></tr>
+                      <tr><td>Free SSL (HTTPS)</td><td class="ht-fill"></td><td class="ht-fill"></td><td class="ht-given">✅ Yes</td></tr>
+                      <tr><td>Free domain yr 1</td><td class="ht-fill"></td><td class="ht-fill"></td><td class="ht-given">✅ Subdomain</td></tr>
+                      <tr><td>Uptime guarantee</td><td class="ht-fill"></td><td class="ht-fill"></td><td class="ht-given">No guarantee</td></tr>
+                      <tr><td>WordPress 1-click</td><td class="ht-fill"></td><td class="ht-fill"></td><td class="ht-given">Manual</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-6">
+              <input type="checkbox" id="cb-s2-6" class="step-cb" data-key="cb-s2-6" data-phase="2">
+              <span class="step-circle step-teal">6</span>
+              <div class="step-body">
+                <strong class="step-title">Based on your research: which hosting plan would you recommend to a client?</strong>
+                <p class="step-desc">Think about a small Cambodian business that wants to put their website online. Considering price, features, and the renewal trap — which would you recommend and why? Write your answer in a text file or discuss with your neighbour.</p>
+                <div class="step-ok">💡 There's no single "correct" answer — it depends on budget and needs. The important thing is that you can <em>explain your reasoning</em> based on the data you found.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-7">
+              <input type="checkbox" id="cb-s2-7" class="step-cb" data-key="cb-s2-7" data-phase="2">
+              <span class="step-circle step-teal">7</span>
+              <div class="step-body">
+                <strong class="step-title">Understand SSL: what does the padlock icon mean?</strong>
+                <p class="step-desc">Open any website (e.g. google.com) and look at the browser address bar. You should see a padlock icon (🔒) before <code>https://</code>. Click the padlock to see the SSL certificate details. Now try opening an old site with <code>http://</code> — does Chrome show a warning?</p>
+                <div class="step-ok">✅ <em>Expected:</em> HTTPS sites show the padlock. HTTP sites may show "Not Secure" warning or a broken lock icon in Chrome.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-8">
+              <input type="checkbox" id="cb-s2-8" class="step-cb" data-key="cb-s2-8" data-phase="2">
+              <span class="step-circle step-teal">8</span>
+              <div class="step-body">
+                <strong class="step-title">Discussion: What type of hosting would these businesses need?</strong>
+                <p class="step-desc">Match each scenario to the correct hosting type (Shared / VPS / Cloud):</p>
+                <div class="scenario-match">
+                  <div class="sm-item"><span class="sm-q">A student's portfolio website, 50 visitors/month</span><span class="sm-a">→ <strong>Shared</strong></span></div>
+                  <div class="sm-item"><span class="sm-q">A growing Cambodian e-commerce shop, 5,000 orders/month</span><span class="sm-a">→ <strong>VPS</strong></span></div>
+                  <div class="sm-item"><span class="sm-q">A national bank's online banking platform, 500k users</span><span class="sm-a">→ <strong>Cloud/Dedicated</strong></span></div>
+                  <div class="sm-item"><span class="sm-q">A restaurant's menu and contact page, rarely updated</span><span class="sm-a">→ <strong>Shared</strong></span></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-9">
+              <input type="checkbox" id="cb-s2-9" class="step-cb" data-key="cb-s2-9" data-phase="2">
+              <span class="step-circle step-teal">9</span>
+              <div class="step-body">
+                <strong class="step-title">Calculate: how much would Hostinger cost over 3 years?</strong>
+                <p class="step-desc">Using the prices you found, calculate the real total cost of Hostinger over 3 years (Year 1 promo + Year 2 renewal + Year 3 renewal). Compare this to what you'd pay for 3 years if you locked in the promotional rate by buying a 3-year plan upfront.</p>
+                <div class="step-note">💡 This is a real-world money skill. Hosting companies often let you lock in 1–3 years at the promotional rate. It can save significant money long-term.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s2-10">
+              <input type="checkbox" id="cb-s2-10" class="step-cb" data-key="cb-s2-10" data-phase="2">
+              <span class="step-circle step-teal">10</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Challenge: find a hosting plan cheaper than Hostinger with good features</strong>
+                <p class="step-desc">Search online for "best cheap WordPress hosting 2025". Find one hosting provider NOT on your comparison table that offers a lower renewal price with comparable features. Add it to your table.</p>
+              </div>
+            </label>
           </li>
 
         </ol>
-      </div>
+
+        <div class="phase-banner" id="banner-2" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 2 Complete — Hosting Plans Analysed!</strong>
+          <p>You understand hosting types, SSL, and the Renewal Trap. Move to Phase 3 — setting up your free hosting account!</p></div>
+        </div>
+      </section>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════════
-      FINAL AUDIT CHECKLIST
-    ══════════════════════════════════════════════════════════════ -->
-    <section class="audit-section" id="audit">
-      <header class="phase-header phase-gold">
-        <span class="phase-badge">End of Session</span>
-        <h2>Final Checklist — Is Your Site Complete?</h2>
+    <!-- ═══════════════════════════════════════
+         PHASE 3 — Free Hosting Setup (30 min)
+    ═══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3" data-phase="3" aria-labelledby="p3-title">
+      <header class="phase-hdr ph-purple">
+        <div class="ph-num">3</div>
+        <div class="ph-text">
+          <h2 id="p3-title">Phase 3 — Setting Up Free Hosting</h2>
+          <p>30 minutes · InfinityFree account · Register subdomain · Prep for Week 14 deployment</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p3-label">0 / 8 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-purple" id="p3-fill"></div></div>
+        </div>
       </header>
 
-      <div class="phase-body">
-        <p class="phase-intro">
-          Tick every item below. If anything is missing, fix it before moving on to Session 3.
-        </p>
+      <section class="subsect" aria-labelledby="p3h">
+        <h3 id="p3h">InfinityFree — Free Hosting for Practice</h3>
+        <p>InfinityFree provides <strong>completely free web hosting</strong> with PHP + MySQL support — perfect for deploying your WordPress site to the internet for learning purposes. No credit card required.</p>
 
-        <ul class="audit-list" data-phase="audit">
+        <aside class="tip-box tip-red">
+          <strong>⚠ InfinityFree Limitations — Important!</strong>
+          Free hosting is for <em>learning and practice only</em>. InfinityFree has: slower load times, may inject ads, aggressive caching, no email hosting, and no uptime guarantee. <strong>Never put a real client's site on free hosting.</strong>
+        </aside>
 
-          <li class="audit-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Home page is set as the static front page</div>
-              <div class="step-desc">Settings → Reading → "A static page" → Homepage = Home</div>
-            </div>
-          </li>
-
-          <li class="audit-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">3 pages exist: Home, About Us, Contact</div>
-              <div class="step-desc">Pages → All Pages — you should see all three with "Published" status</div>
-            </div>
-          </li>
-
-          <li class="audit-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">2 categories exist: Hardware and Software</div>
-              <div class="step-desc">Posts → Categories — both should appear in the list</div>
-            </div>
-          </li>
-
-          <li class="audit-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">3 published posts — each with a category and tags</div>
-              <div class="step-desc">Posts → All Posts — 3 posts, none in "Uncategorized", all have tags</div>
-            </div>
-          </li>
-
-          <li class="audit-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">No dummy content remains</div>
-              <div class="step-desc">No "Hello world!" post, no "Sample Page", no sample comments</div>
-            </div>
-          </li>
-
-          <li class="audit-item">
-            <button class="step-check" aria-label="Mark complete">☐</button>
-            <div class="step-content">
-              <div class="step-title">Visiting the site shows the Home page — not a list of posts</div>
-              <div class="step-desc">Click "Visit Site" — you see your Home page welcome content</div>
-            </div>
-          </li>
-
-        </ul>
-
-        <!-- Completion banner — shown by JS when all audit items checked -->
-        <div class="session-complete" id="session-complete" style="display:none;">
-          🎉 Session 2 Complete! You now have a working multi-page WordPress site.
-          <br>Next: <strong>Session 3 — Media Library, Featured Images &amp; SEO URLs</strong>
+        <!-- InfinityFree features -->
+        <div class="if-features">
+          <div class="iff-card"><div class="iff-icon">💰</div><strong>100% Free</strong><p>No credit card, no payment ever required</p></div>
+          <div class="iff-card"><div class="iff-icon">🌐</div><strong>Free Subdomain</strong><p>yoursite.epizy.com or .infinityfreeapp.com</p></div>
+          <div class="iff-card"><div class="iff-icon">🔒</div><strong>Free SSL</strong><p>HTTPS included automatically</p></div>
+          <div class="iff-card"><div class="iff-icon">🗃</div><strong>MySQL Database</strong><p>Supports PHP + WordPress</p></div>
+          <div class="iff-card"><div class="iff-icon">📁</div><strong>5 GB Storage</strong><p>Enough for your project</p></div>
+          <div class="iff-card"><div class="iff-icon">⚡</div><strong>Free Bandwidth</strong><p>Unlimited (fair use policy)</p></div>
         </div>
 
-      </div>
-    </section>
+        <ol class="step-list" aria-label="Phase 3 InfinityFree setup steps">
 
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-1">
+              <input type="checkbox" id="cb-s3-1" class="step-cb" data-key="cb-s3-1" data-phase="3">
+              <span class="step-circle step-purple">1</span>
+              <div class="step-body">
+                <strong class="step-title">Go to InfinityFree.com → click "Sign Up Free"</strong>
+                <p class="step-desc">Open <a href="https://www.infinityfree.com" target="_blank" rel="noopener"><strong>infinityfree.com</strong></a> in your browser. On the homepage, click the <strong>Sign Up Free</strong> button. The registration form appears.</p>
+                <div class="step-ok">✅ <em>Expected:</em> A registration form with email, username, and password fields.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-2">
+              <input type="checkbox" id="cb-s3-2" class="step-cb" data-key="cb-s3-2" data-phase="3">
+              <span class="step-circle step-purple">2</span>
+              <div class="step-body">
+                <strong class="step-title">Create your account with a real email address</strong>
+                <p class="step-desc">Fill in the registration form:</p>
+                <ul class="sub-list">
+                  <li><strong>Email:</strong> Use a real, accessible email (you need to verify it)</li>
+                  <li><strong>Password:</strong> Create a strong password — store it safely</li>
+                </ul>
+                <p class="step-desc">Click <strong>Register</strong> (or Sign Up). Check your email for a verification link from InfinityFree.</p>
+                <div class="step-warn">⚠️ Check your spam/junk folder if the verification email doesn't arrive in 2–3 minutes.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-3">
+              <input type="checkbox" id="cb-s3-3" class="step-cb" data-key="cb-s3-3" data-phase="3">
+              <span class="step-circle step-purple">3</span>
+              <div class="step-body">
+                <strong class="step-title">Verify your email address → log in to InfinityFree</strong>
+                <p class="step-desc">Open the verification email from InfinityFree. Click the verification link. You'll be redirected back to InfinityFree and automatically logged in (or prompted to log in).</p>
+                <div class="step-ok">✅ <em>Expected:</em> You see the InfinityFree dashboard — a clean panel with options to create a hosting account.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-4">
+              <input type="checkbox" id="cb-s3-4" class="step-cb" data-key="cb-s3-4" data-phase="3">
+              <span class="step-circle step-purple">4</span>
+              <div class="step-body">
+                <strong class="step-title">Click "Create Account" in the InfinityFree dashboard</strong>
+                <p class="step-desc">In the InfinityFree control panel, click the green <strong>Create Account</strong> button. This starts the process of setting up your hosting account (separate from your InfinityFree login account).</p>
+                <div class="step-ok">✅ <em>Expected:</em> A form appears asking you to choose a subdomain name and set an account password.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-5">
+              <input type="checkbox" id="cb-s3-5" class="step-cb" data-key="cb-s3-5" data-phase="3">
+              <span class="step-circle step-purple">5</span>
+              <div class="step-body">
+                <strong class="step-title">Choose your free subdomain name</strong>
+                <p class="step-desc">In the subdomain field, type your desired name (same as your domain research from Phase 1). You can choose between:</p>
+                <ul class="sub-list">
+                  <li><code>yourname.epizy.com</code></li>
+                  <li><code>yourname.infinityfreeapp.com</code></li>
+                </ul>
+                <div class="code-eg"><span class="ce-label">Example subdomain:</span><code>soktechnews.epizy.com</code></div>
+                <div class="step-note">💡 This will be the URL visitors use to access your site during Week 14. Choose something that matches your WordPress site topic. Keep it short and professional.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-6">
+              <input type="checkbox" id="cb-s3-6" class="step-cb" data-key="cb-s3-6" data-phase="3">
+              <span class="step-circle step-purple">6</span>
+              <div class="step-body">
+                <strong class="step-title">Set a password for the hosting account → click Create</strong>
+                <p class="step-desc">Set a password for this specific hosting account (different from your InfinityFree login). <strong>Store this password somewhere safe</strong> — you'll need it in Week 14 to access your FTP and control panel. Click <strong>Create</strong> or <strong>Create Account</strong>.</p>
+                <div class="step-warn">⚠️ <strong>Account provisioning takes 2–5 minutes.</strong> The status may show "Account Creating..." — this is normal. Do not refresh or click again. Wait patiently.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-7">
+              <input type="checkbox" id="cb-s3-7" class="step-cb" data-key="cb-s3-7" data-phase="3">
+              <span class="step-circle step-purple">7</span>
+              <div class="step-body">
+                <strong class="step-title">Once active: note down your hosting account details</strong>
+                <p class="step-desc">When provisioning is complete, InfinityFree shows your account details. Write them down — you'll need ALL of these in Week 14:</p>
+                <div class="details-grid">
+                  <div class="dg-item"><span class="dg-label">Subdomain URL</span><span class="dg-eg">e.g. soktechnews.epizy.com</span></div>
+                  <div class="dg-item"><span class="dg-label">Control Panel URL</span><span class="dg-eg">e.g. cpanel1.infinityfree.com</span></div>
+                  <div class="dg-item"><span class="dg-label">FTP Hostname</span><span class="dg-eg">e.g. ftpupload.net</span></div>
+                  <div class="dg-item"><span class="dg-label">FTP Username</span><span class="dg-eg">e.g. epiz_38201234</span></div>
+                  <div class="dg-item"><span class="dg-label">FTP Password</span><span class="dg-eg">Your hosting account password</span></div>
+                  <div class="dg-item"><span class="dg-label">MySQL Host</span><span class="dg-eg">e.g. sql123.epizy.com</span></div>
+                </div>
+                <div class="step-ok">✅ Screenshot this page or copy the details to a text file. Keep it safe — these are your server credentials!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-8">
+              <input type="checkbox" id="cb-s3-8" class="step-cb" data-key="cb-s3-8" data-phase="3">
+              <span class="step-circle step-purple">8</span>
+              <div class="step-body">
+                <strong class="step-title">Visit your subdomain URL in the browser to confirm it's live</strong>
+                <p class="step-desc">Copy your subdomain URL (e.g. <code>soktechnews.epizy.com</code>) and paste it into a new browser tab. You should see either:</p>
+                <ul class="sub-list">
+                  <li>An InfinityFree default "Account Created" page (this is correct!)</li>
+                  <li>A blank page or "Coming Soon" message (also correct)</li>
+                  <li>A browser error (wait 5–10 more minutes and try again — DNS propagation takes time)</li>
+                </ul>
+                <div class="step-ok">🏆 <strong>Your free hosting account is live!</strong> Your subdomain exists on the real internet. In Week 14, you'll upload your WordPress site using the .wpress file you created in Week 12 Session 3.</div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner phase-banner--final" id="banner-3" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🏆</span>
+          <div><strong>Week 13 Session 1 Complete!</strong>
+          <p>You have a live subdomain on the internet and understand how domains and hosting work. Next session: put your WordPress site on that server for the world to see!</p></div>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="subsect" aria-labelledby="sum-h">
+        <h3 id="sum-h">Session Summary — Quick Reference</h3>
+        <div class="summary-grid" role="list">
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-blue">🏡</div><div><h4>Domain vs Hosting</h4><p>Domain = address. Hosting = house. Both required. You LEASE domains — never own them permanently.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-teal">🌐</div><div><h4>TLDs &amp; ICANN</h4><p>.com anyone can register. .com.kh requires company registration in Cambodia. Managed globally by ICANN.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-purple">🏘</div><div><h4>Hosting Types</h4><p>Shared (cheap, shared resources) → VPS (dedicated slice) → Cloud/Dedicated (own server, expensive).</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-orange">⚠</div><div><h4>The Renewal Trap</h4><p>Always check the Year 2 renewal price. Promotional pricing hides the true ongoing annual cost.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-green">🔒</div><div><h4>SSL Certificates</h4><p>HTTPS = padlock = encrypted. Required for all sites. Most hosts include Free SSL via Let's Encrypt.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-red">🆓</div><div><h4>InfinityFree Setup</h4><p>Free subdomain live on the internet. FTP + MySQL credentials noted. Ready for Week 14 deployment.</p></div></article>
+        </div>
+
+        <aside class="tip-box tip-navy">
+          <strong>🚀 Coming Up — Week 13 Session 2 onwards: Deployment</strong>
+          <p>Your site currently exists only on your laptop. Next sessions you'll take the .wpress backup file you made in Week 12, upload it to your InfinityFree server, and your website will be visible to the whole world at your subdomain URL.</p>
+        </aside>
+      </section>
+    </section>
 
   </main>
 
+  <div class="session-overlay" id="session-overlay" role="dialog" aria-modal="true" aria-labelledby="ov-title" hidden>
+    <div class="overlay-card">
+      <p class="ov-icon">🏆</p>
+      <h2 id="ov-title">Session 1 Complete!</h2>
+      <p>Domain researched, hosting plans compared, InfinityFree subdomain live. You're ready for deployment!</p>
+      <button class="btn-reset btn-reset--lg" onclick="resetAll()">🔄 Reset &amp; Start Over</button>
+    </div>
+  </div>
 
-  <!-- ============================================================
-    FOOTER
-  ============================================================ -->
-  <footer class="site-footer">
-    <p>Web Client Programming &nbsp;·&nbsp; Week 09 Session 02 &nbsp;·&nbsp;
-       Dashboard Navigation &amp; Content Creation
-    </p>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-in">
+      <p><strong>Web Client Programming</strong> &nbsp;·&nbsp; Week 13 · Session 1 &nbsp;·&nbsp; Institute of Technology of Cambodia</p>
+      <p class="footer-lo">LO8: Understand web hosting, domains, deployment, and site migration</p>
+      <button class="btn-reset" onclick="resetAll()">🔄 Reset All Progress</button>
+    </div>
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>
