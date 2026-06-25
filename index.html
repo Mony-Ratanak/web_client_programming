@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 13 Session 2 Lab Guide — cPanel Overview and FTP Setup. Navigate cPanel, understand htdocs, install FileZilla, connect via FTP, upload first live file.">
+  <title>Week 13 · Session 2 — cPanel Overview &amp; FTP Setup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header class="site-header" role="banner">
+    <nav class="top-bar" aria-label="Course navigation">
+      <span class="course-badge">Web Client Programming</span>
+      <span class="session-label">Week 13 · Session 2  ·  2 Hours</span>
+    </nav>
+    <hgroup class="hero-band">
+      <p class="eyebrow">Phase-by-Phase Lab Guide</p>
+      <h1>cPanel Overview &amp; <span class="blue-accent">FTP Setup</span></h1>
+      <p class="hero-sub">cPanel Navigation · htdocs Rule · FTP Credentials · FileZilla · First Live Upload!</p>
+    </hgroup>
+    <div class="overall-bar-wrap" role="region" aria-label="Overall progress">
+      <div class="overall-bar-meta">
+        <span>Overall Progress</span>
+        <span id="overall-count">0 / 26 steps</span>
+      </div>
+      <div class="bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="overall-track">
+        <div class="bar-fill" id="overall-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ PHASE NAV ══ -->
+  <nav class="phase-nav" id="phase-nav" aria-label="Jump to phase">
+    <ol class="pnav-list" role="list">
+      <li><a href="#phase-1" class="pnav-btn" data-phase="1">
+        <span class="pdot" id="dot-1" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 1</strong><small>cPanel · 45 min</small></span>
+        <span class="pnav-count" id="nc-1"></span>
+      </a></li>
+      <li><a href="#phase-2" class="pnav-btn" data-phase="2">
+        <span class="pdot" id="dot-2" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 2</strong><small>FTP &amp; FileZilla · 45 min</small></span>
+        <span class="pnav-count" id="nc-2"></span>
+      </a></li>
+      <li><a href="#phase-3" class="pnav-btn" data-phase="3">
+        <span class="pdot" id="dot-3" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 3</strong><small>Connect &amp; Upload · 30 min</small></span>
+        <span class="pnav-count" id="nc-3"></span>
+      </a></li>
+      <li><a href="#phase-4" class="pnav-btn" data-phase="4">
+        <span class="pdot" id="dot-4" aria-hidden="true"></span>
+        <span class="pnav-text"><strong>Phase 4</strong><small>Clean Up · 15 min</small></span>
+        <span class="pnav-count" id="nc-4"></span>
+      </a></li>
+    </ol>
+  </nav>
+
+  <main class="main-content" id="main-content">
+
+    <!-- ══ CONCEPT CARD ══ -->
+    <section class="card" id="concept" aria-labelledby="concept-h">
+      <header class="card-header">
+        <p class="eyebrow">Key Concept — What Are We Doing Today?</p>
+        <h2 id="concept-h">cPanel = Server Dashboard · FTP = File Delivery Service</h2>
+        <p class="card-lead">Today you go from having a <em>subdomain address</em> to having <em>actual files</em> running on a server visible to the whole world. By the end, you will type your URL into a browser and see YOUR HTML.</p>
+      </header>
+
+      <!-- Journey flow -->
+      <div class="journey-flow" aria-label="Today's journey from laptop to live website">
+        <div class="jf-step">
+          <div class="jf-icon">💻</div>
+          <strong>Your Laptop</strong>
+          <p>Files exist only here</p>
+        </div>
+        <div class="jf-arrow">→</div>
+        <div class="jf-step">
+          <div class="jf-icon">🔑</div>
+          <strong>cPanel</strong>
+          <p>Access the server dashboard</p>
+        </div>
+        <div class="jf-arrow">→</div>
+        <div class="jf-step">
+          <div class="jf-icon">⚡</div>
+          <strong>FileZilla FTP</strong>
+          <p>Transfer files to server</p>
+        </div>
+        <div class="jf-arrow">→</div>
+        <div class="jf-step jf-step--highlight">
+          <div class="jf-icon">🌐</div>
+          <strong>Live on Internet!</strong>
+          <p>Anyone can visit your URL</p>
+        </div>
+      </div>
+
+      <!-- cPanel overview interactive mock -->
+      <div class="cpanel-section">
+        <h3>The cPanel Dashboard — Click Any Section to Learn More</h3>
+        <p>cPanel is a <strong>Graphical User Interface (GUI)</strong> for managing your web server. Instead of typing Linux commands, you click icons. It's the industry standard used by almost all shared hosting providers.</p>
+
+        <figure class="cpanel-mock" aria-label="Interactive cPanel dashboard mock">
+          <figcaption class="demo-caption">Click any cPanel section below to see what it does and when you'll use it</figcaption>
+          <div class="cp-dashboard">
+            <div class="cp-topbar">
+              <span class="cp-logo">cPanel®</span>
+              <span class="cp-account">soktechnews.epizy.com</span>
+            </div>
+            <div class="cp-grid">
+              <button class="cp-tile cp-active-default" id="cp-files" onclick="showCP('files',this)">
+                <span class="cp-tile-icon">📁</span>
+                <span class="cp-tile-name">File Manager</span>
+              </button>
+              <button class="cp-tile" id="cp-phpmyadmin" onclick="showCP('phpmyadmin',this)">
+                <span class="cp-tile-icon">🗄</span>
+                <span class="cp-tile-name">phpMyAdmin</span>
+              </button>
+              <button class="cp-tile" id="cp-mysql" onclick="showCP('mysql',this)">
+                <span class="cp-tile-icon">🛢</span>
+                <span class="cp-tile-name">MySQL Databases</span>
+              </button>
+              <button class="cp-tile" id="cp-domains" onclick="showCP('domains',this)">
+                <span class="cp-tile-icon">🌐</span>
+                <span class="cp-tile-name">Addon Domains</span>
+              </button>
+              <button class="cp-tile" id="cp-ssl" onclick="showCP('ssl',this)">
+                <span class="cp-tile-icon">🔒</span>
+                <span class="cp-tile-name">SSL / TLS</span>
+              </button>
+              <button class="cp-tile" id="cp-php" onclick="showCP('php',this)">
+                <span class="cp-tile-icon">⚙</span>
+                <span class="cp-tile-name">PHP Manager</span>
+              </button>
+              <button class="cp-tile" id="cp-email" onclick="showCP('email',this)">
+                <span class="cp-tile-icon">📧</span>
+                <span class="cp-tile-name">Email Accounts</span>
+              </button>
+              <button class="cp-tile" id="cp-ftp" onclick="showCP('ftp',this)">
+                <span class="cp-tile-icon">📤</span>
+                <span class="cp-tile-name">FTP Accounts</span>
+              </button>
+            </div>
+          </div>
+          <!-- Info panel -->
+          <div class="cp-info-panel" id="cp-info">
+            <div class="cp-info-content" id="cp-info-files">
+              <h4>📁 File Manager</h4>
+              <p><strong>What it does:</strong> A web-based file browser — like Windows Explorer, but for your web server. You can browse, upload, edit, create, and delete files directly in your browser.</p>
+              <p><strong>Key location:</strong> The <code>htdocs</code> (or <code>public_html</code>) folder inside File Manager is where ALL your website files must go.</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> Right now in Phase 1 — browse the folder structure. Also in Week 14 as a fallback if FTP doesn't work.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-phpmyadmin" hidden>
+              <h4>🗄 phpMyAdmin</h4>
+              <p><strong>What it does:</strong> A visual interface for your MySQL database. You can view tables, run SQL queries, import/export database backups, and manage database users.</p>
+              <p><strong>You've seen this before!</strong> In Week 9 you used phpMyAdmin on XAMPP (localhost). The one in cPanel is the same tool — just on the live server instead of your laptop.</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> Week 14 — you'll create a new MySQL database here before importing your WordPress site.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-mysql" hidden>
+              <h4>🛢 MySQL Databases</h4>
+              <p><strong>What it does:</strong> Create and manage database accounts and users. Before you can use phpMyAdmin to store WordPress data, you need to create a database here first.</p>
+              <p>Order: Create database here → Create a user → Give user full privileges → then connect WordPress.</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> Week 14 — create the database for your WordPress installation before importing the .wpress file.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-domains" hidden>
+              <h4>🌐 Addon Domains / Subdomains</h4>
+              <p><strong>What it does:</strong> Connect additional domain names to your hosting account. If you bought a .com domain from Namecheap (Session 1), you'd point it to your server here.</p>
+              <p>Addon Domain = connect a separate domain (soktechnews.com)<br>Subdomain = create sub.soktechnews.epizy.com</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> If you purchase a real .com domain name and want to connect it to InfinityFree hosting instead of using the .epizy.com subdomain.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-ssl" hidden>
+              <h4>🔒 SSL / TLS Manager</h4>
+              <p><strong>What it does:</strong> Manage SSL certificates — what makes your site use <code>https://</code> instead of <code>http://</code>. InfinityFree provides a free SSL certificate automatically.</p>
+              <p>If the padlock isn't showing on your site, this is where you check the SSL status and force HTTPS redirects.</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> After Week 14 deployment — check that HTTPS (the padlock) is working on your live site.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-php" hidden>
+              <h4>⚙ PHP Version Manager</h4>
+              <p><strong>What it does:</strong> Switches which version of PHP the server uses to run your website. WordPress requires PHP 7.4 or higher. If your site breaks after a server update, this is often why.</p>
+              <p><strong>Right now</strong>, check what PHP version is selected. It should be 7.4, 8.0, 8.1, or 8.2. If it's 5.x, change it to 8.1 now.</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> Week 14 — verify PHP version is compatible with WordPress before installing.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-email" hidden>
+              <h4>📧 Email Accounts</h4>
+              <p><strong>What it does:</strong> Create email addresses like <code>info@yourdomain.com</code>. On InfinityFree's free plan, this feature is limited or unavailable. Paid hosting includes email.</p>
+              <div class="cp-when"><strong>Note:</strong> Free hosting plans rarely include email hosting. To get info@yourdomain.com, you typically need paid hosting or a separate email service like Google Workspace.</div>
+            </div>
+            <div class="cp-info-content" id="cp-info-ftp" hidden>
+              <h4>📤 FTP Accounts</h4>
+              <p><strong>What it does:</strong> Create additional FTP accounts with restricted access. The main FTP account is created automatically when you set up your hosting. You can create sub-accounts with limited folder access here.</p>
+              <p>Useful when working with a team — give a team member FTP access to only their project folder.</p>
+              <div class="cp-when"><strong>When you'll use it:</strong> Today — your main FTP credentials come from the InfinityFree dashboard, not this section. This is for additional accounts.</div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         PHASE 1 — Exploring cPanel (45 min)
+    ══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-1" data-phase="1" aria-labelledby="p1-title">
+      <header class="phase-hdr ph-blue">
+        <div class="ph-num">1</div>
+        <div class="ph-text">
+          <h2 id="p1-title">Phase 1 — Exploring cPanel</h2>
+          <p>45 minutes · Access cPanel · Scavenger hunt · Find htdocs · The Golden Rule</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p1-label">0 / 8 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-blue" id="p1-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p1h">
+        <h3 id="p1h">Accessing Your cPanel Dashboard</h3>
+
+        <!-- htdocs rule explainer -->
+        <div class="htdocs-rule">
+          <h4>⭐ The Most Important Rule in Web Hosting</h4>
+          <div class="htdocs-visual" aria-label="htdocs folder rule diagram">
+            <div class="htv-server">
+              <div class="htv-server-label">📦 Your Hosting Server</div>
+              <div class="htv-folders">
+                <div class="htv-folder htv-private">
+                  <span class="htv-folder-icon">🔒</span>
+                  <div>
+                    <strong>/etc/</strong> — Private config files (NOT visible)
+                  </div>
+                </div>
+                <div class="htv-folder htv-private">
+                  <span class="htv-folder-icon">🔒</span>
+                  <div>
+                    <strong>/logs/</strong> — Server logs (NOT visible)
+                  </div>
+                </div>
+                <div class="htv-folder htv-public">
+                  <span class="htv-folder-icon">🌐</span>
+                  <div>
+                    <strong>/htdocs/</strong> &nbsp;←&nbsp; PUBLIC FOLDER
+                    <div class="htv-files">
+                      <div class="htv-file">📄 index.html → <code>yoursite.epizy.com/index.html</code> ✅ VISIBLE</div>
+                      <div class="htv-file">📂 wp-content/ → <code>yoursite.epizy.com/wp-content/</code> ✅ VISIBLE</div>
+                      <div class="htv-file">📄 style.css → <code>yoursite.epizy.com/style.css</code> ✅ VISIBLE</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="htv-folder htv-private">
+                  <span class="htv-folder-icon">🔒</span>
+                  <div>
+                    <strong>/tmp/</strong> — Temporary files (NOT visible)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="htdocs-note">
+            ✅ <strong>Golden Rule:</strong> Only files placed inside the <code>htdocs</code> folder (sometimes called <code>public_html</code>) are accessible to visitors on the internet. Files outside this folder are completely private. This is a core security feature of all web servers.
+          </aside>
+        </div>
+
+        <ol class="step-list" aria-label="Phase 1 cPanel exploration steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-1">
+              <input type="checkbox" id="cb-s1-1" class="step-cb" data-key="cb-s1-1" data-phase="1">
+              <span class="step-circle">1</span>
+              <div class="step-body">
+                <strong class="step-title">Log in to your InfinityFree account</strong>
+                <p class="step-desc">Open <a href="https://www.infinityfree.com" target="_blank" rel="noopener"><strong>infinityfree.com</strong></a> and log in with your account email and password (created in Session 1). The InfinityFree client area dashboard appears.</p>
+                <div class="step-ok">✅ <em>Expected:</em> You see your hosting account listed (e.g. "soktechnews.epizy.com") with an "Active" status badge.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-2">
+              <input type="checkbox" id="cb-s1-2" class="step-cb" data-key="cb-s1-2" data-phase="1">
+              <span class="step-circle">2</span>
+              <div class="step-body">
+                <strong class="step-title">Click on your hosting account → click "Control Panel"</strong>
+                <p class="step-desc">In the InfinityFree dashboard, click on your account name (e.g. soktechnews.epizy.com). The account details appear. Click the <strong>Control Panel</strong> button (blue button).</p>
+                <div class="step-warn">⚠️ <strong>If a "Notice of Changes" warning appears:</strong> Read it briefly and click <strong>"I Approve"</strong> or <strong>"Accept"</strong> to proceed. This is normal for InfinityFree.</div>
+                <div class="step-ok">✅ <em>Expected:</em> A new browser tab opens showing the cPanel dashboard with icons for all server management tools.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-3">
+              <input type="checkbox" id="cb-s1-3" class="step-cb" data-key="cb-s1-3" data-phase="1">
+              <span class="step-circle">3</span>
+              <div class="step-body">
+                <strong class="step-title">Scavenger Hunt — find and click these 4 sections in cPanel</strong>
+                <p class="step-desc">Look through the cPanel dashboard and find each of these icons. Click on each one to explore what it looks like inside. Check them off as you find them:</p>
+                <div class="scavenger-hunt">
+                  <div class="sh-item"><span class="sh-icon">📁</span><div><strong>File Manager</strong><p>Should open a file browser. Can you see a folder called <code>htdocs</code> or <code>public_html</code>?</p></div></div>
+                  <div class="sh-item"><span class="sh-icon">🗄</span><div><strong>phpMyAdmin</strong><p>Opens in a new tab. Looks familiar? You used it on localhost in Week 9!</p></div></div>
+                  <div class="sh-item"><span class="sh-icon">🌐</span><div><strong>Addon Domains or Subdomains</strong><p>This is where you'd connect a real .com domain to this hosting.</p></div></div>
+                  <div class="sh-item"><span class="sh-icon">⚙</span><div><strong>PHP Version Manager</strong><p>What PHP version is selected? It should be 7.4 or 8.x for WordPress compatibility.</p></div></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-4">
+              <input type="checkbox" id="cb-s1-4" class="step-cb" data-key="cb-s1-4" data-phase="1">
+              <span class="step-circle">4</span>
+              <div class="step-body">
+                <strong class="step-title">Click "File Manager" → find the htdocs folder</strong>
+                <p class="step-desc">Click the <strong>File Manager</strong> icon in cPanel. A web-based file browser opens. Look at the folder list on the left or the main area:</p>
+                <ul class="sub-list">
+                  <li>Find a folder called <strong>htdocs</strong> or <strong>public_html</strong> (name depends on the hosting provider)</li>
+                  <li>Double-click to open it — it should be empty (or contain a default index file)</li>
+                  <li>Notice: there are other folders like <code>logs/</code> that you CANNOT access from a browser URL</li>
+                </ul>
+                <div class="step-ok">✅ This is where YOUR website files will live. In Week 14, your entire WordPress site will go inside this folder.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-5">
+              <input type="checkbox" id="cb-s1-5" class="step-cb" data-key="cb-s1-5" data-phase="1">
+              <span class="step-circle">5</span>
+              <div class="step-body">
+                <strong class="step-title">Verify the PHP version is 7.4 or higher</strong>
+                <p class="step-desc">Go back to cPanel. Click <strong>PHP Version Manager</strong> (or "Select PHP Version"). Check the current PHP version selected.</p>
+                <div class="php-check">
+                  <div class="pc-ok"><span>✅</span><strong>PHP 7.4, 8.0, 8.1, or 8.2</strong> — WordPress compatible. No action needed.</div>
+                  <div class="pc-warn"><span>⚠️</span><strong>PHP 5.x or 6.x</strong> — Too old for WordPress! Click the dropdown and change to PHP 8.1.</div>
+                </div>
+                <div class="step-note">💡 WordPress officially requires PHP 7.4+ and recommends PHP 8.1 or 8.2 for best performance.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-6">
+              <input type="checkbox" id="cb-s1-6" class="step-cb" data-key="cb-s1-6" data-phase="1">
+              <span class="step-circle">6</span>
+              <div class="step-body">
+                <strong class="step-title">Test the htdocs rule: try to access a private folder via URL</strong>
+                <p class="step-desc">This step proves why the htdocs rule matters. In your browser address bar, try typing:</p>
+                <div class="code-eg"><span class="ce-label">Try this URL (replace with your subdomain):</span><code>yoursubdomain.epizy.com/logs/</code></div>
+                <div class="step-ok">✅ <em>Expected:</em> You should get a "403 Forbidden" or "404 Not Found" error. The <code>logs/</code> folder exists on the server, but it's NOT inside htdocs, so the public cannot access it. Security working correctly!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s1-7">
+              <input type="checkbox" id="cb-s1-7" class="step-cb" data-key="cb-s1-7" data-phase="1">
+              <span class="step-circle">7</span>
+              <div class="step-body">
+                <strong class="step-title">Find your FTP credentials in InfinityFree (NOT cPanel)</strong>
+                <p class="step-desc">Go back to the <strong>InfinityFree client dashboard</strong> (not cPanel). Click on your hosting account. Look for a tab or section called <strong>"FTP Details"</strong> or <strong>"Account Details"</strong>. Find and note these 4 values:</p>
+                <div class="ftp-creds-form">
+                  <div class="fcf-row">
+                    <span class="fcf-num fcf-n1">1</span>
+                    <span class="fcf-label">FTP Host:</span>
+                    <div class="fcf-example">e.g. <code>ftpupload.net</code></div>
+                    <div class="fcf-hint">The server address FileZilla will connect to</div>
+                  </div>
+                  <div class="fcf-row">
+                    <span class="fcf-num fcf-n2">2</span>
+                    <span class="fcf-label">FTP Username:</span>
+                    <div class="fcf-example">e.g. <code>epiz_38201234</code></div>
+                    <div class="fcf-hint">Starts with "epiz_" followed by numbers</div>
+                  </div>
+                  <div class="fcf-row">
+                    <span class="fcf-num fcf-n3">3</span>
+                    <span class="fcf-label">FTP Password:</span>
+                    <div class="fcf-example">e.g. <code>your account password</code></div>
+                    <div class="fcf-hint">The password you set when creating the hosting account</div>
+                  </div>
+                  <div class="fcf-row">
+                    <span class="fcf-num fcf-n4">4</span>
+                    <span class="fcf-label">FTP Port:</span>
+                    <div class="fcf-example"><code>21</code></div>
+                    <div class="fcf-hint">Always 21 — the standard FTP port. You don't need to find this.</div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s1-8">
+              <input type="checkbox" id="cb-s1-8" class="step-cb" data-key="cb-s1-8" data-phase="1">
+              <span class="step-circle">8</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Show trainer: your cPanel File Manager open at the htdocs folder</strong>
+                <p class="step-desc">Show your trainer:</p>
+                <ul class="sub-list">
+                  <li>✅ cPanel is open in your browser</li>
+                  <li>✅ File Manager is open showing the htdocs/public_html folder</li>
+                  <li>✅ You have your 4 FTP credentials written down (Host, Username, Password, Port)</li>
+                  <li>✅ PHP version is 7.4 or higher</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-1" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 1 Complete — cPanel Explored!</strong>
+          <p>You've navigated cPanel, found htdocs, and collected your FTP credentials. Move to Phase 2 — setting up FileZilla!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         PHASE 2 — FTP & FileZilla (45 min)
+    ══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-2" data-phase="2" aria-labelledby="p2-title">
+      <header class="phase-hdr ph-teal">
+        <div class="ph-num">2</div>
+        <div class="ph-text">
+          <h2 id="p2-title">Phase 2 — Introduction to FTP &amp; FileZilla</h2>
+          <p>45 minutes · What is FTP · Install FileZilla · Understand the interface</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p2-label">0 / 8 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-teal" id="p2-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p2h">
+        <h3 id="p2h">What is FTP? Why Not Just Use the File Manager?</h3>
+        <p>FTP (File Transfer Protocol) is a dedicated connection between your computer and the server, designed specifically for moving files efficiently. The browser-based File Manager works but has serious limitations for large websites.</p>
+
+        <div class="ftp-compare">
+          <div class="ftp-c-col ftp-bad">
+            <div class="ftp-c-header">🌐 Browser File Manager</div>
+            <ul class="ftp-c-list">
+              <li class="ftp-no">Uploads go through your web browser</li>
+              <li class="ftp-no">Can time out for files over 50 MB</li>
+              <li class="ftp-no">Cannot upload entire folders at once</li>
+              <li class="ftp-no">Slow — extra overhead from browser</li>
+              <li class="ftp-no">Clunky for managing many files</li>
+              <li class="ftp-yes ftp-ok">Good for: quick single-file edits</li>
+            </ul>
+          </div>
+          <div class="ftp-c-col ftp-good">
+            <div class="ftp-c-header">⚡ FTP with FileZilla</div>
+            <ul class="ftp-c-list">
+              <li class="ftp-yes">Direct protocol connection to server</li>
+              <li class="ftp-yes">Handles large WordPress .wpress files</li>
+              <li class="ftp-yes">Drag and drop entire folders</li>
+              <li class="ftp-yes">Fast — optimised for file transfers</li>
+              <li class="ftp-yes">See both local and server files simultaneously</li>
+              <li class="ftp-yes">Industry standard used by all developers</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FileZilla interface explainer -->
+        <div class="filezilla-explainer">
+          <h3>The FileZilla Interface — Left Side vs Right Side</h3>
+          <p>This is the most important thing to understand before opening FileZilla. The window is split into two halves:</p>
+
+          <figure class="fz-mock" aria-label="FileZilla interface diagram showing local and remote panels">
+            <figcaption class="demo-caption">FileZilla interface — your computer on the left, the web server on the right</figcaption>
+            <div class="fz-window">
+              <!-- Quickconnect bar -->
+              <div class="fz-topbar">
+                <span class="fz-menu">File  Edit  Transfer  Server  Bookmarks  Help</span>
+              </div>
+              <div class="fz-quickconnect">
+                <span class="fz-qc-label">Host:</span>
+                <div class="fz-qc-field">ftpupload.net</div>
+                <span class="fz-qc-label">Username:</span>
+                <div class="fz-qc-field">epiz_12345678</div>
+                <span class="fz-qc-label">Password:</span>
+                <div class="fz-qc-field">••••••••</div>
+                <span class="fz-qc-label">Port:</span>
+                <div class="fz-qc-field fz-qc-port">21</div>
+                <button class="fz-qc-btn">Quickconnect ▾</button>
+              </div>
+              <!-- Status area -->
+              <div class="fz-status">
+                <div class="fz-status-line fz-s-ok">Status: Connected to ftpupload.net</div>
+                <div class="fz-status-line fz-s-ok">Status: Directory listing of "/" successful</div>
+              </div>
+              <!-- Main panels -->
+              <div class="fz-panels">
+                <!-- Left: Local -->
+                <div class="fz-panel fz-local">
+                  <div class="fz-panel-header fz-ph-local">
+                    💻 LOCAL SITE (Your Computer)
+                    <span class="fz-panel-sub">← Find your files here</span>
+                  </div>
+                  <div class="fz-path-bar">/Users/Mony/Documents/</div>
+                  <div class="fz-file-list">
+                    <div class="fz-folder">📂 Desktop</div>
+                    <div class="fz-folder fz-selected-folder">📂 Week_01_Project</div>
+                    <div class="fz-file fz-target-file">📄 &nbsp;&nbsp;&nbsp;index.html ← <strong>DRAG ME</strong></div>
+                    <div class="fz-file">📄 &nbsp;&nbsp;&nbsp;style.css</div>
+                    <div class="fz-folder">📂 Downloads</div>
+                  </div>
+                </div>
+                <!-- Drag arrow -->
+                <div class="fz-drag-arrow" aria-hidden="true">
+                  <span class="fz-da-icon">→</span>
+                  <span class="fz-da-text">drag &amp;<br>drop</span>
+                </div>
+                <!-- Right: Remote -->
+                <div class="fz-panel fz-remote">
+                  <div class="fz-panel-header fz-ph-remote">
+                    🌐 REMOTE SITE (Web Server)
+                    <span class="fz-panel-sub">← Drop files here</span>
+                  </div>
+                  <div class="fz-path-bar">/htdocs/</div>
+                  <div class="fz-file-list">
+                    <div class="fz-folder fz-private">🔒 logs/ (private)</div>
+                    <div class="fz-folder fz-target-folder">📂 htdocs/ ← <strong>DROP HERE</strong></div>
+                    <div class="fz-file fz-empty-note">&nbsp;&nbsp;&nbsp;&nbsp;(empty — ready for files)</div>
+                    <div class="fz-folder fz-private">🔒 tmp/ (private)</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Transfer queue -->
+              <div class="fz-queue">
+                <span class="fz-q-label">Queued files · Failed transfers · Successful transfers</span>
+                <span class="fz-q-success">✅ File transfer successful: index.html</span>
+              </div>
+            </div>
+          </figure>
+
+          <div class="fz-key-points">
+            <div class="fz-kp fz-kp-left"><strong>💻 LEFT panel = YOUR computer</strong><p>Navigate to find the file on your laptop. Your Documents, Desktop, Downloads folders all appear here.</p></div>
+            <div class="fz-kp fz-kp-right"><strong>🌐 RIGHT panel = WEB SERVER</strong><p>Your live hosting account. Navigate to htdocs folder. Anything you drop here goes live on the internet.</p></div>
+          </div>
+        </div>
+
+        <ol class="step-list" aria-label="Phase 2 FileZilla setup steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-1">
+              <input type="checkbox" id="cb-s2-1" class="step-cb" data-key="cb-s2-1" data-phase="2">
+              <span class="step-circle step-teal">1</span>
+              <div class="step-body">
+                <strong class="step-title">Go to filezilla-project.org and download FileZilla Client</strong>
+                <p class="step-desc">Open <a href="https://filezilla-project.org" target="_blank" rel="noopener"><strong>filezilla-project.org</strong></a>. Click the <strong>Download FileZilla Client</strong> button. Choose your operating system:</p>
+                <ul class="sub-list">
+                  <li>Windows: download the <strong>.exe</strong> installer</li>
+                  <li>macOS: download the <strong>.app.tar.bz2</strong> package</li>
+                </ul>
+                <div class="step-warn">⚠️ <strong>Download only the CLIENT, not the Server!</strong> FileZilla Server is for running your own FTP server. FileZilla Client is for connecting TO a server.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-2">
+              <input type="checkbox" id="cb-s2-2" class="step-cb" data-key="cb-s2-2" data-phase="2">
+              <span class="step-circle step-teal">2</span>
+              <div class="step-body">
+                <strong class="step-title">Install FileZilla</strong>
+                <p class="step-desc"><strong>Windows:</strong> Double-click the downloaded .exe file. Click through the installer (Next → Agree → Install). May ask for admin permission — click Yes.</p>
+                <p class="step-desc"><strong>macOS:</strong> Open the .bz2 archive, drag the FileZilla icon to your Applications folder.</p>
+                <div class="step-ok">✅ <em>Expected:</em> FileZilla opens showing a dark split-panel interface: file browser on the left and right, with a Quickconnect bar at the top.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-3">
+              <input type="checkbox" id="cb-s2-3" class="step-cb" data-key="cb-s2-3" data-phase="2">
+              <span class="step-circle step-teal">3</span>
+              <div class="step-body">
+                <strong class="step-title">Understand the Quickconnect bar at the top of FileZilla</strong>
+                <p class="step-desc">The top of FileZilla shows a bar with 4 input fields and a button. This is all you need to connect to your server:</p>
+                <div class="qc-diagram">
+                  <div class="qcd-field"><span class="qcd-label">Host:</span><div class="qcd-box">ftpupload.net</div><p>The server address</p></div>
+                  <div class="qcd-field"><span class="qcd-label">Username:</span><div class="qcd-box">epiz_12345678</div><p>Your FTP username</p></div>
+                  <div class="qcd-field"><span class="qcd-label">Password:</span><div class="qcd-box qcd-pass">••••••••</div><p>Your account password</p></div>
+                  <div class="qcd-field"><span class="qcd-label">Port:</span><div class="qcd-box qcd-port">21</div><p>Always 21</p></div>
+                  <div class="qcd-field"><button class="qcd-btn">Quickconnect</button><p>Click to connect</p></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-4">
+              <input type="checkbox" id="cb-s2-4" class="step-cb" data-key="cb-s2-4" data-phase="2">
+              <span class="step-circle step-teal">4</span>
+              <div class="step-body">
+                <strong class="step-title">Identify the LEFT panel — navigate to your Week 1 project folder</strong>
+                <p class="step-desc">In the <strong>LEFT panel</strong> (Local Site — Your Computer), click through the folders to find your <strong>Week_01_Project</strong> folder from the very first week of class. This folder should contain your <code>index.html</code> file.</p>
+                <div class="step-note">💡 If you can't find it, search your computer for "index.html" or "Week 1" to locate it. Ask your trainer if needed.</div>
+                <div class="step-ok">✅ <em>Expected:</em> You can see <code>index.html</code> in the left panel. It's waiting to be uploaded!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-5">
+              <input type="checkbox" id="cb-s2-5" class="step-cb" data-key="cb-s2-5" data-phase="2">
+              <span class="step-circle step-teal">5</span>
+              <div class="step-body">
+                <strong class="step-title">Identify the RIGHT panel — this is your server (not connected yet)</strong>
+                <p class="step-desc">Look at the <strong>RIGHT panel</strong> (Remote Site — Web Server). Before you connect, it shows "Not connected to any server". After connecting, it will show your hosting account's folder structure.</p>
+                <div class="step-ok">💡 The RIGHT panel will show the htdocs folder after you connect in Phase 3. That's where you'll drop your index.html.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-6">
+              <input type="checkbox" id="cb-s2-6" class="step-cb" data-key="cb-s2-6" data-phase="2">
+              <span class="step-circle step-teal">6</span>
+              <div class="step-body">
+                <strong class="step-title">Understand the Status bar (top message area in FileZilla)</strong>
+                <p class="step-desc">The area below the Quickconnect bar shows connection messages in real time. Recognise these important messages:</p>
+                <div class="status-msgs">
+                  <div class="sm-row sm-ok"><code>Status: Connecting to ftpupload.net:21</code><span>→ Trying to connect</span></div>
+                  <div class="sm-row sm-ok"><code>Status: Connection established, waiting for welcome message</code><span>→ Connected!</span></div>
+                  <div class="sm-row sm-ok"><code>Status: Directory listing of "/" successful</code><span>→ Can see server files</span></div>
+                  <div class="sm-row sm-err"><code>Error: Connection timed out after 20 seconds</code><span>→ Firewall blocking (see troubleshooting)</span></div>
+                  <div class="sm-row sm-err"><code>Error: 530 Login authentication failed</code><span>→ Wrong username or password</span></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s2-7">
+              <input type="checkbox" id="cb-s2-7" class="step-cb" data-key="cb-s2-7" data-phase="2">
+              <span class="step-circle step-teal">7</span>
+              <div class="step-body">
+                <strong class="step-title">Understand the Transfer Queue (bottom of FileZilla)</strong>
+                <p class="step-desc">At the very bottom of FileZilla, there are 3 tabs:</p>
+                <ul class="sub-list">
+                  <li><strong>Queued files</strong> — files waiting to be uploaded</li>
+                  <li><strong>Failed transfers</strong> — files that didn't upload (see error here)</li>
+                  <li><strong>Successful transfers</strong> — files that uploaded perfectly (look here to confirm)</li>
+                </ul>
+                <div class="step-ok">💡 After uploading, always check the <strong>Successful transfers</strong> tab to confirm the file reached the server correctly.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s2-8">
+              <input type="checkbox" id="cb-s2-8" class="step-cb" data-key="cb-s2-8" data-phase="2">
+              <span class="step-circle step-teal">8</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Ready check: you have FileZilla open and 4 FTP credentials noted</strong>
+                <p class="step-desc">Before moving to Phase 3, confirm:</p>
+                <ul class="sub-list">
+                  <li>✅ FileZilla is installed and open on your laptop</li>
+                  <li>✅ LEFT panel shows your Week_01_Project/index.html file</li>
+                  <li>✅ You have your 4 FTP credentials ready: Host, Username, Password, Port 21</li>
+                  <li>✅ You understand: LEFT = your computer, RIGHT = the web server</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner" id="banner-2" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🎉</span>
+          <div><strong>Phase 2 Complete — FileZilla Ready!</strong>
+          <p>FileZilla is installed and you understand the Left/Right interface. Move to Phase 3 — actually connecting and making your first live upload!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         PHASE 3 — Connect & Upload (30 min)
+    ══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-3" data-phase="3" aria-labelledby="p3-title">
+      <header class="phase-hdr ph-purple">
+        <div class="ph-num">3</div>
+        <div class="ph-text">
+          <h2 id="p3-title">Phase 3 — Connect via FTP &amp; Upload</h2>
+          <p>30 minutes · Quickconnect · Navigate to htdocs · Upload index.html · See it LIVE!</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p3-label">0 / 6 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-purple" id="p3-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p3h">
+        <h3 id="p3h">Making the Connection &amp; First Upload</h3>
+
+        <!-- Troubleshooting card — shown upfront -->
+        <details class="troubleshoot-card">
+          <summary>⚠ FTP Blocked by Campus Firewall? Read This First!</summary>
+          <div class="ts-body">
+            <p>Campus networks often block <strong>Port 21</strong> (the FTP port) for security. If FileZilla shows "Connection timed out" or "ECONNREFUSED", this is why. Here are your options:</p>
+            <div class="ts-options">
+              <div class="ts-option ts-best">
+                <strong>Option 1 (Best): Use your phone as a hotspot</strong>
+                <p>Turn on your phone's mobile hotspot. Connect your laptop to it. Then try FileZilla again. Mobile networks usually don't block Port 21.</p>
+              </div>
+              <div class="ts-option">
+                <strong>Option 2: Use a free VPN</strong>
+                <p>Install a free VPN app (Windscribe, ProtonVPN). Connect to any server. Then try FileZilla again — the VPN tunnels through the firewall.</p>
+              </div>
+              <div class="ts-option">
+                <strong>Option 3 (Fallback): Use cPanel File Manager</strong>
+                <p>If FTP won't work at all: go back to cPanel → File Manager → navigate to htdocs → click the <strong>Upload</strong> button in the toolbar to upload files directly in the browser. Slower but always works.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <ol class="step-list" aria-label="Phase 3 connect and upload steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-1">
+              <input type="checkbox" id="cb-s3-1" class="step-cb" data-key="cb-s3-1" data-phase="3">
+              <span class="step-circle step-purple">1</span>
+              <div class="step-body">
+                <strong class="step-title">Enter your 4 FTP credentials into FileZilla's Quickconnect bar</strong>
+                <p class="step-desc">At the very top of FileZilla, you see 4 input fields. Fill them in with your InfinityFree FTP details:</p>
+                <div class="qc-fill">
+                  <div class="qcf-row"><span class="qcf-field">Host:</span><span class="qcf-eg">ftpupload.net</span><span class="qcf-note">← copy from InfinityFree FTP Details</span></div>
+                  <div class="qcf-row"><span class="qcf-field">Username:</span><span class="qcf-eg">epiz_xxxxxxxx</span><span class="qcf-note">← starts with epiz_</span></div>
+                  <div class="qcf-row"><span class="qcf-field">Password:</span><span class="qcf-eg">(your hosting password)</span><span class="qcf-note">← the password you set when creating the account</span></div>
+                  <div class="qcf-row"><span class="qcf-field">Port:</span><span class="qcf-eg">21</span><span class="qcf-note">← always 21, type it yourself</span></div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-2">
+              <input type="checkbox" id="cb-s3-2" class="step-cb" data-key="cb-s3-2" data-phase="3">
+              <span class="step-circle step-purple">2</span>
+              <div class="step-body">
+                <strong class="step-title">Click "Quickconnect" and watch the status messages</strong>
+                <p class="step-desc">Click the <strong>Quickconnect</strong> button. Watch the status area below the bar. You'll see a series of messages:</p>
+                <div class="status-msgs">
+                  <div class="sm-row sm-ok"><code>Status: Connecting to ftpupload.net:21...</code><span>Trying...</span></div>
+                  <div class="sm-row sm-ok"><code>Status: Connected to ftpupload.net</code><span>Connected!</span></div>
+                  <div class="sm-row sm-ok"><code>Status: Directory listing of "/" successful</code><span>Can see files!</span></div>
+                </div>
+                <div class="step-warn">⚠️ <strong>"Unknown certificate" warning?</strong> This is normal for free hosting. Click <strong>OK</strong> or <strong>Always trust</strong> to continue. It's not a real security threat.</div>
+                <div class="step-ok">✅ <em>Expected:</em> The RIGHT panel now shows folders from your web server (logs/, htdocs/, etc.)</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-3">
+              <input type="checkbox" id="cb-s3-3" class="step-cb" data-key="cb-s3-3" data-phase="3">
+              <span class="step-circle step-purple">3</span>
+              <div class="step-body">
+                <strong class="step-title">In the RIGHT panel: double-click "htdocs" to open it</strong>
+                <p class="step-desc">In the Remote Site (RIGHT) panel, you'll see a folder called <strong>htdocs</strong> or <strong>public_html</strong>. <strong>Double-click it</strong> to navigate inside.</p>
+                <div class="step-ok">✅ <em>Expected:</em> The path bar at the top of the right panel shows <code>/htdocs/</code>. The folder content should be empty (or contain only a default file). This is where your website lives!</div>
+                <div class="step-note">💡 The path <code>/htdocs/</code> in the right panel = <code>yoursite.epizy.com/</code> in the browser. Every file you put here becomes publicly accessible via your URL.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-4">
+              <input type="checkbox" id="cb-s3-4" class="step-cb" data-key="cb-s3-4" data-phase="3">
+              <span class="step-circle step-purple">4</span>
+              <div class="step-body">
+                <strong class="step-title">Drag index.html from LEFT panel → drop it into htdocs on RIGHT panel</strong>
+                <p class="step-desc">In the <strong>LEFT panel</strong>, find your <code>index.html</code> file inside the Week_01_Project folder. Click and hold on it, then drag your mouse across to the <strong>RIGHT panel</strong> (which shows the htdocs folder contents). Release the mouse button to drop it.</p>
+                <ul class="sub-list">
+                  <li>A progress bar may appear at the bottom of FileZilla</li>
+                  <li>The file appears in the right panel almost instantly (index.html is tiny)</li>
+                  <li>The status bar shows "File transfer successful"</li>
+                </ul>
+                <div class="step-ok">✅ <em>Expected:</em> <code>index.html</code> now appears in the RIGHT panel under htdocs. The bottom "Successful transfers" tab shows 1 file.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s3-5">
+              <input type="checkbox" id="cb-s3-5" class="step-cb" data-key="cb-s3-5" data-phase="3">
+              <span class="step-circle step-purple">5</span>
+              <div class="step-body">
+                <strong class="step-title">🚀 Open a browser → type your subdomain URL → see it LIVE!</strong>
+                <p class="step-desc">Open any web browser (Chrome, Firefox, Edge). In the address bar, type your InfinityFree subdomain:</p>
+                <div class="code-eg live-url-eg"><span class="ce-label">Type your subdomain (replace with yours):</span><code>soktechnews.epizy.com</code></div>
+                <p class="step-desc">Press Enter. Your Week 1 HTML page should appear — the same page you built on Week 1 of this course, now live on the internet!</p>
+                <div class="step-ok">🎉 <strong>MILESTONE!</strong> Your HTML is live on the internet. Anyone in the world with a browser can now visit your URL and see your code! Pull it up on your mobile phone too!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item step-item--challenge">
+            <label class="step-lbl" for="cb-s3-6">
+              <input type="checkbox" id="cb-s3-6" class="step-cb" data-key="cb-s3-6" data-phase="3">
+              <span class="step-circle step-purple">6</span>
+              <div class="step-body">
+                <strong class="step-title">🎯 Show trainer: your mobile phone displaying your site at your subdomain URL</strong>
+                <p class="step-desc">The milestone check for this session is pulling up your subdomain on your mobile phone — proving it's truly accessible from the global internet (not just your laptop).</p>
+                <ul class="sub-list">
+                  <li>✅ Type your subdomain URL in your phone browser</li>
+                  <li>✅ Your Week 1 HTML page loads on the phone screen</li>
+                  <li>✅ Show the trainer your phone</li>
+                </ul>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner phase-banner--milestone" id="banner-3" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🌐</span>
+          <div><strong>Phase 3 Complete — You're on the Internet!</strong>
+          <p>Your code is live. Now let's clean up the server for the real WordPress deployment next week!</p></div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         PHASE 4 — Clean Up (15 min)
+    ══════════════════════════════════════ -->
+    <section class="phase-section" id="phase-4" data-phase="4" aria-labelledby="p4-title">
+      <header class="phase-hdr ph-orange">
+        <div class="ph-num">4</div>
+        <div class="ph-text">
+          <h2 id="p4-title">Phase 4 — Wrap-Up &amp; Clean Up</h2>
+          <p>15 minutes · Delete test file · Leave htdocs empty · Ready for WordPress migration</p>
+        </div>
+        <div class="ph-progress">
+          <p class="ph-label" id="p4-label">0 / 4 steps</p>
+          <div class="bar-track"><div class="bar-fill bar-orange" id="p4-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="subsect" aria-labelledby="p4h">
+        <h3 id="p4h">Clean the Server — Prepare for WordPress</h3>
+        <p>Next week you'll import your entire WordPress site into htdocs. But if index.html is already there, WordPress won't install cleanly. You need to <strong>delete the test file</strong> now.</p>
+
+        <aside class="tip-box tip-orange">
+          <strong>🧹 Why delete it?</strong>
+          When All-in-One WP Migration restores your site, it installs WordPress files into htdocs. If index.html already exists there, it will conflict with WordPress's own index.php file. Starting with an empty htdocs = clean, conflict-free WordPress installation.
+        </aside>
+
+        <ol class="step-list" aria-label="Phase 4 clean up steps">
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-1">
+              <input type="checkbox" id="cb-s4-1" class="step-cb" data-key="cb-s4-1" data-phase="4">
+              <span class="step-circle step-orange">1</span>
+              <div class="step-body">
+                <strong class="step-title">In FileZilla — right-click index.html in the RIGHT panel → Delete</strong>
+                <p class="step-desc">Make sure you are still in the <strong>htdocs</strong> folder in the RIGHT panel. Find <code>index.html</code> in the file list. <strong>Right-click</strong> on it. A context menu appears. Click <strong>Delete</strong>. Confirm the deletion.</p>
+                <div class="step-warn">⚠️ <strong>Make sure you're in the RIGHT panel (server)!</strong> Deleting from the LEFT panel deletes from your own computer. Deleting from the RIGHT panel deletes from the server. Check the path bar above the panel says <code>/htdocs/</code>.</div>
+                <div class="step-ok">✅ <em>Expected:</em> index.html disappears from the right panel. The htdocs folder is now empty.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-2">
+              <input type="checkbox" id="cb-s4-2" class="step-cb" data-key="cb-s4-2" data-phase="4">
+              <span class="step-circle step-orange">2</span>
+              <div class="step-body">
+                <strong class="step-title">Verify: visit your subdomain URL — it should show an empty page or error</strong>
+                <p class="step-desc">Open your browser and revisit your subdomain URL (e.g. <code>soktechnews.epizy.com</code>). After deleting index.html, the page should now show a "Not Found" error, blank page, or the InfinityFree default page.</p>
+                <div class="step-ok">✅ <em>Expected:</em> Your HTML site is gone. The server is empty and clean — ready for WordPress in Week 14!</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-3">
+              <input type="checkbox" id="cb-s4-3" class="step-cb" data-key="cb-s4-3" data-phase="4">
+              <span class="step-circle step-orange">3</span>
+              <div class="step-body">
+                <strong class="step-title">Confirm: you have your .wpress backup file from Week 12 Session 3</strong>
+                <p class="step-desc">For Week 14's WordPress deployment to work, you need your .wpress backup file from Week 12 Session 3 (when you used All-in-One WP Migration to export your site). Find it now:</p>
+                <ul class="sub-list">
+                  <li>Check your Downloads folder for a file ending in <code>.wpress</code></li>
+                  <li>Check your USB drive or Google Drive backup</li>
+                  <li>The filename looks like: <code>localhost_sitename_2025-xx-xx.wpress</code></li>
+                </ul>
+                <div class="step-warn">🚨 <strong>Missing your .wpress file?</strong> Tell your trainer immediately. Without it, you'll need to re-export your WordPress site in Week 14 before deploying.</div>
+              </div>
+            </label>
+          </li>
+
+          <li class="step-item">
+            <label class="step-lbl" for="cb-s4-4">
+              <input type="checkbox" id="cb-s4-4" class="step-cb" data-key="cb-s4-4" data-phase="4">
+              <span class="step-circle step-orange">4</span>
+              <div class="step-body">
+                <strong class="step-title">Final checklist — confirm you're ready for Week 14</strong>
+                <p class="step-desc">You are ready for next week's WordPress deployment if ALL of these are true:</p>
+                <div class="final-checklist">
+                  <div class="fc-item"><span>✅</span> InfinityFree account active with subdomain (e.g. yoursite.epizy.com)</div>
+                  <div class="fc-item"><span>✅</span> cPanel accessible and File Manager works</div>
+                  <div class="fc-item"><span>✅</span> htdocs folder is empty (test file deleted)</div>
+                  <div class="fc-item"><span>✅</span> FileZilla installed and FTP credentials saved</div>
+                  <div class="fc-item"><span>✅</span> .wpress backup file saved (USB + Google Drive)</div>
+                  <div class="fc-item"><span>✅</span> PHP version in cPanel is 7.4 or higher</div>
+                </div>
+              </div>
+            </label>
+          </li>
+
+        </ol>
+
+        <div class="phase-banner phase-banner--final" id="banner-4" role="status" aria-live="polite" hidden>
+          <span class="banner-icon">🏆</span>
+          <div><strong>Week 13 Session 2 — Complete!</strong>
+          <p>Server is clean, tools are set up, and you uploaded your first file to the real internet. Week 14: the full WordPress site goes live!</p></div>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="subsect" aria-labelledby="sum-h">
+        <h3 id="sum-h">Quick Reference Summary</h3>
+        <div class="summary-grid" role="list">
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-blue">🖥</div><div><h4>cPanel</h4><p>GUI dashboard for your server. Contains File Manager, phpMyAdmin, Domains, SSL, PHP Manager.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-teal">📁</div><div><h4>htdocs Rule</h4><p>Only files inside <code>htdocs</code> (public_html) are visible on the internet. Files outside are private.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-purple">⚡</div><div><h4>FTP</h4><p>File Transfer Protocol. Faster and more powerful than the browser file manager. Port 21.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-orange">🗂</div><div><h4>FileZilla</h4><p>LEFT = your computer. RIGHT = web server. Drag files from left to right to upload.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-green">🔑</div><div><h4>FTP Credentials</h4><p>Host (ftpupload.net) + Username (epiz_xxx) + Password + Port 21. From InfinityFree FTP Details.</p></div></article>
+          <article class="summary-card" role="listitem"><div class="sc-icon sc-red">🔥</div><div><h4>Firewall Fix</h4><p>Campus WiFi blocks Port 21? Use phone hotspot, VPN, or cPanel File Manager as fallback.</p></div></article>
+        </div>
+
+        <aside class="tip-box tip-navy">
+          <strong>🚀 Week 14: Full WordPress Deployment</strong>
+          <p>Next session you will use All-in-One WP Migration to import your .wpress backup directly to the live server. Your entire WordPress site — Elementor pages, forms, user roles, media, everything — will be live on your InfinityFree subdomain for the world to see.</p>
+        </aside>
+      </section>
+    </section>
+
+  </main>
+
+  <!-- OVERLAY -->
+  <div class="session-overlay" id="session-overlay" role="dialog" aria-modal="true" aria-labelledby="ov-title" hidden>
+    <div class="overlay-card">
+      <p class="ov-icon">🌐</p>
+      <h2 id="ov-title">Session Complete!</h2>
+      <p>You navigated cPanel, connected via FTP, uploaded a file, and saw it live on the internet. Week 14: full WordPress deployment!</p>
+      <button class="btn-reset btn-reset--lg" onclick="resetAll()">🔄 Reset &amp; Start Over</button>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-in">
+      <p><strong>Web Client Programming</strong> &nbsp;·&nbsp; Week 13 · Session 2 &nbsp;·&nbsp; Institute of Technology of Cambodia</p>
+      <p class="footer-lo">LO8: Understand web hosting, domains, deployment, and site migration</p>
+      <button class="btn-reset" onclick="resetAll()">🔄 Reset All Progress</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
